@@ -7,7 +7,12 @@
   "icon": "/logo.svg",
   "resources": [
     "catalog",
-    "item"
+    "item",
+    "resolve"
+  ],
+  "urlPatterns": [
+    "*/live/play/*",
+    "*vavoo*"
   ],
   "types": [
     "live",

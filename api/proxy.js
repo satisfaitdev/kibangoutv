@@ -1,3 +1,5 @@
+import { Readable } from "stream";
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD");
@@ -8,15 +10,30 @@ export default async function handler(req, res) {
   }
 
   let targetUrl = req.query.url;
+  if (req.url && req.url.includes("?url=")) {
+    const rawParam = req.url.slice(req.url.indexOf("?url=") + 5);
+    try {
+      targetUrl = decodeURIComponent(rawParam);
+    } catch {
+      targetUrl = rawParam;
+    }
+  }
+
   if (!targetUrl) {
     return res.status(400).json({ error: "Missing url parameter" });
   }
 
   // Nettoyage des éventuels wrappers imbriqués
-  targetUrl = decodeURIComponent(targetUrl);
-  while (targetUrl.includes("/api/proxy?url=")) {
-    targetUrl = decodeURIComponent(targetUrl.split("/api/proxy?url=")[1]);
+  while (targetUrl && (targetUrl.includes("/api/proxy?url=") || targetUrl.includes("/api/proxy.js?url="))) {
+    const parts = targetUrl.split(/\/api\/proxy(?:\.js)?\?url=/);
+    const lastPart = parts[parts.length - 1];
+    try {
+      targetUrl = decodeURIComponent(lastPart);
+    } catch {
+      targetUrl = lastPart;
+    }
   }
+
   if (targetUrl.startsWith("//")) {
     targetUrl = "https:" + targetUrl;
   } else if (!targetUrl.startsWith("http://") && !targetUrl.startsWith("https://")) {
@@ -25,21 +42,27 @@ export default async function handler(req, res) {
 
   try {
     const fetchHeaders = {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "User-Agent": targetUrl.includes("vavoo") ? "VAVOO/2.6" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
       "Accept": "*/*",
       "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
     };
 
+    if (req.headers.range) {
+      fetchHeaders["Range"] = req.headers.range;
+    }
+
     const upstreamRes = await fetch(targetUrl, {
       method: req.method === "POST" ? "POST" : "GET",
       headers: fetchHeaders,
-      body: req.method === "POST" ? JSON.stringify(req.body) : undefined
+      redirect: "follow",
+      body: req.method === "POST" ? (typeof req.body === "string" ? req.body : JSON.stringify(req.body)) : undefined
     });
 
+    const finalUrl = upstreamRes.url || targetUrl;
     const contentType = upstreamRes.headers.get("content-type") || "application/octet-stream";
 
     // 1. Détection et réécriture HLS M3U8
-    if (targetUrl.includes(".m3u8") || contentType.includes("mpegurl")) {
+    if (finalUrl.includes(".m3u8") || contentType.includes("mpegurl") || contentType.includes("x-mpegURL")) {
       const text = await upstreamRes.text();
       const lines = text.split("\n");
       const rewritten = [];
@@ -51,16 +74,24 @@ export default async function handler(req, res) {
         } else if (sline.startsWith("#")) {
           if (sline.includes('URI="')) {
             const replaced = sline.replace(/URI="([^"]+)"/g, (match, rawUri) => {
-              const absUri = new URL(rawUri, targetUrl).href;
-              return `URI="/api/proxy?url=${encodeURIComponent(absUri)}"`;
+              try {
+                const absUri = new URL(rawUri, finalUrl).href;
+                return `URI="/api/proxy?url=${encodeURIComponent(absUri)}"`;
+              } catch {
+                return match;
+              }
             });
             rewritten.push(replaced);
           } else {
             rewritten.push(sline);
           }
         } else {
-          const absUri = new URL(sline, targetUrl).href;
-          rewritten.push(`/api/proxy?url=${encodeURIComponent(absUri)}`);
+          try {
+            const absUri = new URL(sline, finalUrl).href;
+            rewritten.push(`/api/proxy?url=${encodeURIComponent(absUri)}`);
+          } catch {
+            rewritten.push(sline);
+          }
         }
       }
 
@@ -69,7 +100,7 @@ export default async function handler(req, res) {
     }
 
     // 2. Détection et priorisation des sources francophones VOD
-    if (targetUrl.includes("/vod/source/")) {
+    if (finalUrl.includes("/vod/source/")) {
       const data = await upstreamRes.json();
       const sources = data.sources || [];
       if (sources.length > 0) {
@@ -97,10 +128,28 @@ export default async function handler(req, res) {
       return res.status(upstreamRes.status).json(data);
     }
 
-    // 3. Réponse standard (JSON, buffer binaire, flux vidéo)
+    // 3. Réponse standard (flux vidéo, fragments TS, images, buffers)
     res.setHeader("Content-Type", contentType);
-    const buffer = Buffer.from(await upstreamRes.arrayBuffer());
-    return res.status(upstreamRes.status).send(buffer);
+    if (upstreamRes.headers.get("content-range")) {
+      res.setHeader("Content-Range", upstreamRes.headers.get("content-range"));
+    }
+    if (upstreamRes.headers.get("accept-ranges")) {
+      res.setHeader("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
+    }
+    if (upstreamRes.headers.get("content-length")) {
+      res.setHeader("Content-Length", upstreamRes.headers.get("content-length"));
+    }
+
+    if (upstreamRes.body) {
+      if (typeof Readable.fromWeb === "function") {
+        return Readable.fromWeb(upstreamRes.body).pipe(res);
+      } else {
+        const buffer = Buffer.from(await upstreamRes.arrayBuffer());
+        return res.status(upstreamRes.status).send(buffer);
+      }
+    } else {
+      return res.status(upstreamRes.status).end();
+    }
 
   } catch (err) {
     console.error("Vercel Proxy Error:", err);

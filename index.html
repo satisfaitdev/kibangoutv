@@ -47,6 +47,32 @@
     }
 
     /* ========================================================
+       SUPPRESSION TOTALE DU BOUTON FLOTTANT SOCIAL SUR MOBILE & PC
+       ======================================================== */
+    .sc-track,
+    .sc-slot,
+    .sc-pill,
+    .sc-pill-shadow,
+    .sc-front,
+    .sc-back,
+    .sc-covers,
+    .btn-party,
+    .modal-party,
+    [class*="sc-track"],
+    [class*="sc-slot"],
+    [class*="sc-pill"] {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      opacity: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }
+
+    /* ========================================================
        EN-TÊTE MOBILE & BOTTOM NAVBAR SUR MOBILE (< 768px)
        ======================================================== */
     #mobile-top-header {
@@ -60,24 +86,23 @@
         top: 0;
         left: 0;
         right: 0;
-        height: calc(52px + var(--sat, 0px));
+        height: calc(54px + var(--sat, 0px));
         padding-top: var(--sat, 0px);
         padding-left: 14px;
         padding-right: 14px;
         align-items: center;
         justify-content: space-between;
-        background: rgba(14, 19, 24, 0.92);
+        background: rgba(14, 19, 24, 0.94);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        z-index: 9999;
+        z-index: 99999 !important;
         box-sizing: border-box;
         transition: transform 0.25s ease, opacity 0.25s ease;
       }
 
-      /* Masquer l'en-tête mobile si le lecteur plein écran ou une modale est ouverte */
-      html.player-open #mobile-top-header,
-      html.modal-open #mobile-top-header {
+      /* Masquer l'en-tête mobile si le lecteur plein écran est ouvert */
+      html.player-open #mobile-top-header {
         transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
@@ -95,27 +120,27 @@
       body:not(.is-home) .main-inner,
       body:not(.is-home) .main,
       body:not(.is-home) .stage {
-        padding-top: calc(52px + var(--sat, 0px)) !important;
+        padding-top: calc(54px + var(--sat, 0px)) !important;
       }
     }
 
     .m-brand-link {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       text-decoration: none;
       color: #FFFFFF;
     }
 
     .m-brand-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      filter: drop-shadow(0 2px 6px rgba(0, 200, 83, 0.45));
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      filter: drop-shadow(0 2px 8px rgba(0, 200, 83, 0.55));
     }
 
     .m-brand-name {
-      font-size: 1.12rem;
+      font-size: 1.15rem;
       font-weight: 800;
       letter-spacing: -0.01em;
       color: #FFFFFF;
@@ -143,6 +168,7 @@
       color: #B8B8B8;
       text-decoration: none;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .m-header-icon-btn svg {
@@ -157,6 +183,113 @@
       border-color: rgba(0, 200, 83, 0.45);
       color: var(--accent);
       transform: scale(1.04);
+    }
+
+    .m-header-icon-btn.m-btn-logout:hover,
+    .m-header-icon-btn.m-btn-logout:active {
+      background: rgba(248, 113, 113, 0.2);
+      border-color: rgba(248, 113, 113, 0.5);
+      color: #f87171;
+    }
+
+    /* Style du bouton déconnexion dans la sidebar desktop */
+    .nav-item-logout {
+      margin-top: auto;
+      color: #f87171 !important;
+      cursor: pointer;
+    }
+    .nav-item-logout:hover {
+      background: rgba(248, 113, 113, 0.12) !important;
+    }
+
+    /* ========================================================
+       LOADER UNIVERSEL AVEC LOGO KIBANGOUTV
+       ======================================================== */
+    #kibangou-global-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999999;
+      background: rgba(14, 19, 24, 0.76);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    #kibangou-global-loader.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .kibangou-loader-box {
+      background: rgba(21, 28, 36, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 200, 83, 0.25);
+      animation: loaderPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes loaderPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .kibangou-loader-logo-wrap {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .kibangou-loader-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      filter: drop-shadow(0 4px 14px rgba(0, 200, 83, 0.6));
+      animation: logoPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 4px 14px rgba(0, 200, 83, 0.6)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 6px 20px rgba(0, 200, 83, 0.85)); }
+    }
+
+    .kibangou-loader-spin {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.12);
+      border-top-color: #00C853;
+      border-right-color: #00C853;
+      animation: spinRing 0.75s linear infinite;
+    }
+
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+
+    .kibangou-loader-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+    }
+
+    .kibangou-loader-subtitle {
+      font-size: 0.82rem;
+      color: #8E99A4;
+      font-weight: 500;
     }
 
     /* ========================================================
@@ -419,19 +552,66 @@
 
     const nativeFetch = window.fetch;
 
+    // Contrôleur du loader global KibangouTV
+    let pendingRequestsCount = 0;
+    let loaderTimer = null;
+
+    function showGlobalLoader() {
+      pendingRequestsCount++;
+      if (pendingRequestsCount === 1) {
+        clearTimeout(loaderTimer);
+        loaderTimer = setTimeout(() => {
+          if (pendingRequestsCount > 0) {
+            const el = document.getElementById("kibangou-global-loader");
+            if (el) el.classList.add("is-visible");
+          }
+        }, 160);
+      }
+    }
+
+    function hideGlobalLoader() {
+      pendingRequestsCount = Math.max(0, pendingRequestsCount - 1);
+      if (pendingRequestsCount === 0) {
+        clearTimeout(loaderTimer);
+        const el = document.getElementById("kibangou-global-loader");
+        if (el) el.classList.remove("is-visible");
+      }
+    }
+
     function getProxiedUrl(rawUrl) {
       if (!rawUrl || typeof rawUrl !== "string") return rawUrl;
+
+      // Déjà sur le proxy ou ressources internes du site
       if (
         rawUrl.startsWith("/api/proxy") || 
         rawUrl.startsWith("/get?") || 
         rawUrl.startsWith("/") || 
         rawUrl.startsWith("./") || 
         rawUrl.startsWith("../") || 
-        rawUrl.includes("localhost:8080") ||
-        rawUrl.includes("127.0.0.1:8080")
+        rawUrl.includes(location.host) ||
+        rawUrl.includes(location.origin) ||
+        rawUrl.includes("kibangoutv.vercel.app") ||
+        rawUrl.includes("vercel.app") ||
+        rawUrl.includes("localhost") ||
+        rawUrl.includes("127.0.0.1")
       ) {
         return rawUrl;
       }
+
+      // Ne pas proxifier les pages iframes d'embed vidéo directes (évite les blocages CORS de lecteurs tiers)
+      if (
+        rawUrl.includes("youtube.com") ||
+        rawUrl.includes("youtu.be") ||
+        rawUrl.includes("dood.") ||
+        rawUrl.includes("voe.sx") ||
+        rawUrl.includes("vidoza.net") ||
+        rawUrl.includes("streamtape.com") ||
+        rawUrl.includes("mixdrop.co") ||
+        rawUrl.includes("upstream.to")
+      ) {
+        return rawUrl;
+      }
+
       if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
         return `/api/proxy?url=${encodeURIComponent(rawUrl)}`;
       }
@@ -445,11 +625,16 @@
       async fetch(url, options = {}) {
         let sUrl = typeof url === "string" ? url : (url?.url || String(url));
         const proxyUrl = getProxiedUrl(sUrl);
-        return nativeFetch(proxyUrl, {
-          method: options.method || "GET",
-          headers: options.headers,
-          body: options.body
-        });
+        showGlobalLoader();
+        try {
+          return await nativeFetch(proxyUrl, {
+            method: options.method || "GET",
+            headers: options.headers,
+            body: options.body
+          });
+        } finally {
+          hideGlobalLoader();
+        }
       },
       setImmersive() {},
       openSearch() {},
@@ -459,23 +644,53 @@
     };
 
     window.fetch = function(input, init) {
+      let isDataCall = false;
+      const urlStr = typeof input === "string" ? input : (input?.url || "");
+
+      // Détection des appels de données pour activer le loader KibangouTV
+      if (
+        urlStr.includes("addon") || 
+        urlStr.includes("catalog") || 
+        urlStr.includes("item") || 
+        urlStr.includes("tmdb") || 
+        urlStr.includes("vod/source") ||
+        urlStr.includes("resolve")
+      ) {
+        isDataCall = true;
+        showGlobalLoader();
+      }
+
       try {
+        let reqPromise;
         if (typeof input === "string") {
           const proxied = getProxiedUrl(input);
-          return nativeFetch.call(this, proxied, init);
+          reqPromise = nativeFetch.call(this, proxied, init);
         } else if (input instanceof Request) {
           const proxied = getProxiedUrl(input.url);
           if (proxied !== input.url) {
             const newReq = new Request(proxied, input);
-            return nativeFetch.call(this, newReq, init);
+            reqPromise = nativeFetch.call(this, newReq, init);
+          } else {
+            reqPromise = nativeFetch.call(this, input, init);
           }
         } else if (input && typeof input.url === "string") {
           input.url = getProxiedUrl(input.url);
+          reqPromise = nativeFetch.call(this, input, init);
+        } else {
+          reqPromise = nativeFetch.call(this, input, init);
         }
+
+        if (isDataCall) {
+          return reqPromise.finally(() => {
+            hideGlobalLoader();
+          });
+        }
+        return reqPromise;
       } catch (err) {
+        if (isDataCall) hideGlobalLoader();
         console.warn("fetch hook fallback:", err);
+        return nativeFetch.call(this, input, init);
       }
-      return nativeFetch.call(this, input, init);
     };
   </script>
 </head>
@@ -557,7 +772,7 @@
   </div>
 
   <!-- ========================================================
-       EN-TÊTE MOBILE KIBANGOUTV (RECHERCHE & PARAMÈTRES)
+       EN-TÊTE MOBILE KIBANGOUTV (LOGO, RECHERCHE, PARAMÈTRES, DÉCONNEXION)
        ======================================================== -->
   <header id="mobile-top-header">
     <a href="#/" class="m-brand-link" aria-label="Accueil KibangouTV">
@@ -577,8 +792,29 @@
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
       </a>
+      <button type="button" class="m-header-icon-btn m-btn-logout" id="m-btn-logout" title="Déconnexion" aria-label="Se déconnecter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </button>
     </div>
   </header>
+
+  <!-- ========================================================
+       LOADER UNIVERSEL AVEC LOGO KIBANGOUTV
+       ======================================================== -->
+  <div id="kibangou-global-loader" aria-hidden="true">
+    <div class="kibangou-loader-box">
+      <div class="kibangou-loader-logo-wrap">
+        <img src="./logo.svg" alt="KibangouTV" class="kibangou-loader-img">
+      </div>
+      <div class="kibangou-loader-title">Kibangou<span style="color:#00C853">TV</span></div>
+      <div class="kibangou-loader-spin"></div>
+      <div class="kibangou-loader-subtitle">Chargement des données...</div>
+    </div>
+  </div>
 
   <div id="app">
     <!-- Écran de démarrage KibangouTV -->
@@ -776,14 +1012,33 @@
     const SVG_FILM = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>`;
     const SVG_SERIES = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>`;
 
+    function performLogout() {
+      if (confirm("Voulez-vous vraiment vous déconnecter de KibangouTV ?")) {
+        localStorage.removeItem("kibangou_auth");
+        localStorage.removeItem("kibangou_auth_email");
+        sessionStorage.clear();
+        location.reload();
+      }
+    }
+
     function injectCustomNavItems() {
+      // 0. Suppression impitoyable du widget Social / Watch Party flottant sur le bord droit
+      document.querySelectorAll('.sc-track, .sc-slot, .sc-pill, .sc-front, .sc-back, .btn-party, .modal-party, a[href="#/social"]').forEach(el => el.remove());
+
+      // 0b. Liaison du bouton déconnexion mobile
+      const mLogout = document.getElementById("m-btn-logout");
+      if (mLogout && !mLogout.dataset.bound) {
+        mLogout.dataset.bound = "1";
+        mLogout.addEventListener("click", performLogout);
+      }
+
       // 1. Redirection automatique du lien Chaînes vers Live TV par défaut
       const channelsItems = document.querySelectorAll('a[href="#/channels"], a[href^="#/channels?"]');
       channelsItems.forEach(item => {
         item.href = "#/channels?src=vavoo-live%2Fchannels";
       });
 
-      // 2. Sidebar (Desktop & Tablette) - Route garantie vers kibangou-direct
+      // 2. Sidebar (Desktop & Tablette) - Route garantie vers kibangou-direct + bouton déconnexion
       const sidebarNav = document.querySelector(".sidebar-nav");
       if (sidebarNav && !sidebarNav.querySelector("#nav-films")) {
         const channelsItem = sidebarNav.querySelector('a[href^="#/channels"]');
@@ -803,6 +1058,18 @@
           channelsItem.after(seriesItem);
           channelsItem.after(filmsItem);
         }
+      }
+
+      // Bouton Déconnexion dans la sidebar desktop
+      const sidebarBottom = document.querySelector(".sidebar-bottom");
+      if (sidebarBottom && !sidebarBottom.querySelector("#nav-logout")) {
+        const logoutItem = document.createElement("a");
+        logoutItem.id = "nav-logout";
+        logoutItem.className = "nav-item nav-item-logout";
+        logoutItem.title = "Se déconnecter";
+        logoutItem.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg><span>Déconnexion</span>`;
+        logoutItem.addEventListener("click", performLogout);
+        sidebarBottom.appendChild(logoutItem);
       }
 
       // 3. Bottom Nav (Mobile)
@@ -851,7 +1118,7 @@
       // 5. Suppression des éléments Social
       document.querySelectorAll('a[href="#/social"]').forEach(el => el.remove());
 
-      // 6. Nettoyage de la page Réglages (#/settings)
+      // 6. Nettoyage de la page Réglages (#/settings) et injection de la carte Déconnexion
       if (location.hash.startsWith("#/settings")) {
         document.querySelectorAll(".s-group").forEach(group => {
           const text = group.textContent || "";
@@ -862,6 +1129,23 @@
             group.remove();
           }
         });
+
+        const sContainer = document.querySelector(".settings-view") || document.querySelector(".s-panel") || document.querySelector(".main-inner");
+        if (sContainer && !sContainer.querySelector("#settings-logout-card")) {
+          const card = document.createElement("div");
+          card.id = "settings-logout-card";
+          card.style.cssText = "margin: 20px var(--pad, 16px); padding: 18px 20px; border-radius: 16px; background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.25); display: flex; flex-direction: column; gap: 10px;";
+          card.innerHTML = `
+            <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem;">Compte & Session KibangouTV</div>
+            <div style="font-size:0.85rem; color:#8E99A4;">Vous êtes connecté à KibangouTV. Pour verrouiller l'application et exiger à nouveau le code secret, déconnectez-vous.</div>
+            <button type="button" id="btn-settings-logout-action" style="margin-top:4px; height:42px; width:fit-content; padding:0 20px; border-radius:10px; border:none; background:#E5484D; color:#FFFFFF; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              Se déconnecter
+            </button>
+          `;
+          card.querySelector("#btn-settings-logout-action").addEventListener("click", performLogout);
+          sContainer.appendChild(card);
+        }
       }
 
       updateActiveNav();

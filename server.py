@@ -155,9 +155,10 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
                 if is_m3u8:
                     content = resp.read()
+                    final_url = resp.geturl() or target_url
                     global LAST_STREAM_BASE
-                    LAST_STREAM_BASE = target_url.split("?", 1)[0].rsplit("/", 1)[0] + "/"
-                    content = rewrite_m3u8(content, target_url)
+                    LAST_STREAM_BASE = final_url.split("?", 1)[0].rsplit("/", 1)[0] + "/"
+                    content = rewrite_m3u8(content, final_url)
                     self.send_response(resp.status)
                     self.send_header("Content-Type", "application/vnd.apple.mpegurl")
                     self.send_header("Content-Length", str(len(content)))
@@ -237,6 +238,27 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.path = f"/api/proxy?url={urllib.parse.quote(abs_target)}"
                 self.forward_proxy("GET")
                 return
+
+        # 0d. Résolution des flux Live TV (Canal+, beIN, TNT, etc.) avec proxy HTTPS automatique
+        if "/kibangou-addon/resolve" in self.path or self.path.startswith("/resolve"):
+            raw_url = self.path.split("url=", 1)[1] if "url=" in self.path else ""
+            play_url = urllib.parse.unquote(raw_url)
+            try:
+                vavoo_resolve = f"https://vavoo.top/live/resolve?url={urllib.parse.quote(play_url)}"
+                req = urllib.request.Request(vavoo_resolve, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=10) as r:
+                    data = json.loads(r.read().decode())
+                if data and "url" in data:
+                    data["url"] = f"/api/proxy?url={urllib.parse.quote(data['url'])}"
+                resp_bytes = json.dumps(data).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(resp_bytes)))
+                self.end_headers()
+                self.wfile.write(resp_bytes)
+                return
+            except Exception as e:
+                print("Resolve error:", e)
 
         # 1. Redimensionneur et cache d'images de Vuma /get?url=...
         if self.path.startswith("/get?url=") or self.path.startswith("/get?"):

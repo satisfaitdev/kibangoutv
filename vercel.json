@@ -10,6 +10,14 @@
       "destination": "/api/get.js"
     },
     {
+      "source": "/kibangou-addon/resolve",
+      "destination": "/api/resolve.js"
+    },
+    {
+      "source": "/resolve",
+      "destination": "/api/resolve.js"
+    },
+    {
       "source": "/kibangou-addon",
       "destination": "/kibangou-addon/mhub-addon.json"
     },
