@@ -1,0 +1,2289 @@
+{
+  "items": [
+    {
+      "id": "tmdb:42009",
+      "type": "series",
+      "name": "Black Mirror",
+      "ids": {
+        "tmdb": "42009"
+      },
+      "description": "Les histoires tordues se succèdent dans cette série d'anthologie hallucinante qui révèle les plus grandes innovations de l'humanité, mais aussi ses côtés les plus sombres.",
+      "releaseDate": "2011-12-04",
+      "ratings": {
+        "tmdb": 8.295
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/9acfIYfBuB4GFVROipM9YrqxsXd.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/dg3OindVAGZBjlT3xYKqIAdukPL.jpg"
+        ]
+      },
+      "genres": [
+        "Science-Fiction & Fantastique",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:46923",
+      "type": "series",
+      "name": "Shetland",
+      "ids": {
+        "tmdb": "46923"
+      },
+      "description": "Lorsqu'un jeune archéologue découvre des restes humains, les habitants de Shetland Island sont intrigués de savoir de qui il s'agit. Et quand une femme âgée est abattue dans des circonstances mystérieuses, Perez et son équipe se retrouvent au centre de deux familles ennemies, dont l'envie, la cupidité et l'amertume ont divisé la communauté environnante...",
+      "releaseDate": "2013-03-10",
+      "ratings": {
+        "tmdb": 7.539
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/rKnxmir8m5I3RdSTdZr3jaQaCZi.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/AdlDrgoNCDu3naYjZMwmiklBHnV.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:41727",
+      "type": "series",
+      "name": "Banshee",
+      "ids": {
+        "tmdb": "41727"
+      },
+      "description": "Banshee, une petite ville des États-Unis en territoire Amish, en Pennsylvannie, est quelque peu perturbée par un nouvel arrivant énigmatique, expert en arts martiaux, qui se fait passer pour le remplaçant du shérif récemment assassiné. Il a bien l'intention de faire régner la loi, mais à sa manière, concoctant des plans qui ne servent que son intérêt...",
+      "releaseDate": "2013-01-11",
+      "ratings": {
+        "tmdb": 7.983
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/arAmw8hmfNIjW6LURondZpV5wJa.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/mo9bfYdewzmHxnaeURB2jRPvGuX.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:1434",
+      "type": "series",
+      "name": "Les Griffin",
+      "ids": {
+        "tmdb": "1434"
+      },
+      "description": "La famille Griffin habite à Quahog, charmante petite bourgade américaine. Peter, le père, a érigé la fainéantise en philosophie de vie. Lois, la mère, est à la fois la femme au foyer bonne à tout faire et le cerveau de la famille. Chris, le fils, a hérité de son père ses formes généreuses et ses préoccupations favorites sont manger, surfer sur le web et manger. Megan, la fille, est l'archétype de l'adolescente en crise : elle ne s'aime pas et, en même temps, attend désespérément son prince. Stewie, le petit dernier, a pour ambition de conquérir le monde. Même Brian, le chien, est complètement fou, ou plutôt très intelligent : il parle, philosophe, débat… Bienvenue chez les Griffin !",
+      "releaseDate": "1999-01-31",
+      "ratings": {
+        "tmdb": 7.4
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/7nHl3OHUSTHgslQxJUzNSy9vxqo.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/jbTqU6BJMufoMnPSlO4ThrcXs3Y.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:32573",
+      "type": "series",
+      "name": "Strike Back",
+      "ids": {
+        "tmdb": "32573"
+      },
+      "description": "Cette mini série suit les aventures des forces spéciales anglaises en 2003, au Moyen-Orient, lors de guerre d'Irak. La section 20 du MI-6 déploie ses moyens pour combattre le terrorisme. Les agents de terrain les plus efficaces parcourent le globe pour éradiquer les menaces.",
+      "releaseDate": "2010-05-05",
+      "ratings": {
+        "tmdb": 7.415
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/c0ItaC2Grf4WVJ06G87BjNn9pRs.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/2tL3pNaPQb2ioEYswMkDGVTo1pt.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Action & Adventure"
+      ]
+    },
+    {
+      "id": "tmdb:95480",
+      "type": "series",
+      "name": "Slow Horses",
+      "ids": {
+        "tmdb": "95480"
+      },
+      "description": "Une équipe d’agents secrets britanniques mis au placard par le MI5 suite aux erreurs qu’ils ont commises en mission. Placés sous les ordres d’un chef aussi brillant qu’irascible, le célèbre Jackson Lamb, ils naviguent dans le monde de l’espionnage, où règnent les faux-semblants, pour défendre la Grande-Bretagne contre les forces ennemies.",
+      "releaseDate": "2022-04-01",
+      "ratings": {
+        "tmdb": 8.079
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/uAU6AFatRCIwthPRJ16Tcf7pSXy.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/gPQppUnLx9vqPDLz3WwZ2HJsNbt.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:4620",
+      "type": "series",
+      "name": "Eureka",
+      "ids": {
+        "tmdb": "4620"
+      },
+      "description": "Jack Carter, un marshall américain, découvre, au cours d'une escapade avec sa fille Zoe, l'existence d'Eureka, un complexe top-secret abritant des scientifiques et leur famille dans le but de les faire travailler sur des projets confidentiels. Mis au pied du mur et fasciné par cette ambitieuse entreprise, il accepte d'en devenir le shérif. Mais il est rapidement confronté à des événements et à des phénomènes qui dépassent son entendement.",
+      "releaseDate": "2006-07-18",
+      "ratings": {
+        "tmdb": 7.7
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/gBQXWLPRG9j8851z8qCPmoVdmAp.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/8MQeyFsWrp2ILjbumtxrinmk7t4.jpg"
+        ]
+      },
+      "genres": [
+        "Science-Fiction & Fantastique",
+        "Comédie",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:1420",
+      "type": "series",
+      "name": "New Girl",
+      "ids": {
+        "tmdb": "1420"
+      },
+      "description": "Jess Day, une jeune femme naïve et étrange, est malheureuse en amour depuis que son petit ami l'a trompée puis quittée. Elle s'installe alors en colocation avec trois garçons un peu attardés. Parviendront-ils à lui redonner le sourire ?",
+      "releaseDate": "2011-09-20",
+      "ratings": {
+        "tmdb": 7.4
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/8oCqMlKKomCArVtyOjRzMN6g40Z.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/959IFVeGqz2M6qGvQ1RxN2r6Mq6.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:1622",
+      "type": "series",
+      "name": "Supernatural",
+      "ids": {
+        "tmdb": "1622"
+      },
+      "description": "Deux frères, Sam et Dean Winchester, chasseurs de créatures surnaturelles, sillonnent les États-Unis à bord d'une Chevrolet Impala noire de 1967 et enquêtent sur des phénomènes paranormaux (souvent issus du folklore, des superstitions, mythes et légendes urbaines américaines, mais aussi des monstres surnaturels tels que les fantômes, loups-garous, démons, vampires…).",
+      "releaseDate": "2005-09-13",
+      "ratings": {
+        "tmdb": 8.316
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/iBR4U3MZelj5avBqqs1SJpIqArP.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/lirPqYLTtd6XZqGn4cS1wiesTq0.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Mystère",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:1438",
+      "type": "series",
+      "name": "Sur écoute",
+      "ids": {
+        "tmdb": "1438"
+      },
+      "description": "Quand la police s'efforce de démanteler un réseau tentaculaire de trafic de drogue et du crime à Baltimore.",
+      "releaseDate": "2002-06-02",
+      "ratings": {
+        "tmdb": 8.6
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/efV8dprxpU1JXNGqepVY68ZaHKZ.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/aQTtua5pG490fMfeKgtYg5B853e.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:1413",
+      "type": "series",
+      "name": "American Horror Story",
+      "ids": {
+        "tmdb": "1413"
+      },
+      "description": "À chaque saison, son histoire. American Horror Story nous embarque dans des récits à la fois poignants et cauchemardesques, mêlant la peur, le gore et le politiquement correct. De quoi vous confronter à vos plus grandes frayeurs !",
+      "releaseDate": "2011-10-05",
+      "ratings": {
+        "tmdb": 8.1
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/o6n7edVeJJFLPwd2pQdbiZ0b8wW.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/5G4Bnc4Q0YUK1bwLEUYmIsmm2Ib.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Mystère",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:5920",
+      "type": "series",
+      "name": "Mentalist",
+      "ids": {
+        "tmdb": "5920"
+      },
+      "description": "Un mentaliste utilise ses extraordinaires dons d'observation pour résoudre des crimes en tant que consultant du CBI. Une façon pour lui de contribuer à la justice et de démasquer le mystérieux tueur en série qui a assassiné son épouse et sa fille…",
+      "releaseDate": "2008-09-23",
+      "ratings": {
+        "tmdb": 8.4
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/dGRoQRWjGac97wqp6WuLnRsZDpc.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:76331",
+      "type": "series",
+      "name": "Succession",
+      "ids": {
+        "tmdb": "76331"
+      },
+      "description": "La riche et puissante famille Roy, composée du patriarche Logan et de ses quatres enfants, contrôle l'un des plus gros conglomérats de médias du monde. Alors que leur père vieillissant se retire peu à peu de la compagnie, Connor, Kendall, Roman et Siobhan contemplent le futur de l'entreprise sans lui...",
+      "releaseDate": "2018-06-03",
+      "ratings": {
+        "tmdb": 8.308
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/z0XiwdrCQ9yVIr4O0pxzaAYRxdW.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/d87JXX3DLkRJMfm5StCmmnmhHuX.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:18347",
+      "type": "series",
+      "name": "Community",
+      "ids": {
+        "tmdb": "18347"
+      },
+      "description": "Jeff est avocat. Mais Jeff doit surtout retourner à l'université car son certificat a été invalidé. Entre les femmes au foyer fraîchement divorcées et ceux qui reprennent les études pour garder leur esprit actif, Jeff intègre une bande de joyeux drilles qui découvre les joies de la vie sur le campus. Ils en apprennent plus sur eux-mêmes que sur les cours qu'ils suivent…",
+      "releaseDate": "2009-09-17",
+      "ratings": {
+        "tmdb": 8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/3KUjDt8XY7w2Ku70UE0SECmv1zP.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/1xRfgONYmK3T6FSmbtcuo8eyxVt.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:84773",
+      "type": "series",
+      "name": "Le Seigneur des anneaux : Les Anneaux de pouvoir",
+      "ids": {
+        "tmdb": "84773"
+      },
+      "description": "Divers personnages, connus et inconnus, doivent faire face à la résurgence du mal en Terre du Milieu. Des profondeurs des Montagnes de Brume aux forêts majestueuses du Lindon, de l'île des Rois de Númenor aux contrées les plus éloignées du monde, ces royaumes et personnages vont forger un héritage qui demeurera bien après leur disparition.",
+      "releaseDate": "2022-09-01",
+      "ratings": {
+        "tmdb": 7.223
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/8aiJ6pr5ibhHMWe3yOEZQsdkFox.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/i1phX1JpaqSnHBBGta6LBFYVCZq.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:60735",
+      "type": "series",
+      "name": "Flash",
+      "ids": {
+        "tmdb": "60735"
+      },
+      "description": "Jeune expert de la police scientifique de Central City, Barry Allen se retrouve doté d'une vitesse extraordinaire après avoir été frappé par la foudre. Sous le costume de Flash, il utilise ses nouveaux pouvoirs pour combattre le crime.",
+      "releaseDate": "2014-10-07",
+      "ratings": {
+        "tmdb": 7.737
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/Hrta0iq8KEQbdOpSnki2gUMowk.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/gFkHcIh7iE5G0oVOgpmY8ONQjhl.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:86893",
+      "type": "series",
+      "name": "Tacoma FD",
+      "ids": {
+        "tmdb": "86893"
+      },
+      "description": "Le quotidien d'une caserne de pompiers dans une ville très humide qui ne connaît jamais d'incendie. Les membres de cette équipe dirigée par le Chef Terry McConky et le Captaine Eddie Penisi doivent alors se contenter des missions les moins palpitantes du métier.",
+      "releaseDate": "2019-03-25",
+      "ratings": {
+        "tmdb": 7.74
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/mH0d0dUdHYkmHLAkoTVXc1FUS9V.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/cn0BAoregZTYm7hG58pDFIfPjAr.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:83631",
+      "type": "series",
+      "name": "What We Do in the Shadows",
+      "ids": {
+        "tmdb": "83631"
+      },
+      "description": "Ce faux documentaire suit le quotidien de Nandor, Laszlo, Nadja et Guillermo, trois vampires âgés de plusieurs siècles et un humain, vivant en coloc dans le New York d'aujourd'hui. Comment s'organise leur cohabitation ? Un humain peut-il aussi être un ami et pas un dîner ? La vie éternelle, est-ce vraiment si cool ?",
+      "releaseDate": "2019-03-27",
+      "ratings": {
+        "tmdb": 8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/wa3ZQE9kLnqwN3vQ0NNjg1NPsCa.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/mKikck71CvVISUSTLk29fwRbH4y.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:1877",
+      "type": "series",
+      "name": "Phinéas et Ferb",
+      "ids": {
+        "tmdb": "1877"
+      },
+      "description": "Phineas et Ferb sont des demi-frères passant leurs vacances d'été à martyriser leur soeur, à s'imaginer des aventures extraordinaires dans leur jardin... sans se douter que leur ornithorynque de compagnie est un agent secret !",
+      "releaseDate": "2007-08-17",
+      "ratings": {
+        "tmdb": 7.9
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/wgEDwsPxEeYk3hLWKsTgs1KJhS6.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/5MWFjQ3NuNtNeOE9FdrVLeNMNPs.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Comédie",
+        "Familial",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:37678",
+      "type": "series",
+      "name": "The Voice (États-Unis)",
+      "ids": {
+        "tmdb": "37678"
+      },
+      "description": "Les meilleurs chanteurs du pays s’affrontent dans un grand concours de chant, dont le gagnant est couronné « The Voice ». Le programme repose sur un format innovant en quatre étapes : les auditions à l’aveugle, les battles, les épreuves éliminatoires et, les prestations en direct.",
+      "releaseDate": "2011-04-26",
+      "ratings": {
+        "tmdb": 5.9
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/7ah1WExcMkzbq7sARCTmcC23tBr.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/x8pSFa3BXyVpkjHyn7YxmLyhjoh.jpg"
+        ]
+      },
+      "genres": [
+        "Reality"
+      ]
+    },
+    {
+      "id": "tmdb:61933",
+      "type": "series",
+      "name": "X Company",
+      "ids": {
+        "tmdb": "61933"
+      },
+      "description": "Durant la Seconde Guerre mondiale, 5 jeunes hautement qualifiés, d'origine différentes (canadiennes, américaines et britanniques) sont recrutés comme agents dans un centre de formation ultra-secrète.",
+      "releaseDate": "2015-02-18",
+      "ratings": {
+        "tmdb": 7.287
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/1O3REMtCAdrSaPrDxPM3W2fNcEJ.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/vpmVZO2Jte4mM6ZKRpuj4QTHjy.jpg"
+        ]
+      },
+      "genres": [
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:1100",
+      "type": "series",
+      "name": "How I Met Your Mother",
+      "ids": {
+        "tmdb": "1100"
+      },
+      "description": "Ted se remémore ses jeunes années, lorsqu'il était encore célibataire. Il raconte à ses enfants avec nostalgie ses moments d'égarements et de troubles, ses rencontres et ses recherches effrénées du Grand Amour et les facéties de sa bande d'amis...",
+      "releaseDate": "2005-09-19",
+      "ratings": {
+        "tmdb": 8.109
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/zat4C4cnFYFhFLW922VmcxobD9C.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/3f8aW6vcYRP6mTZdgXm83BiuB9t.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:2734",
+      "type": "series",
+      "name": "New York Unité Spéciale",
+      "ids": {
+        "tmdb": "2734"
+      },
+      "description": "Les inspecteurs qui font partie de la division des Crimes sexuels (SVU) du service de police de la ville de New York (NYPD) enquêtent sur des crimes de nature sexuelle. Alors que les autres émissions de la franchise de \"La loi et l'ordre\" se sont largement concentrées sur les cas de meurtres, les inspecteurs de la division des Crimes sexuels (SVU) ont souvent affaire à des crimes, tel le viol, auquel la victime survit et elle aide les autorités lors de l'enquête.",
+      "releaseDate": "1999-09-20",
+      "ratings": {
+        "tmdb": 8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/q2DwtUCzfMc6yKcvxwzJJBp3U1O.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/xhK9YCxNwnE0OB1SWvCY39heHQI.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:231100",
+      "type": "series",
+      "name": "Hudutsuz Sevda",
+      "ids": {
+        "tmdb": "231100"
+      },
+      "releaseDate": "2023-09-21",
+      "ratings": {
+        "tmdb": 8.141
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/1BQSLOIvjnBzrxkXjX9R0JfHTWI.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/vV5GFJtp8DgAysY1F0WfIwedi81.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Crime",
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:1400",
+      "type": "series",
+      "name": "Seinfeld",
+      "ids": {
+        "tmdb": "1400"
+      },
+      "description": "Dans son propre rôle de comique, le bavard Jerry Seinfeld mène une vie qui ne le gâte pas tout le temps, notamment à cause des femmes. Avec son collaborateur malhonnête et son voisin loufoque, Jerry analyse toutes les petites choses du quotidien et les absurdités de la société.",
+      "releaseDate": "1989-07-05",
+      "ratings": {
+        "tmdb": 8.245
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/jHd9QpsMGphze97dwK8bRQAAOcs.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/tMRdEsMg9MyXAkcufK9YJEeIaNW.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:2691",
+      "type": "series",
+      "name": "Mon oncle Charlie",
+      "ids": {
+        "tmdb": "2691"
+      },
+      "description": "La vie d'un riche célibataire est bouleversée lorsque son frère divorcé et son neveu de dix ans débarquent dans sa propriété de Malibu. Malgré leurs différences, les deux frères décident de cohabiter pour offrir un foyer au jeune Jake.",
+      "releaseDate": "2003-09-22",
+      "ratings": {
+        "tmdb": 7.439
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/oD1JuejHVuDfq5qSOGmBO5OlGEo.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/coHpOy9OJyFiHWeH36cSHMpLUHC.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:1411",
+      "type": "series",
+      "name": "Person of Interest",
+      "ids": {
+        "tmdb": "1411"
+      },
+      "description": "Un agent paramilitaire de la CIA, présumé mort, est recruté par un millionnaire reclu pour travailler sur un projet top-secret : prévenir le crime avant qu'il ne se produise ! Un ingénieux programme élaboré par Finch identifie chaque jour des personnes qui vont être impliquées dans un crime. Victime ou coupable ? Reese va devoir mener l'enquête pour découvrir qui est en danger et empêcher qu'un nouveau meurtre soit commis…",
+      "releaseDate": "2011-09-22",
+      "ratings": {
+        "tmdb": 8.098
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/6FuKOyJgViZXgMDOq9djFJLWPqX.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/efeMgQn6iRALsOqDa2cqlf6Pw5O.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Crime",
+        "Science-Fiction & Fantastique",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:1421",
+      "type": "series",
+      "name": "Modern Family",
+      "ids": {
+        "tmdb": "1421"
+      },
+      "description": "Quand les familles Pritchett, Delgado et Dunphy acceptent qu'un documentaire soit tourné sur leurs vies, elles étaient loin d'imaginer qu'elles allaient tant en révéler… Jay Pritchett a rencontré la très sexy Colombienne Gloria Delgado le jour où sa femme l'a quitté. Leur différence d'âge est pour lui un challenge de tous les jours. Sa fille, Claire, a elle-même bien du mal à gérer sa vie de famille depuis que son mari, Phil, est persuadé d'être en phase avec ses enfants adolescents alors qu'il ne fait que les embarrasser ! Quant au frère de Claire, Mitchell, il vit avec son petit-ami Cameron et ils viennent d'adopter Lily, une petite Vietnamienne…",
+      "releaseDate": "2009-09-23",
+      "ratings": {
+        "tmdb": 7.9
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/k5Qg5rgPoKdh3yTJJrLtyoyYGwC.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/nO7EzksrBzlNpAg5rgv8HzaBIkx.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:57243",
+      "type": "series",
+      "name": "Doctor Who",
+      "ids": {
+        "tmdb": "57243"
+      },
+      "description": "Dernier représentant des Seigneurs du temps et âgé de plus de 900 ans, Le Docteur parcourt l'espace et le temps dans son TARDIS. Amoureux de la race humaine, il se fait régulièrement accompagner par une femme ou un homme. Partagé entre folie et génie, insouciant mais conscient de ses responsabilités, il défendra l'humanité quel que soit le prix à payer.",
+      "releaseDate": "2005-03-26",
+      "ratings": {
+        "tmdb": 7.634
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/f4AX3fjmtWkUuIr4WzAYw6EhHFs.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/vcFW09U4834DyFOeRZpsx9x1D3S.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Drame",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:4057",
+      "type": "series",
+      "name": "Esprits criminels",
+      "ids": {
+        "tmdb": "4057"
+      },
+      "description": "L'équipe des profilers étudie les comportements et les esprits torturés des criminels les plus dangereux du pays, afin d'anticiper les crimes d'un éventuel tueur. Chaque membre de cette unité d'élite a sa personnalité, son histoire mais aussi sa spécialité. Ils sont tous dépendants les uns des autres et les résultats dépendent aussi de cette complémentarité.",
+      "releaseDate": "2005-09-22",
+      "ratings": {
+        "tmdb": 8.296
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/kRgsJq9dMz7bIciUEqwbmzFBwSL.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/tUtXfyVy54BY7eJnRtI8Xnmr1ZL.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:18165",
+      "type": "series",
+      "name": "Vampire Diaries",
+      "ids": {
+        "tmdb": "18165"
+      },
+      "description": "Quatre mois après le tragique accident de voiture qui a tué leurs parents, Elena Gilbert, 17 ans, et son frère Jeremy, 15 ans, essaient encore de s'adapter à cette nouvelle réalité. Belle et populaire, l'adolescente poursuit ses études au Mystic Falls High en s'efforçant de masquer son chagrin. Elena est immédiatement fascinée par Stefan et Damon Salvatore, deux frères que tout oppose. Elle ne tarde pas à découvrir qu'ils sont en fait des vampires…",
+      "releaseDate": "2009-09-10",
+      "ratings": {
+        "tmdb": 8.3
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/xKltipwfXRgvyD2u79FUnXAZ09F.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/cJYLon9ejKJV7ua03ab8Tj9u067.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:2316",
+      "type": "series",
+      "name": "The Office",
+      "ids": {
+        "tmdb": "2316"
+      },
+      "description": "Le quotidien d'un groupe d'employés de bureau dans une fabrique de papier en Pennsylvanie. Michael Scott, le responsable régional, pense être le mec le plus drôle du bureau. Il ne se doute pas que ses employés le tolèrent uniquement parce que c'est lui qui signe les chèques. S'efforçant de paraître cool et apprécié de tous, Michael est en fait perçu comme étant pathétique…",
+      "releaseDate": "2005-03-24",
+      "ratings": {
+        "tmdb": 8.581
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/2dApsoX4bd98szjrbj5i3syYOh2.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/9vMzIrMIncPmtalcxh1MOrgcE6C.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:4386",
+      "type": "series",
+      "name": "Alerte à Malibu",
+      "ids": {
+        "tmdb": "4386"
+      },
+      "description": "Une brigade de sauvetage du comté de Los Angeles (L.A. County Beach Patrol) menée par le lieutenant Mitch Buchannon et composée d'une dizaine de sauveteurs doit faire face chaque jour aux dangers de la plage de Malibu, tout en composant avec leur vie personnelle.",
+      "releaseDate": "1989-04-23",
+      "ratings": {
+        "tmdb": 5.953
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/6qcHgLbhz2cncGFi9d4PQkpEdZX.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/yXuZVMnOEsIhx1vtu9kJGpzmjGN.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Drame",
+        "Crime"
+      ]
+    },
+    {
+      "id": "tmdb:1416",
+      "type": "series",
+      "name": "Grey's Anatomy",
+      "ids": {
+        "tmdb": "1416"
+      },
+      "description": "Meredith Grey, fille d'un chirurgien très réputé, commence son internat de première année en médecine chirurgicale dans un hôpital de Seattle. La jeune femme s'efforce de maintenir de bonnes relations avec ses camarades internes, mais dans ce métier difficile la compétition fait rage.",
+      "releaseDate": "2005-03-27",
+      "ratings": {
+        "tmdb": 8.2
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/meLc14IucQOzlqRn3ERCWjt5BEC.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/A4NwkQXTXElE5iAsne5RpvS8R2Z.jpg"
+        ]
+      },
+      "genres": [
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:1408",
+      "type": "series",
+      "name": "Dr. House",
+      "ids": {
+        "tmdb": "1408"
+      },
+      "description": "Le docteur Gregory House est un brillant médecin à tendance misanthrope, qui dirige une équipe d'internistes au sein de l'hôpital fictif de Princeton-Plainsboro dans le New Jersey. House est un personnage arrogant, cynique, anticonformiste et asocial. Il souffre d'une claudication provenant d'une douleur chronique à la jambe droite due à un infarctus du muscle de la cuisse. Il marche avec une canne et abuse de Vicodin, un analgésique opiacé, pour soulager sa douleur.",
+      "releaseDate": "2004-11-16",
+      "ratings": {
+        "tmdb": 8.556
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/2Bw00vWztWFeTFpWTuPbUMkyDCA.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/r0Q6eeN9L1ORL9QsV0Sg8ZV3vnv.jpg"
+        ]
+      },
+      "genres": [
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:64432",
+      "type": "series",
+      "name": "The Magicians",
+      "ids": {
+        "tmdb": "64432"
+      },
+      "description": "Bientôt diplômé, Quentin Coldwater a du mal à se projeter dans son avenir en laissant de côté la magie qui le passionne depuis sa tendre enfance. A sa grande surprise, le jeune homme est admis à Brakebills, une école secrète qui forme les futurs magiciens. Il y fait la connaissance d'Alice, Penny, Margo et Eliot , avec lesquels il entretient des relations tantôt complices et souvent conflictuelles. Ensemble, ils vont pourtant devoir faire face à de grands dangers, des forces maléfiques venues de contrées insoupçonnées. Pendant ce temps, Julia, la meilleure amie de Quentin, qui a échoué aux tests d'admission de Brakebills, suit son propre chemin. Un chemin obscur et dangereux qui pourrait la mener à sa perte…",
+      "releaseDate": "2015-12-16",
+      "ratings": {
+        "tmdb": 7.587
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/vMXD0GNUDUmP0nmjHg5iYG5b9EB.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/qb9vehNFxTpPrazhD7JJ6QtEtCv.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:2025",
+      "type": "series",
+      "name": "Beverly Hills 90210",
+      "ids": {
+        "tmdb": "2025"
+      },
+      "description": "Brandon et Brenda Walsh viennent de quitter leur Minnesota natal pour emménager dans un luxueux quartier résidentiel de Los Angeles, le célèbre quartier de Beverly Hills. Les premiers jours sont difficiles au lycée, où ils doivent d'intégrer parmi des lycéens avec lesquels ils ont a priori peu de choses en commun… Mais Brenda fait la connaissance de Kelly et Donna, qui vont devenir ses meilleures amies, tandis que Brandon se rapproche de Dylan, Steve et Andrea.",
+      "releaseDate": "1990-10-04",
+      "ratings": {
+        "tmdb": 7.246
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/rnNfrxMkzQ8eTw6ffP7LAUyAKRN.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/iMFsQ7yyToYg7SkS9Ml0by9UJ0X.jpg"
+        ]
+      },
+      "genres": [
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:456",
+      "type": "series",
+      "name": "Les Simpson",
+      "ids": {
+        "tmdb": "456"
+      },
+      "description": "Située à Springfield, ville américaine moyenne, la série se concentre sur les singeries et les aventures quotidiennes de la famille Simpson : Homer, Marge, Bart, Lisa et Maggie, ainsi que des milliers d'autres personnages.",
+      "releaseDate": "1989-12-17",
+      "ratings": {
+        "tmdb": 8.029
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/py1CAYqgpKKtLBdtctLIXfDYDjW.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/jIArNHIekrCSVgdMbKPAXpPY03Y.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:60572",
+      "type": "series",
+      "name": "Pokémon",
+      "ids": {
+        "tmdb": "60572"
+      },
+      "description": "L'histoire suit les aventures d'un jeune garçon nommé Sacha dont le but est de devenir un jour Maître Pokémon. Pour cela, il va faire connaissance d'un Pikachu à très mauvais caractère au début, mais qui va vite devenir par la suite son meilleur ami. Sacha va aussi rencontrer d'autres dresseurs avec qui il partagera ses aventures. Lors de son voyage dans plusieurs régions, il va devoir continuer à progresser pour découvrir de nouveaux Pokémon et peut-être les capturer. Et avec ces derniers comme amis, il va aussi devoir affronter des groupes de bandits, surtout la Team Rocket. Mais il va aussi faire face à d'autres personnes malintentionnées. Heureusement, Sacha peut compter sur ses amis pour l'aider. Ensemble et parfois avec d'autres personnages en plus, la grande quête leur réservera bien des surprises...",
+      "releaseDate": "1997-04-01",
+      "ratings": {
+        "tmdb": 7.984
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/HPoy0TYWdHLQ0TNXlKAdlSB6q.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/yYpQV25I7XB6S0POJOScPjxYWV5.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:4177",
+      "type": "series",
+      "name": "Perry Mason",
+      "ids": {
+        "tmdb": "4177"
+      },
+      "description": "Le classique absolu de la série judiciaire. Les bases se posent dès le premier épisode  : un avocat imperturbable, un sens implacable de la vérité et des enquêtes qui retournent chaque certitude. Chaque épisode commence par un accusé piégé par les apparences… et se termine par un coup de théâtre en pleine audience. Avec Della Street, précise et loyale, et Paul Drake, enquêteur redoutablement efficace, Mason navigue entre héritages piégés, mensonges familiaux, faux aveux et crimes maquillés. Ce charme rétro, cette tension des procès et l’intelligence des déductions rendent la série étonnamment moderne.",
+      "releaseDate": "1957-09-21",
+      "ratings": {
+        "tmdb": 7.697
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/zk2RBhWyrbI6gXfN4zueagq1nZT.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/iq4BjyVsDxzg24XnjoGP0Xi2Tz5.jpg"
+        ]
+      },
+      "genres": [
+        "Mystère",
+        "Drame",
+        "Crime"
+      ]
+    },
+    {
+      "id": "tmdb:2560",
+      "type": "series",
+      "name": "UFO, alerte dans l'espace",
+      "ids": {
+        "tmdb": "2560"
+      },
+      "description": "En 1980, la Terre est menacée d'invasion par une race extraterrestre en voie d'extinction. Seule une organisation secrète militaire, appelée le SHADO (Supreme Headquarters Alien Defence Organization), dont le quartier-général est camouflé sous les studios de cinéma Harlington-Straker en Angleterre peut empêcher cette invasion... Pour cela, cette organisation dispose d'une base lunaire, d'un véhicule amphibie à la fois sous-marin et avion, et de véhicules tout-terrain d'intervention.",
+      "releaseDate": "1970-09-16",
+      "ratings": {
+        "tmdb": 7.625
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/1YoLLiFGpvA5bQjQQKREUaAsSkW.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/pYcSxml94LU0Emgc69o3CCcTq5Q.jpg"
+        ]
+      },
+      "genres": [
+        "Science-Fiction & Fantastique",
+        "Drame",
+        "Action & Adventure"
+      ]
+    },
+    {
+      "id": "tmdb:1426",
+      "type": "series",
+      "name": "Luther",
+      "ids": {
+        "tmdb": "1426"
+      },
+      "description": "Un inspecteur de police consciencieux tente de ne pas partir à la dérive tandis qu'il démêle les facteurs psychologiques qui sous-tendent ses affaires criminelles.",
+      "releaseDate": "2010-05-04",
+      "ratings": {
+        "tmdb": 7.844
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/hDxOMX8zzH1FiqKWVBzNaYGBkle.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/A2qdFRq9oJDC5E7fbgSS4POUMDF.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:3291",
+      "type": "series",
+      "name": "Manimal",
+      "ids": {
+        "tmdb": "3291"
+      },
+      "description": "Des recoins les plus profonds de l'Afrique au plus haut sommet du Tibet, Jonathan Chase a étudié pendant de longues années les mystères indicibles de la Nature et les liens entre les animaux et l'Homme. Détenteur d'un secret ancestral, il est désormais capable de se transformer en n'importe quel animal. Professeur à l'Université de New York, il aide également la police dans ses enquêtes. En compagnie de Ty, un ancien camarade de l'armée, et Brooke, une séduisante policière, Jonathan \"Manimal\" Chase combat le crime.",
+      "releaseDate": "1983-09-30",
+      "ratings": {
+        "tmdb": 7.378
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/vAaQbfTqMVBaUi7pHq9tH1ZoLdu.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/51BoopTmVwTchhGFneUHOozlAtB.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:22980",
+      "type": "series",
+      "name": "Watch What Happens Live with Andy Cohen",
+      "ids": {
+        "tmdb": "22980"
+      },
+      "description": "Andy Cohen, directeur du réseau Bravo, discute de sujets liés à la culture pop avec des célébrités et des personnalités de téléréalité.",
+      "releaseDate": "2009-07-16",
+      "ratings": {
+        "tmdb": 4.892
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/hINekSpbcBxjnjGqmIm6I4bz2ab.jpg"
+        ]
+      },
+      "genres": [
+        "Talk",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:4588",
+      "type": "series",
+      "name": "Urgences",
+      "ids": {
+        "tmdb": "4588"
+      },
+      "description": "A Chicago, médecins, infirmières, standardistes et bien d'autres font vivre les urgences du Cook County General Hospital. Entre drames et naissances, les occupants des urgences forment une petite communauté complexe et diverse. Retrouvez le Dr. Greene, le Dr. Ross, le Dr. Lewis ainsi que Carter, Benton et Hathaway : ils sont tous là, ceux qui vous ont fait aimer passer vos soirées aux urgences.",
+      "releaseDate": "1994-09-19",
+      "ratings": {
+        "tmdb": 7.8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/a8LPNPubjASrG1LZ3EKZDwOnuA3.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/en3zftWPQb5Ue6aA8W88RQbtqzd.jpg"
+        ]
+      },
+      "genres": [
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:59941",
+      "type": "series",
+      "name": "Le Tonight Show",
+      "ids": {
+        "tmdb": "59941"
+      },
+      "description": "Mêlant humour et talk-show, Jimmy Fallon reçoit des personnalités de la musique, du cinéma, ou encore du sport, pour un entretien.",
+      "releaseDate": "2014-02-17",
+      "ratings": {
+        "tmdb": 5.804
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/1g9k0mSogSkkC7aRZlrTvGYMudE.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/i4OYRb5V13BrOnTPJGdyXWg4r0J.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:247718",
+      "type": "series",
+      "name": "MobLand",
+      "ids": {
+        "tmdb": "247718"
+      },
+      "description": "Deux familles du crime s'affrontent dans une lutte à mort qui menace de faire tomber des empires. Pris entre deux feux, Harry Da Souza, un « fixer », connaît mieux que personne la valeur de la loyauté quand des forces opposées entrent en collision.",
+      "releaseDate": "2025-03-30",
+      "ratings": {
+        "tmdb": 8.7
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/fs1GCzfveWH8A8xG7UunUYNmQPP.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/h0OC7ouop8YLwbAVfS3UUE2Lw4T.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:2261",
+      "type": "series",
+      "name": "The Tonight Show avec Johnny Carson",
+      "ids": {
+        "tmdb": "2261"
+      },
+      "description": "Le 1er octobre 1962, Groucho Marx accueillit Johnny Carson comme le nouveau présentateur du The Tonight Show.\n\nL’émission a été filmée à New York pendant pratiquement les dix premières années, avec Johnny Carson en tant que présentateur. Puis à partir de mai 1972, le plateau déménagea au Studio One à Burbank en Californie pour le reste de son « mandat » .",
+      "releaseDate": "1962-10-01",
+      "ratings": {
+        "tmdb": 7.534
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/uSvET5YUvHNDIeoCpErrbSmasFb.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/qFfWFwfaEHzDLWLuttWiYq7Poy2.jpg"
+        ]
+      },
+      "genres": [
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:97079",
+      "type": "series",
+      "name": "Hamilton",
+      "ids": {
+        "tmdb": "97079"
+      },
+      "releaseDate": "2020-01-01",
+      "ratings": {
+        "tmdb": 6.214
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/3RKFjYh488MzbZEJbo6A9RTqC80.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/yJbwyPLBietHPuYDPNJerzNLt50.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:2398",
+      "type": "series",
+      "name": "Girlfriends",
+      "ids": {
+        "tmdb": "2398"
+      },
+      "description": "Regard sur la vie, les amours et les séparations de quatre femmes différentes, Toni, Maya, Lynn et Joan.",
+      "releaseDate": "2000-09-11",
+      "ratings": {
+        "tmdb": 7.12
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/buFnsyWEg4pPR7dco5Vbsm6HCIY.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/lJEItmoc7bdqvA0yS5quuBIwW0N.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:2153",
+      "type": "series",
+      "name": "Arthur",
+      "ids": {
+        "tmdb": "2153"
+      },
+      "releaseDate": "1996-10-07",
+      "ratings": {
+        "tmdb": 7
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/nYN8okmcsmhd4bGVcqifZ5OCumB.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/5k3JpB88vubqYVSHHiAhk2T8z17.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Comédie",
+        "Kids",
+        "Familial"
+      ]
+    },
+    {
+      "id": "tmdb:33238",
+      "type": "series",
+      "name": "Running Man",
+      "ids": {
+        "tmdb": "33238"
+      },
+      "description": "Les présentateurs de l'émission sont au nombre de 7, ils affrontent seul ou ensemble les invités afin de gagner la « course finale » et de gagner des « Running Ball ». Ces dernières sont utiles pour éviter tout genre de punitions qui varient selon les épisodes. Les présentateurs sont la plupart du temps mélangés avec les invités pour rendre les défis plus équitables étant donné que les présentateurs connaissent déjà à l'avance certains jeux contrairement aux invités.",
+      "releaseDate": "2010-07-11",
+      "ratings": {
+        "tmdb": 8.2
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/15SMnscZqd7HZ0bzruatOcKUlOV.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/wsHj4oHQJoe7DMYaqNFwVoyLiAh.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "Reality"
+      ]
+    },
+    {
+      "id": "tmdb:11890",
+      "type": "series",
+      "name": "Goede Tijden, Slechte Tijden",
+      "ids": {
+        "tmdb": "11890"
+      },
+      "releaseDate": "1990-10-01",
+      "ratings": {
+        "tmdb": 5.152
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/ksNrsIkIwFKpetIyiUA7kBSBKvC.jpg"
+        ]
+      },
+      "genres": [
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:65733",
+      "type": "series",
+      "name": "Doraemon",
+      "ids": {
+        "tmdb": "65733"
+      },
+      "description": "Les aventures du chat bleu.",
+      "releaseDate": "2005-04-22",
+      "ratings": {
+        "tmdb": 8.094
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/9YqdMXlPTQGLIG67vqZdsPdPC4T.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/c2oiRa7V3bQzof4wVGzLXtWJ5QU.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Animation",
+        "Comédie",
+        "Science-Fiction & Fantastique",
+        "Kids",
+        "Familial"
+      ]
+    },
+    {
+      "id": "tmdb:94722",
+      "type": "series",
+      "name": "Tagesschau",
+      "ids": {
+        "tmdb": "94722"
+      },
+      "releaseDate": "1952-12-26",
+      "ratings": {
+        "tmdb": 6.8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/7dFZJ2ZJJdcmkp05B9NWlqTJ5tq.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/jWXrQstj7p3Wl5MfYWY6IHqRpDb.jpg"
+        ]
+      },
+      "genres": [
+        "News"
+      ]
+    },
+    {
+      "id": "tmdb:498",
+      "type": "series",
+      "name": "Late Show with David Letterman",
+      "ids": {
+        "tmdb": "498"
+      },
+      "releaseDate": "1993-08-30",
+      "ratings": {
+        "tmdb": 6.43
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/fTBC5EpsgKmli9VQcJMtqQ08Qj4.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/7jEnft2CLNbILWAiBRIBrXNN7Qh.jpg"
+        ]
+      },
+      "genres": [
+        "Talk",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:2224",
+      "type": "series",
+      "name": "Le Daily Show",
+      "ids": {
+        "tmdb": "2224"
+      },
+      "description": "Trevor Noah et l'équipe de la plus fausse information au monde abordent les plus grandes histoires de l'actualité, de la politique et de la culture pop.",
+      "releaseDate": "1996-07-22",
+      "ratings": {
+        "tmdb": 6.429
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/np5l5SGS990ZV6FcP9CCRPq3hSe.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/qLMfcvdCcCGD2BNLH8b6ZCBuO7D.jpg"
+        ]
+      },
+      "genres": [
+        "News",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:37854",
+      "type": "series",
+      "name": "One Piece",
+      "ids": {
+        "tmdb": "37854"
+      },
+      "description": "Il fut un temps où Gold Roger était le plus grand de tous les pirates, le \"Roi des Pirates\" était son surnom. A sa mort, son trésor d'une valeur inestimable connu sous le nom de \"One Piece\" fut caché quelque part sur \"Grand Line\". De nombreux pirates sont partis à la recherche de ce trésor mais tous sont morts avant même de l'atteindre. Monkey D. Luffy rêve de retrouver ce trésor légendaire et de devenir le nouveau \"Roi des Pirates\". Après avoir mangé un fruit du démon, il possède un pouvoir lui permettant de réaliser son rêve. Il lui faut maintenant trouver un équipage pour partir à l'aventure !",
+      "releaseDate": "1999-10-20",
+      "ratings": {
+        "tmdb": 8.8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/8f33Q5AuM2G5ZqFeusbIqDjr3cI.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/2rmK7mnchw9Xr3XdiTFSxTTLXqv.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Comédie",
+        "Animation"
+      ]
+    },
+    {
+      "id": "tmdb:153312",
+      "type": "series",
+      "name": "Tulsa King",
+      "ids": {
+        "tmdb": "153312"
+      },
+      "description": "Dwight Manfredi, surnommé « Le Général », vient de sortir de prison où il a passé 25 ans. Cet ancien membre de la mafia new-yorkaise est cependant contraint de s'exiler à Tulsa dans l'Oklahoma. Il va y rassembler sa propre « famille » pour développer un empire criminel.",
+      "releaseDate": "2022-11-13",
+      "ratings": {
+        "tmdb": 8.322
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/oyovexqrZRbafJNlNb5Sxgp9exQ.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/mNHRGO1gFpR2CYZdANe72kcKq7G.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:61818",
+      "type": "series",
+      "name": "Late Night with Seth Meyers",
+      "ids": {
+        "tmdb": "61818"
+      },
+      "releaseDate": "2014-02-25",
+      "ratings": {
+        "tmdb": 5.1
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/hZYQjSo7mHZ06w52mzfN8izFTwZ.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/dfX2UaHVE5c7kLBFbgmEZJuy4Ev.jpg"
+        ]
+      },
+      "genres": [
+        "Talk",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:64414",
+      "type": "series",
+      "name": "Wakfu",
+      "ids": {
+        "tmdb": "64414"
+      },
+      "description": "Deux cents ans ont passé depuis le grand déluge qui a mis fin à l'âge des Dofus et transformé les continents de l'époque en archipels. Les eaux montent, la nature devient folle ? Des choses se sont passés, d'autres se sont terminés, mais le Wakfu, l'énergie primordiale créatrice du monde est fortement perturbée par un être mystérieux.\n\nSur une petite île au large de la nation d'Amakna, se trouve un petit village perdu dans la forêt : Emelka. Dans ce petit village, démarre les épopées d'un jeune garçon du nom de Yugo, qui vient de découvrir ses pouvoirs, mais aussi ses origines.\n\nC'est ici que tout commence.",
+      "releaseDate": "2008-10-30",
+      "ratings": {
+        "tmdb": 8.239
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/hXx5KsyUynyH6f6sxyqpOQgLBNb.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/794lCiKgncQg4tE2FDY8GVcEubZ.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Action & Adventure",
+        "Drame",
+        "Science-Fiction & Fantastique",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:63770",
+      "type": "series",
+      "name": "The Late Show with Stephen Colbert",
+      "ids": {
+        "tmdb": "63770"
+      },
+      "description": "L'acteur d'improvisation et comique Stephen Colbert laisse derrière lui son personnage \"The Colbert Report\" alors qu'il fait son retour tant attendu à la télévision. En tant qu'hôte de la franchise The Late Show redux - enregistrée au théâtre historique Ed Sullivan à New York - Colbert parle pour la première fois aux acteurs, aux athlètes, aux politiciens, aux bandes dessinées, aux artistes et aux musiciens. Les fans fidèles, cependant, seront également traités avec cohérence car Colbert reste soutenu par de nombreux membres de son équipe d'écriture et numérique de son ancienne entreprise. Jon Batiste, formé à Julliard, est le chef d'orchestre.",
+      "releaseDate": "2015-09-08",
+      "ratings": {
+        "tmdb": 6.088
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/9jkThAGYj2yp8jsS6Nriy5mzKFT.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/gMMnf8VRg3Z98WaFmOLr9Jk8pIs.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:45789",
+      "type": "series",
+      "name": "Le tourbillon de l'amour",
+      "ids": {
+        "tmdb": "45789"
+      },
+      "description": "Les intrigues du Fürstenhof, un hôtel cinq étoiles situé en Bavière.",
+      "releaseDate": "2005-09-26",
+      "ratings": {
+        "tmdb": 6
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/jfFNydakwvbeACEwSd2Gh8UWtba.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/kGxPVyra9Lvf5tPmTXnMEBpwOip.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:206559",
+      "type": "series",
+      "name": "Binnelanders",
+      "ids": {
+        "tmdb": "206559"
+      },
+      "releaseDate": "2005-10-13",
+      "ratings": {
+        "tmdb": 5.474
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/3bzECfllho8PphdYujLUIuhncJD.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/s1dTt4M31q2HwD5Fkl1tf5tQzJg.jpg"
+        ]
+      },
+      "genres": [
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:79593",
+      "type": "series",
+      "name": "Magnum",
+      "ids": {
+        "tmdb": "79593"
+      },
+      "description": "A son retour d'Afghanistan, Thomas Magnum, officier décoré de l'unité d'élite des SEAL de la Marine américaine, s'installe à Hawaï. Tout en assurant la sécurité du domaine du richissime Robin Master, Magnum, hébergé sur la propriété dans la maison des invités, officie en tant que détective privé. Pour l'aider à résoudre ses enquêtes, le jeune homme peut compter sur ses frères d'armes, TC et Rick. Quant à Juliet Higgins, la majordome du domaine, accompagnée de ses dobermans Zeus et Apollon, elle se charge de garder un œil sur Magnum en veillant à ce qu'il n'abuse pas de la générosité de Robin Master.",
+      "releaseDate": "2018-09-24",
+      "ratings": {
+        "tmdb": 7.49
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/kQpHMcmjX54oY0QuVYKR39VC7C2.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/x40yXVPV8tPbuWAjSPGAGauDrhj.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Drame",
+        "Crime"
+      ]
+    },
+    {
+      "id": "tmdb:4614",
+      "type": "series",
+      "name": "NCIS : Enquêtes Spéciales",
+      "ids": {
+        "tmdb": "4614"
+      },
+      "description": "L'agent spécial Leroy Jethro Gibbs, de la Section criminelle de la Gendarmerie maritime, dirige un groupe de personnes aux personnalités colorées qui enquête sur les crimes. Ceux-ci vont du meurtre et de l'espionnage au terrorisme, et sont reliés de manière assurée au personnel du corps de la Marine. L'équipe est composée d'Anthony DiNozzo, un ex-inspecteur plein d'esprit spécialisé en homicides, d'Abby Sciuto, l'excentrique spécialiste d'enquête en technique de laboratoire, de Timothy McGee, brillant lorsqu'inquiet, et de Ziva David, ex-officier de liaison du Mossad. Le Dr Donald \"Ducky\" Mallard contribue à la résolution de cas grâce à sa grande expérience dans le domaine de la médecine légale.",
+      "releaseDate": "2003-09-23",
+      "ratings": {
+        "tmdb": 7.601
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/salC1Yhi3QW8DW5iIJGFQOzPWVQ.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/rHKRZCBpDFSNc45kzyf665LJYp3.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Action & Adventure"
+      ]
+    },
+    {
+      "id": "tmdb:549",
+      "type": "series",
+      "name": "New York Police Judiciaire",
+      "ids": {
+        "tmdb": "549"
+      },
+      "description": "À New York, détectives et assistants du procureur tentent de résoudre les affaires les plus délicates. Les uns sur le terrain, les autres devant les tribunaux.",
+      "releaseDate": "1990-09-13",
+      "ratings": {
+        "tmdb": 7.3
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/7ZFSCSIuW8wzXJL1JezrKcLzV4x.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/hrfP9BQ4mOMZOa8nHbFJLSDHBLz.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:4656",
+      "type": "series",
+      "name": "WWE Raw",
+      "ids": {
+        "tmdb": "4656"
+      },
+      "description": "Chaque semaine, les supertars de Raw s'affrontent dans le ring mais également en dehors. Combats acharnés, prises impressionnantes, les catcheurs sont prêts à tout pour remporter la victoire. Depuis le 1000e épisode du show, diffusé le 23 juillet 2012, WWE Raw passe à un format de trois heures au lieu de deux, format auparavant réservé aux épisodes spéciaux.",
+      "releaseDate": "1993-01-11",
+      "ratings": {
+        "tmdb": 6.7
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/ykWWT8FAChBffNxcDzoJMCK9LBb.jpg"
+        ]
+      },
+      "genres": [
+        "Reality"
+      ]
+    },
+    {
+      "id": "tmdb:14424",
+      "type": "series",
+      "name": "Malhação",
+      "ids": {
+        "tmdb": "14424"
+      },
+      "releaseDate": "1995-04-24",
+      "ratings": {
+        "tmdb": 6.202
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/bF24r2FxsjzgkJcrbBU8RC9JVoU.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/7Vpk75SxS86Ai7o2iilJUz5rx4x.jpg"
+        ]
+      },
+      "genres": [
+        "Soap",
+        "Comédie",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:291",
+      "type": "series",
+      "name": "Coronation Street",
+      "ids": {
+        "tmdb": "291"
+      },
+      "releaseDate": "1960-12-09",
+      "ratings": {
+        "tmdb": 5.289
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/5APjn4LnV5wWk5DXq7ZewT6zzP1.jpg"
+        ]
+      },
+      "genres": [
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:387",
+      "type": "series",
+      "name": "Bob l'éponge",
+      "ids": {
+        "tmdb": "387"
+      },
+      "description": "Qui vit dans un ananas sous la mer ? Bob l'éponge bien sûr ! Suivez les aventures de cette éponge rigolote et de ses amis dont les bonnes intentions finissent toujours par leur attirer des ennuis. Heureusement, l'innocence et l'optimisme de Bob l'éponge les sauvent à chaque fois. Car on ne s'ennuie jamais à « Bikini Bottom ».",
+      "releaseDate": "1999-05-01",
+      "ratings": {
+        "tmdb": 7.721
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/uUUzblARnPSjgqIGnrp799I13X2.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/f3f5OzzYd8m3zN47DAjKs0sbx00.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Comédie",
+        "Familial"
+      ]
+    },
+    {
+      "id": "tmdb:231962",
+      "type": "series",
+      "name": "Diepe Waters",
+      "ids": {
+        "tmdb": "231962"
+      },
+      "releaseDate": "2022-10-03",
+      "ratings": {
+        "tmdb": 8.2
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/uF5SpFjMmYTMF0sc5MbjnDsoBcG.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/nPexsB86g0YUXxBpa7OYd8sqCPP.jpg"
+        ]
+      },
+      "genres": [
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:2661",
+      "type": "series",
+      "name": "Kamen Rider",
+      "ids": {
+        "tmdb": "2661"
+      },
+      "description": "Le monde est tourmenté par Shocker, une mystérieuse organisation terroriste, qui recrute ses agents en kidnappant des personnes qu'ils transforment en mutants cyborgs. Takeshi Hongo, l'une des victimes, se rebelle juste avant la phase finale de sa transformation. A l'aide de ses nouveaux pouvoirs, il décide de combattre Shocker…",
+      "releaseDate": "1971-04-03",
+      "ratings": {
+        "tmdb": 6.45
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/fIJNVBa6MJStPiOvhLV69nAdu0e.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/usLRh1bcbL0Q9X8zf6rL4OV1qrA.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Science-Fiction & Fantastique",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:82873",
+      "type": "series",
+      "name": "The Kelly Clarkson Show",
+      "ids": {
+        "tmdb": "82873"
+      },
+      "description": "Présentée par Kelly Clarkson, l’émission met en avant des figures influentes du cinéma, de la télévision et de la musique, ainsi que de nouveaux talents et des personnes ordinaires qui se distinguent par leur impact positif et leur rôle inspirant au sein de leurs communautés.",
+      "releaseDate": "2019-09-09",
+      "ratings": {
+        "tmdb": 6.197
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/sBix25bie9UQFzbarN51DpFO5ky.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/bk7QdAIUqkGpZO5GUX4AMB2AZIB.jpg"
+        ]
+      },
+      "genres": [
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:32415",
+      "type": "series",
+      "name": "Conan",
+      "ids": {
+        "tmdb": "32415"
+      },
+      "description": "Une émission-débat de fin de soirée, animée par Conan O'Brien.",
+      "releaseDate": "2010-11-08",
+      "ratings": {
+        "tmdb": 7.153
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/oQxrvUhP3ycwnlxIrIMQ9Z3kleq.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/2Ib8kvWa9gGhJrAfGlhIvbmtbWn.jpg"
+        ]
+      },
+      "genres": [
+        "Talk",
+        "Comédie",
+        "News"
+      ]
+    },
+    {
+      "id": "tmdb:279246",
+      "type": "series",
+      "name": "L'impératrice remariée",
+      "ids": {
+        "tmdb": "279246"
+      },
+      "description": "Impératrice de l'Empire de l'Est, la brillante Navier règne en parfaite harmonie avec son époux, l'empereur Sovieshu. Mais leur monde s'écroule quand il introduit au palais Lasta, une esclave en fuite, et la prend comme maîtresse. Alors que son titre et son amour sont menacés, Navier reste stoïque. Seul Heinri, prince du Royaume de l'Ouest de passage pour la Nouvelle Année, devine la force et la solitude derrière son masque. Le jour où Sovieshu promet le trône à Lasta, Navier réalise qu'elle ne peut plus subir. Pour ne pas être une impératrice déchue mais celle qui choisit son destin, elle prend une décision qui changera sa vie à jamais.",
+      "releaseDate": "2026-11-03",
+      "ratings": {
+        "tmdb": 8.696
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/1TKAhnnicIIV5k2L8bquwnU1B0s.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/fNcpHmuZLKoyhNMBEzdqzX8iIvg.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:62992",
+      "type": "series",
+      "name": "DAS!",
+      "ids": {
+        "tmdb": "62992"
+      },
+      "releaseDate": "1991-01-02",
+      "ratings": {
+        "tmdb": 4.571
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/yMg0l6hxCnR94Fcl1F1IEkmG26V.jpg"
+      },
+      "genres": [
+        "Talk",
+        "News"
+      ]
+    },
+    {
+      "id": "tmdb:64190",
+      "type": "series",
+      "name": "Volle Kanne",
+      "ids": {
+        "tmdb": "64190"
+      },
+      "releaseDate": "1999-08-30",
+      "ratings": {
+        "tmdb": 4.375
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/3tHHtqwNmQzRpiGqZNfj2OQUgYB.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/rWZXt8MOLNF4zSj68rptePNzksX.jpg"
+        ]
+      },
+      "genres": [
+        "News"
+      ]
+    },
+    {
+      "id": "tmdb:57775",
+      "type": "series",
+      "name": "ちびまる子ちゃん",
+      "ids": {
+        "tmdb": "57775"
+      },
+      "releaseDate": "1990-01-07",
+      "ratings": {
+        "tmdb": 7.704
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/auruoMM9a9c4diotHvI5v7dKFbF.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/vuajwjep1FxphPhMEWKv4bfrCnf.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:265167",
+      "type": "series",
+      "name": "ZIBB",
+      "ids": {
+        "tmdb": "265167"
+      },
+      "releaseDate": "2003-11-10",
+      "ratings": {
+        "tmdb": 5.5
+      },
+      "genres": [
+        "News",
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:1871",
+      "type": "series",
+      "name": "EastEnders",
+      "ids": {
+        "tmdb": "1871"
+      },
+      "description": "La vie quotidienne des habitants de la classe ouvrière de la place Albert, une traditionnelle place victorienne de maisons mitoyennes entourant un parc dans le quartier de Walford, à l'est de Londres.",
+      "releaseDate": "1985-02-19",
+      "ratings": {
+        "tmdb": 4.3
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/ETFWCToRFx45vNAsNexh31ufSE.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/2jzrUm0vGW2TqJPds1PfZVRYrh7.jpg"
+        ]
+      },
+      "genres": [
+        "Soap",
+        "Drame",
+        "Crime"
+      ]
+    },
+    {
+      "id": "tmdb:1431",
+      "type": "series",
+      "name": "Les Experts",
+      "ids": {
+        "tmdb": "1431"
+      },
+      "description": "À Las Vegas, un groupe d'experts scientifiques de la police recueille des indices sur les scènes de crime pour résoudre des enquêtes complexes. Un temps conduite par Gil Grissom, un entomologiste qui garde toujours son sang-froid, l'équipe enchaîne les affaires délicates : meurtres sanglants, viols, disparitions, leur taux d'efficacité est impressionnant. D.B. Russell, qui prend la suite des opérations après le départ de Gil Grissom et l'intérim de Raymond Langston, tente de maintenir la réputation d'excellence du service.",
+      "releaseDate": "2000-10-06",
+      "ratings": {
+        "tmdb": 7.6
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/fx304X0L9dykk0yZixBfhUDqH53.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/cvlLBcQWpO9X21jDHhgPJnE2aVq.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:13945",
+      "type": "series",
+      "name": "Gute Zeiten, schlechte Zeiten",
+      "ids": {
+        "tmdb": "13945"
+      },
+      "releaseDate": "1992-05-11",
+      "ratings": {
+        "tmdb": 5.385
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/qujVFLAlBnPU9mZElV4NZgL8iXT.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/ottT2Yt0OfHiHp3PHJTLNVV8JPE.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:108978",
+      "type": "series",
+      "name": "Reacher",
+      "ids": {
+        "tmdb": "108978"
+      },
+      "description": "Ancien officier de Police Militaire, Jack Reacher est arrêté pour un meurtre qu'il n'a pas commis et découvre une conspiration sanglante où baignent flics véreux, hommes d'affaire louches et politiciens corrompus. Avec son astuce pour seule arme, il va déjouer ce qui se trame à Margrave en Géorgie.",
+      "releaseDate": "2022-02-03",
+      "ratings": {
+        "tmdb": 8.127
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/qrJOCIAcvPmyZ63KajWTalQtqPT.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Crime"
+      ]
+    },
+    {
+      "id": "tmdb:1433",
+      "type": "series",
+      "name": "American Dad!",
+      "ids": {
+        "tmdb": "1433"
+      },
+      "description": "Agent de la CIA, Stan Smith est aussi l'époux comblé de la douce Francine et le fier papa de Hayley et Steve. Le tableau est idyllique. Le problème c'est que Stan a une légère tendance à verser dans la paranoïa. Prêt à tout pour défendre son Amérique chérie et ses valeurs conservatrices, il n'hésiterait pas à tirer sur son grille-pain si celui-ci était suspecté de trahison... Rajoutez à cela la présence dans la maison des Smith de Roger, l'alien sarcastique, et de Klaus, le poisson rouge d'origine germanique, et vous aurez le portrait haut en couleurs de ce père américain si parfait !",
+      "releaseDate": "2005-02-06",
+      "ratings": {
+        "tmdb": 7.026
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/eb9sH2am9IUSQ8GhXTNAVoujk8W.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/iixxhk3ycXmFqBn616pAsC3lu53.jpg"
+        ]
+      },
+      "genres": [
+        "Animation",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:81329",
+      "type": "series",
+      "name": "Un si grand soleil",
+      "ids": {
+        "tmdb": "81329"
+      },
+      "description": "Claire revient à Montpellier après 17 ans d’absence, pour faire découvrir sa ville natale à son fils Théo. Mais dès son arrivée, rien ne se passe comme prévu. Seulement quelques heures plus tard, elle est en garde à vue, accusée du meurtre d’un ami d’enfance. Pour se disculper, Claire n’aura d’autre choix que de percer tous les secrets du passé, notamment celui de la mort de sa sœur Angèle.",
+      "releaseDate": "2018-08-27",
+      "ratings": {
+        "tmdb": 6.546
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/dhEN7hDJ3TR86JK36VyySEoPFok.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/aizbHLcKVWvJ7jxkflJzTu5Z8GE.jpg"
+        ]
+      },
+      "genres": [
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:330613",
+      "type": "series",
+      "name": "กฎหลังเที่ยงคืน",
+      "ids": {
+        "tmdb": "330613"
+      },
+      "releaseDate": "2026-10-28",
+      "ratings": {
+        "tmdb": 8.667
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/hJF2csAuSuNRJIacTkQmfkd6GgL.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/VgW1XPEFiwEZgYuR2Wl204DxGL.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Mystère",
+        "Science-Fiction & Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:65270",
+      "type": "series",
+      "name": "라디오스타",
+      "ids": {
+        "tmdb": "65270"
+      },
+      "releaseDate": "2007-05-30",
+      "ratings": {
+        "tmdb": 5.286
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/ofo50w2DTFcPkOm3iguWGU3Y8cw.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/kCd0rmnNwCd3sgupO9DqSi9aHa0.jpg"
+        ]
+      },
+      "genres": [
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:79744",
+      "type": "series",
+      "name": "The Rookie : Le Flic de Los Angeles",
+      "ids": {
+        "tmdb": "79744"
+      },
+      "description": "John Nolan, le rookie le plus âgé du LAPD, utilise son expérience de vie, sa détermination et son sens de l’humour pour suivre des recrues âgées de 20 ans de moins que lui.",
+      "releaseDate": "2018-10-16",
+      "ratings": {
+        "tmdb": 8.532
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/aOXBLBRg7M5D2Zrs5luKD5cDB8O.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/6iNWfGVCEfASDdlNb05TP5nG0ll.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:17887",
+      "type": "series",
+      "name": "7de Laan",
+      "ids": {
+        "tmdb": "17887"
+      },
+      "releaseDate": "2000-04-04",
+      "ratings": {
+        "tmdb": 6.5
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/vQcC4Kcx0ZEXxmj0gUrfkFR14LU.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/ovnj5NSQRAn54e81ecIyAIfKRZK.jpg"
+        ]
+      },
+      "genres": [
+        "Soap"
+      ]
+    },
+    {
+      "id": "tmdb:1399",
+      "type": "series",
+      "name": "Game of Thrones",
+      "ids": {
+        "tmdb": "1399"
+      },
+      "description": "Il y a très longtemps, à une époque oubliée, une force a détruit l'équilibre des saisons. Dans un pays où l'été peut durer plusieurs années et l'hiver toute une vie, des forces sinistres et surnaturelles se pressent aux portes du Royaume des Sept Couronnes. La confrérie de la Garde de Nuit, protégeant le Royaume de toute créature pouvant provenir d'au-delà du Mur protecteur, n'a plus les ressources nécessaires pour assurer la sécurité de tous. Après un été de dix années, un hiver rigoureux s'abat sur le Royaume avec la promesse d'un avenir des plus sombres. Pendant ce temps, complots et rivalités se jouent sur le continent pour s'emparer du Trône de fer, le symbole du pouvoir absolu.",
+      "releaseDate": "2011-04-17",
+      "ratings": {
+        "tmdb": 8.476
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/eRMfekBOnwyE9G0ffyEJIBOjX2n.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/zZqpAXxVSBtxV9qPBcscfXBcL2w.jpg"
+        ]
+      },
+      "genres": [
+        "Science-Fiction & Fantastique",
+        "Drame",
+        "Action & Adventure"
+      ]
+    },
+    {
+      "id": "tmdb:14686",
+      "type": "series",
+      "name": "Le rêve de Diana",
+      "ids": {
+        "tmdb": "14686"
+      },
+      "description": "Diana, 23 ans, rêve de devenir patineuse artistique professionnelle. Un directeur marketing d'un centre de remise en forme, qui cherche une nouvelle égérie pour sa campagne publicitaire, décide de l'engager.",
+      "releaseDate": "2006-09-04",
+      "ratings": {
+        "tmdb": 4.8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/kh7lcozUlj13uRqoZJ2ZjENkm9Q.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/2o0cVL6fOa06aXd5xogZhD1h4ce.jpg"
+        ]
+      },
+      "genres": [
+        "Soap",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:1911",
+      "type": "series",
+      "name": "Bones",
+      "ids": {
+        "tmdb": "1911"
+      },
+      "description": "Temperance Brennan est une anthropologue hautement qualifiée qui travaille à l'Institut Jeffersonian. En examinant les squelettes de personnes décédées, elle est capable d'en reconstituer la vie et les circonstances de la mort. De telles capacités n'échappent pas au FBI qui fait appel à ses services dans le cadre d'affaires criminelles lorsque les méthodes traditionnelles d'identification des corps ne donnent rien. Temperance travaille en collaboration avec l'agent spécial Seeley Booth, ancien sniper de l'armée qui se méfie de la science et des scientifiques.",
+      "releaseDate": "2005-09-13",
+      "ratings": {
+        "tmdb": 8.166
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/jY8jLmNzWEsnHlTuI5FSzAb1ouo.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/aSye04zKzWtUP3U6Cl4bOXc5Ih9.jpg"
+        ]
+      },
+      "genres": [
+        "Crime",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:70672",
+      "type": "series",
+      "name": "Knowing Brothers",
+      "ids": {
+        "tmdb": "70672"
+      },
+      "description": "Durant l'émission l'invité(e) fait un questionnaire sur lui et pose les questions une par une et les présentateurs doivent avoir le plus de bonnes réponses. S'ils se trompent, ils sont punis. Le concept de l'émission est que les présentateurs soient dans un lycée et que chaque invité soit un « nouvel » élève transféré.",
+      "releaseDate": "2015-12-05",
+      "ratings": {
+        "tmdb": 7.279
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/zak7mqMxJGnnWplSdbjDtV7bg2Y.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/a8a8z4aJr40zYgRMfmSESppX2eO.jpg"
+        ]
+      },
+      "genres": [
+        "Reality",
+        "Comédie"
+      ]
+    },
+    {
+      "id": "tmdb:14981",
+      "type": "series",
+      "name": "The Late Late Show with Craig Ferguson",
+      "ids": {
+        "tmdb": "14981"
+      },
+      "releaseDate": "2005-01-03",
+      "ratings": {
+        "tmdb": 6.843
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/gGC7zSDgG0FY0MbM1pjfhTCWQBI.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/m0bV3qBiJBBlpFaaKjwHo13MVjm.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:23915",
+      "type": "series",
+      "name": "Markus Lanz",
+      "ids": {
+        "tmdb": "23915"
+      },
+      "releaseDate": "2008-06-03",
+      "ratings": {
+        "tmdb": 5.433
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/tr4cLn4ecRASV0SPM9FRv0AJOQF.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/qJnjJXBLgG4tummCm792nvNz7u1.jpg"
+        ]
+      },
+      "genres": [
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:65334",
+      "type": "series",
+      "name": "Miraculous, les aventures de Ladybug et Chat Noir",
+      "ids": {
+        "tmdb": "65334"
+      },
+      "description": "Paris, aujourd'hui. Marinette et Adrien sont deux collégiens comme les autres, à la différence près qu’ils ont été choisis pour sauver Paris ! Leur mission : capturer les Akumas du mystérieux Papillon qui transforment les parisiens en super vilains. Grâce à leur kwami, nos deux collégiens se métamorphosent en superhéros : Ladybug, et Chat Noir.",
+      "releaseDate": "2015-10-19",
+      "ratings": {
+        "tmdb": 8.072
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/585lHpUQ75NvprAuSpAvJaNJya5.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/lH22EnM0ofC7GsVGU8dAA2RXV1c.jpg"
+        ]
+      },
+      "genres": [
+        "Action & Adventure",
+        "Animation",
+        "Kids"
+      ]
+    },
+    {
+      "id": "tmdb:1667",
+      "type": "series",
+      "name": "Saturday Night Live",
+      "ids": {
+        "tmdb": "1667"
+      },
+      "description": "Saturday Night Live est une émission de divertissement retransmise en direct depuis le Studio 8H du GE Building au Rockefeller Center de New York. Diffusé le samedi soir sur la chaîne NBC, le programme se compose de sketches, de parodies et de performances musicales. Il s'agit de l'un des programmes phares de la télévision américaine, qui a permis l'émergence de nombreuses stars de la comédie lors des trente dernières années.",
+      "releaseDate": "1975-10-11",
+      "ratings": {
+        "tmdb": 6.869
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/s1cZBqbMwAF3w8S3Yo0j5nr2Yuo.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/sSAX59Kf01lBRkBW4UcIL4kIoIm.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "News"
+      ]
+    },
+    {
+      "id": "tmdb:2221",
+      "type": "series",
+      "name": "La Vue",
+      "ids": {
+        "tmdb": "2221"
+      },
+      "description": "Cinq femmes avec des perspectives très différentes sur la politique, Hollywood et ses stars, et l'actualité discutent de ces sujets et d'autres sujets de division du jour.",
+      "releaseDate": "1997-08-11",
+      "ratings": {
+        "tmdb": 4.227
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/pEUNIxCMh2jFjUj7u09f4O5CcR4.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/tHZsAFdtNsKNxE58jopl9Eh4f7a.jpg"
+        ]
+      },
+      "genres": [
+        "Talk"
+      ]
+    },
+    {
+      "id": "tmdb:5092",
+      "type": "series",
+      "name": "무한도전",
+      "ids": {
+        "tmdb": "5092"
+      },
+      "releaseDate": "2005-04-23",
+      "ratings": {
+        "tmdb": 7.524
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/original/fpXfEfcZu5uDTOKqjwXSGgrL4iY.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/s2qJb1FLwp1Mse9lY08JqgMp0kw.jpg"
+        ]
+      },
+      "genres": [
+        "Reality",
+        "Comédie"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "drtv",
+  "name": "DRTV International",
+  "type": "live",
+  "url": "https://vps122407.serveur-vps.net/hls/drtv.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/gK97P92.png",
+    "poster": "https://i.imgur.com/gK97P92.png"
+  },
+  "tags": ["Congo", "Brazzaville"]
+}

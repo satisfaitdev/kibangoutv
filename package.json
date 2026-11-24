@@ -1,0 +1,9 @@
+{
+  "name": "kibangoutv",
+  "version": "1.0.0",
+  "description": "KibangouTV Streaming Platform",
+  "type": "module",
+  "scripts": {
+    "start": "python server.py"
+  }
+}

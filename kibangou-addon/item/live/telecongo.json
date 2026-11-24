@@ -1,0 +1,11 @@
+{
+  "id": "telecongo",
+  "name": "Télé Congo (Brazzaville)",
+  "type": "live",
+  "url": "http://51.254.199.122:8080/telecongo/index.m3u8",
+  "images": {
+    "logo": "https://raw.githubusercontent.com/iptv-org/epg/master/sites/telecongo.cg/telecongo.cg.png",
+    "poster": "https://raw.githubusercontent.com/iptv-org/epg/master/sites/telecongo.cg/telecongo.cg.png"
+  },
+  "tags": ["Congo", "National", "Direct"]
+}

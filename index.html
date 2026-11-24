@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <title>KibangouTV - Canal+, beIN Sports, Télé Congo, Films & Séries</title>
+  
+  <!-- Moteur Vuma -->
+  <link rel="stylesheet" href="https://vuma.mx/latest/style.css">
+  <link rel="icon" href="./logo.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0E1318">
+  
+  <!-- Prise en charge télécommande TV (D-pad), tactile et PC -->
+  <meta name="mhub" content="app dpad">
+
+  <style>
+    /* ========================================================
+       KIBANGOUTV - STYLES GLOBAUX & PERSONNALISATIONS
+       ======================================================== */
+    :root {
+      --accent: #00C853;
+      --accent-rgb: 0, 200, 83;
+      --bg-dark: #0E1318;
+      --surface-dark: #151C24;
+      --surface-border: #232D38;
+      --text-muted: #8E99A4;
+    }
+
+    /* 1. Masquer l'option Social dans la sidebar et la bottom nav */
+    a.nav-item[href="#/social"],
+    a.bnav-item[href="#/social"],
+    .nav-social {
+      display: none !important;
+    }
+
+    /* 2. Masquer le bouton 'Supprimer les données de ce site' et la section Social dans Paramètres */
+    .s-label-danger,
+    div:has(> .s-label-danger),
+    .s-group:has(.s-label-danger) {
+      display: none !important;
+    }
+
+    /* Masquer le groupe Social dans les réglages */
+    .s-group[data-group="social"],
+    .s-group:has(.s-gicon):has(.toggle) {
+      display: none !important;
+    }
+
+    /* ========================================================
+       PORTAIL D'AUTHENTIFICATION (PIN 6 CHIFFRES & E-MAIL WEB)
+       ======================================================== */
+    #auth-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: radial-gradient(circle at 50% 30%, #151e28 0%, #0a0d12 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #FFFFFF;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #auth-gate.unlocked {
+      display: none !important;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 380px;
+      background: rgba(21, 28, 36, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(0, 200, 83, 0.15);
+      backdrop-filter: blur(20px);
+    }
+
+    .auth-logo {
+      width: 68px;
+      height: 68px;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 6px 18px rgba(0, 200, 83, 0.4));
+    }
+
+    .auth-brand {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .auth-brand span {
+      color: #00C853;
+    }
+
+    .auth-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .auth-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.45;
+    }
+
+    /* Affichage des 6 chiffres PIN */
+    .pin-display {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .pin-dot {
+      width: 44px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #00C853;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .pin-dot.filled {
+      background: rgba(0, 200, 83, 0.12);
+      border-color: #00C853;
+      box-shadow: 0 0 14px rgba(0, 200, 83, 0.35);
+    }
+
+    .pin-dot.filled::after {
+      content: "•";
+      font-size: 28px;
+      color: #00C853;
+    }
+
+    /* Clavier virtuel PIN */
+    .pin-keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+
+    .pin-key {
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .pin-key:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .pin-key:active {
+      transform: scale(0.94);
+      background: rgba(0, 200, 83, 0.2);
+    }
+
+    .pin-key.key-action {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Formulaire de connexion par e-mail (Web) */
+    .email-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .email-input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .email-input {
+      width: 100%;
+      box-sizing: border-box;
+      height: 48px;
+      padding: 0 16px 0 42px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      color: #FFFFFF;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .email-input:focus {
+      border-color: #00C853;
+      box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.25);
+    }
+
+    .email-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+    }
+
+    .auth-btn {
+      height: 48px;
+      width: 100%;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #00C853 0%, #00963d 100%);
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+      box-shadow: 0 4px 18px rgba(0, 200, 83, 0.4);
+    }
+
+    .auth-btn:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 6px 22px rgba(0, 200, 83, 0.5);
+    }
+
+    .auth-btn:active {
+      transform: scale(0.98);
+    }
+
+    .mode-switch-btn {
+      background: none;
+      border: none;
+      color: #00C853;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .mode-switch-btn:hover {
+      background: rgba(0, 200, 83, 0.1);
+    }
+
+    .auth-error {
+      font-size: 12px;
+      color: #FF5252;
+      min-height: 18px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    @keyframes pin-shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    .shake {
+      animation: pin-shake 0.35s ease;
+    }
+  </style>
+
+  <!-- Polyfill mHub API & bypass de cache corrompu -->
+  <script>
+    // Nettoyer tout cache d'addon corrompu
+    try {
+      localStorage.removeItem("vuma_addons_disabled");
+      localStorage.removeItem("vuma_addons");
+    } catch(e) {}
+
+    const nativeFetch = window.fetch;
+
+    function getProxiedUrl(rawUrl) {
+      if (!rawUrl || typeof rawUrl !== "string") return rawUrl;
+      if (
+        rawUrl.startsWith("/api/proxy") || 
+        rawUrl.startsWith("/get?") || 
+        rawUrl.startsWith("/") || 
+        rawUrl.startsWith("./") || 
+        rawUrl.startsWith("../") || 
+        rawUrl.includes("localhost:8080") ||
+        rawUrl.includes("127.0.0.1:8080")
+      ) {
+        return rawUrl;
+      }
+      if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
+        return `/api/proxy?url=${encodeURIComponent(rawUrl)}`;
+      }
+      return rawUrl;
+    }
+
+    window.mhub = {
+      ready: Promise.resolve(true),
+      capabilities: ["fetch", "clientFetch"],
+      device: { isTV: false, platform: "windows" },
+      async fetch(url, options = {}) {
+        let sUrl = typeof url === "string" ? url : (url?.url || String(url));
+        const proxyUrl = getProxiedUrl(sUrl);
+        return nativeFetch(proxyUrl, {
+          method: options.method || "GET",
+          headers: options.headers,
+          body: options.body
+        });
+      },
+      setImmersive() {},
+      openSearch() {},
+      requestPlayback() {},
+      exit() {},
+      notify() { return Promise.resolve(); }
+    };
+
+    window.fetch = function(input, init) {
+      try {
+        if (typeof input === "string") {
+          const proxied = getProxiedUrl(input);
+          return nativeFetch.call(this, proxied, init);
+        } else if (input instanceof Request) {
+          const proxied = getProxiedUrl(input.url);
+          if (proxied !== input.url) {
+            const newReq = new Request(proxied, input);
+            return nativeFetch.call(this, newReq, init);
+          }
+        } else if (input && typeof input.url === "string") {
+          input.url = getProxiedUrl(input.url);
+        }
+      } catch (err) {
+        console.warn("fetch hook fallback:", err);
+      }
+      return nativeFetch.call(this, input, init);
+    };
+  </script>
+</head>
+<body>
+
+  <!-- ========================================================
+       PORTAIL D'AUTHENTIFICATION (LOCK SCREEN)
+       ======================================================== -->
+  <div id="auth-gate">
+    <div class="auth-card" id="auth-card">
+      <img src="./logo.svg" alt="KibangouTV" class="auth-logo">
+      <div class="auth-brand">Kibangou<span>TV</span></div>
+      
+      <!-- Vue Code PIN -->
+      <div id="view-pin" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+        <div class="auth-title">Code secret d'accès</div>
+        <div class="auth-subtitle">Entrez votre code à 6 chiffres pour déverrouiller l'application</div>
+        
+        <div class="pin-display" id="pin-display">
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+        </div>
+
+        <div class="auth-error" id="pin-error"></div>
+
+        <div class="pin-keypad">
+          <button type="button" class="pin-key" data-digit="1">1</button>
+          <button type="button" class="pin-key" data-digit="2">2</button>
+          <button type="button" class="pin-key" data-digit="3">3</button>
+          <button type="button" class="pin-key" data-digit="4">4</button>
+          <button type="button" class="pin-key" data-digit="5">5</button>
+          <button type="button" class="pin-key" data-digit="6">6</button>
+          <button type="button" class="pin-key" data-digit="7">7</button>
+          <button type="button" class="pin-key" data-digit="8">8</button>
+          <button type="button" class="pin-key" data-digit="9">9</button>
+          <button type="button" class="pin-key key-action" id="pin-clear">Effacer</button>
+          <button type="button" class="pin-key" data-digit="0">0</button>
+          <button type="button" class="pin-key key-action" id="pin-del">⌫</button>
+        </div>
+
+        <button type="button" class="mode-switch-btn" id="btn-switch-to-email">
+          Connexion par e-mail (Web) →
+        </button>
+      </div>
+
+      <!-- Vue Connexion E-mail -->
+      <div id="view-email" style="width:100%; display:none; flex-direction:column; align-items:center;">
+        <div class="auth-title">Connexion Web</div>
+        <div class="auth-subtitle">Accédez à votre espace streaming avec votre adresse e-mail</div>
+
+        <form class="email-form" id="email-form">
+          <div class="email-input-wrapper">
+            <svg class="email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <input type="email" class="email-input" id="auth-email-input" placeholder="nom@exemple.com" required autocomplete="email">
+          </div>
+          <div class="auth-error" id="email-error"></div>
+          <button type="submit" class="auth-btn">
+            <span>Accéder à KibangouTV</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </form>
+
+        <button type="button" class="mode-switch-btn" id="btn-switch-to-pin">
+          ← Déverrouillage par code PIN (6 chiffres)
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="app">
+    <!-- Écran de démarrage KibangouTV -->
+    <div style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#0E1318;color:#FFFFFF;font-family:system-ui,-apple-system,sans-serif">
+      <img src="./logo.svg" alt="KibangouTV" width="84" height="84" style="filter:drop-shadow(0 4px 14px rgba(0,200,83,0.45))">
+      <div style="font-size:24px;font-weight:700;letter-spacing:0.5px;color:#FFFFFF">Kibangou<span style="color:#00C853">TV</span></div>
+      <div style="font-size:13px;color:#8E99A4">Canal+, beIN Sports, Télé Congo, Films & Séries...</div>
+      <div style="width:26px;height:26px;border-radius:50%;border:3px solid rgba(255,255,255,.1);border-top-color:#00C853;animation:boot-spin .8s linear infinite;margin-top:8px"></div>
+      <style>@keyframes boot-spin { to { transform: rotate(360deg); } }</style>
+    </div>
+  </div>
+
+  <script>
+    /* ========================================================
+       LOGIQUE D'AUTHENTIFICATION & SÉCURITÉ
+       ======================================================== */
+    (function initAuth() {
+      const authGate = document.getElementById("auth-gate");
+      const authCard = document.getElementById("auth-card");
+      const viewPin = document.getElementById("view-pin");
+      const viewEmail = document.getElementById("view-email");
+      const btnSwitchToEmail = document.getElementById("btn-switch-to-email");
+      const btnSwitchToPin = document.getElementById("btn-switch-to-pin");
+      const pinDots = document.querySelectorAll("#pin-display .pin-dot");
+      const pinError = document.getElementById("pin-error");
+      const emailForm = document.getElementById("email-form");
+      const emailInput = document.getElementById("auth-email-input");
+      const emailError = document.getElementById("email-error");
+
+      const MASTER_PIN = localStorage.getItem("kibangoutv_custom_pin") || "123456";
+      let enteredPin = "";
+
+      const existingAuth = localStorage.getItem("kibangoutv_auth");
+      if (existingAuth) {
+        authGate.classList.add("unlocked");
+        authGate.style.display = "none";
+      }
+
+      const isMobileOrStandalone = (
+        window.__TAURI__ ||
+        window.Capacitor ||
+        window.process?.type ||
+        window.matchMedia("(display-mode: standalone)").matches ||
+        /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
+      );
+
+      function showMode(mode) {
+        if (mode === "email") {
+          viewPin.style.display = "none";
+          viewEmail.style.display = "flex";
+          emailInput.focus();
+        } else {
+          viewEmail.style.display = "none";
+          viewPin.style.display = "flex";
+          enteredPin = "";
+          updatePinDots();
+        }
+      }
+
+      showMode(isMobileOrStandalone ? "pin" : "email");
+
+      btnSwitchToEmail.addEventListener("click", () => showMode("email"));
+      btnSwitchToPin.addEventListener("click", () => showMode("pin"));
+
+      function updatePinDots() {
+        pinDots.forEach((dot, index) => {
+          if (index < enteredPin.length) {
+            dot.classList.add("filled");
+          } else {
+            dot.classList.remove("filled");
+          }
+        });
+      }
+
+      function unlockApp(authType) {
+        localStorage.setItem("kibangoutv_auth", authType);
+        authGate.classList.add("unlocked");
+        setTimeout(() => {
+          authGate.style.display = "none";
+        }, 300);
+      }
+
+      function handlePinInput(digit) {
+        if (enteredPin.length >= 6) return;
+        enteredPin += digit;
+        updatePinDots();
+        pinError.textContent = "";
+
+        if (enteredPin.length === 6) {
+          if (enteredPin === MASTER_PIN) {
+            pinDots.forEach(d => d.style.borderColor = "#00C853");
+            setTimeout(() => unlockApp("pin"), 150);
+          } else {
+            authCard.classList.add("shake");
+            pinError.textContent = "Code PIN incorrect (Défaut : 123456)";
+            setTimeout(() => {
+              authCard.classList.remove("shake");
+              enteredPin = "";
+              updatePinDots();
+            }, 600);
+          }
+        }
+      }
+
+      document.querySelectorAll(".pin-key[data-digit]").forEach(btn => {
+        btn.addEventListener("click", () => handlePinInput(btn.getAttribute("data-digit")));
+      });
+
+      document.getElementById("pin-del").addEventListener("click", () => {
+        if (enteredPin.length > 0) {
+          enteredPin = enteredPin.slice(0, -1);
+          updatePinDots();
+          pinError.textContent = "";
+        }
+      });
+
+      document.getElementById("pin-clear").addEventListener("click", () => {
+        enteredPin = "";
+        updatePinDots();
+        pinError.textContent = "";
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (authGate.style.display === "none" || authGate.classList.contains("unlocked") || viewPin.style.display === "none") return;
+        if (/^[0-9]$/.test(e.key)) {
+          handlePinInput(e.key);
+        } else if (e.key === "Backspace") {
+          if (enteredPin.length > 0) {
+            enteredPin = enteredPin.slice(0, -1);
+            updatePinDots();
+          }
+        }
+      });
+
+      emailForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          unlockApp(email);
+        } else {
+          emailError.textContent = "Veuillez entrer une adresse e-mail valide.";
+        }
+      });
+    })();
+  </script>
+
+  <!-- ========================================================
+       APPLICATION KIBANGOUTV (VUMA CORE + NAVIGATION SUR MESURE)
+       ======================================================== -->
+  <script type="module">
+    import { mount } from "https://vuma.mx/latest/app.js";
+
+    // Bouquet local Kibangou TV (URL propre sans injection de query string)
+    const bouquetKibangou = new URL("./kibangou-addon", location.href).href;
+
+    mount({
+      addons: [
+        "https://vavoo.top/live",     // Moteur Live VAVOO en premier (Place 'Live TV' directement après Favoris)
+        bouquetKibangou,              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
+        "https://vavoo.top/vod",      // Moteur VAVOO VOD (Résolution des sources de streaming)
+        "https://vavoo.top/subtitle"  // Sous-titres
+      ],
+
+      addonManager: "hidden",
+      locale: "fr",
+
+      links: [
+        {
+          id: "vavoo",
+          name: "VAVOO.TOP",
+          icon: "./logo.svg",
+          endpoints: [
+            "https://vavoo.top",
+            "https://www.vavoo.to",
+            "https://www.voltop.net"
+          ]
+        }
+      ],
+
+      brand: {
+        name: "KibangouTV",
+        logo: "./logo.svg",
+        icon: "./logo.svg",
+        colors: { 
+          accent: "#00C853", 
+          bg: "#0E1318", 
+          text: "#FFFFFF" 
+        }
+      }
+    });
+
+    /* ========================================================
+       INJECTION DES BOUTONS 'FILMS' ET 'SÉRIES' DANS LA NAVBAR
+       ======================================================== */
+    const SVG_FILM = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>`;
+    const SVG_SERIES = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>`;
+
+    function injectCustomNavItems() {
+      // 1. Redirection automatique du lien Chaînes vers Live TV par défaut
+      const channelsItems = document.querySelectorAll('a[href="#/channels"], a[href^="#/channels?"]');
+      channelsItems.forEach(item => {
+        item.href = "#/channels?src=vavoo-live%2Fchannels";
+      });
+
+      // 2. Sidebar (Desktop & Tablette) - Route garantie vers kibangou-direct
+      const sidebarNav = document.querySelector(".sidebar-nav");
+      if (sidebarNav && !sidebarNav.querySelector("#nav-films")) {
+        const channelsItem = sidebarNav.querySelector('a[href^="#/channels"]');
+        if (channelsItem) {
+          const filmsItem = document.createElement("a");
+          filmsItem.id = "nav-films";
+          filmsItem.className = "nav-item";
+          filmsItem.href = "#/catalog/kibangou-direct/video/movie?name=Films";
+          filmsItem.innerHTML = `${SVG_FILM}<span>Films</span>`;
+          
+          const seriesItem = document.createElement("a");
+          seriesItem.id = "nav-series";
+          seriesItem.className = "nav-item";
+          seriesItem.href = "#/catalog/kibangou-direct/series/series?name=S%C3%A9ries";
+          seriesItem.innerHTML = `${SVG_SERIES}<span>Séries</span>`;
+
+          channelsItem.after(seriesItem);
+          channelsItem.after(filmsItem);
+        }
+      }
+
+      // 3. Bottom Nav (Mobile)
+      const bnav = document.querySelector(".bnav");
+      if (bnav && !bnav.querySelector("#bnav-films")) {
+        const bChannels = bnav.querySelector('a[href^="#/channels"]');
+        if (bChannels) {
+          const bFilms = document.createElement("a");
+          bFilms.id = "bnav-films";
+          bFilms.className = "bnav-item";
+          bFilms.href = "#/catalog/kibangou-direct/video/movie?name=Films";
+          bFilms.innerHTML = `${SVG_FILM}<span>Films</span>`;
+
+          const bSeries = document.createElement("a");
+          bSeries.id = "bnav-series";
+          bSeries.className = "bnav-item";
+          bSeries.href = "#/catalog/kibangou-direct/series/series?name=S%C3%A9ries";
+          bSeries.innerHTML = `${SVG_SERIES}<span>Séries</span>`;
+
+          bChannels.after(bSeries);
+          bChannels.after(bFilms);
+        }
+      }
+
+      // 4. Positionnement garanti de l'onglet 'Live TV' juste après 'Favoris'
+      const allTabs = Array.from(document.querySelectorAll("button, a")).filter(el => {
+        const text = (el.textContent || "").trim();
+        return text === "Favoris" || text === "Live TV";
+      });
+      const favTab = allTabs.find(el => el.textContent.trim() === "Favoris");
+      const liveTab = allTabs.find(el => el.textContent.trim() === "Live TV");
+      if (favTab && liveTab && favTab.parentNode === liveTab.parentNode) {
+        if (favTab.nextElementSibling !== liveTab) {
+          favTab.after(liveTab);
+        }
+      }
+
+      // 5. Suppression des éléments Social
+      document.querySelectorAll('a[href="#/social"]').forEach(el => el.remove());
+
+      // 6. Nettoyage de la page Réglages (#/settings)
+      if (location.hash.startsWith("#/settings")) {
+        document.querySelectorAll(".s-group").forEach(group => {
+          const text = group.textContent || "";
+          if (text.includes("Social") || text.includes("Watch Parties") || text.includes("Utiliser Social")) {
+            group.remove();
+          }
+          if (text.includes("Supprimer les données de ce site") || text.includes("Delete this site")) {
+            group.remove();
+          }
+        });
+      }
+
+      updateActiveNav();
+    }
+
+    function updateActiveNav() {
+      const hash = location.hash;
+      const navFilms = document.getElementById("nav-films");
+      const navSeries = document.getElementById("nav-series");
+      const bnavFilms = document.getElementById("bnav-films");
+      const bnavSeries = document.getElementById("bnav-series");
+
+      const isFilm = hash.includes("video/movie");
+      const isSeries = hash.includes("series/series");
+
+      if (navFilms) navFilms.classList.toggle("active", isFilm);
+      if (bnavFilms) bnavFilms.classList.toggle("active", isFilm);
+
+      if (navSeries) navSeries.classList.toggle("active", isSeries);
+      if (bnavSeries) bnavSeries.classList.toggle("active", isSeries);
+
+      if (isFilm || isSeries) {
+        document.querySelectorAll('.sidebar-nav .nav-item:not(#nav-films):not(#nav-series)').forEach(el => el.classList.remove("active"));
+        document.querySelectorAll('.bnav .bnav-item:not(#bnav-films):not(#bnav-series)').forEach(el => el.classList.remove("active"));
+      }
+    }
+
+    const navObserver = new MutationObserver(() => {
+      injectCustomNavItems();
+    });
+    navObserver.observe(document.body, { childList: true, subtree: true });
+
+    function checkChannelsHash() {
+      if (location.hash === "#/channels") {
+        location.replace("#/channels?src=vavoo-live%2Fchannels");
+      }
+    }
+    checkChannelsHash();
+
+    window.addEventListener("hashchange", () => {
+      checkChannelsHash();
+      injectCustomNavItems();
+      updateActiveNav();
+    });
+
+    setInterval(injectCustomNavItems, 300);
+
+    /* ========================================================
+       DÉFILEMENT AUTOMATIQUE DU CARROUSEL HERO (TOUTES LES 6S)
+       ======================================================== */
+    setInterval(() => {
+      const hero = document.querySelector(".hero");
+      if (!hero || hero.matches(":hover")) return;
+
+      // Chercher prioritairement les vignettes (hero-strip), sinon les points (hero-dots)
+      let targets = Array.from(document.querySelectorAll(".hero-strip .hero-thumb"));
+      if (!targets.length) {
+        targets = Array.from(document.querySelectorAll(".hero-dots .hero-dot"));
+      }
+      if (targets.length <= 1) return;
+
+      const activeIdx = targets.findIndex(el => el.classList.contains("active") || el.getAttribute("aria-current") === "true");
+      if (activeIdx !== -1) {
+        const nextIdx = (activeIdx + 1) % targets.length;
+        targets[nextIdx].click();
+      }
+    }, 6000);
+  </script>
+</body>
+</html>

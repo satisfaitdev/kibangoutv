@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+check_*.py
+extract_*.py
+find_*.py
+test_*.py
+build_bouquet.py

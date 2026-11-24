@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="kgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C853" />
+      <stop offset="50%" stop-color="#009624" />
+      <stop offset="100%" stop-color="#00600F" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD600" />
+      <stop offset="100%" stop-color="#FFAB00" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect x="10" y="10" width="180" height="180" rx="45" fill="#11161B" stroke="#00C853" stroke-width="3" />
+
+  <!-- Stylized K with Broadcast / Play Signal -->
+  <!-- Left vertical pillar of 'K' -->
+  <rect x="48" y="44" width="22" height="112" rx="11" fill="url(#kgGrad)" />
+
+  <!-- Diagonal top branch with play flare -->
+  <path d="M70 102 L132 50 C138 45 146 50 146 58 L146 72 C146 76 142 81 138 84 L96 114 Z" fill="url(#accentGrad)" />
+
+  <!-- Diagonal bottom branch of 'K' -->
+  <path d="M76 96 L124 142 C129 147 136 150 144 150 L150 150 C156 150 160 144 156 139 L108 88 Z" fill="url(#kgGrad)" />
+
+  <!-- TV Antenna / Signal dot -->
+  <circle cx="152" cy="46" r="10" fill="#FFD600" filter="url(#glow)" />
+</svg>

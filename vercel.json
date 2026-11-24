@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/proxy",
+      "destination": "/api/proxy.js"
+    },
+    {
+      "source": "/get",
+      "destination": "/api/get.js"
+    },
+    {
+      "source": "/kibangou-addon",
+      "destination": "/kibangou-addon/mhub-addon.json"
+    },
+    {
+      "source": "/kibangou-addon/",
+      "destination": "/kibangou-addon/mhub-addon.json"
+    },
+    {
+      "source": "/live2/logo/:match*",
+      "destination": "/api/proxy.js?url=https://vavoo.top/live2/logo/:match*"
+    },
+    {
+      "source": "/live/logo/:match*",
+      "destination": "/api/proxy.js?url=https://vavoo.top/live2/logo/:match*"
+    },
+    {
+      "source": "/kibangou-addon/item/:match*",
+      "destination": "/api/proxy.js?url=https://www.mhub.mx/tmdb/item/:match*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS, HEAD" },
+        { "key": "Access-Control-Allow-Headers", "value": "*" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "france24",
+  "name": "France 24 Français (Direct)",
+  "type": "live",
+  "url": "https://static.france24.com/live/F24_FR_LO_HLS/live_tv.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/France_24_logo.svg/512px-France_24_logo.svg.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/France_24_logo.svg/512px-France_24_logo.svg.png"
+  },
+  "tags": ["France", "Info", "Direct"]
+}
