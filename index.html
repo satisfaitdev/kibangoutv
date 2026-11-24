@@ -47,6 +47,119 @@
     }
 
     /* ========================================================
+       EN-TÊTE MOBILE & BOTTOM NAVBAR SUR MOBILE (< 768px)
+       ======================================================== */
+    #mobile-top-header {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      #mobile-top-header {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: calc(52px + var(--sat, 0px));
+        padding-top: var(--sat, 0px);
+        padding-left: 14px;
+        padding-right: 14px;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(14, 19, 24, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        z-index: 9999;
+        box-sizing: border-box;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+
+      /* Masquer l'en-tête mobile si le lecteur plein écran ou une modale est ouverte */
+      html.player-open #mobile-top-header,
+      html.modal-open #mobile-top-header {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Masquer Recherche et Paramètres de la barre du bas (.bnav) sur mobile */
+      .bnav a[href="#/search"],
+      .bnav a[href*="search"],
+      .bnav a[href="#/settings"],
+      .bnav a[href*="settings"] {
+        display: none !important;
+      }
+
+      /* Ajustement du décalage de contenu pour les pages sans hero */
+      body:not(.is-home) .main-inner,
+      body:not(.is-home) .main,
+      body:not(.is-home) .stage {
+        padding-top: calc(52px + var(--sat, 0px)) !important;
+      }
+    }
+
+    .m-brand-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+
+    .m-brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      filter: drop-shadow(0 2px 6px rgba(0, 200, 83, 0.45));
+    }
+
+    .m-brand-name {
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+    }
+
+    .m-brand-accent {
+      color: var(--accent);
+    }
+
+    .m-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .m-header-icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #B8B8B8;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .m-header-icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .m-header-icon-btn:hover,
+    .m-header-icon-btn:active,
+    .m-header-icon-btn.active {
+      background: rgba(0, 200, 83, 0.18);
+      border-color: rgba(0, 200, 83, 0.45);
+      color: var(--accent);
+      transform: scale(1.04);
+    }
+
+    /* ========================================================
        PORTAIL D'AUTHENTIFICATION (PIN 6 CHIFFRES & E-MAIL WEB)
        ======================================================== */
     #auth-gate {
@@ -443,6 +556,30 @@
     </div>
   </div>
 
+  <!-- ========================================================
+       EN-TÊTE MOBILE KIBANGOUTV (RECHERCHE & PARAMÈTRES)
+       ======================================================== -->
+  <header id="mobile-top-header">
+    <a href="#/" class="m-brand-link" aria-label="Accueil KibangouTV">
+      <img src="./logo.svg" alt="KibangouTV" class="m-brand-logo">
+      <span class="m-brand-name">Kibangou<span class="m-brand-accent">TV</span></span>
+    </a>
+    <div class="m-header-actions">
+      <a href="#/search" class="m-header-icon-btn" id="m-btn-search" title="Recherche" aria-label="Recherche">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.2" y2="16.2"></line>
+        </svg>
+      </a>
+      <a href="#/settings" class="m-header-icon-btn" id="m-btn-settings" title="Paramètres" aria-label="Paramètres">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
   <div id="app">
     <!-- Écran de démarrage KibangouTV -->
     <div style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#0E1318;color:#FFFFFF;font-family:system-ui,-apple-system,sans-serif">
@@ -670,23 +807,31 @@
 
       // 3. Bottom Nav (Mobile)
       const bnav = document.querySelector(".bnav");
-      if (bnav && !bnav.querySelector("#bnav-films")) {
-        const bChannels = bnav.querySelector('a[href^="#/channels"]');
-        if (bChannels) {
-          const bFilms = document.createElement("a");
-          bFilms.id = "bnav-films";
-          bFilms.className = "bnav-item";
-          bFilms.href = "#/catalog/kibangou-direct/video/movie?name=Films";
-          bFilms.innerHTML = `${SVG_FILM}<span>Films</span>`;
+      if (bnav) {
+        // Masquer Recherche et Paramètres dans la bottom nav sur mobile
+        const bnavSearch = bnav.querySelector('a[href="#/search"], a[href*="search"]');
+        if (bnavSearch) bnavSearch.style.setProperty('display', 'none', 'important');
+        const bnavSettings = bnav.querySelector('a[href="#/settings"], a[href*="settings"]');
+        if (bnavSettings) bnavSettings.style.setProperty('display', 'none', 'important');
 
-          const bSeries = document.createElement("a");
-          bSeries.id = "bnav-series";
-          bSeries.className = "bnav-item";
-          bSeries.href = "#/catalog/kibangou-direct/series/series?name=S%C3%A9ries";
-          bSeries.innerHTML = `${SVG_SERIES}<span>Séries</span>`;
+        if (!bnav.querySelector("#bnav-films")) {
+          const bChannels = bnav.querySelector('a[href^="#/channels"]');
+          if (bChannels) {
+            const bFilms = document.createElement("a");
+            bFilms.id = "bnav-films";
+            bFilms.className = "bnav-item";
+            bFilms.href = "#/catalog/kibangou-direct/video/movie?name=Films";
+            bFilms.innerHTML = `${SVG_FILM}<span>Films</span>`;
 
-          bChannels.after(bSeries);
-          bChannels.after(bFilms);
+            const bSeries = document.createElement("a");
+            bSeries.id = "bnav-series";
+            bSeries.className = "bnav-item";
+            bSeries.href = "#/catalog/kibangou-direct/series/series?name=S%C3%A9ries";
+            bSeries.innerHTML = `${SVG_SERIES}<span>Séries</span>`;
+
+            bChannels.after(bSeries);
+            bChannels.after(bFilms);
+          }
         }
       }
 
@@ -723,7 +868,17 @@
     }
 
     function updateActiveNav() {
-      const hash = location.hash;
+      const hash = location.hash || "#/";
+      const isHome = hash === "#/" || hash === "" || hash.startsWith("#/?");
+      document.body.classList.toggle("is-home", isHome);
+
+      const isSearch = hash.startsWith("#/search");
+      const isSettings = hash.startsWith("#/settings");
+      const mSearch = document.getElementById("m-btn-search");
+      const mSettings = document.getElementById("m-btn-settings");
+      if (mSearch) mSearch.classList.toggle("active", isSearch);
+      if (mSettings) mSettings.classList.toggle("active", isSettings);
+
       const navFilms = document.getElementById("nav-films");
       const navSeries = document.getElementById("nav-series");
       const bnavFilms = document.getElementById("bnav-films");
@@ -741,6 +896,21 @@
       if (isFilm || isSeries) {
         document.querySelectorAll('.sidebar-nav .nav-item:not(#nav-films):not(#nav-series)').forEach(el => el.classList.remove("active"));
         document.querySelectorAll('.bnav .bnav-item:not(#bnav-films):not(#bnav-series)').forEach(el => el.classList.remove("active"));
+      }
+
+      // Ajuster le pill indicateur de la bottom nav
+      const bnav = document.querySelector(".bnav");
+      if (bnav) {
+        const visibleItems = Array.from(bnav.querySelectorAll(".bnav-item")).filter(el => {
+          return window.getComputedStyle(el).display !== "none";
+        });
+        if (visibleItems.length > 0) {
+          bnav.style.setProperty("--bnav-count", visibleItems.length);
+          const activeIdx = visibleItems.findIndex(el => el.classList.contains("active"));
+          if (activeIdx >= 0) {
+            bnav.style.setProperty("--bnav-active", activeIdx);
+          }
+        }
       }
     }
 
