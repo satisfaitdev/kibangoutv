@@ -47,6 +47,12 @@ export default async function handler(req, res) {
       "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
     };
 
+    const clientIp = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "";
+    if (clientIp) {
+      fetchHeaders["X-Forwarded-For"] = clientIp;
+      fetchHeaders["X-Real-IP"] = clientIp;
+    }
+
     if (req.headers.range) {
       fetchHeaders["Range"] = req.headers.range;
     }

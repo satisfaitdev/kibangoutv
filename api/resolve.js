@@ -14,9 +14,14 @@ export default async function handler(req, res) {
 
   try {
     const vavooResolveUrl = `https://vavoo.top/live/resolve?url=${encodeURIComponent(playUrl)}`;
-    const r = await fetch(vavooResolveUrl, {
-      headers: { "User-Agent": "Mozilla/5.0" }
-    });
+    const clientIp = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "";
+    const headers = { "User-Agent": "Mozilla/5.0" };
+    if (clientIp) {
+      headers["X-Forwarded-For"] = clientIp;
+      headers["X-Real-IP"] = clientIp;
+    }
+
+    const r = await fetch(vavooResolveUrl, { headers });
     const data = await r.json();
 
     if (data && data.url) {
