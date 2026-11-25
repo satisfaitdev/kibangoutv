@@ -1,1355 +1,3667 @@
 {
   "items": [
     {
-      "id": "3483866123",
-      "name": "CANAL + HD (7)",
+      "id": "6981957",
+      "name": "CANAL+ (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3483866123",
+      "url": "https://www.vavoo.to/live/play/6981957",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/6981957.png",
+        "poster": "/live2/logo/6981957.png"
       },
       "tags": [
         "France"
-      ]
-    },
-    {
-      "id": "3717538119",
-      "name": "CANAL + LIGUE 1 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3717538119",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+      ],
+      "ids": {
+        "tvg": "CanalPlus.fr"
       },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2307221187",
-      "name": "CANAL + SPORTS 1 HD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2307221187",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3364489313",
-      "name": "CANAL ALPHA (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3364489313",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "561846029",
-      "name": "CANAL ALPHA JURA (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/561846029",
-      "images": {
-        "logo": "/live2/logo/561846029.png",
-        "poster": "/live2/logo/561846029.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "520753959",
-      "name": "CANAL CINEMA HD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/520753959",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2351267513",
-      "name": "CANAL D (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2351267513",
-      "images": {
-        "logo": "/live2/logo/2351267513.png",
-        "poster": "/live2/logo/2351267513.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1491965877",
-      "name": "CANAL EMOTION HD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1491965877",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1441897533",
-      "name": "CANAL FAMILY HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1441897533",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2641610486",
-      "name": "CANAL HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2641610486",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3860888136",
-      "name": "CANAL J (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3860888136",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "857063640",
-      "name": "CANAL J (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/857063640",
-      "images": {
-        "logo": "/live2/logo/857063640.png",
-        "poster": "/live2/logo/857063640.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "609930447",
-      "name": "CANAL J (BACKUP) (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/609930447",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1467172722",
-      "name": "CANAL JUNIOR HD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1467172722",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3488639675",
-      "name": "CANAL PLAY (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3488639675",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3466693410",
-      "name": "CANAL PLAY 1 (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3466693410",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3241421560",
-      "name": "CANAL PLAY 11 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3241421560",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2257866792",
-      "name": "CANAL PLAY 12 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2257866792",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3153361304",
-      "name": "CANAL PLAY 13 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3153361304",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "164930952",
-      "name": "CANAL PLAY 14 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/164930952",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "884247608",
-      "name": "CANAL PLAY 15 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/884247608",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1930753768",
-      "name": "CANAL PLAY 16 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1930753768",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1316282200",
-      "name": "CANAL PLAY 17 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1316282200",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3424929929",
-      "name": "CANAL PLAY 18 (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3424929929",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2298606066",
-      "name": "CANAL PLAY 2 (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2298606066",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2126628468",
-      "name": "CANAL PLAY 2 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2126628468",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3026311234",
-      "name": "CANAL PLAY 3 (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3026311234",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1134686148",
-      "name": "CANAL PLAY 3 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1134686148",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "104924242",
-      "name": "CANAL PLAY 4 (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/104924242",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "4051776468",
-      "name": "CANAL PLAY 4 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/4051776468",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "992030178",
-      "name": "CANAL PLAY 5 (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/992030178",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3437304420",
-      "name": "CANAL PLAY 5 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3437304420",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "548876175",
-      "name": "CANAL PLAY 5 FHD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/548876175",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2336317620",
-      "name": "CANAL PLAY 6 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2336317620",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "423236426",
-      "name": "CANAL PLAY 6 FHD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/423236426",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3055634692",
-      "name": "CANAL PLAY 7 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3055634692",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "879877845",
-      "name": "CANAL PLAY 8 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/879877845",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3522742488",
-      "name": "CANAL PLAY 8 FHD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3522742488",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "152172389",
-      "name": "CANAL PLAY 9 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/152172389",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3330530459",
-      "name": "CANAL PLAY 9 FHD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3330530459",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1281048661",
-      "name": "CANAL PLUS C NEMA (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1281048661",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2684363321",
-      "name": "CANAL SAVOIR (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2684363321",
-      "images": {
-        "logo": "/live2/logo/2684363321.png",
-        "poster": "/live2/logo/2684363321.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "4289865749",
-      "name": "CANAL SERIES HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/4289865749",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2246854724",
-      "name": "CANAL SPORT (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2246854724",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "4021366844",
-      "name": "CANAL SPORT HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/4021366844",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
+      "epg": [
+        {
+          "title": "Clique",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:29:00Z"
+        },
+        {
+          "title": "Michael",
+          "start": "2026-11-25T12:29:00Z",
+          "end": "2026-11-25T14:38:00Z"
+        }
       ]
     },
     {
       "id": "2096977228",
       "name": "CANAL+ 360 4K (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2096977228",
+      "url": "https://www.vavoo.to/live/play/2096977228",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2096977228.png",
+        "poster": "/live2/logo/2096977228.png"
       },
       "tags": [
         "France"
-      ]
+      ],
+      "ids": {
+        "tvg": "Canal360.fr"
+      }
     },
     {
       "id": "707775847",
       "name": "CANAL+ 360 FHD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/707775847",
+      "url": "https://www.vavoo.to/live/play/707775847",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/707775847.png",
+        "poster": "/live2/logo/707775847.png"
       },
       "tags": [
         "France"
-      ]
+      ],
+      "ids": {
+        "tvg": "Canal360.fr"
+      }
     },
     {
       "id": "2421698062",
       "name": "CANAL+ 4K (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2421698062",
+      "url": "https://www.vavoo.to/live/play/2421698062",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2421698062.png",
+        "poster": "/live2/logo/2421698062.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlus.fr"
+      },
+      "epg": [
+        {
+          "title": "Clique",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:29:00Z"
+        },
+        {
+          "title": "Michael",
+          "start": "2026-11-25T12:29:00Z",
+          "end": "2026-11-25T14:38:00Z"
+        }
       ]
     },
     {
       "id": "2558095112",
       "name": "CANAL+ 4K ULTRA (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2558095112",
+      "url": "https://www.vavoo.to/live/play/2558095112",
       "images": {
         "logo": "/live2/logo/2558095112.png",
         "poster": "/live2/logo/2558095112.png"
       },
       "tags": [
         "France"
-      ]
+      ],
+      "ids": {
+        "tvg": "CanalUltra.fr"
+      }
     },
     {
       "id": "3856042964",
       "name": "CANAL+ ACTION HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3856042964",
+      "url": "https://www.vavoo.to/live/play/3856042964",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3856042964.png",
+        "poster": "/live2/logo/3856042964.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalAction.fr"
+      }
+    },
+    {
+      "id": "3655983806",
+      "name": "CANAL+ BOX OFFICE (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3655983806",
+      "images": {
+        "logo": "/live2/logo/3655983806.png",
+        "poster": "/live2/logo/3655983806.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusBoxOffice.fr"
+      },
+      "epg": [
+        {
+          "title": "Deux pianos",
+          "start": "2026-11-25T10:39:00Z",
+          "end": "2026-11-25T12:31:00Z"
+        },
+        {
+          "title": "Juste une illusion",
+          "start": "2026-11-25T12:31:00Z",
+          "end": "2026-11-25T14:26:00Z"
+        }
+      ]
+    },
+    {
+      "id": "972384002",
+      "name": "CANAL+ BOX OFFICE (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/972384002",
+      "images": {
+        "logo": "/live2/logo/972384002.png",
+        "poster": "/live2/logo/972384002.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusBoxOffice.fr"
+      },
+      "epg": [
+        {
+          "title": "Deux pianos",
+          "start": "2026-11-25T10:39:00Z",
+          "end": "2026-11-25T12:31:00Z"
+        },
+        {
+          "title": "Juste une illusion",
+          "start": "2026-11-25T12:31:00Z",
+          "end": "2026-11-25T14:26:00Z"
+        }
       ]
     },
     {
       "id": "821044379",
       "name": "CANAL+ BOX OFFICE HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/821044379",
+      "url": "https://www.vavoo.to/live/play/821044379",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/821044379.png",
+        "poster": "/live2/logo/821044379.png"
       },
       "tags": [
         "France"
-      ]
-    },
-    {
-      "id": "3980730104",
-      "name": "CANAL+ CINEMA (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3980730104",
-      "images": {
-        "logo": "/live2/logo/3980730104.png",
-        "poster": "/live2/logo/3980730104.png"
+      ],
+      "ids": {
+        "tvg": "CanalPlusBoxOffice.fr"
       },
-      "tags": [
-        "France"
+      "epg": [
+        {
+          "title": "Deux pianos",
+          "start": "2026-11-25T10:39:00Z",
+          "end": "2026-11-25T12:31:00Z"
+        },
+        {
+          "title": "Juste une illusion",
+          "start": "2026-11-25T12:31:00Z",
+          "end": "2026-11-25T14:26:00Z"
+        }
       ]
     },
     {
       "id": "781538197",
       "name": "CANAL+ CINEMA (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/781538197",
+      "url": "https://www.vavoo.to/live/play/781538197",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/781538197.png",
+        "poster": "/live2/logo/781538197.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemas.fr"
+      },
+      "epg": [
+        {
+          "title": "Les Rêveurs",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T12:47:00Z"
+        },
+        {
+          "title": "Le crime du 3e étage",
+          "start": "2026-11-25T12:47:00Z",
+          "end": "2026-11-25T14:28:00Z"
+        }
       ]
     },
     {
       "id": "2132350685",
       "name": "CANAL+ CINEMA CENTRE HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2132350685",
+      "url": "https://www.vavoo.to/live/play/2132350685",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2132350685.png",
+        "poster": "/live2/logo/2132350685.png"
       },
       "tags": [
         "France"
-      ]
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemaCentre.fr"
+      }
     },
     {
       "id": "289838749",
       "name": "CANAL+ CINEMA FHD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/289838749",
+      "url": "https://www.vavoo.to/live/play/289838749",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/289838749.png",
+        "poster": "/live2/logo/289838749.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemas.fr"
+      },
+      "epg": [
+        {
+          "title": "Les Rêveurs",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T12:47:00Z"
+        },
+        {
+          "title": "Le crime du 3e étage",
+          "start": "2026-11-25T12:47:00Z",
+          "end": "2026-11-25T14:28:00Z"
+        }
       ]
     },
     {
-      "id": "1199637350",
-      "name": "CANAL+ CINEMA OUEST HD (1)",
+      "id": "974077876",
+      "name": "CANAL+ CINEMA HD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1199637350",
+      "url": "https://www.vavoo.to/live/play/974077876",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/974077876.png",
+        "poster": "/live2/logo/974077876.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemas.fr"
+      },
+      "epg": [
+        {
+          "title": "Les Rêveurs",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T12:47:00Z"
+        },
+        {
+          "title": "Le crime du 3e étage",
+          "start": "2026-11-25T12:47:00Z",
+          "end": "2026-11-25T14:28:00Z"
+        }
       ]
     },
     {
       "id": "3602737855",
       "name": "CANAL+ CINEMAS 4K (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3602737855",
+      "url": "https://www.vavoo.to/live/play/3602737855",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3602737855.png",
+        "poster": "/live2/logo/3602737855.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemas.fr"
+      },
+      "epg": [
+        {
+          "title": "Les Rêveurs",
+          "start": "2026-11-25T11:04:00Z",
+          "end": "2026-11-25T12:47:00Z"
+        },
+        {
+          "title": "Le crime du 3e étage",
+          "start": "2026-11-25T12:47:00Z",
+          "end": "2026-11-25T14:28:00Z"
+        }
       ]
     },
     {
       "id": "238104318",
       "name": "CANAL+ CINEMAS FHD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/238104318",
+      "url": "https://www.vavoo.to/live/play/238104318",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/238104318.png",
+        "poster": "/live2/logo/238104318.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemas.fr"
+      },
+      "epg": [
+        {
+          "title": "Les Rêveurs",
+          "start": "2026-11-25T11:04:00Z",
+          "end": "2026-11-25T12:47:00Z"
+        },
+        {
+          "title": "Le crime du 3e étage",
+          "start": "2026-11-25T12:47:00Z",
+          "end": "2026-11-25T14:28:00Z"
+        }
+      ]
+    },
+    {
+      "id": "671953108",
+      "name": "CANAL+ CINEMAS HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/671953108",
+      "images": {
+        "logo": "/live2/logo/671953108.png",
+        "poster": "/live2/logo/671953108.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemas.fr"
+      },
+      "epg": [
+        {
+          "title": "Les Rêveurs",
+          "start": "2026-11-25T11:04:00Z",
+          "end": "2026-11-25T12:47:00Z"
+        },
+        {
+          "title": "Le crime du 3e étage",
+          "start": "2026-11-25T12:47:00Z",
+          "end": "2026-11-25T14:28:00Z"
+        }
       ]
     },
     {
       "id": "1092403852",
       "name": "CANAL+ CINEMAS SD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1092403852",
+      "url": "https://www.vavoo.to/live/play/1092403852",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1092403852.png",
+        "poster": "/live2/logo/1092403852.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCinemas.fr"
+      },
+      "epg": [
+        {
+          "title": "Les Rêveurs",
+          "start": "2026-11-25T11:04:00Z",
+          "end": "2026-11-25T12:47:00Z"
+        },
+        {
+          "title": "Le crime du 3e étage",
+          "start": "2026-11-25T12:47:00Z",
+          "end": "2026-11-25T14:28:00Z"
+        }
       ]
+    },
+    {
+      "id": "3090919986",
+      "name": "CANAL+ DECALE (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3090919986",
+      "images": {
+        "logo": "/live2/logo/3090919986.png",
+        "poster": "/live2/logo/3090919986.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusDecale.fr"
+      }
+    },
+    {
+      "id": "1919536632",
+      "name": "CANAL+ DECALE FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1919536632",
+      "images": {
+        "logo": "/live2/logo/1919536632.png",
+        "poster": "/live2/logo/1919536632.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusDecale.fr"
+      }
     },
     {
       "id": "1161602732",
       "name": "CANAL+ DOCS (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1161602732",
+      "url": "https://www.vavoo.to/live/play/1161602732",
       "images": {
         "logo": "/live2/logo/1161602732.png",
         "poster": "/live2/logo/1161602732.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusDocs.fr"
+      },
+      "epg": [
+        {
+          "title": "Plastic Odyssey",
+          "start": "2026-11-25T11:07:00Z",
+          "end": "2026-11-25T12:21:00Z"
+        },
+        {
+          "title": "A la poursuite du rougail saucisses",
+          "start": "2026-11-25T12:21:00Z",
+          "end": "2026-11-25T12:52:00Z"
+        }
       ]
     },
     {
       "id": "3625345371",
       "name": "CANAL+ DOCS HD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3625345371",
+      "url": "https://www.vavoo.to/live/play/3625345371",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3625345371.png",
+        "poster": "/live2/logo/3625345371.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusDocs.fr"
+      },
+      "epg": [
+        {
+          "title": "Plastic Odyssey",
+          "start": "2026-11-25T11:07:00Z",
+          "end": "2026-11-25T12:21:00Z"
+        },
+        {
+          "title": "A la poursuite du rougail saucisses",
+          "start": "2026-11-25T12:21:00Z",
+          "end": "2026-11-25T12:52:00Z"
+        }
       ]
+    },
+    {
+      "id": "3917988462",
+      "name": "CANAL+ ELLES CENTRE HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3917988462",
+      "images": {
+        "logo": "/live2/logo/3917988462.png",
+        "poster": "/live2/logo/3917988462.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusEllesCentre.fr"
+      }
     },
     {
       "id": "2904368955",
       "name": "CANAL+ ELLES HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2904368955",
+      "url": "https://www.vavoo.to/live/play/2904368955",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2904368955.png",
+        "poster": "/live2/logo/2904368955.png"
       },
       "tags": [
         "France"
-      ]
+      ],
+      "ids": {
+        "tvg": "CanalElles.fr"
+      }
     },
     {
       "id": "4007062954",
       "name": "CANAL+ FAMILY HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4007062954",
+      "url": "https://www.vavoo.to/live/play/4007062954",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4007062954.png",
+        "poster": "/live2/logo/4007062954.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusFamily.fr"
+      },
+      "epg": [
+        {
+          "title": "Chwila prawdy",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Porzucone konstrukcje",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "2987477152",
       "name": "CANAL+ FHD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2987477152",
+      "url": "https://www.vavoo.to/live/play/2987477152",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2987477152.png",
+        "poster": "/live2/logo/2987477152.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlus.fr"
+      },
+      "epg": [
+        {
+          "title": "Clique",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:29:00Z"
+        },
+        {
+          "title": "Michael",
+          "start": "2026-11-25T12:29:00Z",
+          "end": "2026-11-25T14:38:00Z"
+        }
       ]
     },
     {
       "id": "4177424223",
       "name": "CANAL+ FHD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4177424223",
+      "url": "https://www.vavoo.to/live/play/4177424223",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4177424223.png",
+        "poster": "/live2/logo/4177424223.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlus.fr"
+      },
+      "epg": [
+        {
+          "title": "Clique",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:29:00Z"
+        },
+        {
+          "title": "Michael",
+          "start": "2026-11-25T12:29:00Z",
+          "end": "2026-11-25T14:38:00Z"
+        }
       ]
     },
     {
       "id": "3271278010",
       "name": "CANAL+ FOOT (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3271278010",
+      "url": "https://www.vavoo.to/live/play/3271278010",
       "images": {
         "logo": "/live2/logo/3271278010.png",
         "poster": "/live2/logo/3271278010.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusFoot.fr"
+      },
+      "epg": [
+        {
+          "title": "Canal Football Club",
+          "start": "2026-11-25T11:01:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Canal Football Club",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:26:00Z"
+        }
       ]
     },
     {
       "id": "3010946034",
       "name": "CANAL+ FOOT FHD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3010946034",
+      "url": "https://www.vavoo.to/live/play/3010946034",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3010946034.png",
+        "poster": "/live2/logo/3010946034.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusFoot.fr"
+      },
+      "epg": [
+        {
+          "title": "Canal Football Club",
+          "start": "2026-11-25T11:01:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Canal Football Club",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:26:00Z"
+        }
       ]
     },
     {
       "id": "1821057687",
       "name": "CANAL+ FOOT HD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1821057687",
+      "url": "https://www.vavoo.to/live/play/1821057687",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1821057687.png",
+        "poster": "/live2/logo/1821057687.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusFoot.fr"
+      },
+      "epg": [
+        {
+          "title": "Canal Football Club",
+          "start": "2026-11-25T11:01:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Canal Football Club",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:26:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2574747173",
+      "name": "CANAL+ GRAND ECRAN (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2574747173",
+      "images": {
+        "logo": "/live2/logo/2574747173.png",
+        "poster": "/live2/logo/2574747173.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusGrandEcran.fr"
+      },
+      "epg": [
+        {
+          "title": "Moonwalker",
+          "start": "2026-11-25T11:06:00Z",
+          "end": "2026-11-25T12:37:00Z"
+        },
+        {
+          "title": "Batman",
+          "start": "2026-11-25T12:37:00Z",
+          "end": "2026-11-25T14:39:00Z"
+        }
       ]
     },
     {
       "id": "764514828",
       "name": "CANAL+ GRAND ECRAN FHD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/764514828",
+      "url": "https://www.vavoo.to/live/play/764514828",
       "images": {
         "logo": "/live2/logo/764514828.png",
         "poster": "/live2/logo/764514828.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusGrandEcran.fr"
+      },
+      "epg": [
+        {
+          "title": "Moonwalker",
+          "start": "2026-11-25T11:06:00Z",
+          "end": "2026-11-25T12:37:00Z"
+        },
+        {
+          "title": "Batman",
+          "start": "2026-11-25T12:37:00Z",
+          "end": "2026-11-25T14:39:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2548189800",
+      "name": "CANAL+ GRAND ECRAN FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2548189800",
+      "images": {
+        "logo": "/live2/logo/2548189800.png",
+        "poster": "/live2/logo/2548189800.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusGrandEcran.fr"
+      },
+      "epg": [
+        {
+          "title": "Moonwalker",
+          "start": "2026-11-25T11:06:00Z",
+          "end": "2026-11-25T12:37:00Z"
+        },
+        {
+          "title": "Batman",
+          "start": "2026-11-25T12:37:00Z",
+          "end": "2026-11-25T14:39:00Z"
+        }
       ]
     },
     {
       "id": "1373011235",
       "name": "CANAL+ GRAND ECRAN HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1373011235",
+      "url": "https://www.vavoo.to/live/play/1373011235",
       "images": {
         "logo": "/live2/logo/1373011235.png",
         "poster": "/live2/logo/1373011235.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusGrandEcran.fr"
+      },
+      "epg": [
+        {
+          "title": "Moonwalker",
+          "start": "2026-11-25T11:06:00Z",
+          "end": "2026-11-25T12:37:00Z"
+        },
+        {
+          "title": "Batman",
+          "start": "2026-11-25T12:37:00Z",
+          "end": "2026-11-25T14:39:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1860727909",
+      "name": "CANAL+ HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1860727909",
+      "images": {
+        "logo": "/live2/logo/1860727909.png",
+        "poster": "/live2/logo/1860727909.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlus.fr"
+      },
+      "epg": [
+        {
+          "title": "Clique",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:29:00Z"
+        },
+        {
+          "title": "Michael",
+          "start": "2026-11-25T12:29:00Z",
+          "end": "2026-11-25T14:38:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3780364466",
+      "name": "CANAL+ HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3780364466",
+      "images": {
+        "logo": "/live2/logo/3780364466.png",
+        "poster": "/live2/logo/3780364466.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlus.fr"
+      },
+      "epg": [
+        {
+          "title": "Clique",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:29:00Z"
+        },
+        {
+          "title": "Michael",
+          "start": "2026-11-25T12:29:00Z",
+          "end": "2026-11-25T14:38:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3804868994",
+      "name": "CANAL+ KIDS (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3804868994",
+      "images": {
+        "logo": "/live2/logo/3804868994.png",
+        "poster": "/live2/logo/3804868994.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusKids.fr"
+      },
+      "epg": [
+        {
+          "title": "Kididoc",
+          "start": "2026-11-25T11:37:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Mortina",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:03:00Z"
+        }
+      ]
+    },
+    {
+      "id": "4039804890",
+      "name": "CANAL+ KIDS 4K (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4039804890",
+      "images": {
+        "logo": "/live2/logo/4039804890.png",
+        "poster": "/live2/logo/4039804890.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusKids.fr"
+      },
+      "epg": [
+        {
+          "title": "Kididoc",
+          "start": "2026-11-25T11:37:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Mortina",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:03:00Z"
+        }
+      ]
+    },
+    {
+      "id": "869256388",
+      "name": "CANAL+ KIDS FHD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/869256388",
+      "images": {
+        "logo": "/live2/logo/869256388.png",
+        "poster": "/live2/logo/869256388.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusKids.fr"
+      },
+      "epg": [
+        {
+          "title": "Kididoc",
+          "start": "2026-11-25T11:37:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Mortina",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:03:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1508654689",
+      "name": "CANAL+ KIDS FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1508654689",
+      "images": {
+        "logo": "/live2/logo/1508654689.png",
+        "poster": "/live2/logo/1508654689.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusKids.fr"
+      },
+      "epg": [
+        {
+          "title": "Kididoc",
+          "start": "2026-11-25T11:37:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Mortina",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:03:00Z"
+        }
       ]
     },
     {
       "id": "242933169",
       "name": "CANAL+ KIDS HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/242933169",
+      "url": "https://www.vavoo.to/live/play/242933169",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/242933169.png",
+        "poster": "/live2/logo/242933169.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusKids.fr"
+      },
+      "epg": [
+        {
+          "title": "Kididoc",
+          "start": "2026-11-25T11:37:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Mortina",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:03:00Z"
+        }
+      ]
+    },
+    {
+      "id": "579962899",
+      "name": "CANAL+ KIDS HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/579962899",
+      "images": {
+        "logo": "/live2/logo/579962899.png",
+        "poster": "/live2/logo/579962899.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusKids.fr"
+      },
+      "epg": [
+        {
+          "title": "Kididoc",
+          "start": "2026-11-25T11:37:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Mortina",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:03:00Z"
+        }
       ]
     },
     {
       "id": "2961896896",
       "name": "CANAL+ LIVE 1 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2961896896",
+      "url": "https://www.vavoo.to/live/play/2961896896",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2961896896.png",
+        "poster": "/live2/logo/2961896896.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive1.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T15:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T15:00:00Z",
+          "end": "2026-11-25T17:45:00Z"
+        }
       ]
     },
     {
       "id": "4272460704",
       "name": "CANAL+ LIVE 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4272460704",
+      "url": "https://www.vavoo.to/live/play/4272460704",
       "images": {
         "logo": "/live2/logo/4272460704.png",
         "poster": "/live2/logo/4272460704.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive1.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T15:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T15:00:00Z",
+          "end": "2026-11-25T17:45:00Z"
+        }
       ]
     },
     {
       "id": "4231501773",
       "name": "CANAL+ LIVE 1 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4231501773",
+      "url": "https://www.vavoo.to/live/play/4231501773",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4231501773.png",
+        "poster": "/live2/logo/4231501773.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive1.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T15:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T15:00:00Z",
+          "end": "2026-11-25T17:45:00Z"
+        }
       ]
     },
     {
       "id": "942555923",
       "name": "CANAL+ LIVE 10 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/942555923",
+      "url": "https://www.vavoo.to/live/play/942555923",
       "images": {
         "logo": "/live2/logo/942555923.png",
         "poster": "/live2/logo/942555923.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive10.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T17:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T17:00:00Z",
+          "end": "2026-11-25T23:00:00Z"
+        }
       ]
     },
     {
       "id": "89025187",
       "name": "CANAL+ LIVE 11 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/89025187",
+      "url": "https://www.vavoo.to/live/play/89025187",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/89025187.png",
+        "poster": "/live2/logo/89025187.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive11.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T17:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T17:00:00Z",
+          "end": "2026-11-25T23:00:00Z"
+        }
       ]
     },
     {
       "id": "1122898035",
       "name": "CANAL+ LIVE 12 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1122898035",
+      "url": "https://www.vavoo.to/live/play/1122898035",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1122898035.png",
+        "poster": "/live2/logo/1122898035.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive12.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T17:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T17:00:00Z",
+          "end": "2026-11-25T23:00:00Z"
+        }
       ]
     },
     {
       "id": "3104369008",
       "name": "CANAL+ LIVE 2 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3104369008",
+      "url": "https://www.vavoo.to/live/play/3104369008",
       "images": {
         "logo": "/live2/logo/3104369008.png",
         "poster": "/live2/logo/3104369008.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive2.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T11:55:00Z"
+        },
+        {
+          "title": "A venir : Plateau avant-match Youth League",
+          "start": "2026-11-25T11:55:00Z",
+          "end": "2026-11-25T12:55:00Z"
+        }
       ]
     },
     {
       "id": "1924698158",
       "name": "CANAL+ LIVE 2 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1924698158",
+      "url": "https://www.vavoo.to/live/play/1924698158",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1924698158.png",
+        "poster": "/live2/logo/1924698158.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive2.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T11:55:00Z"
+        },
+        {
+          "title": "A venir : Plateau avant-match Youth League",
+          "start": "2026-11-25T11:55:00Z",
+          "end": "2026-11-25T12:55:00Z"
+        }
       ]
     },
     {
       "id": "2221457600",
       "name": "CANAL+ LIVE 3 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2221457600",
+      "url": "https://www.vavoo.to/live/play/2221457600",
       "images": {
         "logo": "/live2/logo/2221457600.png",
         "poster": "/live2/logo/2221457600.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive3.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T15:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T15:00:00Z",
+          "end": "2026-11-25T16:35:00Z"
+        }
       ]
     },
     {
       "id": "3188887728",
       "name": "CANAL+ LIVE 3 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3188887728",
+      "url": "https://www.vavoo.to/live/play/3188887728",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3188887728.png",
+        "poster": "/live2/logo/3188887728.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalLive3.fr"
+      },
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T15:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T15:00:00Z",
+          "end": "2026-11-25T16:35:00Z"
+        }
       ]
     },
     {
       "id": "910695632",
       "name": "CANAL+ LIVE 4 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/910695632",
+      "url": "https://www.vavoo.to/live/play/910695632",
       "images": {
         "logo": "/live2/logo/910695632.png",
         "poster": "/live2/logo/910695632.png"
       },
       "tags": [
         "France"
-      ]
-    },
-    {
-      "id": "3034028457",
-      "name": "CANAL+ LIVE 4 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3034028457",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+      ],
+      "ids": {
+        "tvg": "CanalLive4.fr"
       },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "187184480",
-      "name": "CANAL+ LIVE 5 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/187184480",
-      "images": {
-        "logo": "/live2/logo/187184480.png",
-        "poster": "/live2/logo/187184480.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "2021497143",
-      "name": "CANAL+ LIVE 5 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/2021497143",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1284001712",
-      "name": "CANAL+ LIVE 6 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1284001712",
-      "images": {
-        "logo": "/live2/logo/1284001712.png",
-        "poster": "/live2/logo/1284001712.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "4143095508",
-      "name": "CANAL+ LIVE 6 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/4143095508",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1911055872",
-      "name": "CANAL+ LIVE 7 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1911055872",
-      "images": {
-        "logo": "/live2/logo/1911055872.png",
-        "poster": "/live2/logo/1911055872.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "978886218",
-      "name": "CANAL+ LIVE 7 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/978886218",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "4088984017",
-      "name": "CANAL+ LIVE 8 (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/4088984017",
-      "images": {
-        "logo": "/live2/logo/4088984017.png",
-        "poster": "/live2/logo/4088984017.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "898021432",
-      "name": "CANAL+ MOTOGP (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/898021432",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1051067269",
-      "name": "CANAL+ PL (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1051067269",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "128077399",
-      "name": "CANAL+ PREMIER LEAGUE (6)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/128077399",
-      "images": {
-        "logo": "/live2/logo/128077399.png",
-        "poster": "/live2/logo/128077399.png"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "599931871",
-      "name": "CANAL+ PREMIER LEAGUE (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/599931871",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3850478651",
-      "name": "CANAL+ PREMIER LEAGUE HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3850478651",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "1296369071",
-      "name": "CANAL+ PREMIERE HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1296369071",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "133793341",
-      "name": "CANAL+ SD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/133793341",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
+      "epg": [
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T17:00:00Z"
+        },
+        {
+          "title": "Vivez en direct les évènements de CANAL+",
+          "start": "2026-11-25T17:00:00Z",
+          "end": "2026-11-25T18:55:00Z"
+        }
       ]
     },
     {
       "id": "1012399982",
       "name": "CANAL+ SPORT (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1012399982",
+      "url": "https://www.vavoo.to/live/play/1012399982",
       "images": {
         "logo": "/live2/logo/1012399982.png",
         "poster": "/live2/logo/1012399982.png"
       },
       "tags": [
         "France"
-      ]
-    },
-    {
-      "id": "1663608238",
-      "name": "CANAL+ SPORT 1 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/1663608238",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSport.fr"
       },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "3987186253",
-      "name": "CANAL+ SPORT 2 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/3987186253",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
-      ]
-    },
-    {
-      "id": "554541779",
-      "name": "CANAL+ SPORT 3 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/554541779",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France"
+      "epg": [
+        {
+          "title": "Golf+, le mag",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:35:00Z"
+        },
+        {
+          "title": "Cesta Punta: Open International 2026",
+          "start": "2026-11-25T12:35:00Z",
+          "end": "2026-11-25T13:55:00Z"
+        }
       ]
     },
     {
       "id": "1814819760",
       "name": "CANAL+ SPORT 360 (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1814819760",
+      "url": "https://www.vavoo.to/live/play/1814819760",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1814819760.png",
+        "poster": "/live2/logo/1814819760.png"
       },
       "tags": [
         "France"
-      ]
-    },
-    {
-      "id": "734571466",
-      "name": "CANAL+ SPORT 4 HD (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/734571466",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSport360.fr"
       },
-      "tags": [
-        "France"
+      "epg": [
+        {
+          "title": "Le JT",
+          "start": "2026-11-25T11:15:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Rallye : WRC, Rallye Italie Sardaigne",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T14:30:00Z"
+        }
       ]
     },
     {
       "id": "1027079906",
       "name": "CANAL+ SPORT 4K (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1027079906",
+      "url": "https://www.vavoo.to/live/play/1027079906",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1027079906.png",
+        "poster": "/live2/logo/1027079906.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSport.fr"
+      },
+      "epg": [
+        {
+          "title": "Golf+, le mag",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:35:00Z"
+        },
+        {
+          "title": "Cesta Punta: Open International 2026",
+          "start": "2026-11-25T12:35:00Z",
+          "end": "2026-11-25T13:55:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3882003284",
+      "name": "CANAL+ SPORT 5 HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3882003284",
+      "images": {
+        "logo": "/live2/logo/3882003284.png",
+        "poster": "/live2/logo/3882003284.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSport5.fr"
+      },
+      "epg": [
+        {
+          "title": "Hola LaLiga",
+          "start": "2026-11-25T10:45:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Piłka nożna: Liga hiszpańska - mecz: Real Madryt CF - Celta Vigo",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T14:15:00Z"
+        }
+      ]
+    },
+    {
+      "id": "4070446369",
+      "name": "13 EME RUE HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4070446369",
+      "images": {
+        "logo": "/live2/logo/4070446369.png",
+        "poster": "/live2/logo/4070446369.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "13emeRue.fr"
+      },
+      "epg": [
+        {
+          "title": "Chicago Police Department",
+          "start": "2026-11-25T11:04:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Chicago Police Department",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "422603219",
+      "name": "13EME RUE HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/422603219",
+      "images": {
+        "logo": "/live2/logo/422603219.png",
+        "poster": "/live2/logo/422603219.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "13emeRue.fr"
+      },
+      "epg": [
+        {
+          "title": "Chicago Police Department",
+          "start": "2026-11-25T11:04:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Chicago Police Department",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "469192959",
+      "name": "CA: CANAL D (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/469192959",
+      "images": {
+        "logo": "/live2/logo/469192959.png",
+        "poster": "/live2/logo/469192959.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CaCanalD.fr"
+      },
+      "epg": [
+        {
+          "title": "Mayday",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Cauchemar sur l'autoroute",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3717538119",
+      "name": "CANAL + LIGUE 1 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3717538119",
+      "images": {
+        "logo": "/live2/logo/3717538119.png",
+        "poster": "/live2/logo/3717538119.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalLigue1.fr"
+      }
+    },
+    {
+      "id": "2732163487",
+      "name": "CANAL 1 MAR MENOR (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2732163487",
+      "images": {
+        "logo": "/live2/logo/2732163487.png",
+        "poster": "/live2/logo/2732163487.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Canal1MarMenor.es"
+      }
+    },
+    {
+      "id": "2123081752",
+      "name": "CANAL 24 HORAS (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2123081752",
+      "images": {
+        "logo": "/live2/logo/2123081752.png",
+        "poster": "/live2/logo/2123081752.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "24Horas.es"
+      },
+      "epg": [
+        {
+          "title": "Diario 24",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "Noticias 24 h",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:55:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2766909423",
+      "name": "CANAL 3 BIAR (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2766909423",
+      "images": {
+        "logo": "/live2/logo/2766909423.png",
+        "poster": "/live2/logo/2766909423.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Canal3Biar.es"
+      }
+    },
+    {
+      "id": "940352071",
+      "name": "CANAL 33 MADRID (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/940352071",
+      "images": {
+        "logo": "/live2/logo/940352071.png",
+        "poster": "/live2/logo/940352071.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Canal33Madrid.es"
+      }
+    },
+    {
+      "id": "3790097768",
+      "name": "CANAL 4 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3790097768",
+      "images": {
+        "logo": "/live2/logo/3790097768.png",
+        "poster": "/live2/logo/3790097768.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Canal4.es"
+      }
+    },
+    {
+      "id": "2071559748",
+      "name": "CANAL 4 MANCHA CENTRO (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2071559748",
+      "images": {
+        "logo": "/live2/logo/2071559748.png",
+        "poster": "/live2/logo/2071559748.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Canal4ManchaCentro.es"
+      }
+    },
+    {
+      "id": "2197204081",
+      "name": "CANAL 45 TV (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2197204081",
+      "images": {
+        "logo": "/live2/logo/2197204081.png",
+        "poster": "/live2/logo/2197204081.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Canal45Tv.es"
+      }
+    },
+    {
+      "id": "3918688074",
+      "name": "CANAL 56 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3918688074",
+      "images": {
+        "logo": "/live2/logo/3918688074.png",
+        "poster": "/live2/logo/3918688074.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Canal56.es"
+      }
+    },
+    {
+      "id": "3364489313",
+      "name": "CANAL ALPHA (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3364489313",
+      "images": {
+        "logo": "/live2/logo/3364489313.png",
+        "poster": "/live2/logo/3364489313.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalAlpha.fr"
+      }
+    },
+    {
+      "id": "561846029",
+      "name": "CANAL ALPHA JURA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/561846029",
+      "images": {
+        "logo": "/live2/logo/561846029.png",
+        "poster": "/live2/logo/561846029.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalAlphaJura.fr"
+      }
+    },
+    {
+      "id": "3095520235",
+      "name": "CANAL COCINA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3095520235",
+      "images": {
+        "logo": "/live2/logo/3095520235.png",
+        "poster": "/live2/logo/3095520235.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalCocina.es"
+      },
+      "epg": [
+        {
+          "title": "Canal cocina de puerto en puerto",
+          "start": "2026-11-25T11:25:00Z",
+          "end": "2026-11-25T12:28:00Z"
+        },
+        {
+          "title": "Jamie Oliver: Listo en 20 minutos",
+          "start": "2026-11-25T12:28:00Z",
+          "end": "2026-11-25T13:24:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3418635035",
+      "name": "CANAL COCINA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3418635035",
+      "images": {
+        "logo": "/live2/logo/3418635035.png",
+        "poster": "/live2/logo/3418635035.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalCocina.es"
+      },
+      "epg": [
+        {
+          "title": "Canal cocina de puerto en puerto",
+          "start": "2026-11-25T11:25:00Z",
+          "end": "2026-11-25T12:28:00Z"
+        },
+        {
+          "title": "Jamie Oliver: Listo en 20 minutos",
+          "start": "2026-11-25T12:28:00Z",
+          "end": "2026-11-25T13:24:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2351267513",
+      "name": "CANAL D (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2351267513",
+      "images": {
+        "logo": "/live2/logo/2351267513.png",
+        "poster": "/live2/logo/2351267513.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalD.fr"
+      },
+      "epg": [
+        {
+          "title": "Mayday",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Cauchemar sur l'autoroute",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1545493919",
+      "name": "CANAL DECALE HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1545493919",
+      "images": {
+        "logo": "/live2/logo/1545493919.png",
+        "poster": "/live2/logo/1545493919.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusDecale.fr"
+      }
+    },
+    {
+      "id": "910012218",
+      "name": "CANAL DECALE HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/910012218",
+      "images": {
+        "logo": "/live2/logo/910012218.png",
+        "poster": "/live2/logo/910012218.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusDecale.fr"
+      }
+    },
+    {
+      "id": "1137978670",
+      "name": "CANAL DECASA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1137978670",
+      "images": {
+        "logo": "/live2/logo/1137978670.png",
+        "poster": "/live2/logo/1137978670.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalDecasa.es"
+      }
+    },
+    {
+      "id": "4217507207",
+      "name": "CANAL DIOCESANO (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4217507207",
+      "images": {
+        "logo": "/live2/logo/4217507207.png",
+        "poster": "/live2/logo/4217507207.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalDiocesano.es"
+      }
+    },
+    {
+      "id": "2180152276",
+      "name": "CANAL DONANA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2180152276",
+      "images": {
+        "logo": "/live2/logo/2180152276.png",
+        "poster": "/live2/logo/2180152276.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalDonana.es"
+      }
+    },
+    {
+      "id": "1491965877",
+      "name": "CANAL EMOTION HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1491965877",
+      "images": {
+        "logo": "/live2/logo/1491965877.png",
+        "poster": "/live2/logo/1491965877.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalEmotion.fr"
+      }
+    },
+    {
+      "id": "3410008380",
+      "name": "CANAL EXTREMADURA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3410008380",
+      "images": {
+        "logo": "/live2/logo/3410008380.png",
+        "poster": "/live2/logo/3410008380.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalExtremadura.es"
+      },
+      "epg": [
+        {
+          "title": "Ahora Extremadura",
+          "start": "2026-11-25T11:20:00Z",
+          "end": "2026-11-25T12:20:00Z"
+        },
+        {
+          "title": "A nuestra salud",
+          "start": "2026-11-25T12:20:00Z",
+          "end": "2026-11-25T12:57:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1441897533",
+      "name": "CANAL FAMILY HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1441897533",
+      "images": {
+        "logo": "/live2/logo/1441897533.png",
+        "poster": "/live2/logo/1441897533.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusFamily.fr"
+      },
+      "epg": [
+        {
+          "title": "Chwila prawdy",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Porzucone konstrukcje",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3288402534",
+      "name": "CANAL HOLLYWOOD (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3288402534",
+      "images": {
+        "logo": "/live2/logo/3288402534.png",
+        "poster": "/live2/logo/3288402534.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalHollywood.es"
+      }
+    },
+    {
+      "id": "3860888136",
+      "name": "CANAL J (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3860888136",
+      "images": {
+        "logo": "/live2/logo/3860888136.png",
+        "poster": "/live2/logo/3860888136.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalJ.fr"
+      },
+      "epg": [
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:40:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:10:00Z"
+        }
+      ]
+    },
+    {
+      "id": "857063640",
+      "name": "CANAL J (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/857063640",
+      "images": {
+        "logo": "/live2/logo/857063640.png",
+        "poster": "/live2/logo/857063640.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalJ.fr"
+      },
+      "epg": [
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:40:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:10:00Z"
+        }
+      ]
+    },
+    {
+      "id": "609930447",
+      "name": "CANAL J (BACKUP) (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/609930447",
+      "images": {
+        "logo": "/live2/logo/609930447.png",
+        "poster": "/live2/logo/609930447.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalJ.fr"
+      },
+      "epg": [
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:40:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:10:00Z"
+        }
+      ]
+    },
+    {
+      "id": "24446412",
+      "name": "CANAL J FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/24446412",
+      "images": {
+        "logo": "/live2/logo/24446412.png",
+        "poster": "/live2/logo/24446412.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalJ.fr"
+      },
+      "epg": [
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:40:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Alvinnn !!! et les Chipmunks",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:10:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1467172722",
+      "name": "CANAL JUNIOR HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1467172722",
+      "images": {
+        "logo": "/live2/logo/1467172722.png",
+        "poster": "/live2/logo/1467172722.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalJunior.fr"
+      }
+    },
+    {
+      "id": "3490700601",
+      "name": "CANAL MALAGA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3490700601",
+      "images": {
+        "logo": "/live2/logo/3490700601.png",
+        "poster": "/live2/logo/3490700601.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalMalaga.es"
+      }
+    },
+    {
+      "id": "406958643",
+      "name": "CANAL ODISEA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/406958643",
+      "images": {
+        "logo": "/live2/logo/406958643.png",
+        "poster": "/live2/logo/406958643.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalOdisea.es"
+      }
+    },
+    {
+      "id": "1795451587",
+      "name": "CANAL ODISEA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1795451587",
+      "images": {
+        "logo": "/live2/logo/1795451587.png",
+        "poster": "/live2/logo/1795451587.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalOdisea.es"
+      }
+    },
+    {
+      "id": "3910659553",
+      "name": "CANAL PANDA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3910659553",
+      "images": {
+        "logo": "/live2/logo/3910659553.png",
+        "poster": "/live2/logo/3910659553.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalPanda.es"
+      },
+      "epg": [
+        {
+          "title": "Supertato",
+          "start": "2026-11-25T11:38:00Z",
+          "end": "2026-11-25T11:46:00Z"
+        },
+        {
+          "title": "Panda Ciência, o Grande Desafio",
+          "start": "2026-11-25T11:46:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1111750157",
+      "name": "CANAL PARLAMENTO (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1111750157",
+      "images": {
+        "logo": "/live2/logo/1111750157.png",
+        "poster": "/live2/logo/1111750157.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalParlamento.es"
+      }
+    },
+    {
+      "id": "3466693410",
+      "name": "CANAL PLAY 1 (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3466693410",
+      "images": {
+        "logo": "/live2/logo/3466693410.png",
+        "poster": "/live2/logo/3466693410.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay1.fr"
+      }
+    },
+    {
+      "id": "962706596",
+      "name": "CANAL PLAY 1 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/962706596",
+      "images": {
+        "logo": "/live2/logo/962706596.png",
+        "poster": "/live2/logo/962706596.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay1.fr"
+      }
+    },
+    {
+      "id": "2103148163",
+      "name": "CANAL PLAY 1 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2103148163",
+      "images": {
+        "logo": "/live2/logo/2103148163.png",
+        "poster": "/live2/logo/2103148163.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay1.fr"
+      }
+    },
+    {
+      "id": "3241421560",
+      "name": "CANAL PLAY 11 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3241421560",
+      "images": {
+        "logo": "/live2/logo/3241421560.png",
+        "poster": "/live2/logo/3241421560.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay11.fr"
+      }
+    },
+    {
+      "id": "2257866792",
+      "name": "CANAL PLAY 12 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2257866792",
+      "images": {
+        "logo": "/live2/logo/2257866792.png",
+        "poster": "/live2/logo/2257866792.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay12.fr"
+      }
+    },
+    {
+      "id": "3153361304",
+      "name": "CANAL PLAY 13 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3153361304",
+      "images": {
+        "logo": "/live2/logo/3153361304.png",
+        "poster": "/live2/logo/3153361304.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay13.fr"
+      }
+    },
+    {
+      "id": "164930952",
+      "name": "CANAL PLAY 14 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/164930952",
+      "images": {
+        "logo": "/live2/logo/164930952.png",
+        "poster": "/live2/logo/164930952.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay14.fr"
+      }
+    },
+    {
+      "id": "1316282200",
+      "name": "CANAL PLAY 17 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1316282200",
+      "images": {
+        "logo": "/live2/logo/1316282200.png",
+        "poster": "/live2/logo/1316282200.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay17.fr"
+      }
+    },
+    {
+      "id": "3424929929",
+      "name": "CANAL PLAY 18 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3424929929",
+      "images": {
+        "logo": "/live2/logo/3424929929.png",
+        "poster": "/live2/logo/3424929929.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay18.fr"
+      }
+    },
+    {
+      "id": "2298606066",
+      "name": "CANAL PLAY 2 (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2298606066",
+      "images": {
+        "logo": "/live2/logo/2298606066.png",
+        "poster": "/live2/logo/2298606066.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay2.fr"
+      }
+    },
+    {
+      "id": "2126628468",
+      "name": "CANAL PLAY 2 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2126628468",
+      "images": {
+        "logo": "/live2/logo/2126628468.png",
+        "poster": "/live2/logo/2126628468.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay2.fr"
+      }
+    },
+    {
+      "id": "1154892358",
+      "name": "CANAL PLAY 2 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1154892358",
+      "images": {
+        "logo": "/live2/logo/1154892358.png",
+        "poster": "/live2/logo/1154892358.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay2.fr"
+      }
+    },
+    {
+      "id": "3026311234",
+      "name": "CANAL PLAY 3 (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3026311234",
+      "images": {
+        "logo": "/live2/logo/3026311234.png",
+        "poster": "/live2/logo/3026311234.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay3.fr"
+      }
+    },
+    {
+      "id": "1403868677",
+      "name": "CANAL PLAY 3 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1403868677",
+      "images": {
+        "logo": "/live2/logo/1403868677.png",
+        "poster": "/live2/logo/1403868677.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay3.fr"
+      }
+    },
+    {
+      "id": "104924242",
+      "name": "CANAL PLAY 4 (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/104924242",
+      "images": {
+        "logo": "/live2/logo/104924242.png",
+        "poster": "/live2/logo/104924242.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay4.fr"
+      }
+    },
+    {
+      "id": "4051776468",
+      "name": "CANAL PLAY 4 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4051776468",
+      "images": {
+        "logo": "/live2/logo/4051776468.png",
+        "poster": "/live2/logo/4051776468.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay4.fr"
+      }
+    },
+    {
+      "id": "936131532",
+      "name": "CANAL PLAY 4 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/936131532",
+      "images": {
+        "logo": "/live2/logo/936131532.png",
+        "poster": "/live2/logo/936131532.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay4.fr"
+      }
+    },
+    {
+      "id": "992030178",
+      "name": "CANAL PLAY 5 (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/992030178",
+      "images": {
+        "logo": "/live2/logo/992030178.png",
+        "poster": "/live2/logo/992030178.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay5.fr"
+      }
+    },
+    {
+      "id": "3437304420",
+      "name": "CANAL PLAY 5 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3437304420",
+      "images": {
+        "logo": "/live2/logo/3437304420.png",
+        "poster": "/live2/logo/3437304420.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay5.fr"
+      }
+    },
+    {
+      "id": "548876175",
+      "name": "CANAL PLAY 5 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/548876175",
+      "images": {
+        "logo": "/live2/logo/548876175.png",
+        "poster": "/live2/logo/548876175.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay5.fr"
+      }
+    },
+    {
+      "id": "2336317620",
+      "name": "CANAL PLAY 6 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2336317620",
+      "images": {
+        "logo": "/live2/logo/2336317620.png",
+        "poster": "/live2/logo/2336317620.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay6.fr"
+      }
+    },
+    {
+      "id": "423236426",
+      "name": "CANAL PLAY 6 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/423236426",
+      "images": {
+        "logo": "/live2/logo/423236426.png",
+        "poster": "/live2/logo/423236426.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay6.fr"
+      }
+    },
+    {
+      "id": "3055634692",
+      "name": "CANAL PLAY 7 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3055634692",
+      "images": {
+        "logo": "/live2/logo/3055634692.png",
+        "poster": "/live2/logo/3055634692.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay7.fr"
+      }
+    },
+    {
+      "id": "239142665",
+      "name": "CANAL PLAY 7 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/239142665",
+      "images": {
+        "logo": "/live2/logo/239142665.png",
+        "poster": "/live2/logo/239142665.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay7.fr"
+      }
+    },
+    {
+      "id": "879877845",
+      "name": "CANAL PLAY 8 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/879877845",
+      "images": {
+        "logo": "/live2/logo/879877845.png",
+        "poster": "/live2/logo/879877845.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay8.fr"
+      }
+    },
+    {
+      "id": "3522742488",
+      "name": "CANAL PLAY 8 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3522742488",
+      "images": {
+        "logo": "/live2/logo/3522742488.png",
+        "poster": "/live2/logo/3522742488.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay8.fr"
+      }
+    },
+    {
+      "id": "152172389",
+      "name": "CANAL PLAY 9 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/152172389",
+      "images": {
+        "logo": "/live2/logo/152172389.png",
+        "poster": "/live2/logo/152172389.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay9.fr"
+      }
+    },
+    {
+      "id": "3330530459",
+      "name": "CANAL PLAY 9 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3330530459",
+      "images": {
+        "logo": "/live2/logo/3330530459.png",
+        "poster": "/live2/logo/3330530459.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlay9.fr"
+      }
+    },
+    {
+      "id": "1281048661",
+      "name": "CANAL PLUS C NEMA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1281048661",
+      "images": {
+        "logo": "/live2/logo/1281048661.png",
+        "poster": "/live2/logo/1281048661.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusCNema.fr"
+      }
+    },
+    {
+      "id": "1754187427",
+      "name": "CANAL SAN ROQUE (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1754187427",
+      "images": {
+        "logo": "/live2/logo/1754187427.png",
+        "poster": "/live2/logo/1754187427.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalSanRoque.es"
+      }
+    },
+    {
+      "id": "2684363321",
+      "name": "CANAL SAVOIR (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2684363321",
+      "images": {
+        "logo": "/live2/logo/2684363321.png",
+        "poster": "/live2/logo/2684363321.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalSavoir.fr"
+      },
+      "epg": [
+        {
+          "title": "Les perles de Lauberivière",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "La société du travail",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "624101167",
+      "name": "CANAL SERIALE HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/624101167",
+      "images": {
+        "logo": "/live2/logo/624101167.png",
+        "poster": "/live2/logo/624101167.png"
+      },
+      "tags": [
+        "Poland"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSeriale.pl"
+      },
+      "epg": [
+        {
+          "title": "Naruto 7",
+          "start": "2026-11-25T11:20:00Z",
+          "end": "2026-11-25T11:50:00Z"
+        },
+        {
+          "title": "Naruto 7",
+          "start": "2026-11-25T11:50:00Z",
+          "end": "2026-11-25T12:20:00Z"
+        }
+      ]
+    },
+    {
+      "id": "4289865749",
+      "name": "CANAL SERIES HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4289865749",
+      "images": {
+        "logo": "/live2/logo/4289865749.png",
+        "poster": "/live2/logo/4289865749.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSeries.fr"
+      },
+      "epg": [
+        {
+          "title": "No Data",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "No Data",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1475374610",
+      "name": "CANAL SIERRA DE CADIZ (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1475374610",
+      "images": {
+        "logo": "/live2/logo/1475374610.png",
+        "poster": "/live2/logo/1475374610.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalSierradeCadiz.es"
+      }
+    },
+    {
+      "id": "2246854724",
+      "name": "CANAL SPORT (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2246854724",
+      "images": {
+        "logo": "/live2/logo/2246854724.png",
+        "poster": "/live2/logo/2246854724.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSport.fr"
+      },
+      "epg": [
+        {
+          "title": "Golf+, le mag",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:35:00Z"
+        },
+        {
+          "title": "Cesta Punta: Open International 2026",
+          "start": "2026-11-25T12:35:00Z",
+          "end": "2026-11-25T13:55:00Z"
+        }
+      ]
+    },
+    {
+      "id": "4021366844",
+      "name": "CANAL SPORT HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4021366844",
+      "images": {
+        "logo": "/live2/logo/4021366844.png",
+        "poster": "/live2/logo/4021366844.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "CanalPlusSport.fr"
+      },
+      "epg": [
+        {
+          "title": "Golf+, le mag",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:35:00Z"
+        },
+        {
+          "title": "Cesta Punta: Open International 2026",
+          "start": "2026-11-25T12:35:00Z",
+          "end": "2026-11-25T13:55:00Z"
+        }
+      ]
+    },
+    {
+      "id": "460346627",
+      "name": "CANAL SUR A (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/460346627",
+      "images": {
+        "logo": "/live2/logo/460346627.png",
+        "poster": "/live2/logo/460346627.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalSurA.es"
+      }
+    },
+    {
+      "id": "2458539823",
+      "name": "CANAL SUR ANDALUCIA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2458539823",
+      "images": {
+        "logo": "/live2/logo/2458539823.png",
+        "poster": "/live2/logo/2458539823.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalSurAndalucia.es"
+      },
+      "epg": [
+        {
+          "title": "Hoy en día mesa de análisis",
+          "start": "2026-11-25T11:25:00Z",
+          "end": "2026-11-25T12:55:00Z"
+        },
+        {
+          "title": "Andalucía Mediodía",
+          "start": "2026-11-25T12:55:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "864327681",
+      "name": "CANAL SUR ANDALUCIA 2 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/864327681",
+      "images": {
+        "logo": "/live2/logo/864327681.png",
+        "poster": "/live2/logo/864327681.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalSurAndalucia2.es"
+      }
+    },
+    {
+      "id": "645787578",
+      "name": "CANAL TARONJA ANOIA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/645787578",
+      "images": {
+        "logo": "/live2/logo/645787578.png",
+        "poster": "/live2/logo/645787578.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "CanalTaronjaAnoia.es"
+      }
+    },
+    {
+      "id": "1534161807",
+      "name": "CANALE 5 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1534161807",
+      "images": {
+        "logo": "/live2/logo/1534161807.png",
+        "poster": "/live2/logo/1534161807.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Canale5.it"
+      },
+      "epg": [
+        {
+          "title": "Forum",
+          "start": "2026-11-25T09:55:00Z",
+          "end": "2026-11-25T11:58:00Z"
+        },
+        {
+          "title": "Tg5",
+          "start": "2026-11-25T11:58:00Z",
+          "end": "2026-11-25T12:39:00Z"
+        }
+      ]
+    },
+    {
+      "id": "140294889",
+      "name": "FIX CINEMA ACTION (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/140294889",
+      "images": {
+        "logo": "/live2/logo/140294889.png",
+        "poster": "/live2/logo/140294889.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaAction.tr"
+      }
+    },
+    {
+      "id": "2480231926",
+      "name": "FIX CINEMA BILM KURGU (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2480231926",
+      "images": {
+        "logo": "/live2/logo/2480231926.png",
+        "poster": "/live2/logo/2480231926.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaBilmKurgu.tr"
+      }
+    },
+    {
+      "id": "2830763591",
+      "name": "FIX CINEMA DRAM (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2830763591",
+      "images": {
+        "logo": "/live2/logo/2830763591.png",
+        "poster": "/live2/logo/2830763591.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaDram.tr"
+      }
+    },
+    {
+      "id": "2459747332",
+      "name": "FIX CINEMA FANTASTIC (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2459747332",
+      "images": {
+        "logo": "/live2/logo/2459747332.png",
+        "poster": "/live2/logo/2459747332.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaFantastic.tr"
+      }
+    },
+    {
+      "id": "2778910791",
+      "name": "FIX CINEMA KORKU (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2778910791",
+      "images": {
+        "logo": "/live2/logo/2778910791.png",
+        "poster": "/live2/logo/2778910791.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaKorku.tr"
+      }
+    },
+    {
+      "id": "2958075443",
+      "name": "FIX CINEMA MACERA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2958075443",
+      "images": {
+        "logo": "/live2/logo/2958075443.png",
+        "poster": "/live2/logo/2958075443.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaMacera.tr"
+      }
+    },
+    {
+      "id": "3216985800",
+      "name": "FIX CINEMA NETFLIX (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3216985800",
+      "images": {
+        "logo": "/live2/logo/3216985800.png",
+        "poster": "/live2/logo/3216985800.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaNetflix.tr"
+      }
+    },
+    {
+      "id": "239201347",
+      "name": "FIX CINEMA YERLI (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/239201347",
+      "images": {
+        "logo": "/live2/logo/239201347.png",
+        "poster": "/live2/logo/239201347.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaYerli.tr"
+      }
+    },
+    {
+      "id": "4110861662",
+      "name": "FIX CINEMA YESILCAM (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4110861662",
+      "images": {
+        "logo": "/live2/logo/4110861662.png",
+        "poster": "/live2/logo/4110861662.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "FixCinemaYesilcam.tr"
+      }
+    },
+    {
+      "id": "3812796171",
+      "name": "SKY CINEMA ACTION (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3812796171",
+      "images": {
+        "logo": "/live2/logo/3812796171.png",
+        "poster": "/live2/logo/3812796171.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaAction.it"
+      },
+      "epg": [
+        {
+          "title": "Olympus Has Fallen - Die Welt in Gefahr",
+          "start": "2026-11-25T09:52:00Z",
+          "end": "2026-11-25T11:54:00Z"
+        },
+        {
+          "title": "Shadow Force - Die letzte Mission",
+          "start": "2026-11-25T11:54:00Z",
+          "end": "2026-11-25T13:39:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1144128726",
+      "name": "SKY CINEMA ACTION (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1144128726",
+      "images": {
+        "logo": "/live2/logo/1144128726.png",
+        "poster": "/live2/logo/1144128726.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaAction.it"
+      },
+      "epg": [
+        {
+          "title": "Soldado",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T13:10:00Z"
+        },
+        {
+          "title": "L'uomo d'acciaio",
+          "start": "2026-11-25T13:10:00Z",
+          "end": "2026-11-25T15:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2242741766",
+      "name": "SKY CINEMA ACTION (BACKUP) (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2242741766",
+      "images": {
+        "logo": "/live2/logo/2242741766.png",
+        "poster": "/live2/logo/2242741766.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaAction.it"
+      },
+      "epg": [
+        {
+          "title": "Soldado",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T13:10:00Z"
+        },
+        {
+          "title": "L'uomo d'acciaio",
+          "start": "2026-11-25T13:10:00Z",
+          "end": "2026-11-25T15:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3525837057",
+      "name": "SKY CINEMA COLLECTION (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3525837057",
+      "images": {
+        "logo": "/live2/logo/3525837057.png",
+        "poster": "/live2/logo/3525837057.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaCollection.it"
+      },
+      "epg": [
+        {
+          "title": "Prova a prendermi",
+          "start": "2026-11-25T11:10:00Z",
+          "end": "2026-11-25T13:35:00Z"
+        },
+        {
+          "title": "Inside Man",
+          "start": "2026-11-25T13:35:00Z",
+          "end": "2026-11-25T15:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "500203271",
+      "name": "SKY CINEMA COMEDY (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/500203271",
+      "images": {
+        "logo": "/live2/logo/500203271.png",
+        "poster": "/live2/logo/500203271.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaComedy.it"
+      },
+      "epg": [
+        {
+          "title": "Monty Python - Il senso della vita",
+          "start": "2026-11-25T11:05:00Z",
+          "end": "2026-11-25T12:55:00Z"
+        },
+        {
+          "title": "Mamma o papà",
+          "start": "2026-11-25T12:55:00Z",
+          "end": "2026-11-25T14:40:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3131104474",
+      "name": "SKY CINEMA COMEDY (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3131104474",
+      "images": {
+        "logo": "/live2/logo/3131104474.png",
+        "poster": "/live2/logo/3131104474.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaComedy.it"
+      },
+      "epg": [
+        {
+          "title": "Pitch Perfect 2",
+          "start": "2026-11-25T10:25:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        },
+        {
+          "title": "Pitch Perfect 3",
+          "start": "2026-11-25T12:30:00Z",
+          "end": "2026-11-25T14:15:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1235530177",
+      "name": "SKY CINEMA DRAMA (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1235530177",
+      "images": {
+        "logo": "/live2/logo/1235530177.png",
+        "poster": "/live2/logo/1235530177.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaDrama.it"
+      },
+      "epg": [
+        {
+          "title": "The Fabelmans",
+          "start": "2026-11-25T09:50:00Z",
+          "end": "2026-11-25T12:25:00Z"
+        },
+        {
+          "title": "Napoli velata",
+          "start": "2026-11-25T12:25:00Z",
+          "end": "2026-11-25T14:20:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1228534500",
+      "name": "SKY CINEMA DUE (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1228534500",
+      "images": {
+        "logo": "/live2/logo/1228534500.png",
+        "poster": "/live2/logo/1228534500.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaDue.it"
+      },
+      "epg": [
+        {
+          "title": "Interstellar",
+          "start": "2026-11-25T09:50:00Z",
+          "end": "2026-11-25T12:40:00Z"
+        },
+        {
+          "title": "C'e' Ancora Domani",
+          "start": "2026-11-25T12:40:00Z",
+          "end": "2026-11-25T14:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "415795144",
+      "name": "SKY CINEMA FAMILY (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/415795144",
+      "images": {
+        "logo": "/live2/logo/415795144.png",
+        "poster": "/live2/logo/415795144.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaFamily.it"
+      },
+      "epg": [
+        {
+          "title": "Biancaneve",
+          "start": "2026-11-25T11:25:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        },
+        {
+          "title": "Madagascar",
+          "start": "2026-11-25T13:15:00Z",
+          "end": "2026-11-25T14:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3216516117",
+      "name": "SKY CINEMA FAMILY (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3216516117",
+      "images": {
+        "logo": "/live2/logo/3216516117.png",
+        "poster": "/live2/logo/3216516117.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaFamily.it"
+      },
+      "epg": [
+        {
+          "title": "Biancaneve",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        },
+        {
+          "title": "Madagascar",
+          "start": "2026-11-25T13:15:00Z",
+          "end": "2026-11-25T14:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2890008905",
+      "name": "SKY CINEMA ROMANCE (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2890008905",
+      "images": {
+        "logo": "/live2/logo/2890008905.png",
+        "poster": "/live2/logo/2890008905.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaRomance.it"
+      },
+      "epg": [
+        {
+          "title": "Lei mi parla ancora",
+          "start": "2026-11-25T10:25:00Z",
+          "end": "2026-11-25T12:05:00Z"
+        },
+        {
+          "title": "Le parole che non ti ho detto",
+          "start": "2026-11-25T12:05:00Z",
+          "end": "2026-11-25T14:20:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1281264885",
+      "name": "SKY CINEMA ROMANCE (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1281264885",
+      "images": {
+        "logo": "/live2/logo/1281264885.png",
+        "poster": "/live2/logo/1281264885.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaRomance.it"
+      },
+      "epg": [
+        {
+          "title": "Lei mi parla ancora",
+          "start": "2026-11-25T10:25:00Z",
+          "end": "2026-11-25T12:05:00Z"
+        },
+        {
+          "title": "Le parole che non ti ho detto",
+          "start": "2026-11-25T12:05:00Z",
+          "end": "2026-11-25T14:20:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2451443049",
+      "name": "SKY CINEMA STORIES (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2451443049",
+      "images": {
+        "logo": "/live2/logo/2451443049.png",
+        "poster": "/live2/logo/2451443049.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaStories.it"
+      }
+    },
+    {
+      "id": "1820997555",
+      "name": "SKY CINEMA SUSPENSE (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1820997555",
+      "images": {
+        "logo": "/live2/logo/1820997555.png",
+        "poster": "/live2/logo/1820997555.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaSuspense.it"
+      },
+      "epg": [
+        {
+          "title": "I falchi della notte",
+          "start": "2026-11-25T10:50:00Z",
+          "end": "2026-11-25T12:35:00Z"
+        },
+        {
+          "title": "Assassinio sul Nilo",
+          "start": "2026-11-25T12:35:00Z",
+          "end": "2026-11-25T14:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3060043751",
+      "name": "SKY CINEMA SUSPENSE (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3060043751",
+      "images": {
+        "logo": "/live2/logo/3060043751.png",
+        "poster": "/live2/logo/3060043751.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaSuspense.it"
+      },
+      "epg": [
+        {
+          "title": "I falchi della notte",
+          "start": "2026-11-25T10:55:00Z",
+          "end": "2026-11-25T12:35:00Z"
+        },
+        {
+          "title": "Assassinio sul Nilo",
+          "start": "2026-11-25T12:35:00Z",
+          "end": "2026-11-25T14:50:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2872151911",
+      "name": "SKY CINEMA UNO (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2872151911",
+      "images": {
+        "logo": "/live2/logo/2872151911.png",
+        "poster": "/live2/logo/2872151911.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaUno.it"
+      },
+      "epg": [
+        {
+          "title": "Cinquanta sfumature di nero",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "Armageddon - Giudizio finale",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T15:35:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1759625738",
+      "name": "SKY CINEMA UNO (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1759625738",
+      "images": {
+        "logo": "/live2/logo/1759625738.png",
+        "poster": "/live2/logo/1759625738.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaUno.it"
+      },
+      "epg": [
+        {
+          "title": "Cinquanta sfumature di nero",
+          "start": "2026-11-25T11:10:00Z",
+          "end": "2026-11-25T13:10:00Z"
+        },
+        {
+          "title": "Armageddon - Giudizio finale",
+          "start": "2026-11-25T13:10:00Z",
+          "end": "2026-11-25T15:35:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1699876530",
+      "name": "SKY CINEMA UNO +24 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1699876530",
+      "images": {
+        "logo": "/live2/logo/1699876530.png",
+        "poster": "/live2/logo/1699876530.png"
+      },
+      "tags": [
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "SkyCinemaUno24.it"
+      },
+      "epg": [
+        {
+          "title": "L'avvocato Del Diavolo",
+          "start": "2026-11-25T09:10:00Z",
+          "end": "2026-11-25T11:45:00Z"
+        },
+        {
+          "title": "Nord Sud Ovest Est: La leggendaria...",
+          "start": "2026-11-25T11:45:00Z",
+          "end": "2026-11-25T12:40:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3891466198",
+      "name": "TCM (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3891466198",
+      "images": {
+        "logo": "/live2/logo/3891466198.png",
+        "poster": "/live2/logo/3891466198.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "TCM.es"
+      },
+      "epg": [
+        {
+          "title": "Πολύ Μεγάλες Κακίες",
+          "start": "2026-11-25T10:45:00Z",
+          "end": "2026-11-25T12:20:00Z"
+        },
+        {
+          "title": "Οι Γέφυρες του Μάντισον",
+          "start": "2026-11-25T12:20:00Z",
+          "end": "2026-11-25T14:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2451805128",
+      "name": "TCM CINEMA (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2451805128",
+      "images": {
+        "logo": "/live2/logo/2451805128.png",
+        "poster": "/live2/logo/2451805128.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "TCMCinema.fr"
+      },
+      "epg": [
+        {
+          "title": "A fleur de peau",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:40:00Z"
+        },
+        {
+          "title": "Suspicion",
+          "start": "2026-11-25T12:40:00Z",
+          "end": "2026-11-25T14:35:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1868847447",
+      "name": "TCM HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1868847447",
+      "images": {
+        "logo": "/live2/logo/1868847447.png",
+        "poster": "/live2/logo/1868847447.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "TCM.es"
+      },
+      "epg": [
+        {
+          "title": "Πολύ Μεγάλες Κακίες",
+          "start": "2026-11-25T10:45:00Z",
+          "end": "2026-11-25T12:20:00Z"
+        },
+        {
+          "title": "Οι Γέφυρες του Μάντισον",
+          "start": "2026-11-25T12:20:00Z",
+          "end": "2026-11-25T14:30:00Z"
+        }
       ]
     }
   ]

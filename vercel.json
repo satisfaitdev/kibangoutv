@@ -52,6 +52,14 @@
     {
       "source": "/item/:match*",
       "destination": "/api/item.js"
+    },
+    {
+      "source": "/kibangou-addon/source/:match*",
+      "destination": "/api/source.js"
+    },
+    {
+      "source": "/source/:match*",
+      "destination": "/api/source.js"
     }
   ],
   "headers": [

@@ -69,6 +69,13 @@
     .btn-party,
     .btn-hero-glass.btn-party,
     .modal-party,
+    .player-action-invite,
+    [class*="player-action-invite"],
+    button[title*="Inviter"],
+    button[title*="inviter"],
+    button[aria-label*="Inviter"],
+    button[aria-label*="inviter"],
+    .pt-seat-plus,
     .sc-track,
     .sc-slot,
     .sc-pill,
@@ -1054,7 +1061,7 @@
       addons: [
         "https://vavoo.top/live/mhub-addon.json",     // Moteur Live VAVOO (Place 'Live TV' directement après Favoris)
         bouquetKibangou,                              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
-        "https://www.mhub.mx/tmdb/mhub-addon.json",   // Moteur TMDB officiel (Résolution native des métadonnées)
+        "https://www.mhub.mx/tmdb",                   // Moteur TMDB officiel (Requis par vavoo-vod)
         "https://vavoo.top/vod/mhub-addon.json",      // Moteur VAVOO VOD (Résolution des sources de streaming)
         "https://vavoo.top/subtitle/mhub-addon.json"  // Sous-titres
       ],
@@ -1137,8 +1144,8 @@
     });
 
     function injectCustomNavItems() {
-      // 0. Suppression impitoyable du widget Social / Watch Party flottant sur le bord droit
-      document.querySelectorAll('.sc-track, .sc-slot, .sc-pill, .sc-front, .sc-back, .btn-party, .modal-party, .sv-fab, .feature-dock, .feature-dock-bar, .feature-bar, [class*="sv-fab"], a[href="#/social"]').forEach(el => el.remove());
+      // 0. Suppression impitoyable du widget Social / Watch Party et du bouton Inviter
+      document.querySelectorAll('.sc-track, .sc-slot, .sc-pill, .sc-front, .sc-back, .btn-party, .modal-party, .sv-fab, .feature-dock, .feature-dock-bar, .feature-bar, [class*="sv-fab"], .player-action-invite, [class*="player-action-invite"], button[title*="Inviter"], button[aria-label*="Inviter"], a[href="#/social"]').forEach(el => el.remove());
 
       // 0b. Liaison du bouton déconnexion mobile
       const mLogout = document.getElementById("m-btn-logout");

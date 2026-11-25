@@ -371,6 +371,49 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.forward_proxy("GET")
             return
 
+        # 4b. Sources VOD pour le bouquet Kibangou (gère /kibangou-addon/source/ ET /source/)
+        if "/kibangou-addon/source/" in unquoted_path or unquoted_path.startswith("/source/"):
+            if "/kibangou-addon/source/" in unquoted_path:
+                sub_path = unquoted_path.split("/kibangou-addon/source/", 1)[1]
+            else:
+                sub_path = unquoted_path.split("/source/", 1)[1]
+
+            clean_sub = sub_path.split("?", 1)[0].replace(".json", "")
+            parts = clean_sub.split("/")
+            if len(parts) >= 2:
+                stype = parts[0]
+                sid = parts[1]
+                imdb_id = ""
+                season = "1"
+                episode = "1"
+
+                if sid.startswith("tmdb:"):
+                    segs = sid.split(":")
+                    tmdb_num = segs[1]
+                    if len(segs) >= 4:
+                        season = segs[2]
+                        episode = segs[3]
+                    try:
+                        tmdb_req = urllib.request.Request(f"https://www.mhub.mx/tmdb/item/{stype}/tmdb:{tmdb_num}.json", headers={"User-Agent": "Mozilla/5.0"})
+                        with urllib.request.urlopen(tmdb_req, timeout=5) as tr:
+                            tdata = json.loads(tr.read().decode())
+                            if "ids" in tdata and "imdb" in tdata["ids"]:
+                                imdb_id = tdata["ids"]["imdb"].replace("tt", "")
+                    except Exception as te:
+                        print("TMDB to IMDb error in server.py:", te)
+                elif sid.startswith("imdb:"):
+                    segs = sid.split(":")
+                    imdb_id = segs[1].replace("tt", "")
+                    if len(segs) >= 4:
+                        season = segs[2]
+                        episode = segs[3]
+
+                target_id = f"imdb:tt{imdb_id}:{season}:{episode}" if stype == "series" else f"imdb:tt{imdb_id}" if imdb_id else sid
+                vavoo_vod_url = f"https://vavoo.top/vod/source/{stype}/{target_id}.json?region=FR&language=fr"
+                self.path = f"/api/proxy?url={urllib.parse.quote(vavoo_vod_url)}"
+                self.forward_proxy("GET")
+                return
+
         # 5. Fichiers statiques normaux
         super().do_GET()
 

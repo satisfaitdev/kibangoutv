@@ -1,1109 +1,2951 @@
 {
   "items": [
     {
+      "id": "1363827223",
+      "name": "BEIN 1 FEED (720P) (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1363827223",
+      "images": {
+        "logo": "/live2/logo/1363827223.png",
+        "poster": "/live2/logo/1363827223.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "beinsports1.tr"
+      }
+    },
+    {
+      "id": "2930746102",
+      "name": "BEIN BOX OFFICE 1 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2930746102",
+      "images": {
+        "logo": "/live2/logo/2930746102.png",
+        "poster": "/live2/logo/2930746102.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "beINBoxOffice1.tr"
+      }
+    },
+    {
+      "id": "2500913164",
+      "name": "BEIN MOVIES STARS (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2500913164",
+      "images": {
+        "logo": "/live2/logo/2500913164.png",
+        "poster": "/live2/logo/2500913164.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "beINMoviesStars.tr"
+      }
+    },
+    {
       "id": "3844916882",
       "name": "BEIN SPORTS 1 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3844916882",
+      "url": "https://www.vavoo.to/live/play/3844916882",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3844916882.png",
+        "poster": "/live2/logo/3844916882.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1.fr"
+      },
+      "epg": [
+        {
+          "title": "Basket-ball : NBA",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T11:45:00Z"
+        },
+        {
+          "title": "NBA Extra",
+          "start": "2026-11-25T11:45:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        }
       ]
     },
     {
       "id": "2869862642",
       "name": "BEIN SPORTS 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2869862642",
+      "url": "https://www.vavoo.to/live/play/2869862642",
       "images": {
         "logo": "/live2/logo/2869862642.png",
         "poster": "/live2/logo/2869862642.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "1759440287",
       "name": "BEIN SPORTS 1 (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1759440287",
+      "url": "https://www.vavoo.to/live/play/1759440287",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1759440287.png",
+        "poster": "/live2/logo/1759440287.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "1550443751",
+      "name": "BEIN SPORTS 1 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1550443751",
+      "images": {
+        "logo": "/live2/logo/1550443751.png",
+        "poster": "/live2/logo/1550443751.png"
+      },
+      "tags": [
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "beINSports1.au"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "1696521306",
       "name": "BEIN SPORTS 1 (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1696521306",
+      "url": "https://www.vavoo.to/live/play/1696521306",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1696521306.png",
+        "poster": "/live2/logo/1696521306.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
-      "id": "181449693",
-      "name": "BEIN SPORTS 1 [LIVE DURING EVENTS ONLY] (7)",
+      "id": "2729088606",
+      "name": "BEIN SPORTS 1 FEED (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/181449693",
+      "url": "https://www.vavoo.to/live/play/2729088606",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2729088606.png",
+        "poster": "/live2/logo/2729088606.png"
       },
       "tags": [
-        "France"
-      ]
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "BeinSports1Feed.tr"
+      }
     },
     {
       "id": "3472596589",
       "name": "BEIN SPORTS 1 FHD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3472596589",
+      "url": "https://www.vavoo.to/live/play/3472596589",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3472596589.png",
+        "poster": "/live2/logo/3472596589.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "2526338165",
       "name": "BEIN SPORTS 1 FHD [LIVE DURING EVENTS ONLY] (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2526338165",
+      "url": "https://www.vavoo.to/live/play/2526338165",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2526338165.png",
+        "poster": "/live2/logo/2526338165.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1LiveDuringEventsOnly.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "1490095787",
       "name": "BEIN SPORTS 1 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1490095787",
+      "url": "https://www.vavoo.to/live/play/1490095787",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1490095787.png",
+        "poster": "/live2/logo/1490095787.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1.fr"
+      },
+      "epg": [
+        {
+          "title": "Basket-ball : NBA",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T11:45:00Z"
+        },
+        {
+          "title": "NBA Extra",
+          "start": "2026-11-25T11:45:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        }
       ]
     },
     {
       "id": "1063761523",
       "name": "BEIN SPORTS 1 HD [LIVE DURING EVENTS ONLY] (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1063761523",
+      "url": "https://www.vavoo.to/live/play/1063761523",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1063761523.png",
+        "poster": "/live2/logo/1063761523.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1LiveDuringEventsOnly.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "679604721",
+      "name": "BEIN SPORTS 1 HQ (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/679604721",
+      "images": {
+        "logo": "/live2/logo/679604721.png",
+        "poster": "/live2/logo/679604721.png"
+      },
+      "tags": [
+        "Arabia"
+      ],
+      "ids": {
+        "tvg": "BeinSports1Hq.sa"
+      }
+    },
+    {
+      "id": "2902511239",
+      "name": "BEIN SPORTS 1 PL (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2902511239",
+      "images": {
+        "logo": "/live2/logo/2902511239.png",
+        "poster": "/live2/logo/2902511239.png"
+      },
+      "tags": [
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "beINSports1.au"
+      }
+    },
+    {
+      "id": "181449693",
+      "name": "BEIN SPORTS 1 [LIVE DURING EVENTS ONLY] (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/181449693",
+      "images": {
+        "logo": "/live2/logo/181449693.png",
+        "poster": "/live2/logo/181449693.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports1LiveDuringEventsOnly.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3428984703",
+      "name": "BEIN SPORTS 1 [LIVE DURING EVENTS ONLY] (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3428984703",
+      "images": {
+        "logo": "/live2/logo/3428984703.png",
+        "poster": "/live2/logo/3428984703.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "BeinSports1LiveDuringEventsOnly.tr"
+      },
+      "epg": [
+        {
+          "title": "ATP",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "2727132226",
       "name": "BEIN SPORTS 2 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2727132226",
+      "url": "https://www.vavoo.to/live/play/2727132226",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2727132226.png",
+        "poster": "/live2/logo/2727132226.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "Football : Bundesliga",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "Laval / Montpellier",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "3970882082",
       "name": "BEIN SPORTS 2 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3970882082",
+      "url": "https://www.vavoo.to/live/play/3970882082",
       "images": {
         "logo": "/live2/logo/3970882082.png",
         "poster": "/live2/logo/3970882082.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "PSG TV",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "This Is Paris",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
       ]
     },
     {
       "id": "796825423",
       "name": "BEIN SPORTS 2 (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/796825423",
+      "url": "https://www.vavoo.to/live/play/796825423",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/796825423.png",
+        "poster": "/live2/logo/796825423.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "PSG TV",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "This Is Paris",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "466198071",
+      "name": "BEIN SPORTS 2 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/466198071",
+      "images": {
+        "logo": "/live2/logo/466198071.png",
+        "poster": "/live2/logo/466198071.png"
+      },
+      "tags": [
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "beINSports2.au"
+      },
+      "epg": [
+        {
+          "title": "PSG TV",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "This Is Paris",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
       ]
     },
     {
       "id": "427817345",
       "name": "BEIN SPORTS 2 (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/427817345",
+      "url": "https://www.vavoo.to/live/play/427817345",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/427817345.png",
+        "poster": "/live2/logo/427817345.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "PSG TV",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "This Is Paris",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
       ]
     },
     {
       "id": "4151747240",
       "name": "BEIN SPORTS 2 FHD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4151747240",
+      "url": "https://www.vavoo.to/live/play/4151747240",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4151747240.png",
+        "poster": "/live2/logo/4151747240.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "PSG TV",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "This Is Paris",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "75819853",
+      "name": "BEIN SPORTS 2 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/75819853",
+      "images": {
+        "logo": "/live2/logo/75819853.png",
+        "poster": "/live2/logo/75819853.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "PSG TV",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "This Is Paris",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
       ]
     },
     {
       "id": "3596486984",
       "name": "BEIN SPORTS 2 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3596486984",
+      "url": "https://www.vavoo.to/live/play/3596486984",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3596486984.png",
+        "poster": "/live2/logo/3596486984.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "Football : Bundesliga",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "Laval / Montpellier",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "576693993",
+      "name": "BEIN SPORTS 2 HD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/576693993",
+      "images": {
+        "logo": "/live2/logo/576693993.png",
+        "poster": "/live2/logo/576693993.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports2.fr"
+      },
+      "epg": [
+        {
+          "title": "PSG TV",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "This Is Paris",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        }
       ]
     },
     {
       "id": "2683082226",
       "name": "BEIN SPORTS 3 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2683082226",
+      "url": "https://www.vavoo.to/live/play/2683082226",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2683082226.png",
+        "poster": "/live2/logo/2683082226.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "Football américain : NFL",
+          "start": "2026-11-25T09:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "NFL Extra",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        }
       ]
     },
     {
       "id": "3520000914",
       "name": "BEIN SPORTS 3 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3520000914",
+      "url": "https://www.vavoo.to/live/play/3520000914",
       "images": {
         "logo": "/live2/logo/3520000914.png",
         "poster": "/live2/logo/3520000914.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "EFL Championship",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:50:00Z"
+        },
+        {
+          "title": "EFL Classic",
+          "start": "2026-11-25T12:50:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "304004863",
       "name": "BEIN SPORTS 3 (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/304004863",
+      "url": "https://www.vavoo.to/live/play/304004863",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/304004863.png",
+        "poster": "/live2/logo/304004863.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "EFL Championship",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:50:00Z"
+        },
+        {
+          "title": "EFL Classic",
+          "start": "2026-11-25T12:50:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "648656775",
+      "name": "BEIN SPORTS 3 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/648656775",
+      "images": {
+        "logo": "/live2/logo/648656775.png",
+        "poster": "/live2/logo/648656775.png"
+      },
+      "tags": [
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "beINSports3.au"
+      },
+      "epg": [
+        {
+          "title": "EFL Championship",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:50:00Z"
+        },
+        {
+          "title": "EFL Classic",
+          "start": "2026-11-25T12:50:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "2221938935",
       "name": "BEIN SPORTS 3 (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2221938935",
+      "url": "https://www.vavoo.to/live/play/2221938935",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2221938935.png",
+        "poster": "/live2/logo/2221938935.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "EFL Championship",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:50:00Z"
+        },
+        {
+          "title": "EFL Classic",
+          "start": "2026-11-25T12:50:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "3758995179",
       "name": "BEIN SPORTS 3 FHD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3758995179",
+      "url": "https://www.vavoo.to/live/play/3758995179",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3758995179.png",
+        "poster": "/live2/logo/3758995179.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "EFL Championship",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:50:00Z"
+        },
+        {
+          "title": "EFL Classic",
+          "start": "2026-11-25T12:50:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "335544078",
       "name": "BEIN SPORTS 3 FHD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/335544078",
+      "url": "https://www.vavoo.to/live/play/335544078",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/335544078.png",
+        "poster": "/live2/logo/335544078.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "EFL Championship",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:50:00Z"
+        },
+        {
+          "title": "EFL Classic",
+          "start": "2026-11-25T12:50:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
       "id": "452200918",
       "name": "BEIN SPORTS 3 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/452200918",
+      "url": "https://www.vavoo.to/live/play/452200918",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/452200918.png",
+        "poster": "/live2/logo/452200918.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "Football américain : NFL",
+          "start": "2026-11-25T09:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "NFL Extra",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        }
       ]
     },
     {
       "id": "4009076343",
       "name": "BEIN SPORTS 3 HD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4009076343",
+      "url": "https://www.vavoo.to/live/play/4009076343",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4009076343.png",
+        "poster": "/live2/logo/4009076343.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSports3.fr"
+      },
+      "epg": [
+        {
+          "title": "EFL Championship",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:50:00Z"
+        },
+        {
+          "title": "EFL Classic",
+          "start": "2026-11-25T12:50:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
+    },
+    {
+      "id": "2113462398",
+      "name": "BEIN SPORTS 8K FEED (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2113462398",
+      "images": {
+        "logo": "/live2/logo/2113462398.png",
+        "poster": "/live2/logo/2113462398.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "BeinSports8KFeed.tr"
+      }
+    },
+    {
+      "id": "3620837545",
+      "name": "BEIN SPORTS ENGLISH 2 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3620837545",
+      "images": {
+        "logo": "/live2/logo/3620837545.png",
+        "poster": "/live2/logo/3620837545.png"
+      },
+      "tags": [
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "beIN.Sports.HD.ae"
+      },
+      "epg": [
+        {
+          "title": "Italy Vs Netherlands - Beach Volleyball Gold Medal - 2026 Youth Olympic Games – Dakar",
+          "start": "2026-11-25T11:40:00Z",
+          "end": "2026-11-25T12:40:00Z"
+        },
+        {
+          "title": "Germany Vs Austria - Beach Volleyball Gold Medal - 2026 Youth Olympic Games – Dakar",
+          "start": "2026-11-25T12:40:00Z",
+          "end": "2026-11-25T14:15:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3939390473",
+      "name": "BEIN SPORTS LA LIGA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3939390473",
+      "images": {
+        "logo": "/live2/logo/3939390473.png",
+        "poster": "/live2/logo/3939390473.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "BeinSportsLaLiga.es"
+      }
+    },
+    {
+      "id": "1338646069",
+      "name": "BEIN SPORTS LA LIGA (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1338646069",
+      "images": {
+        "logo": "/live2/logo/1338646069.png",
+        "poster": "/live2/logo/1338646069.png"
+      },
+      "tags": [
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "BeinSportsLaLiga.gb"
+      }
     },
     {
       "id": "3123667785",
       "name": "BEIN SPORTS MAX 10 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3123667785",
+      "url": "https://www.vavoo.to/live/play/3123667785",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3123667785.png",
+        "poster": "/live2/logo/3123667785.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax10.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3800425623",
       "name": "BEIN SPORTS MAX 10 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3800425623",
+      "url": "https://www.vavoo.to/live/play/3800425623",
       "images": {
         "logo": "/live2/logo/3800425623.png",
         "poster": "/live2/logo/3800425623.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax10.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2158150250",
       "name": "BEIN SPORTS MAX 10 FHD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2158150250",
+      "url": "https://www.vavoo.to/live/play/2158150250",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2158150250.png",
+        "poster": "/live2/logo/2158150250.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax10.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2473905459",
       "name": "BEIN SPORTS MAX 10 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2473905459",
+      "url": "https://www.vavoo.to/live/play/2473905459",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2473905459.png",
+        "poster": "/live2/logo/2473905459.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax10.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "116006831",
       "name": "BEIN SPORTS MAX 10 HD (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/116006831",
+      "url": "https://www.vavoo.to/live/play/116006831",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/116006831.png",
+        "poster": "/live2/logo/116006831.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax10.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "4005135586",
       "name": "BEIN SPORTS MAX 4 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4005135586",
+      "url": "https://www.vavoo.to/live/play/4005135586",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4005135586.png",
+        "poster": "/live2/logo/4005135586.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax4.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "4250355899",
       "name": "BEIN SPORTS MAX 4 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4250355899",
+      "url": "https://www.vavoo.to/live/play/4250355899",
       "images": {
         "logo": "/live2/logo/4250355899.png",
         "poster": "/live2/logo/4250355899.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax4.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3251642729",
+      "name": "BEIN SPORTS MAX 4 FHD (EVENT ONLY) (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3251642729",
+      "images": {
+        "logo": "/live2/logo/3251642729.png",
+        "poster": "/live2/logo/3251642729.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax4.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "1309289660",
       "name": "BEIN SPORTS MAX 4 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1309289660",
+      "url": "https://www.vavoo.to/live/play/1309289660",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1309289660.png",
+        "poster": "/live2/logo/1309289660.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax4.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3800781129",
       "name": "BEIN SPORTS MAX 4 HD (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3800781129",
+      "url": "https://www.vavoo.to/live/play/3800781129",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3800781129.png",
+        "poster": "/live2/logo/3800781129.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax4.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        }
       ]
     },
     {
       "id": "470010406",
       "name": "BEIN SPORTS MAX 4 HD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/470010406",
+      "url": "https://www.vavoo.to/live/play/470010406",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/470010406.png",
+        "poster": "/live2/logo/470010406.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax4.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3554258258",
       "name": "BEIN SPORTS MAX 5 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3554258258",
+      "url": "https://www.vavoo.to/live/play/3554258258",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3554258258.png",
+        "poster": "/live2/logo/3554258258.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax5.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3224854795",
       "name": "BEIN SPORTS MAX 5 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3224854795",
+      "url": "https://www.vavoo.to/live/play/3224854795",
       "images": {
         "logo": "/live2/logo/3224854795.png",
         "poster": "/live2/logo/3224854795.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax5.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3606594985",
       "name": "BEIN SPORTS MAX 5 FHD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3606594985",
+      "url": "https://www.vavoo.to/live/play/3606594985",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3606594985.png",
+        "poster": "/live2/logo/3606594985.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax5.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2191535138",
       "name": "BEIN SPORTS MAX 5 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2191535138",
+      "url": "https://www.vavoo.to/live/play/2191535138",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2191535138.png",
+        "poster": "/live2/logo/2191535138.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax5.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "1697487370",
       "name": "BEIN SPORTS MAX 5 HD (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1697487370",
+      "url": "https://www.vavoo.to/live/play/1697487370",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1697487370.png",
+        "poster": "/live2/logo/1697487370.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax5.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        }
       ]
     },
     {
       "id": "2212055480",
       "name": "BEIN SPORTS MAX 5 HD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2212055480",
+      "url": "https://www.vavoo.to/live/play/2212055480",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2212055480.png",
+        "poster": "/live2/logo/2212055480.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax5.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2491012994",
       "name": "BEIN SPORTS MAX 6 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2491012994",
+      "url": "https://www.vavoo.to/live/play/2491012994",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2491012994.png",
+        "poster": "/live2/logo/2491012994.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax6.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2274827227",
       "name": "BEIN SPORTS MAX 6 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2274827227",
+      "url": "https://www.vavoo.to/live/play/2274827227",
       "images": {
         "logo": "/live2/logo/2274827227.png",
         "poster": "/live2/logo/2274827227.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax6.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "4018202857",
+      "name": "BEIN SPORTS MAX 6 FHD (EVENT ONLY) (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4018202857",
+      "images": {
+        "logo": "/live2/logo/4018202857.png",
+        "poster": "/live2/logo/4018202857.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax6.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "204417985",
       "name": "BEIN SPORTS MAX 6 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/204417985",
+      "url": "https://www.vavoo.to/live/play/204417985",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/204417985.png",
+        "poster": "/live2/logo/204417985.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax6.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "918012302",
       "name": "BEIN SPORTS MAX 6 HD (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/918012302",
+      "url": "https://www.vavoo.to/live/play/918012302",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/918012302.png",
+        "poster": "/live2/logo/918012302.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax6.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "4173843291",
       "name": "BEIN SPORTS MAX 6 HD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4173843291",
+      "url": "https://www.vavoo.to/live/play/4173843291",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4173843291.png",
+        "poster": "/live2/logo/4173843291.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax6.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2837052978",
       "name": "BEIN SPORTS MAX 7 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2837052978",
+      "url": "https://www.vavoo.to/live/play/2837052978",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2837052978.png",
+        "poster": "/live2/logo/2837052978.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax7.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3136762475",
       "name": "BEIN SPORTS MAX 7 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3136762475",
+      "url": "https://www.vavoo.to/live/play/3136762475",
       "images": {
         "logo": "/live2/logo/3136762475.png",
         "poster": "/live2/logo/3136762475.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax7.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "4171795497",
       "name": "BEIN SPORTS MAX 7 FHD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4171795497",
+      "url": "https://www.vavoo.to/live/play/4171795497",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4171795497.png",
+        "poster": "/live2/logo/4171795497.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax7.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3229952863",
       "name": "BEIN SPORTS MAX 7 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3229952863",
+      "url": "https://www.vavoo.to/live/play/3229952863",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3229952863.png",
+        "poster": "/live2/logo/3229952863.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax7.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2970684109",
       "name": "BEIN SPORTS MAX 7 HD (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2970684109",
+      "url": "https://www.vavoo.to/live/play/2970684109",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2970684109.png",
+        "poster": "/live2/logo/2970684109.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax7.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        }
       ]
     },
     {
       "id": "1729972421",
       "name": "BEIN SPORTS MAX 7 HD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1729972421",
+      "url": "https://www.vavoo.to/live/play/1729972421",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1729972421.png",
+        "poster": "/live2/logo/1729972421.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax7.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "726231523",
       "name": "BEIN SPORTS MAX 8 (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/726231523",
+      "url": "https://www.vavoo.to/live/play/726231523",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/726231523.png",
+        "poster": "/live2/logo/726231523.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax8.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "950511034",
       "name": "BEIN SPORTS MAX 8 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/950511034",
+      "url": "https://www.vavoo.to/live/play/950511034",
       "images": {
         "logo": "/live2/logo/950511034.png",
         "poster": "/live2/logo/950511034.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax8.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "607294569",
+      "name": "BEIN SPORTS MAX 8 FHD (EVENT ONLY) (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/607294569",
+      "images": {
+        "logo": "/live2/logo/607294569.png",
+        "poster": "/live2/logo/607294569.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax8.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "430258675",
       "name": "BEIN SPORTS MAX 8 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/430258675",
+      "url": "https://www.vavoo.to/live/play/430258675",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/430258675.png",
+        "poster": "/live2/logo/430258675.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax8.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "2006137112",
       "name": "BEIN SPORTS MAX 8 HD (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2006137112",
+      "url": "https://www.vavoo.to/live/play/2006137112",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2006137112.png",
+        "poster": "/live2/logo/2006137112.png"
       },
       "tags": [
         "France"
-      ]
-    },
-    {
-      "id": "371802195",
-      "name": "BEIN SPORTS MAX 9 (1)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/371802195",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax8.fr"
       },
-      "tags": [
-        "France"
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        }
       ]
     },
     {
       "id": "96963594",
       "name": "BEIN SPORTS MAX 9 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/96963594",
+      "url": "https://www.vavoo.to/live/play/96963594",
       "images": {
         "logo": "/live2/logo/96963594.png",
         "poster": "/live2/logo/96963594.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax9.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "857403561",
+      "name": "BEIN SPORTS MAX 9 FHD (EVENT ONLY) (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/857403561",
+      "images": {
+        "logo": "/live2/logo/857403561.png",
+        "poster": "/live2/logo/857403561.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax9.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "3574544749",
       "name": "BEIN SPORTS MAX 9 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3574544749",
+      "url": "https://www.vavoo.to/live/play/3574544749",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3574544749.png",
+        "poster": "/live2/logo/3574544749.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax9.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
       "id": "4030067291",
       "name": "BEIN SPORTS MAX 9 HD (BACKUP) (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4030067291",
+      "url": "https://www.vavoo.to/live/play/4030067291",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4030067291.png",
+        "poster": "/live2/logo/4030067291.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax9.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        }
       ]
     },
     {
       "id": "3033678965",
       "name": "BEIN SPORTS MAX 9 HD (EVENT ONLY) (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3033678965",
+      "url": "https://www.vavoo.to/live/play/3033678965",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3033678965.png",
+        "poster": "/live2/logo/3033678965.png"
       },
       "tags": [
         "France"
+      ],
+      "ids": {
+        "tvg": "BeinSportsMax9.fr"
+      },
+      "epg": [
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T08:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "beIN SPORTS, le plus grand des spectacles",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        }
       ]
     },
     {
-      "id": "2019775967",
-      "name": "DAZN EVENT 1 (7)",
+      "id": "2404725296",
+      "name": "BEIN SPORTS USA (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2019775967",
+      "url": "https://www.vavoo.to/live/play/2404725296",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2404725296.png",
+        "poster": "/live2/logo/2404725296.png"
       },
       "tags": [
-        "France Sport"
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "beIN.Sports.USA.HD.us2"
+      },
+      "epg": [
+        {
+          "title": "Paid Programming",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Paid Programming",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        }
       ]
     },
     {
-      "id": "3771449102",
-      "name": "DAZN EVENT 10 (7)",
+      "id": "979824657",
+      "name": "BEIN SPORTS XTRA Ñ (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3771449102",
+      "url": "https://www.vavoo.to/live/play/979824657",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/979824657.png",
+        "poster": "/live2/logo/979824657.png"
       },
       "tags": [
-        "France Sport"
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "BeinSportsXtra.es"
+      }
+    },
+    {
+      "id": "2941093452",
+      "name": "DAZN 1 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2941093452",
+      "images": {
+        "logo": "/live2/logo/2941093452.png",
+        "poster": "/live2/logo/2941093452.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Dazn1.es"
+      },
+      "epg": [
+        {
+          "title": "LaLiga 26/27",
+          "start": "2026-11-25T10:20:00Z",
+          "end": "2026-11-25T12:15:00Z"
+        },
+        {
+          "title": "Serie A Top Goals 26/27",
+          "start": "2026-11-25T12:15:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        }
       ]
     },
     {
-      "id": "2808858078",
-      "name": "DAZN EVENT 13 (7)",
+      "id": "3567590597",
+      "name": "DAZN 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2808858078",
+      "url": "https://www.vavoo.to/live/play/3567590597",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3567590597.png",
+        "poster": "/live2/logo/3567590597.png"
       },
       "tags": [
-        "France Sport"
+        "France"
+      ],
+      "ids": {
+        "tvg": "Dazn1.fr"
+      },
+      "epg": [
+        {
+          "title": "LaLiga 26/27",
+          "start": "2026-11-25T10:20:00Z",
+          "end": "2026-11-25T12:15:00Z"
+        },
+        {
+          "title": "Serie A Top Goals 26/27",
+          "start": "2026-11-25T12:15:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        }
       ]
     },
     {
-      "id": "357243342",
-      "name": "DAZN EVENT 14 (7)",
+      "id": "1376440573",
+      "name": "DAZN 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/357243342",
+      "url": "https://www.vavoo.to/live/play/1376440573",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1376440573.png",
+        "poster": "/live2/logo/1376440573.png"
       },
       "tags": [
-        "France Sport"
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Dazn1.it"
+      },
+      "epg": [
+        {
+          "title": "LaLiga 26/27",
+          "start": "2026-11-25T10:20:00Z",
+          "end": "2026-11-25T12:15:00Z"
+        },
+        {
+          "title": "Serie A Top Goals 26/27",
+          "start": "2026-11-25T12:15:00Z",
+          "end": "2026-11-25T12:30:00Z"
+        }
       ]
     },
     {
-      "id": "673919102",
-      "name": "DAZN EVENT 15 (7)",
+      "id": "2686192037",
+      "name": "DAZN 1 BAR HD+ (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/673919102",
+      "url": "https://www.vavoo.to/live/play/2686192037",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2686192037.png",
+        "poster": "/live2/logo/2686192037.png"
       },
       "tags": [
-        "France Sport"
+        "Germany"
+      ],
+      "ids": {
+        "tvg": "Dazn1Bar.de"
+      },
+      "epg": [
+        {
+          "title": "Eishockey: NHL",
+          "start": "2026-11-25T10:30:00Z",
+          "end": "2026-11-25T19:49:00Z"
+        }
       ]
     },
     {
-      "id": "1871399598",
-      "name": "DAZN EVENT 16 (7)",
+      "id": "3907910812",
+      "name": "DAZN 2 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1871399598",
+      "url": "https://www.vavoo.to/live/play/3907910812",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3907910812.png",
+        "poster": "/live2/logo/3907910812.png"
       },
       "tags": [
-        "France Sport"
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Dazn2.es"
+      },
+      "epg": [
+        {
+          "title": "Bundesliga 26/27",
+          "start": "2026-11-25T10:55:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        },
+        {
+          "title": "Bundesliga Features 26/27",
+          "start": "2026-11-25T12:45:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
-      "id": "3501978831",
-      "name": "DAZN EVENT 18 (7)",
+      "id": "1063360744",
+      "name": "DAZN 2 BAR HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3501978831",
+      "url": "https://www.vavoo.to/live/play/1063360744",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1063360744.png",
+        "poster": "/live2/logo/1063360744.png"
       },
       "tags": [
-        "France Sport"
+        "Germany"
+      ],
+      "ids": {
+        "tvg": "Dazn2Bar.de"
+      }
+    },
+    {
+      "id": "500589931",
+      "name": "DAZN 2 BAR HD+ (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/500589931",
+      "images": {
+        "logo": "/live2/logo/500589931.png",
+        "poster": "/live2/logo/500589931.png"
+      },
+      "tags": [
+        "Germany"
+      ],
+      "ids": {
+        "tvg": "Dazn2Bar.de"
+      }
+    },
+    {
+      "id": "2587190923",
+      "name": "DAZN 2 LEAUGE 1 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2587190923",
+      "images": {
+        "logo": "/live2/logo/2587190923.png",
+        "poster": "/live2/logo/2587190923.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "Dazn2Leauge1.fr"
+      }
+    },
+    {
+      "id": "3582842156",
+      "name": "DAZN 3 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3582842156",
+      "images": {
+        "logo": "/live2/logo/3582842156.png",
+        "poster": "/live2/logo/3582842156.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Dazn3.es"
+      },
+      "epg": [
+        {
+          "title": "Liga Endesa",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "SL Benfica x Ovarense - Liga Betclic Basquetebol Masculino",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
+        }
       ]
     },
     {
-      "id": "1069756175",
-      "name": "DAZN EVENT 2 (7)",
+      "id": "121276413",
+      "name": "DAZN 3 LEAUGE 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1069756175",
+      "url": "https://www.vavoo.to/live/play/121276413",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/121276413.png",
+        "poster": "/live2/logo/121276413.png"
       },
       "tags": [
-        "France Sport"
+        "France"
+      ],
+      "ids": {
+        "tvg": "Dazn3Leauge1.fr"
+      }
+    },
+    {
+      "id": "1739393340",
+      "name": "DAZN 4 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1739393340",
+      "images": {
+        "logo": "/live2/logo/1739393340.png",
+        "poster": "/live2/logo/1739393340.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Dazn4.es"
+      },
+      "epg": [
+        {
+          "title": "Sem Emissão",
+          "start": "2026-11-25T11:35:00Z",
+          "end": "2026-11-25T12:10:00Z"
+        },
+        {
+          "title": "Sem Emissão",
+          "start": "2026-11-25T12:10:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        }
       ]
     },
     {
-      "id": "1717554592",
-      "name": "DAZN EVENT 20 (7)",
+      "id": "222932870",
+      "name": "DAZN EVENT 3 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1717554592",
+      "url": "https://www.vavoo.to/live/play/222932870",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/222932870.png",
+        "poster": "/live2/logo/222932870.png"
       },
       "tags": [
-        "France Sport"
+        "Germany"
+      ],
+      "ids": {
+        "tvg": "DaznEvent3.de"
+      }
+    },
+    {
+      "id": "3129220252",
+      "name": "DAZN F1 (6)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3129220252",
+      "images": {
+        "logo": "/live2/logo/3129220252.png",
+        "poster": "/live2/logo/3129220252.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "DaznF1.es"
+      },
+      "epg": [
+        {
+          "title": "Mañaneros 360",
+          "start": "2026-11-25T09:36:00Z",
+          "end": "2026-11-25T13:55:00Z"
+        },
+        {
+          "title": "Telediario 1",
+          "start": "2026-11-25T13:55:00Z",
+          "end": "2026-11-25T14:31:00Z"
+        }
       ]
     },
     {
-      "id": "44238527",
-      "name": "DAZN EVENT 3 (7)",
+      "id": "1591618250",
+      "name": "DAZN LALIGA 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/44238527",
+      "url": "https://www.vavoo.to/live/play/1591618250",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1591618250.png",
+        "poster": "/live2/logo/1591618250.png"
       },
       "tags": [
-        "France Sport"
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "DaznLaliga1.es"
+      },
+      "epg": [
+        {
+          "title": "El Post de DAZN (T26/27)",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        },
+        {
+          "title": "Resúmenes LALIGA HyperMotion (T26/27): Girona FC - SD Eibar",
+          "start": "2026-11-25T12:45:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
-      "id": "2961431215",
-      "name": "DAZN EVENT 4 (7)",
+      "id": "3325387265",
+      "name": "DAZN LALIGA 1 FHD [] (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2961431215",
+      "url": "https://www.vavoo.to/live/play/3325387265",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3325387265.png",
+        "poster": "/live2/logo/3325387265.png"
       },
       "tags": [
-        "France Sport"
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "DaznLaliga1.es"
+      },
+      "epg": [
+        {
+          "title": "El Post de DAZN (T26/27)",
+          "start": "2026-11-25T11:00:00Z",
+          "end": "2026-11-25T12:45:00Z"
+        },
+        {
+          "title": "Resúmenes LALIGA HyperMotion (T26/27): Girona FC - SD Eibar",
+          "start": "2026-11-25T12:45:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
-      "id": "2380526367",
-      "name": "DAZN EVENT 5 (7)",
+      "id": "427708442",
+      "name": "DAZN LALIGA 2 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2380526367",
+      "url": "https://www.vavoo.to/live/play/427708442",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/427708442.png",
+        "poster": "/live2/logo/427708442.png"
       },
       "tags": [
-        "France Sport"
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "DaznLaliga2.es"
+      },
+      "epg": [
+        {
+          "title": "DAZN LaLiga 2",
+          "start": "2026-11-25T09:45:00Z",
+          "end": "2026-11-25T13:45:00Z"
+        },
+        {
+          "title": "DAZN LaLiga 2",
+          "start": "2026-11-25T13:45:00Z",
+          "end": "2026-11-25T17:45:00Z"
+        }
       ]
     },
     {
-      "id": "3393423823",
-      "name": "DAZN EVENT 6 (7)",
+      "id": "1224881617",
+      "name": "DAZN LIGUE 1 LIVE 1 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3393423823",
+      "url": "https://www.vavoo.to/live/play/1224881617",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1224881617.png",
+        "poster": "/live2/logo/1224881617.png"
       },
       "tags": [
-        "France Sport"
+        "France"
+      ],
+      "ids": {
+        "tvg": "DaznLigue1Live1.fr"
+      }
+    },
+    {
+      "id": "187118252",
+      "name": "DAZN LIGUE 1 LIVE 3 HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/187118252",
+      "images": {
+        "logo": "/live2/logo/187118252.png",
+        "poster": "/live2/logo/187118252.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "DaznLigue1Live3.fr"
+      }
+    },
+    {
+      "id": "2078862937",
+      "name": "4K TR: EUROSPORT 1 HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2078862937",
+      "images": {
+        "logo": "/live2/logo/2078862937.png",
+        "poster": "/live2/logo/2078862937.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "TrEurosport1.tr"
+      }
+    },
+    {
+      "id": "4117227962",
+      "name": "4K TR: EUROSPORT 2 HD (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4117227962",
+      "images": {
+        "logo": "/live2/logo/4117227962.png",
+        "poster": "/live2/logo/4117227962.png"
+      },
+      "tags": [
+        "Turkey"
+      ],
+      "ids": {
+        "tvg": "TrEurosport2.tr"
+      }
+    },
+    {
+      "id": "2935192752",
+      "name": "EUROSPORT 1 (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2935192752",
+      "images": {
+        "logo": "/live2/logo/2935192752.png",
+        "poster": "/live2/logo/2935192752.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "Eurosport1.fr"
+      },
+      "epg": [
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Radsport",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        }
       ]
     },
     {
-      "id": "4146307199",
-      "name": "DAZN EVENT 7 (7)",
+      "id": "3481346857",
+      "name": "EUROSPORT 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4146307199",
+      "url": "https://www.vavoo.to/live/play/3481346857",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3481346857.png",
+        "poster": "/live2/logo/3481346857.png"
       },
       "tags": [
-        "France Sport"
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Eurosport1.it"
+      },
+      "epg": [
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Radsport",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        }
       ]
     },
     {
-      "id": "1970485166",
-      "name": "DAZN EVENT 8 (7)",
+      "id": "3719734336",
+      "name": "EUROSPORT 1 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1970485166",
+      "url": "https://www.vavoo.to/live/play/3719734336",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3719734336.png",
+        "poster": "/live2/logo/3719734336.png"
       },
       "tags": [
-        "France Sport"
+        "France"
+      ],
+      "ids": {
+        "tvg": "Eurosport1.fr"
+      },
+      "epg": [
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Radsport",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        }
       ]
     },
     {
-      "id": "1209212446",
-      "name": "DAZN EVENT 9 (7)",
+      "id": "3448075317",
+      "name": "EUROSPORT 1 (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1209212446",
+      "url": "https://www.vavoo.to/live/play/3448075317",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3448075317.png",
+        "poster": "/live2/logo/3448075317.png"
       },
       "tags": [
-        "France Sport"
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Eurosport1.it"
+      }
+    },
+    {
+      "id": "3513558830",
+      "name": "EUROSPORT 1 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3513558830",
+      "images": {
+        "logo": "/live2/logo/3513558830.png",
+        "poster": "/live2/logo/3513558830.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "Eurosport1.fr"
+      },
+      "epg": [
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Radsport",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        }
       ]
     },
     {
-      "id": "1433004265",
-      "name": "LIGUE 1 FHD (7)",
+      "id": "3618771655",
+      "name": "EUROSPORT 1 (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1433004265",
+      "url": "https://www.vavoo.to/live/play/3618771655",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3618771655.png",
+        "poster": "/live2/logo/3618771655.png"
       },
       "tags": [
-        "France Sport"
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "Abu.Dhabi.HD.ae"
+      }
+    },
+    {
+      "id": "2172924275",
+      "name": "EUROSPORT 1 FHD (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2172924275",
+      "images": {
+        "logo": "/live2/logo/2172924275.png",
+        "poster": "/live2/logo/2172924275.png"
+      },
+      "tags": [
+        "France"
+      ],
+      "ids": {
+        "tvg": "Eurosport1.fr"
+      },
+      "epg": [
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Radsport",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        }
       ]
     },
     {
-      "id": "3249840157",
-      "name": "LIGUE 10 HD (7)",
+      "id": "1801327897",
+      "name": "EUROSPORT 1 HD (1)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/3249840157",
+      "url": "https://www.vavoo.to/live/play/1801327897",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1801327897.png",
+        "poster": "/live2/logo/1801327897.png"
       },
       "tags": [
-        "France Sport"
+        "France"
+      ],
+      "ids": {
+        "tvg": "Eurosport1.fr"
+      },
+      "epg": [
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T11:30:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "Radsport",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:15:00Z"
+        }
       ]
     },
     {
-      "id": "220110979",
-      "name": "LIGUE 11 HD (7)",
+      "id": "2283887097",
+      "name": "EUROSPORT 2 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/220110979",
+      "url": "https://www.vavoo.to/live/play/2283887097",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2283887097.png",
+        "poster": "/live2/logo/2283887097.png"
       },
       "tags": [
-        "France Sport"
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Eurosport2.it"
+      },
+      "epg": [
+        {
+          "title": "World Snooker Tour",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
-      "id": "1826935852",
-      "name": "LIGUE 2 FHD (7)",
+      "id": "2670144662",
+      "name": "EUROSPORT 2 (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/1826935852",
+      "url": "https://www.vavoo.to/live/play/2670144662",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2670144662.png",
+        "poster": "/live2/logo/2670144662.png"
       },
       "tags": [
-        "France Sport"
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Eurosport2.es"
+      },
+      "epg": [
+        {
+          "title": "World Snooker Tour",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
-      "id": "2074067055",
-      "name": "LIGUE 3 FHD (7)",
+      "id": "2317684453",
+      "name": "EUROSPORT 2 (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/2074067055",
+      "url": "https://www.vavoo.to/live/play/2317684453",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2317684453.png",
+        "poster": "/live2/logo/2317684453.png"
       },
       "tags": [
-        "France Sport"
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Eurosport2.it"
+      }
+    },
+    {
+      "id": "2417125399",
+      "name": "EUROSPORT 2 (7)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2417125399",
+      "images": {
+        "logo": "/live2/logo/2417125399.png",
+        "poster": "/live2/logo/2417125399.png"
+      },
+      "tags": [
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "Abu.Dhabi.HD.ae"
+      }
+    },
+    {
+      "id": "3474692336",
+      "name": "EUROSPORT 2 (BACKUP) (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3474692336",
+      "images": {
+        "logo": "/live2/logo/3474692336.png",
+        "poster": "/live2/logo/3474692336.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "Eurosport2.es"
+      },
+      "epg": [
+        {
+          "title": "World Snooker Tour",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T12:00:00Z"
+        },
+        {
+          "title": "FIS Ski Alpin Weltcup",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        }
       ]
     },
     {
-      "id": "142981605",
-      "name": "LIGUE 5 FHD (7)",
+      "id": "597408884",
+      "name": "EUROSPORT 360 1 [LIVE DURING EVENTS ONLY] (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/142981605",
+      "url": "https://www.vavoo.to/live/play/597408884",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/597408884.png",
+        "poster": "/live2/logo/597408884.png"
       },
       "tags": [
-        "France Sport"
-      ]
+        "France"
+      ],
+      "ids": {
+        "tvg": "Eurosport360HD1.fr"
+      }
     },
     {
-      "id": "822641952",
-      "name": "LIGUE 6 FHD (7)",
+      "id": "1668185301",
+      "name": "EUROSPORT 4 TIMVISION (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/822641952",
+      "url": "https://www.vavoo.to/live/play/1668185301",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/1668185301.png",
+        "poster": "/live2/logo/1668185301.png"
       },
       "tags": [
-        "France Sport"
-      ]
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Eurosport4Timvision.it"
+      }
     },
     {
-      "id": "645108067",
-      "name": "LIGUE 7 FHD (7)",
+      "id": "3421031748",
+      "name": "EUROSPORT 6 TIMVISION (6)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/645108067",
+      "url": "https://www.vavoo.to/live/play/3421031748",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3421031748.png",
+        "poster": "/live2/logo/3421031748.png"
       },
       "tags": [
-        "France Sport"
-      ]
+        "Italy"
+      ],
+      "ids": {
+        "tvg": "Eurosport6Timvision.it"
+      }
     },
     {
-      "id": "4190789298",
-      "name": "LIGUE 8 FHD (7)",
+      "id": "3547851801",
+      "name": "EUROSPORT HD (7)",
       "type": "live",
-      "url": "https://vavoo.top/live/play/4190789298",
+      "url": "https://www.vavoo.to/live/play/3547851801",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/3547851801.png",
+        "poster": "/live2/logo/3547851801.png"
       },
       "tags": [
-        "France Sport"
-      ]
-    },
-    {
-      "id": "4004596465",
-      "name": "LIGUE 9 FHD (7)",
-      "type": "live",
-      "url": "https://vavoo.top/live/play/4004596465",
-      "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
-      },
-      "tags": [
-        "France Sport"
-      ]
+        "United Kingdom"
+      ],
+      "ids": {
+        "tvg": "Eurosport.gb"
+      }
     }
   ]
 }

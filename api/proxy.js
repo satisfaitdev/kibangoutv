@@ -167,7 +167,7 @@ export default async function handler(req, res) {
       return res.status(upstreamRes.status).json(data);
     }
 
-    // 3. Réponse standard (flux vidéo, fragments TS, images, buffers)
+    // 3. Réponse standard complète sans troncature (flux vidéo, fragments TS, catalogs JSON, images)
     res.setHeader("Content-Type", contentType);
     if (upstreamRes.headers.get("content-range")) {
       res.setHeader("Content-Range", upstreamRes.headers.get("content-range"));
@@ -175,24 +175,11 @@ export default async function handler(req, res) {
     if (upstreamRes.headers.get("accept-ranges")) {
       res.setHeader("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
     }
-    if (upstreamRes.headers.get("content-length")) {
-      res.setHeader("Content-Length", upstreamRes.headers.get("content-length"));
-    }
 
-    if (upstreamRes.body) {
-      if (typeof Readable.fromWeb === "function") {
-        const readable = Readable.fromWeb(upstreamRes.body);
-        readable.on("error", () => {
-          // Ignore les fermetures prématurées quand l'utilisateur change de chaîne/source
-        });
-        return readable.pipe(res);
-      } else {
-        const buffer = Buffer.from(await upstreamRes.arrayBuffer());
-        return res.status(upstreamRes.status).send(buffer);
-      }
-    } else {
-      return res.status(upstreamRes.status).end();
-    }
+    const arrayBuffer = await upstreamRes.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    res.setHeader("Content-Length", buffer.length);
+    return res.status(upstreamRes.status).send(buffer);
 
   } catch (err) {
     if (err.name === "AbortError" || err.code === "ECONNRESET") {
