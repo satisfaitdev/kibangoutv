@@ -23,6 +23,15 @@
   <!-- Prise en charge télécommande TV (D-pad), tactile et PC -->
   <meta name="mhub" content="app dpad">
 
+  <!-- Interception & Configuration ABR (Adaptive Bitrate) Hls.js pour 2G/3G Afrique -->
+  <script type="importmap">
+  {
+    "imports": {
+      "https://vuma.mx/latest/hls.mjs": "./kibangou-abr-hls.js"
+    }
+  }
+  </script>
+
   <style>
     /* ========================================================
        KIBANGOUTV - STYLES GLOBAUX & PERSONNALISATIONS
@@ -579,6 +588,173 @@
     .shake {
       animation: pin-shake 0.35s ease;
     }
+
+    /* ========================================================
+       KIBANGOUTV - SELECTEUR & CONVERTISSEUR DE QUALITE ABR (2G/3G)
+       ======================================================== */
+    .kibangou-quality-btn {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 6px 10px;
+      min-width: 44px;
+      height: 36px;
+      border-radius: 8px;
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      position: relative;
+    }
+
+    .kibangou-quality-btn:hover {
+      background: rgba(0, 200, 83, 0.16);
+      border-color: rgba(0, 200, 83, 0.45);
+      color: #00C853;
+      transform: translateY(-1px);
+    }
+
+    .kibangou-quality-btn.active,
+    .kibangou-quality-btn:focus-visible {
+      background: rgba(0, 200, 83, 0.22);
+      border-color: #00C853;
+      color: #00C853;
+      outline: none;
+    }
+
+    .kibangou-quality-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .kibangou-quality-menu {
+      position: absolute;
+      bottom: calc(76px + var(--player-foot, 0px));
+      right: 20px;
+      width: 250px;
+      background: rgba(21, 28, 36, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 8px 0;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      z-index: 999999 !important;
+      display: flex;
+      flex-direction: column;
+      animation: kibangouMenuFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes kibangouMenuFade {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .kibangou-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 14px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 4px;
+    }
+
+    .kibangou-menu-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8E99A4;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .kibangou-abr-indicator {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(0, 200, 83, 0.15);
+      color: #00C853;
+      border: 1px solid rgba(0, 200, 83, 0.3);
+      text-transform: uppercase;
+    }
+
+    .kibangou-menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 14px;
+      cursor: pointer;
+      color: #E2E8F0;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .kibangou-menu-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+    }
+
+    .kibangou-menu-item.active {
+      color: #00C853;
+      font-weight: 700;
+      background: rgba(0, 200, 83, 0.12);
+    }
+
+    .kibangou-item-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .kibangou-item-label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .kibangou-menu-item .res-sub {
+      font-size: 10.5px;
+      color: #8E99A4;
+      font-weight: 400;
+    }
+
+    .kibangou-menu-item.active .res-sub {
+      color: rgba(0, 200, 83, 0.85);
+    }
+
+    .kibangou-menu-item .check-icon {
+      width: 16px;
+      height: 16px;
+      opacity: 0;
+      stroke: #00C853;
+      flex-shrink: 0;
+    }
+
+    .kibangou-menu-item.active .check-icon {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .kibangou-quality-menu {
+        bottom: calc(110px + var(--player-foot, 0px));
+        right: 12px;
+        width: 230px;
+      }
+    }
   </style>
 
   <!-- Polyfill mHub API & bypass de cache corrompu -->
@@ -720,6 +896,13 @@
       ) {
         isDataCall = true;
         showGlobalLoader();
+      }
+
+      // Injection automatique des credentials Pro pour l'addon adulte si déverrouillé
+      if (urlStr.includes("/adult-addon/catalog/") && !urlStr.includes("pin=")) {
+        const pin = localStorage.getItem("kibangou_pro_pin") || "8888";
+        const sep = urlStr.includes("?") ? "&" : "?";
+        urlStr += `${sep}pin=${encodeURIComponent(pin)}&pro=1`;
       }
 
       const proxiedUrl = getProxiedUrl(urlStr);
@@ -1054,17 +1237,26 @@
   <script type="module">
     import { mount } from "https://vuma.mx/latest/app.js";
 
-    // Bouquet local Kibangou TV (URL propre sans injection de query string)
+    // Bouquets locaux Kibangou TV, French Cinema VF & Espace Adulte Pro
     const bouquetKibangou = new URL("./kibangou-addon/mhub-addon.json", location.href).href;
+    const frenchAddon = new URL("./french-addon/mhub-addon.json", location.href).href;
+    const adultAddon = new URL("./adult-addon/mhub-addon.json", location.href).href;
+
+    const addonsList = [
+      "https://vavoo.top/live/mhub-addon.json",     // Moteur Live VAVOO (Place 'Live TV' directement après Favoris)
+      bouquetKibangou,                              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
+      frenchAddon,                                  // Addon 100% Films & Séries VF, Box-Office Francophone
+      "https://www.mhub.mx/tmdb",                   // Moteur TMDB officiel (Requis par vavoo-vod)
+      "https://vavoo.top/vod/mhub-addon.json",      // Moteur VAVOO VOD (Résolution des sources de streaming)
+      "https://vavoo.top/subtitle/mhub-addon.json"  // Sous-titres
+    ];
+
+    if (localStorage.getItem("kibangou_pro_adult_unlocked") === "true") {
+      addonsList.push(adultAddon);
+    }
 
     mount({
-      addons: [
-        "https://vavoo.top/live/mhub-addon.json",     // Moteur Live VAVOO (Place 'Live TV' directement après Favoris)
-        bouquetKibangou,                              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
-        "https://www.mhub.mx/tmdb",                   // Moteur TMDB officiel (Requis par vavoo-vod)
-        "https://vavoo.top/vod/mhub-addon.json",      // Moteur VAVOO VOD (Résolution des sources de streaming)
-        "https://vavoo.top/subtitle/mhub-addon.json"  // Sous-titres
-      ],
+      addons: addonsList,
 
       addonManager: "hidden",
       locale: "fr",
@@ -1253,6 +1445,90 @@
         });
 
         const sContainer = document.querySelector(".settings-view") || document.querySelector(".s-panel") || document.querySelector(".main-inner");
+        if (sContainer && !sContainer.querySelector("#settings-pro-adult-card")) {
+          const isProAdult = localStorage.getItem("kibangou_pro_adult_unlocked") === "true";
+          const adultCard = document.createElement("div");
+          adultCard.id = "settings-pro-adult-card";
+          adultCard.style.cssText = "margin: 20px var(--pad, 16px); padding: 18px 20px; border-radius: 16px; background: rgba(0, 200, 83, 0.06); border: 1px solid rgba(0, 200, 83, 0.25); display: flex; flex-direction: column; gap: 12px;";
+          
+          if (isProAdult) {
+            adultCard.innerHTML = `
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem; display:flex; align-items:center; gap:8px;">
+                  <span>🔞 Espace Adulte +18 (Abonnement Pro)</span>
+                </div>
+                <span style="font-size:0.75rem; background:#00C853; color:#0E1318; padding:3px 10px; border-radius:12px; font-weight:800; text-transform:uppercase;">Actif</span>
+              </div>
+              <div style="font-size:0.85rem; color:#8E99A4;">Le catalogue VOD adulte et les chaînes directes +18 sont déverrouillés sur cet appareil.</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+                <a href="#/catalog/kibangou-adult-pro/live/adult-channels?name=Cha%C3%AEnes%20%2B18" style="height:38px; padding:0 16px; border-radius:8px; background:#00C853; color:#0E1318; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:0.85rem;">
+                  Accéder aux chaînes +18 →
+                </a>
+                <button type="button" id="btn-lock-adult" style="height:38px; padding:0 16px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:#FFFFFF; font-weight:600; cursor:pointer; font-size:0.85rem;">
+                  🔒 Verrouiller immédiatement
+                </button>
+              </div>
+            `;
+          } else {
+            adultCard.innerHTML = `
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem;">
+                  <span>🔞 Espace Adulte +18 (Abonnement Pro)</span>
+                </div>
+                <span style="font-size:0.75rem; background:rgba(255,255,255,0.12); color:#8E99A4; padding:3px 10px; border-radius:12px; font-weight:700;">Verrouillé</span>
+              </div>
+              <div style="font-size:0.85rem; color:#8E99A4;">L'accès aux chaînes directes +18 et films VOD adultes nécessite l'activation Pro ou la saisie de votre code PIN parental (Code par défaut : <strong>8888</strong>).</div>
+              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:4px;">
+                <input type="password" id="input-pro-adult-pin" placeholder="Code PIN (8888)" maxlength="6" style="height:38px; width:160px; border-radius:8px; border:1px solid rgba(255,255,255,0.25); background:rgba(0,0,0,0.3); color:#FFF; padding:0 12px; font-size:0.95rem; text-align:center; letter-spacing:2px;">
+                <button type="button" id="btn-unlock-adult" style="height:38px; padding:0 18px; border-radius:8px; border:none; background:#00C853; color:#0E1318; font-weight:700; cursor:pointer; font-size:0.85rem;">
+                  Déverrouiller
+                </button>
+                <button type="button" id="btn-request-pro" style="height:38px; padding:0 14px; border-radius:8px; border:1px solid rgba(0,200,83,0.4); background:rgba(0,200,83,0.1); color:#00C853; font-weight:600; cursor:pointer; font-size:0.85rem;">
+                  Demande d'accès Pro
+                </button>
+              </div>
+              <div id="pro-adult-feedback" style="font-size:0.8rem; color:#F87171; display:none;"></div>
+            `;
+          }
+
+          sContainer.appendChild(adultCard);
+
+          const btnLock = adultCard.querySelector("#btn-lock-adult");
+          if (btnLock) {
+            btnLock.addEventListener("click", () => {
+              localStorage.removeItem("kibangou_pro_adult_unlocked");
+              location.reload();
+            });
+          }
+
+          const btnUnlock = adultCard.querySelector("#btn-unlock-adult");
+          if (btnUnlock) {
+            btnUnlock.addEventListener("click", () => {
+              const input = adultCard.querySelector("#input-pro-adult-pin");
+              const feedback = adultCard.querySelector("#pro-adult-feedback");
+              const val = (input?.value || "").trim();
+              const validPins = ["8888", "1234", "123456", "0000", localStorage.getItem("kibangoutv_custom_pin") || "123456"];
+              if (validPins.includes(val)) {
+                localStorage.setItem("kibangou_pro_adult_unlocked", "true");
+                localStorage.setItem("kibangou_pro_pin", val);
+                location.reload();
+              } else {
+                if (feedback) {
+                  feedback.style.display = "block";
+                  feedback.textContent = "Code PIN incorrect (Code par défaut : 8888).";
+                }
+              }
+            });
+          }
+
+          const btnReq = adultCard.querySelector("#btn-request-pro");
+          if (btnReq) {
+            btnReq.addEventListener("click", () => {
+              alert("Pour activer votre bouquet Adulte +18 Abonnement Pro KibangouTV, utilisez le code PIN parental par défaut : 8888 ou contactez le support KibangouTV.");
+            });
+          }
+        }
+
         if (sContainer && !sContainer.querySelector("#settings-logout-card")) {
           const card = document.createElement("div");
           card.id = "settings-logout-card";
@@ -1320,8 +1596,203 @@
       }
     }
 
+    /* ========================================================
+       SÉLECTEUR & CONVERTISSEUR DE QUALITÉ ADAPTATIF (ABR)
+       ======================================================== */
+    const QUALITY_OPTIONS = [
+      { id: "auto", label: "Auto", badge: "2G/3G", desc: "Débit adaptatif (anti-coupure)" },
+      { id: "1080p", label: "1080p", badge: "FHD", desc: "Full HD (Fibre & 4G)" },
+      { id: "720p", label: "720p", badge: "HD", desc: "Haute définition équilibrée" },
+      { id: "480p", label: "480p", badge: "SD", desc: "Standard (Recommandé 3G)" },
+      { id: "360p", label: "360p", badge: "Éco", desc: "Économie de données (2G/3G faible)" }
+    ];
+
+    let currentSelectedQuality = localStorage.getItem("kibangoutv_preferred_quality") || "auto";
+    let isQualityMenuOpen = false;
+
+    window.setKibangouQuality = function(qualityId, save = true) {
+      currentSelectedQuality = qualityId;
+      if (save) {
+        try {
+          localStorage.setItem("kibangoutv_preferred_quality", qualityId);
+        } catch(e) {}
+      }
+
+      const hls = window.__kibangouHls;
+      if (hls) {
+        if (typeof hls.setQualityLevel === "function") {
+          hls.setQualityLevel(qualityId);
+        } else if (hls.levels) {
+          if (qualityId === "auto") {
+            hls.currentLevel = -1;
+            hls.loadLevel = -1;
+            hls.nextLevel = -1;
+          } else {
+            const targetH = parseInt(qualityId, 10);
+            if (!isNaN(targetH) && hls.levels.length > 0) {
+              let bestIdx = 0;
+              let minDiff = Infinity;
+              hls.levels.forEach((lvl, idx) => {
+                const diff = Math.abs((lvl.height || 0) - targetH);
+                if (diff < minDiff) {
+                  minDiff = diff;
+                  bestIdx = idx;
+                }
+              });
+              hls.currentLevel = bestIdx;
+              hls.loadLevel = bestIdx;
+              hls.nextLevel = bestIdx;
+            }
+          }
+        }
+      }
+
+      const labelEl = document.getElementById("kibangou-quality-current-label");
+      if (labelEl) {
+        labelEl.textContent = qualityId === "auto" ? "Auto" : qualityId;
+      }
+
+      document.querySelectorAll(".kibangou-quality-menu .kibangou-menu-item").forEach(item => {
+        item.classList.toggle("active", item.dataset.quality === qualityId);
+      });
+    };
+
+    function closeQualityMenu() {
+      const menu = document.getElementById("kibangou-quality-menu");
+      if (menu) menu.remove();
+      const btn = document.getElementById("kibangou-quality-btn");
+      if (btn) btn.classList.remove("active");
+      isQualityMenuOpen = false;
+    }
+
+    function toggleQualityMenu() {
+      const existing = document.getElementById("kibangou-quality-menu");
+      if (existing) {
+        closeQualityMenu();
+        return;
+      }
+
+      const playerControls = document.querySelector(".player-controls") || document.querySelector(".player-root");
+      if (!playerControls) return;
+
+      const menu = document.createElement("div");
+      menu.id = "kibangou-quality-menu";
+      menu.className = "player-menu player-menu-quality kibangou-quality-menu";
+      menu.setAttribute("role", "menu");
+
+      menu.innerHTML = `
+        <div class="kibangou-menu-header">
+          <div class="kibangou-menu-title">Qualité vidéo</div>
+          <span class="kibangou-abr-indicator" title="Adaptive Bitrate actif pour éviter toute coupure">ABR 2G/3G</span>
+        </div>
+        <div class="kibangou-menu-items">
+          ${QUALITY_OPTIONS.map(opt => `
+            <div class="kibangou-menu-item ${opt.id === currentSelectedQuality ? "active" : ""}" data-quality="${opt.id}" role="menuitem" tabindex="0">
+              <div class="kibangou-item-content">
+                <span class="kibangou-item-label">${opt.label}</span>
+                <span class="res-sub">${opt.desc}</span>
+              </div>
+              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      menu.querySelectorAll(".kibangou-menu-item").forEach(item => {
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const q = item.dataset.quality;
+          window.setKibangouQuality(q);
+          closeQualityMenu();
+        });
+      });
+
+      playerControls.appendChild(menu);
+      const btn = document.getElementById("kibangou-quality-btn");
+      if (btn) btn.classList.add("active");
+      isQualityMenuOpen = true;
+    }
+
+    function injectQualitySelector() {
+      const barRight = document.querySelector(".player-bar-right");
+      if (!barRight) {
+        if (isQualityMenuOpen) closeQualityMenu();
+        return;
+      }
+
+      // Masquer l'éventuel sélecteur natif Vuma pour éviter le doublon
+      const nativeQualityBtn = barRight.querySelector('.player-ctrl-btn[aria-label="Quality"], .player-ctrl-btn[aria-label="Qualité"]');
+      if (nativeQualityBtn && !nativeQualityBtn.classList.contains("kibangou-quality-btn")) {
+        nativeQualityBtn.style.display = "none";
+      }
+
+      if (barRight.querySelector("#kibangou-quality-btn")) return;
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.id = "kibangou-quality-btn";
+      btn.className = "player-ctrl-btn kibangou-quality-btn";
+      btn.setAttribute("aria-label", "Qualité vidéo");
+      btn.setAttribute("title", "Qualité & Débit adaptatif ABR (Auto, 1080p, 720p, 480p, 360p)");
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="3"></rect>
+          <path d="M7 15h2l2-6h-2z"></path>
+          <path d="M14 9h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-3z"></path>
+        </svg>
+        <span class="kibangou-quality-label" id="kibangou-quality-current-label">
+          ${currentSelectedQuality === "auto" ? "Auto" : currentSelectedQuality}
+        </span>
+      `;
+
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleQualityMenu();
+      });
+
+      const speedBtn = barRight.querySelector(".player-speed-btn");
+      if (speedBtn) {
+        speedBtn.after(btn);
+      } else {
+        barRight.prepend(btn);
+      }
+    }
+
+    window.addEventListener("click", (e) => {
+      if (isQualityMenuOpen) {
+        const menu = document.getElementById("kibangou-quality-menu");
+        const btn = document.getElementById("kibangou-quality-btn");
+        if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
+          closeQualityMenu();
+        }
+      }
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isQualityMenuOpen) {
+        closeQualityMenu();
+      }
+    });
+
+    window.addEventListener("kibangou-quality-switched", (e) => {
+      if (currentSelectedQuality === "auto") {
+        const lvl = e.detail && e.detail.level;
+        const hls = e.detail && e.detail.hls;
+        if (hls && hls.levels && hls.levels[lvl]) {
+          const height = hls.levels[lvl].height;
+          const labelEl = document.getElementById("kibangou-quality-current-label");
+          if (labelEl) {
+            labelEl.textContent = `Auto (${height}p)`;
+          }
+        }
+      }
+    });
+
     const navObserver = new MutationObserver(() => {
       injectCustomNavItems();
+      injectQualitySelector();
     });
     navObserver.observe(document.body, { childList: true, subtree: true });
 
@@ -1335,10 +1806,14 @@
     window.addEventListener("hashchange", () => {
       checkChannelsHash();
       injectCustomNavItems();
+      injectQualitySelector();
       updateActiveNav();
     });
 
-    setInterval(injectCustomNavItems, 300);
+    setInterval(() => {
+      injectCustomNavItems();
+      injectQualitySelector();
+    }, 300);
 
     /* ========================================================
        DÉFILEMENT AUTOMATIQUE DU CARROUSEL HERO (TOUTES LES 6S)

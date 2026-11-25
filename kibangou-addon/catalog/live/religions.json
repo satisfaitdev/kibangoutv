@@ -1,0 +1,109 @@
+{
+  "items": [
+    {
+      "id": "al_bayane",
+      "name": "AL BAYANE TV (Foi Islamique & Éthique)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8302/8302/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Religions",
+        "Islam",
+        "Spiritualité"
+      ]
+    },
+    {
+      "id": "ecclesia_tv",
+      "name": "ECCLESIA TV (Chaîne Catholique Nationale)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8294/8294/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Religions",
+        "Catholique",
+        "Messe"
+      ]
+    },
+    {
+      "id": "kto_tv",
+      "name": "KTO TV (Télévision Catholique Direct)",
+      "type": "live",
+      "url": "https://live-kto.akamaized.net/hls/live/2033284/KTO/master.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_KTO.svg/512px-Logo_KTO.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_KTO.svg/512px-Logo_KTO.svg.png"
+      },
+      "tags": [
+        "Religions",
+        "Catholique",
+        "Vatican"
+      ]
+    },
+    {
+      "id": "ewtn",
+      "name": "EWTN / ESPÉRANCE TV",
+      "type": "live",
+      "url": "https://dash3.antik.sk/live/test_ewtn_tizen/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/EWTN_logo.svg/512px-EWTN_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/EWTN_logo.svg/512px-EWTN_logo.svg.png"
+      },
+      "tags": [
+        "Religions",
+        "Chrétien",
+        "Monde"
+      ]
+    },
+    {
+      "id": "emci_tv",
+      "name": "EMCI TV (Enseigne-Moi Canal International)",
+      "type": "live",
+      "url": "https://stream.emcitv.com/live/smil:direct.smil/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/b/b3/Logo_EMCI_TV.png/512px-Logo_EMCI_TV.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/b/b3/Logo_EMCI_TV.png/512px-Logo_EMCI_TV.png"
+      },
+      "tags": [
+        "Religions",
+        "Évangélique",
+        "Prière"
+      ]
+    },
+    {
+      "id": "benie_tv",
+      "name": "BÉNIE.TV (La Chaîne de la Bénédiction)",
+      "type": "live",
+      "url": "https://tv.voozmedia.fun/benietv/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Religions",
+        "Chrétien",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "lmtv",
+      "name": "LMTV FRENCH (Lumière du Monde Télévision)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8282/8282/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Religions",
+        "Chrétien",
+        "Panafricain"
+      ]
+    }
+  ]
+}

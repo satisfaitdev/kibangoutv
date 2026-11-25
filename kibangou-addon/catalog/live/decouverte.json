@@ -1,0 +1,188 @@
+{
+  "items": [
+    {
+      "id": "86541107",
+      "name": "PLANÈTE+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/86541107",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Découverte",
+        "HD"
+      ]
+    },
+    {
+      "id": "737756046",
+      "name": "USHUAÏA TV FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/737756046",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Nature & Découverte",
+        "HD"
+      ]
+    },
+    {
+      "id": "capital_sante",
+      "name": "CAPITAL SANTÉ TV",
+      "type": "live",
+      "url": "https://tv3.bitstreaming.net:3540/live/santeltvlive.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Découverte",
+        "Santé",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "educa_tv",
+      "name": "EDUCA TV (Éducation & Savoir)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8294/8294/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Découverte",
+        "Éducation"
+      ]
+    },
+    {
+      "id": "english_club_tv",
+      "name": "ENGLISH CLUB TV HD",
+      "type": "live",
+      "url": "https://dash2.antik.sk/live/test_ectv_hd_1200/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/English_Club_TV_logo.png/512px-English_Club_TV_logo.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/English_Club_TV_logo.png/512px-English_Club_TV_logo.png"
+      },
+      "tags": [
+        "Découverte",
+        "Éducation",
+        "Langues"
+      ]
+    },
+    {
+      "id": "386194247",
+      "name": "SCIENCE & VIE TV",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/386194247",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Science",
+        "HD"
+      ]
+    },
+    {
+      "id": "2332499529",
+      "name": "CRIME DISTRICT HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2332499529",
+      "images": {
+        "logo": "/live2/logo/2332499529.png",
+        "poster": "/live2/logo/2332499529.png"
+      },
+      "tags": [
+        "Investigation",
+        "HD"
+      ]
+    },
+    {
+      "id": "439248258",
+      "name": "ANIMAUX HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/439248258",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Animaux",
+        "HD"
+      ]
+    },
+    {
+      "id": "299772643",
+      "name": "PLANÈTE+ AVENTURE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/299772643",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Aventure",
+        "HD"
+      ]
+    },
+    {
+      "id": "3552349294",
+      "name": "PLANÈTE+ CRIME HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3552349294",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Investigation",
+        "HD"
+      ]
+    },
+    {
+      "id": "665994240",
+      "name": "HISTOIRE TV HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/665994240",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Histoire",
+        "HD"
+      ]
+    },
+    {
+      "id": "3780297604",
+      "name": "TOUTE L'HISTOIRE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3780297604",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Histoire",
+        "HD"
+      ]
+    },
+    {
+      "id": "3625345371",
+      "name": "CANAL+ DOCS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3625345371",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Documentaire",
+        "HD"
+      ]
+    }
+  ]
+}

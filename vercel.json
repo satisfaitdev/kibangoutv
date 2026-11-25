@@ -26,6 +26,14 @@
       "destination": "/api/resolve.js"
     },
     {
+      "source": "/french-addon/resolve",
+      "destination": "/api/resolve.js"
+    },
+    {
+      "source": "/adult-addon/resolve",
+      "destination": "/api/resolve.js"
+    },
+    {
       "source": "/resolve",
       "destination": "/api/resolve.js"
     },
@@ -38,6 +46,22 @@
       "destination": "/kibangou-addon/mhub-addon.json"
     },
     {
+      "source": "/french-addon",
+      "destination": "/french-addon/mhub-addon.json"
+    },
+    {
+      "source": "/french-addon/",
+      "destination": "/french-addon/mhub-addon.json"
+    },
+    {
+      "source": "/adult-addon",
+      "destination": "/adult-addon/mhub-addon.json"
+    },
+    {
+      "source": "/adult-addon/",
+      "destination": "/adult-addon/mhub-addon.json"
+    },
+    {
       "source": "/live2/logo/:match*",
       "destination": "/api/proxy.js?url=https://vavoo.top/live2/logo/:match*"
     },
@@ -47,6 +71,14 @@
     },
     {
       "source": "/kibangou-addon/item/:match*",
+      "destination": "/api/item.js"
+    },
+    {
+      "source": "/french-addon/item/:match*",
+      "destination": "/api/item.js"
+    },
+    {
+      "source": "/adult-addon/item/:match*",
       "destination": "/api/item.js"
     },
     {
@@ -63,6 +95,14 @@
     },
     {
       "source": "/kibangou-addon/source/:match*",
+      "destination": "/api/source.js"
+    },
+    {
+      "source": "/french-addon/source/:match*",
+      "destination": "/api/source.js"
+    },
+    {
+      "source": "/adult-addon/source/:match*",
       "destination": "/api/source.js"
     },
     {

@@ -1,0 +1,55 @@
+{
+  "id": "kibangou-adult-pro",
+  "name": "Adulte +18 (Abonnement Pro)",
+  "specVersion": 2,
+  "version": "1.0.0",
+  "description": "Catalogue VOD Adulte et Chaînes TV Live +18 verrouillé par abonnement Pro et Code PIN Parental",
+  "icon": "/logo.svg",
+  "resources": [
+    "catalog",
+    "item",
+    "source",
+    "resolve"
+  ],
+  "types": [
+    "live",
+    "video"
+  ],
+  "idPrefixes": [
+    "adult",
+    "tmdb"
+  ],
+  "catalogs": [
+    {
+      "id": "adult-channels",
+      "name": "🔞 Chaînes Live +18 (Pro)",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "adult-vod",
+      "name": "🔞 Films VOD +18 (Pro)",
+      "type": "video",
+      "options": {
+        "shape": "portrait"
+      }
+    }
+  ],
+  "dashboard": [
+    {
+      "name": "🔞 Chaînes TV Directes +18 (Pro)",
+      "catalog": "adult-channels"
+    },
+    {
+      "name": "🔞 VOD Films +18 (Pro)",
+      "catalog": "adult-vod"
+    }
+  ],
+  "cache": {
+    "catalog": 300,
+    "item": 300
+  }
+}

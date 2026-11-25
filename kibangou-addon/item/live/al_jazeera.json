@@ -1,0 +1,14 @@
+{
+  "id": "al_jazeera",
+  "name": "AL JAZEERA (International Direct)",
+  "type": "live",
+  "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Al_Jazeera_English_logo.svg/512px-Al_Jazeera_English_logo.svg.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Al_Jazeera_English_logo.svg/512px-Al_Jazeera_English_logo.svg.png"
+  },
+  "tags": [
+    "Info",
+    "International"
+  ]
+}

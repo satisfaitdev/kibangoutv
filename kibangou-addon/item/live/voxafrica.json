@@ -1,0 +1,14 @@
+{
+  "id": "voxafrica",
+  "name": "VOXAFRICA (Panafricain)",
+  "type": "live",
+  "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/VoxAfrica_Logo.png/512px-VoxAfrica_Logo.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/VoxAfrica_Logo.png/512px-VoxAfrica_Logo.png"
+  },
+  "tags": [
+    "Afrique",
+    "Généraliste"
+  ]
+}

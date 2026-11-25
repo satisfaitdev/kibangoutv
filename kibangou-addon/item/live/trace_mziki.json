@@ -1,0 +1,15 @@
+{
+  "id": "trace_mziki",
+  "name": "TRACE MZIKI HD (Afrique de l'Est & Swahili)",
+  "type": "live",
+  "url": "https://channels.trace.plus/Traceprod/MZIKI_hd/index.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/gK97P92.png",
+    "poster": "https://i.imgur.com/gK97P92.png"
+  },
+  "tags": [
+    "Musique",
+    "Bongo Flava",
+    "Afrique"
+  ]
+}

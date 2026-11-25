@@ -260,13 +260,21 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
         # 0b. Nettoyage de query au milieu d'un chemin local
-        if "/kibangou-addon/" in self.path:
+        if any(p in self.path for p in ["/kibangou-addon/", "/french-addon/", "/adult-addon/"]):
             self.path = re.sub(r'\?v=[^/]+/?', '', self.path)
 
-        # 0b. Service direct du manifest de l'addon Kibangou (indispensable pour Vuma)
+        # 0b. Service direct des manifests des addons (Kibangou, French Cinema, Adult Pro)
         clean_path = self.path.split("?", 1)[0].rstrip("/")
-        if clean_path in ["/kibangou-addon", "/kibangou-addon/mhub-addon.json"]:
-            manifest_file = os.path.join(DIRECTORY, "kibangou-addon", "mhub-addon.json")
+        addon_manifest_map = {
+            "/kibangou-addon": os.path.join(DIRECTORY, "kibangou-addon", "mhub-addon.json"),
+            "/kibangou-addon/mhub-addon.json": os.path.join(DIRECTORY, "kibangou-addon", "mhub-addon.json"),
+            "/french-addon": os.path.join(DIRECTORY, "french-addon", "mhub-addon.json"),
+            "/french-addon/mhub-addon.json": os.path.join(DIRECTORY, "french-addon", "mhub-addon.json"),
+            "/adult-addon": os.path.join(DIRECTORY, "adult-addon", "mhub-addon.json"),
+            "/adult-addon/mhub-addon.json": os.path.join(DIRECTORY, "adult-addon", "mhub-addon.json"),
+        }
+        if clean_path in addon_manifest_map:
+            manifest_file = addon_manifest_map[clean_path]
             if os.path.isfile(manifest_file):
                 try:
                     with open(manifest_file, "rb") as f:
@@ -278,7 +286,45 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     self.wfile.write(data)
                     return
                 except Exception as e:
-                    print("Error serving kibangou manifest:", e)
+                    print("Error serving addon manifest:", e)
+
+        # 0b1. Contrôle d'accès et verrouillage du catalogue Adulte (+18) Pro
+        if "/adult-addon/catalog/" in clean_path:
+            auth_ok = False
+            qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            pin = qs.get("pin", [""])[0]
+            header_pin = self.headers.get("X-Pro-PIN", "") or self.headers.get("X-Kibangou-PIN", "")
+            effective_pin = pin or header_pin
+            auth_token = qs.get("pro", [""])[0] or self.headers.get("X-Pro-Auth", "")
+
+            # PINs autorisés par défaut: 8888, 1234, 123456, 0000 ou token pro
+            if effective_pin in ["8888", "1234", "123456", "0000"] or auth_token == "1" or auth_token == "true":
+                auth_ok = True
+
+            # Si non déverrouillé, retourner un message sécurisé conforme
+            if not auth_ok:
+                locked_payload = {
+                    "items": [
+                        {
+                            "id": "adult:locked-info",
+                            "name": "🔒 Espace Adulte +18 Verrouillé",
+                            "type": "live" if "live" in clean_path else "video",
+                            "description": "Ce contenu est réservé aux abonnés Pro (18+). Veuillez activer l'accès adulte dans les Réglages avec votre code PIN.",
+                            "images": {
+                                "logo": "/logo.svg",
+                                "poster": "/logo.svg"
+                            },
+                            "tags": ["Verrouillé", "Pro", "18+"]
+                        }
+                    ]
+                }
+                data = json.dumps(locked_payload, ensure_ascii=False).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                return
 
         # 0b2. Résolution directe des identifiants TMDB / IMDb orphelins (ex: /tmdb:1726)
         if clean_path.startswith("/tmdb:") or clean_path.startswith("/imdb:"):
@@ -308,7 +354,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
         # 0d. Résolution des flux Live TV avec proxy HTTPS automatique
-        if "/kibangou-addon/resolve" in self.path or self.path.startswith("/resolve"):
+        if any(p in self.path for p in ["/kibangou-addon/resolve", "/french-addon/resolve", "/adult-addon/resolve"]) or self.path.startswith("/resolve"):
             raw_url = self.path.split("url=", 1)[1] if "url=" in self.path else ""
             play_url = urllib.parse.unquote(raw_url)
             try:
@@ -359,29 +405,36 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.forward_proxy("GET")
             return
 
-        # 4. Métadonnées d'items pour le bouquet Kibangou (gère /kibangou-addon/item/ ET /item/)
+        # 4. Métadonnées d'items pour Kibangou, French Cinema & Adult (gère /kibangou-addon/item/, /french-addon/item/, /adult-addon/item/ ET /item/)
         unquoted_path = urllib.parse.unquote(self.path)
-        if "/kibangou-addon/item/" in unquoted_path or unquoted_path.startswith("/item/"):
-            if "/kibangou-addon/item/" in unquoted_path:
-                sub_path = unquoted_path.split("/kibangou-addon/item/", 1)[1]
+        matching_addon_item = None
+        for prefix in ["/kibangou-addon/item/", "/french-addon/item/", "/adult-addon/item/"]:
+            if prefix in unquoted_path:
+                matching_addon_item = prefix
+                break
+
+        if matching_addon_item or unquoted_path.startswith("/item/"):
+            if matching_addon_item:
+                sub_path = unquoted_path.split(matching_addon_item, 1)[1]
             else:
                 sub_path = unquoted_path.split("/item/", 1)[1]
 
             # Vérifier d'abord si c'est un item local (ex: live/drtv, live/tv5monde)
             clean_sub = sub_path.split("?", 1)[0].replace(".json", "")
-            local_json = os.path.join(DIRECTORY, "kibangou-addon", "item", clean_sub + ".json")
-            if os.path.isfile(local_json):
-                try:
-                    with open(local_json, "rb") as f:
-                        data = f.read()
-                    self.send_response(200)
-                    self.send_header("Content-Type", "application/json; charset=utf-8")
-                    self.send_header("Content-Length", str(len(data)))
-                    self.end_headers()
-                    self.wfile.write(data)
-                    return
-                except Exception as e:
-                    print("Error serving local item:", e)
+            for addon_dir in ["kibangou-addon", "french-addon", "adult-addon"]:
+                local_json = os.path.join(DIRECTORY, addon_dir, "item", clean_sub + ".json")
+                if os.path.isfile(local_json):
+                    try:
+                        with open(local_json, "rb") as f:
+                            data = f.read()
+                        self.send_response(200)
+                        self.send_header("Content-Type", "application/json; charset=utf-8")
+                        self.send_header("Content-Length", str(len(data)))
+                        self.end_headers()
+                        self.wfile.write(data)
+                        return
+                    except Exception as e:
+                        print("Error serving local item:", e)
 
             # Sinon proxy vers TMDB
             tmdb_url = f"https://www.mhub.mx/tmdb/item/{sub_path}"
@@ -389,10 +442,16 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.forward_proxy("GET")
             return
 
-        # 4b. Sources VOD pour le bouquet Kibangou (gère /kibangou-addon/source/ ET /source/)
-        if "/kibangou-addon/source/" in unquoted_path or unquoted_path.startswith("/source/"):
-            if "/kibangou-addon/source/" in unquoted_path:
-                sub_path = unquoted_path.split("/kibangou-addon/source/", 1)[1]
+        # 4b. Sources VOD pour Kibangou, French Cinema & Adult (gère /.../source/ ET /source/)
+        matching_addon_source = None
+        for prefix in ["/kibangou-addon/source/", "/french-addon/source/", "/adult-addon/source/"]:
+            if prefix in unquoted_path:
+                matching_addon_source = prefix
+                break
+
+        if matching_addon_source or unquoted_path.startswith("/source/"):
+            if matching_addon_source:
+                sub_path = unquoted_path.split(matching_addon_source, 1)[1]
             else:
                 sub_path = unquoted_path.split("/source/", 1)[1]
 

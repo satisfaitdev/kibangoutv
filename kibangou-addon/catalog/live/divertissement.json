@@ -1,0 +1,341 @@
+{
+  "items": [
+    {
+      "id": "975685108",
+      "name": "C8 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/975685108",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Divertissement",
+        "HD"
+      ]
+    },
+    {
+      "id": "3408455707",
+      "name": "TV5 MONDE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3408455707",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Francophonie",
+        "HD"
+      ]
+    },
+    {
+      "id": "fashion_africa",
+      "name": "FASHION AFRICA TV",
+      "type": "live",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/nxss.m3u8?auth=testpub",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Mode",
+        "Afrique",
+        "Style"
+      ]
+    },
+    {
+      "id": "3093319007",
+      "name": "E! ENTERTAINMENT",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3093319007",
+      "images": {
+        "logo": "/live2/logo/3093319007.png",
+        "poster": "/live2/logo/3093319007.png"
+      },
+      "tags": [
+        "People & Séries",
+        "HD"
+      ]
+    },
+    {
+      "id": "3794086467",
+      "name": "TFX HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3794086467",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Divertissement",
+        "HD"
+      ]
+    },
+    {
+      "id": "voxafrica",
+      "name": "VOXAFRICA (Panafricain)",
+      "type": "live",
+      "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/VoxAfrica_Logo.png/512px-VoxAfrica_Logo.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/VoxAfrica_Logo.png/512px-VoxAfrica_Logo.png"
+      },
+      "tags": [
+        "Afrique",
+        "Généraliste"
+      ]
+    },
+    {
+      "id": "africable",
+      "name": "AFRICABLE (La Chaîne du Continent)",
+      "type": "live",
+      "url": "http://51.254.199.122:8080/africable/index.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/53/Logo_africable_television.svg/512px-Logo_africable_television.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/53/Logo_africable_television.svg/512px-Logo_africable_television.svg.png"
+      },
+      "tags": [
+        "Afrique",
+        "Culture"
+      ]
+    },
+    {
+      "id": "telesud",
+      "name": "TÉLÉSUD (La Télévision des Suds)",
+      "type": "live",
+      "url": "https://5cbd3bc28341f.streamlock.net:444/telesud/live/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/9/91/T%C3%A9l%C3%A9sud_logo_2016.png/512px-T%C3%A9l%C3%A9sud_logo_2016.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/9/91/T%C3%A9l%C3%A9sud_logo_2016.png/512px-T%C3%A9l%C3%A9sud_logo_2016.png"
+      },
+      "tags": [
+        "Afrique",
+        "Diaspora"
+      ]
+    },
+    {
+      "id": "africa_infinity",
+      "name": "AFRICA INFINITY TV",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8306/8306/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Divertissement",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "passion_tv",
+      "name": "PASSION TV (Telenovelas & Émotions)",
+      "type": "live",
+      "url": "https://jmp2.uk/plu-6911c9704316999535eb21cf.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Divertissement",
+        "Novelas"
+      ]
+    },
+    {
+      "id": "2550219127",
+      "name": "CUISINES (My Cuisine HD)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2550219127",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Art de vivre & Cuisine",
+        "HD"
+      ]
+    },
+    {
+      "id": "1334669376",
+      "name": "TF1 FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1334669376",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD"
+      ]
+    },
+    {
+      "id": "3118025835",
+      "name": "FRANCE 2 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3118025835",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD"
+      ]
+    },
+    {
+      "id": "1970490613",
+      "name": "FRANCE 3 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1970490613",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD"
+      ]
+    },
+    {
+      "id": "3813068770",
+      "name": "M6 FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3813068770",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD"
+      ]
+    },
+    {
+      "id": "1317243355",
+      "name": "MTV FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1317243355",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique & Séries",
+        "HD"
+      ]
+    },
+    {
+      "id": "959272147",
+      "name": "GAME ONE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/959272147",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeux Vidéo & Anime",
+        "HD"
+      ]
+    },
+    {
+      "id": "874035777",
+      "name": "J-ONE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/874035777",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Anime & Manga",
+        "HD"
+      ]
+    },
+    {
+      "id": "4228507215",
+      "name": "TMC HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4228507215",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Divertissement",
+        "HD"
+      ]
+    },
+    {
+      "id": "401237472",
+      "name": "MANGAS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/401237472",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Animation Japonaise",
+        "HD"
+      ]
+    },
+    {
+      "id": "3631271424",
+      "name": "AB1 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3631271424",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Séries & Catch",
+        "HD"
+      ]
+    },
+    {
+      "id": "621108426",
+      "name": "ARTE FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/621108426",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Culture",
+        "HD"
+      ]
+    },
+    {
+      "id": "3004974450",
+      "name": "FRANCE 5 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3004974450",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Société & Docs",
+        "HD"
+      ]
+    },
+    {
+      "id": "3738924449",
+      "name": "TLC HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3738924449",
+      "images": {
+        "logo": "/live2/logo/3738924449.png",
+        "poster": "/live2/logo/3738924449.png"
+      },
+      "tags": [
+        "Téléréalité & Vie",
+        "HD"
+      ]
+    }
+  ]
+}

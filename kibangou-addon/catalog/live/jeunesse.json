@@ -1,0 +1,160 @@
+{
+  "items": [
+    {
+      "id": "nathan_plus",
+      "name": "NATHAN+ (Éducation & Éveil)",
+      "type": "live",
+      "url": "https://ott.tv5monde.com/Content/HLS/Live/channel(tivi5)/variant.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/a/a2/Logo_Nathan.svg/512px-Logo_Nathan.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/a/a2/Logo_Nathan.svg/512px-Logo_Nathan.svg.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Éducation",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "3381221567",
+      "name": "TÉLÉTOON+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3381221567",
+      "images": {
+        "logo": "/live2/logo/3381221567.png",
+        "poster": "/live2/logo/3381221567.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD"
+      ]
+    },
+    {
+      "id": "tivi5_monde",
+      "name": "TiVi5 MONDE (TV5 Jeunesse)",
+      "type": "live",
+      "url": "https://ott.tv5monde.com/Content/HLS/Live/channel(tivi5)/variant.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/TiVi5_Monde_logo.svg/512px-TiVi5_Monde_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/TiVi5_Monde_logo.svg/512px-TiVi5_Monde_logo.svg.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Dessins Animés"
+      ]
+    },
+    {
+      "id": "2460597330",
+      "name": "PIWI+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2460597330",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD"
+      ]
+    },
+    {
+      "id": "kids_music_africa",
+      "name": "KIDS MUSIC AFRICA",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/KITOKO_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Musique",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "ludikids",
+      "name": "LUDIKIDS TV (Apprendre en s'amusant)",
+      "type": "live",
+      "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Ludo-éducatif"
+      ]
+    },
+    {
+      "id": "ouii_africa",
+      "name": "OUII AFRICA TV",
+      "type": "live",
+      "url": "https://tv.voozmedia.fun/benietv/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "844122489",
+      "name": "NICKELODEON HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/844122489",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD"
+      ]
+    },
+    {
+      "id": "2127297858",
+      "name": "CARTOON NETWORK FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2127297858",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD"
+      ]
+    },
+    {
+      "id": "3812280294",
+      "name": "TIJI FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3812280294",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD"
+      ]
+    },
+    {
+      "id": "869256388",
+      "name": "CANAL+ KIDS FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/869256388",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD"
+      ]
+    }
+  ]
+}

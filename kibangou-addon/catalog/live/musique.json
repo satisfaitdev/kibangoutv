@@ -1,0 +1,179 @@
+{
+  "items": [
+    {
+      "id": "3480426017",
+      "name": "C STAR FHD (Hits & Concerts)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3480426017",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique",
+        "HD"
+      ]
+    },
+    {
+      "id": "trace_africa",
+      "name": "TRACE AFRICA HD (Afrobeats & Coupé-Décalé)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/AFRICA_FR_hd/index.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Trace_Africa_logo.svg/512px-Trace_Africa_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Trace_Africa_logo.svg/512px-Trace_Africa_logo.svg.png"
+      },
+      "tags": [
+        "Musique",
+        "Afrobeats",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "trace_teranga",
+      "name": "TRACE TERANGA HD (Sénégal & Afrique de l'Ouest)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/TERANGA_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Musique",
+        "Mbalax",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "trace_mboa",
+      "name": "TRACE MBOA HD (Cameroun & Afrique Centrale)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/MBOA_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Musique",
+        "Makossa",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "trace_kitoko",
+      "name": "TRACE KITOKO HD (Congo Rumba & Ndombolo)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/KITOKO_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Musique",
+        "Rumba Congolaise",
+        "Brazzaville & Kinshasa"
+      ]
+    },
+    {
+      "id": "trace_gospel",
+      "name": "TRACE GOSPEL HD (Louange & Adoration)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/GOSPEL_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Musique",
+        "Gospel",
+        "Chrétien"
+      ]
+    },
+    {
+      "id": "trace_mziki",
+      "name": "TRACE MZIKI HD (Afrique de l'Est & Swahili)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/MZIKI_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Musique",
+        "Bongo Flava",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "1047683403",
+      "name": "BLACK! (Digital Black Music DBM)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1047683403",
+      "images": {
+        "logo": "/live2/logo/1047683403.png",
+        "poster": "/live2/logo/1047683403.png"
+      },
+      "tags": [
+        "Musique",
+        "HD"
+      ]
+    },
+    {
+      "id": "1317243355",
+      "name": "MTV HITS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1317243355",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique",
+        "HD"
+      ]
+    },
+    {
+      "id": "trace_urban",
+      "name": "TRACE URBAN HD (Hip-Hop & R&B)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/URBAN_hd/index.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Trace_Urban_logo.svg/512px-Trace_Urban_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Trace_Urban_logo.svg/512px-Trace_Urban_logo.svg.png"
+      },
+      "tags": [
+        "Musique",
+        "Urban",
+        "Hip-Hop"
+      ]
+    },
+    {
+      "id": "1071808933",
+      "name": "MEZZO LIVE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1071808933",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique",
+        "HD"
+      ]
+    },
+    {
+      "id": "melody_afrique",
+      "name": "MELODY D'AFRIQUE (Rétro & Souvenirs d'Afrique)",
+      "type": "live",
+      "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/melody/live.livx/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Musique",
+        "Classiques Africains"
+      ]
+    }
+  ]
+}

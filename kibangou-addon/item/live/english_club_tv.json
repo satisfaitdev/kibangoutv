@@ -1,0 +1,15 @@
+{
+  "id": "english_club_tv",
+  "name": "ENGLISH CLUB TV HD",
+  "type": "live",
+  "url": "https://dash2.antik.sk/live/test_ectv_hd_1200/playlist.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/English_Club_TV_logo.png/512px-English_Club_TV_logo.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/English_Club_TV_logo.png/512px-English_Club_TV_logo.png"
+  },
+  "tags": [
+    "Découverte",
+    "Éducation",
+    "Langues"
+  ]
+}

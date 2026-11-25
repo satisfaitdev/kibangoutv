@@ -1,0 +1,14 @@
+{
+  "id": "africa_sport",
+  "name": "AFRICA SPORT TV",
+  "type": "live",
+  "url": "https://live-hls-qunv.livepush.io/live_cdn/em8A-kbzIfHqu73/index.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/gK97P92.png",
+    "poster": "https://i.imgur.com/gK97P92.png"
+  },
+  "tags": [
+    "Sport",
+    "Afrique"
+  ]
+}

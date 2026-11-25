@@ -1,1573 +1,242 @@
 {
   "items": [
     {
-      "id": "2470227399",
-      "name": "ACTION HD (7)",
+      "id": "1296369071",
+      "name": "CANAL+ PREMIÈRE HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/2470227399",
+      "url": "https://www.vavoo.to/live/play/1296369071",
       "images": {
-        "logo": "/live2/logo/2470227399.png",
-        "poster": "/live2/logo/2470227399.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Action.fr"
-      },
-      "epg": [
-        {
-          "title": "Les canons de Navarone",
-          "start": "2026-11-25T09:55:00Z",
-          "end": "2026-11-25T12:27:00Z"
-        },
-        {
-          "title": "Les dents de la mer II",
-          "start": "2026-11-25T12:27:00Z",
-          "end": "2026-11-25T14:21:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "3717538119",
-      "name": "CANAL + LIGUE 1 (7)",
+      "id": "canalplus_pop",
+      "name": "CANAL+ POP HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/3717538119",
+      "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/cplus_pop/live.livx/playlist.m3u8",
       "images": {
-        "logo": "/live2/logo/3717538119.png",
-        "poster": "/live2/logo/3717538119.png"
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Canal%2B_Pop_logo_2020.svg/512px-Canal%2B_Pop_logo_2020.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Canal%2B_Pop_logo_2020.svg/512px-Canal%2B_Pop_logo_2020.svg.png"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLigue1.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "2307221187",
-      "name": "CANAL + SPORTS 1 HD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2307221187",
-      "images": {
-        "logo": "/live2/logo/2307221187.png",
-        "poster": "/live2/logo/2307221187.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalSports1.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "1281048661",
-      "name": "CANAL PLUS C NEMA (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1281048661",
-      "images": {
-        "logo": "/live2/logo/1281048661.png",
-        "poster": "/live2/logo/1281048661.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCNema.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "4289865749",
-      "name": "CANAL SERIES HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/4289865749",
-      "images": {
-        "logo": "/live2/logo/4289865749.png",
-        "poster": "/live2/logo/4289865749.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusSeries.fr"
-      },
-      "epg": [
-        {
-          "title": "No Data",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        },
-        {
-          "title": "No Data",
-          "start": "2026-11-25T13:00:00Z",
-          "end": "2026-11-25T14:00:00Z"
-        }
+        "Canal+",
+        "Afrique",
+        "Généraliste"
       ]
     },
     {
-      "id": "2246854724",
-      "name": "CANAL SPORT (1)",
+      "id": "2904368955",
+      "name": "CANAL+ ELLES HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/2246854724",
+      "url": "https://www.vavoo.to/live/play/2904368955",
       "images": {
-        "logo": "/live2/logo/2246854724.png",
-        "poster": "/live2/logo/2246854724.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusSport.fr"
-      },
-      "epg": [
-        {
-          "title": "Golf+, le mag",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:35:00Z"
-        },
-        {
-          "title": "Cesta Punta: Open International 2026",
-          "start": "2026-11-25T12:35:00Z",
-          "end": "2026-11-25T13:55:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
-    },
-    {
-      "id": "4021366844",
-      "name": "CANAL SPORT HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/4021366844",
-      "images": {
-        "logo": "/live2/logo/4021366844.png",
-        "poster": "/live2/logo/4021366844.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusSport.fr"
-      },
-      "epg": [
-        {
-          "title": "Golf+, le mag",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:35:00Z"
-        },
-        {
-          "title": "Cesta Punta: Open International 2026",
-          "start": "2026-11-25T12:35:00Z",
-          "end": "2026-11-25T13:55:00Z"
-        }
-      ]
-    },
-    {
-      "id": "6981957",
-      "name": "CANAL+ (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/6981957",
-      "images": {
-        "logo": "/live2/logo/6981957.png",
-        "poster": "/live2/logo/6981957.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlus.fr"
-      },
-      "epg": [
-        {
-          "title": "Clique",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:29:00Z"
-        },
-        {
-          "title": "Michael",
-          "start": "2026-11-25T12:29:00Z",
-          "end": "2026-11-25T14:38:00Z"
-        }
-      ]
-    },
-    {
-      "id": "707775847",
-      "name": "CANAL+ 360 FHD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/707775847",
-      "images": {
-        "logo": "/live2/logo/707775847.png",
-        "poster": "/live2/logo/707775847.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Canal360.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "2421698062",
-      "name": "CANAL+ 4K (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2421698062",
-      "images": {
-        "logo": "/live2/logo/2421698062.png",
-        "poster": "/live2/logo/2421698062.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlus.fr"
-      },
-      "epg": [
-        {
-          "title": "Clique",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:29:00Z"
-        },
-        {
-          "title": "Michael",
-          "start": "2026-11-25T12:29:00Z",
-          "end": "2026-11-25T14:38:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2558095112",
-      "name": "CANAL+ 4K ULTRA (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2558095112",
-      "images": {
-        "logo": "/live2/logo/2558095112.png",
-        "poster": "/live2/logo/2558095112.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalUltra.fr"
-      },
-      "epg": []
     },
     {
       "id": "3856042964",
-      "name": "CANAL+ ACTION HD (1)",
+      "name": "CANAL+ ACTION HD",
       "type": "live",
       "url": "https://www.vavoo.to/live/play/3856042964",
       "images": {
-        "logo": "/live2/logo/3856042964.png",
-        "poster": "/live2/logo/3856042964.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalAction.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "3655983806",
-      "name": "CANAL+ BOX OFFICE (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3655983806",
-      "images": {
-        "logo": "/live2/logo/3655983806.png",
-        "poster": "/live2/logo/3655983806.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusBoxOffice.fr"
-      },
-      "epg": [
-        {
-          "title": "Deux pianos",
-          "start": "2026-11-25T10:39:00Z",
-          "end": "2026-11-25T12:31:00Z"
-        },
-        {
-          "title": "Juste une illusion",
-          "start": "2026-11-25T12:31:00Z",
-          "end": "2026-11-25T14:26:00Z"
-        }
-      ]
-    },
-    {
-      "id": "972384002",
-      "name": "CANAL+ BOX OFFICE (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/972384002",
-      "images": {
-        "logo": "/live2/logo/972384002.png",
-        "poster": "/live2/logo/972384002.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusBoxOffice.fr"
-      },
-      "epg": [
-        {
-          "title": "Deux pianos",
-          "start": "2026-11-25T10:39:00Z",
-          "end": "2026-11-25T12:31:00Z"
-        },
-        {
-          "title": "Juste une illusion",
-          "start": "2026-11-25T12:31:00Z",
-          "end": "2026-11-25T14:26:00Z"
-        }
-      ]
-    },
-    {
-      "id": "821044379",
-      "name": "CANAL+ BOX OFFICE HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/821044379",
-      "images": {
-        "logo": "/live2/logo/821044379.png",
-        "poster": "/live2/logo/821044379.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusBoxOffice.fr"
-      },
-      "epg": [
-        {
-          "title": "Deux pianos",
-          "start": "2026-11-25T10:39:00Z",
-          "end": "2026-11-25T12:31:00Z"
-        },
-        {
-          "title": "Juste une illusion",
-          "start": "2026-11-25T12:31:00Z",
-          "end": "2026-11-25T14:26:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3980730104",
-      "name": "CANAL+ CINEMA (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3980730104",
-      "images": {
-        "logo": "/live2/logo/3980730104.png",
-        "poster": "/live2/logo/3980730104.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:05:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
-      ]
-    },
-    {
-      "id": "781538197",
-      "name": "CANAL+ CINEMA (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/781538197",
-      "images": {
-        "logo": "/live2/logo/781538197.png",
-        "poster": "/live2/logo/781538197.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:05:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
       "id": "289838749",
-      "name": "CANAL+ CINEMA FHD (7)",
+      "name": "CANAL+ CINÉMA FHD",
       "type": "live",
       "url": "https://www.vavoo.to/live/play/289838749",
       "images": {
-        "logo": "/live2/logo/289838749.png",
-        "poster": "/live2/logo/289838749.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:05:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
-    },
-    {
-      "id": "974077876",
-      "name": "CANAL+ CINEMA HD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/974077876",
-      "images": {
-        "logo": "/live2/logo/974077876.png",
-        "poster": "/live2/logo/974077876.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:05:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3602737855",
-      "name": "CANAL+ CINEMAS 4K (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3602737855",
-      "images": {
-        "logo": "/live2/logo/3602737855.png",
-        "poster": "/live2/logo/3602737855.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:04:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
-      ]
-    },
-    {
-      "id": "238104318",
-      "name": "CANAL+ CINEMAS FHD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/238104318",
-      "images": {
-        "logo": "/live2/logo/238104318.png",
-        "poster": "/live2/logo/238104318.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:04:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
-      ]
-    },
-    {
-      "id": "671953108",
-      "name": "CANAL+ CINEMAS HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/671953108",
-      "images": {
-        "logo": "/live2/logo/671953108.png",
-        "poster": "/live2/logo/671953108.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:04:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1092403852",
-      "name": "CANAL+ CINEMAS SD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1092403852",
-      "images": {
-        "logo": "/live2/logo/1092403852.png",
-        "poster": "/live2/logo/1092403852.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusCinemas.fr"
-      },
-      "epg": [
-        {
-          "title": "Les Rêveurs",
-          "start": "2026-11-25T11:04:00Z",
-          "end": "2026-11-25T12:47:00Z"
-        },
-        {
-          "title": "Le crime du 3e étage",
-          "start": "2026-11-25T12:47:00Z",
-          "end": "2026-11-25T14:28:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3090919986",
-      "name": "CANAL+ DECALE (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3090919986",
-      "images": {
-        "logo": "/live2/logo/3090919986.png",
-        "poster": "/live2/logo/3090919986.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusDecale.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "1919536632",
-      "name": "CANAL+ DECALE FHD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1919536632",
-      "images": {
-        "logo": "/live2/logo/1919536632.png",
-        "poster": "/live2/logo/1919536632.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusDecale.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "1161602732",
-      "name": "CANAL+ DOCS (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1161602732",
-      "images": {
-        "logo": "/live2/logo/1161602732.png",
-        "poster": "/live2/logo/1161602732.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusDocs.fr"
-      },
-      "epg": [
-        {
-          "title": "Plastic Odyssey",
-          "start": "2026-11-25T11:07:00Z",
-          "end": "2026-11-25T12:21:00Z"
-        },
-        {
-          "title": "A la poursuite du rougail saucisses",
-          "start": "2026-11-25T12:21:00Z",
-          "end": "2026-11-25T12:52:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3625345371",
-      "name": "CANAL+ DOCS HD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3625345371",
-      "images": {
-        "logo": "/live2/logo/3625345371.png",
-        "poster": "/live2/logo/3625345371.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusDocs.fr"
-      },
-      "epg": [
-        {
-          "title": "Plastic Odyssey",
-          "start": "2026-11-25T11:07:00Z",
-          "end": "2026-11-25T12:21:00Z"
-        },
-        {
-          "title": "A la poursuite du rougail saucisses",
-          "start": "2026-11-25T12:21:00Z",
-          "end": "2026-11-25T12:52:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3917988462",
-      "name": "CANAL+ ELLES CENTRE HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3917988462",
-      "images": {
-        "logo": "/live2/logo/3917988462.png",
-        "poster": "/live2/logo/3917988462.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusEllesCentre.fr"
-      },
-      "epg": []
-    },
-    {
-      "id": "2904368955",
-      "name": "CANAL+ ELLES HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2904368955",
-      "images": {
-        "logo": "/live2/logo/2904368955.png",
-        "poster": "/live2/logo/2904368955.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalElles.fr"
-      },
-      "epg": []
     },
     {
       "id": "4007062954",
-      "name": "CANAL+ FAMILY HD (1)",
+      "name": "CANAL+ FAMILY HD",
       "type": "live",
       "url": "https://www.vavoo.to/live/play/4007062954",
       "images": {
-        "logo": "/live2/logo/4007062954.png",
-        "poster": "/live2/logo/4007062954.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusFamily.fr"
-      },
-      "epg": [
-        {
-          "title": "Porzucone konstrukcje",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        },
-        {
-          "title": "Zholowani: ciężarówki w opałach 8",
-          "start": "2026-11-25T13:00:00Z",
-          "end": "2026-11-25T13:55:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2987477152",
-      "name": "CANAL+ FHD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2987477152",
-      "images": {
-        "logo": "/live2/logo/2987477152.png",
-        "poster": "/live2/logo/2987477152.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlus.fr"
-      },
-      "epg": [
-        {
-          "title": "Clique",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:29:00Z"
-        },
-        {
-          "title": "Michael",
-          "start": "2026-11-25T12:29:00Z",
-          "end": "2026-11-25T14:38:00Z"
-        }
-      ]
-    },
-    {
-      "id": "4177424223",
-      "name": "CANAL+ FHD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/4177424223",
-      "images": {
-        "logo": "/live2/logo/4177424223.png",
-        "poster": "/live2/logo/4177424223.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlus.fr"
-      },
-      "epg": [
-        {
-          "title": "Clique",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:29:00Z"
-        },
-        {
-          "title": "Michael",
-          "start": "2026-11-25T12:29:00Z",
-          "end": "2026-11-25T14:38:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3271278010",
-      "name": "CANAL+ FOOT (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3271278010",
-      "images": {
-        "logo": "/live2/logo/3271278010.png",
-        "poster": "/live2/logo/3271278010.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusFoot.fr"
-      },
-      "epg": [
-        {
-          "title": "Canal Football Club",
-          "start": "2026-11-25T11:50:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        },
-        {
-          "title": "Fractionné Football",
-          "start": "2026-11-25T12:26:00Z",
-          "end": "2026-11-25T12:44:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3010946034",
-      "name": "CANAL+ FOOT FHD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3010946034",
-      "images": {
-        "logo": "/live2/logo/3010946034.png",
-        "poster": "/live2/logo/3010946034.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusFoot.fr"
-      },
-      "epg": [
-        {
-          "title": "Canal Football Club",
-          "start": "2026-11-25T11:50:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        },
-        {
-          "title": "Fractionné Football",
-          "start": "2026-11-25T12:26:00Z",
-          "end": "2026-11-25T12:44:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1821057687",
-      "name": "CANAL+ FOOT HD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1821057687",
-      "images": {
-        "logo": "/live2/logo/1821057687.png",
-        "poster": "/live2/logo/1821057687.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusFoot.fr"
-      },
-      "epg": [
-        {
-          "title": "Canal Football Club",
-          "start": "2026-11-25T11:50:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        },
-        {
-          "title": "Fractionné Football",
-          "start": "2026-11-25T12:26:00Z",
-          "end": "2026-11-25T12:44:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2574747173",
-      "name": "CANAL+ GRAND ECRAN (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2574747173",
-      "images": {
-        "logo": "/live2/logo/2574747173.png",
-        "poster": "/live2/logo/2574747173.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusGrandEcran.fr"
-      },
-      "epg": [
-        {
-          "title": "Moonwalker",
-          "start": "2026-11-25T11:06:00Z",
-          "end": "2026-11-25T12:37:00Z"
-        },
-        {
-          "title": "Batman",
-          "start": "2026-11-25T12:37:00Z",
-          "end": "2026-11-25T14:39:00Z"
-        }
-      ]
-    },
-    {
-      "id": "764514828",
-      "name": "CANAL+ GRAND ECRAN FHD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/764514828",
-      "images": {
-        "logo": "/live2/logo/764514828.png",
-        "poster": "/live2/logo/764514828.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusGrandEcran.fr"
-      },
-      "epg": [
-        {
-          "title": "Moonwalker",
-          "start": "2026-11-25T11:06:00Z",
-          "end": "2026-11-25T12:37:00Z"
-        },
-        {
-          "title": "Batman",
-          "start": "2026-11-25T12:37:00Z",
-          "end": "2026-11-25T14:39:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2548189800",
-      "name": "CANAL+ GRAND ECRAN FHD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2548189800",
-      "images": {
-        "logo": "/live2/logo/2548189800.png",
-        "poster": "/live2/logo/2548189800.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusGrandEcran.fr"
-      },
-      "epg": [
-        {
-          "title": "Moonwalker",
-          "start": "2026-11-25T11:06:00Z",
-          "end": "2026-11-25T12:37:00Z"
-        },
-        {
-          "title": "Batman",
-          "start": "2026-11-25T12:37:00Z",
-          "end": "2026-11-25T14:39:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1373011235",
-      "name": "CANAL+ GRAND ECRAN HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1373011235",
-      "images": {
-        "logo": "/live2/logo/1373011235.png",
-        "poster": "/live2/logo/1373011235.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusGrandEcran.fr"
-      },
-      "epg": [
-        {
-          "title": "Moonwalker",
-          "start": "2026-11-25T11:06:00Z",
-          "end": "2026-11-25T12:37:00Z"
-        },
-        {
-          "title": "Batman",
-          "start": "2026-11-25T12:37:00Z",
-          "end": "2026-11-25T14:39:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1860727909",
-      "name": "CANAL+ HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1860727909",
-      "images": {
-        "logo": "/live2/logo/1860727909.png",
-        "poster": "/live2/logo/1860727909.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlus.fr"
-      },
-      "epg": [
-        {
-          "title": "Clique",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:29:00Z"
-        },
-        {
-          "title": "Michael",
-          "start": "2026-11-25T12:29:00Z",
-          "end": "2026-11-25T14:38:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3780364466",
-      "name": "CANAL+ HD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3780364466",
-      "images": {
-        "logo": "/live2/logo/3780364466.png",
-        "poster": "/live2/logo/3780364466.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlus.fr"
-      },
-      "epg": [
-        {
-          "title": "Clique",
-          "start": "2026-11-25T11:35:00Z",
-          "end": "2026-11-25T12:29:00Z"
-        },
-        {
-          "title": "Michael",
-          "start": "2026-11-25T12:29:00Z",
-          "end": "2026-11-25T14:38:00Z"
-        }
-      ]
-    },
-    {
-      "id": "4039804890",
-      "name": "CANAL+ KIDS 4K (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/4039804890",
-      "images": {
-        "logo": "/live2/logo/4039804890.png",
-        "poster": "/live2/logo/4039804890.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusKids.fr"
-      },
-      "epg": [
-        {
-          "title": "Mortina",
-          "start": "2026-11-25T12:03:00Z",
-          "end": "2026-11-25T12:15:00Z"
-        },
-        {
-          "title": "Monster Loving Maniacs",
-          "start": "2026-11-25T12:15:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
       "id": "869256388",
-      "name": "CANAL+ KIDS FHD (1)",
+      "name": "CANAL+ KIDS FHD",
       "type": "live",
       "url": "https://www.vavoo.to/live/play/869256388",
       "images": {
-        "logo": "/live2/logo/869256388.png",
-        "poster": "/live2/logo/869256388.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusKids.fr"
-      },
-      "epg": [
-        {
-          "title": "Mortina",
-          "start": "2026-11-25T12:03:00Z",
-          "end": "2026-11-25T12:15:00Z"
-        },
-        {
-          "title": "Monster Loving Maniacs",
-          "start": "2026-11-25T12:15:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "1508654689",
-      "name": "CANAL+ KIDS FHD (7)",
+      "id": "1663608238",
+      "name": "CANAL+ SPORT 1 HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/1508654689",
+      "url": "https://www.vavoo.to/live/play/1663608238",
       "images": {
-        "logo": "/live2/logo/1508654689.png",
-        "poster": "/live2/logo/1508654689.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusKids.fr"
-      },
-      "epg": [
-        {
-          "title": "Mortina",
-          "start": "2026-11-25T12:03:00Z",
-          "end": "2026-11-25T12:15:00Z"
-        },
-        {
-          "title": "Monster Loving Maniacs",
-          "start": "2026-11-25T12:15:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "242933169",
-      "name": "CANAL+ KIDS HD (1)",
+      "id": "3987186253",
+      "name": "CANAL+ SPORT 2 HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/242933169",
+      "url": "https://www.vavoo.to/live/play/3987186253",
       "images": {
-        "logo": "/live2/logo/242933169.png",
-        "poster": "/live2/logo/242933169.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusKids.fr"
-      },
-      "epg": [
-        {
-          "title": "Mortina",
-          "start": "2026-11-25T12:03:00Z",
-          "end": "2026-11-25T12:15:00Z"
-        },
-        {
-          "title": "Monster Loving Maniacs",
-          "start": "2026-11-25T12:15:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "579962899",
-      "name": "CANAL+ KIDS HD (7)",
+      "id": "554541779",
+      "name": "CANAL+ SPORT 3 HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/579962899",
+      "url": "https://www.vavoo.to/live/play/554541779",
       "images": {
-        "logo": "/live2/logo/579962899.png",
-        "poster": "/live2/logo/579962899.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalPlusKids.fr"
-      },
-      "epg": [
-        {
-          "title": "Mortina",
-          "start": "2026-11-25T12:03:00Z",
-          "end": "2026-11-25T12:15:00Z"
-        },
-        {
-          "title": "Monster Loving Maniacs",
-          "start": "2026-11-25T12:15:00Z",
-          "end": "2026-11-25T12:26:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "2961896896",
-      "name": "CANAL+ LIVE 1 (1)",
+      "id": "734571466",
+      "name": "CANAL+ SPORT 4 HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/2961896896",
+      "url": "https://www.vavoo.to/live/play/734571466",
       "images": {
-        "logo": "/live2/logo/2961896896.png",
-        "poster": "/live2/logo/2961896896.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive1.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T15:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T15:00:00Z",
-          "end": "2026-11-25T17:45:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "4272460704",
-      "name": "CANAL+ LIVE 1 (6)",
+      "id": "3882003284",
+      "name": "CANAL+ SPORT 5 HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/4272460704",
+      "url": "https://www.vavoo.to/live/play/3882003284",
       "images": {
-        "logo": "/live2/logo/4272460704.png",
-        "poster": "/live2/logo/4272460704.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive1.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T15:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T15:00:00Z",
-          "end": "2026-11-25T17:45:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "4231501773",
-      "name": "CANAL+ LIVE 1 HD (1)",
+      "id": "3625345371",
+      "name": "CANAL+ DOCS HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/4231501773",
+      "url": "https://www.vavoo.to/live/play/3625345371",
       "images": {
-        "logo": "/live2/logo/4231501773.png",
-        "poster": "/live2/logo/4231501773.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive1.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T15:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T15:00:00Z",
-          "end": "2026-11-25T17:45:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "942555923",
-      "name": "CANAL+ LIVE 10 (6)",
+      "id": "6981957",
+      "name": "CANAL+ HD (Direct)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/942555923",
+      "url": "https://www.vavoo.to/live/play/6981957",
       "images": {
-        "logo": "/live2/logo/942555923.png",
-        "poster": "/live2/logo/942555923.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive10.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T17:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T17:00:00Z",
-          "end": "2026-11-25T23:00:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "89025187",
-      "name": "CANAL+ LIVE 11 (6)",
+      "id": "2141653939",
+      "name": "CANAL+ SÉRIES FHD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/89025187",
+      "url": "https://www.vavoo.to/live/play/2141653939",
       "images": {
-        "logo": "/live2/logo/89025187.png",
-        "poster": "/live2/logo/89025187.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive11.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T17:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T17:00:00Z",
-          "end": "2026-11-25T23:00:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "1122898035",
-      "name": "CANAL+ LIVE 12 (6)",
+      "id": "707775847",
+      "name": "CANAL+ SPORT 360 FHD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/1122898035",
+      "url": "https://www.vavoo.to/live/play/707775847",
       "images": {
-        "logo": "/live2/logo/1122898035.png",
-        "poster": "/live2/logo/1122898035.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive12.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T17:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T17:00:00Z",
-          "end": "2026-11-25T23:00:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     },
     {
-      "id": "3104369008",
-      "name": "CANAL+ LIVE 2 (6)",
+      "id": "821044379",
+      "name": "CANAL+ BOX OFFICE HD",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/3104369008",
+      "url": "https://www.vavoo.to/live/play/821044379",
       "images": {
-        "logo": "/live2/logo/3104369008.png",
-        "poster": "/live2/logo/3104369008.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive2.fr"
-      },
-      "epg": [
-        {
-          "title": "A venir : Plateau avant-match Youth League",
-          "start": "2026-11-25T11:55:00Z",
-          "end": "2026-11-25T12:55:00Z"
-        },
-        {
-          "title": "Plateau avant-match Youth League",
-          "start": "2026-11-25T12:55:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1924698158",
-      "name": "CANAL+ LIVE 2 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1924698158",
-      "images": {
-        "logo": "/live2/logo/1924698158.png",
-        "poster": "/live2/logo/1924698158.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive2.fr"
-      },
-      "epg": [
-        {
-          "title": "A venir : Plateau avant-match Youth League",
-          "start": "2026-11-25T11:55:00Z",
-          "end": "2026-11-25T12:55:00Z"
-        },
-        {
-          "title": "Plateau avant-match Youth League",
-          "start": "2026-11-25T12:55:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2221457600",
-      "name": "CANAL+ LIVE 3 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2221457600",
-      "images": {
-        "logo": "/live2/logo/2221457600.png",
-        "poster": "/live2/logo/2221457600.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive3.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T15:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T15:00:00Z",
-          "end": "2026-11-25T16:35:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3188887728",
-      "name": "CANAL+ LIVE 3 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3188887728",
-      "images": {
-        "logo": "/live2/logo/3188887728.png",
-        "poster": "/live2/logo/3188887728.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive3.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T15:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T15:00:00Z",
-          "end": "2026-11-25T16:35:00Z"
-        }
-      ]
-    },
-    {
-      "id": "910695632",
-      "name": "CANAL+ LIVE 4 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/910695632",
-      "images": {
-        "logo": "/live2/logo/910695632.png",
-        "poster": "/live2/logo/910695632.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive4.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T17:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T17:00:00Z",
-          "end": "2026-11-25T18:55:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3034028457",
-      "name": "CANAL+ LIVE 4 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3034028457",
-      "images": {
-        "logo": "/live2/logo/3034028457.png",
-        "poster": "/live2/logo/3034028457.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive4.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T17:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T17:00:00Z",
-          "end": "2026-11-25T18:55:00Z"
-        }
-      ]
-    },
-    {
-      "id": "187184480",
-      "name": "CANAL+ LIVE 5 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/187184480",
-      "images": {
-        "logo": "/live2/logo/187184480.png",
-        "poster": "/live2/logo/187184480.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive5.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T17:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T17:00:00Z",
-          "end": "2026-11-25T18:55:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2021497143",
-      "name": "CANAL+ LIVE 5 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2021497143",
-      "images": {
-        "logo": "/live2/logo/2021497143.png",
-        "poster": "/live2/logo/2021497143.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "CanalLive5.fr"
-      },
-      "epg": [
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T17:00:00Z"
-        },
-        {
-          "title": "Vivez en direct les évènements de CANAL+",
-          "start": "2026-11-25T17:00:00Z",
-          "end": "2026-11-25T18:55:00Z"
-        }
+        "Canal+",
+        "HD"
       ]
     }
   ]

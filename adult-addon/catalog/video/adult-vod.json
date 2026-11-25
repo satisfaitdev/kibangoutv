@@ -1,0 +1,88 @@
+{
+  "items": [
+    {
+      "id": "adult:vod-1",
+      "type": "video",
+      "name": "Club Privé Séduction (18+)",
+      "description": "Production VOD de charme réservée aux adultes (18+). Accès abonné Pro sécurisé.",
+      "releaseDate": "2024-01-01",
+      "ratings": {
+        "tmdb": 7.5
+      },
+      "images": {
+        "poster": "/logo.svg",
+        "backdrops": [
+          "/logo.svg"
+        ]
+      },
+      "genres": [
+        "Adulte",
+        "Charme",
+        "18+"
+      ]
+    },
+    {
+      "id": "adult:vod-2",
+      "type": "video",
+      "name": "Nuit Secrète à Paris (18+)",
+      "description": "Long-métrage romantique et passion réservé aux adultes (18+).",
+      "releaseDate": "2024-02-14",
+      "ratings": {
+        "tmdb": 7.2
+      },
+      "images": {
+        "poster": "/logo.svg",
+        "backdrops": [
+          "/logo.svg"
+        ]
+      },
+      "genres": [
+        "Adulte",
+        "Romance",
+        "18+"
+      ]
+    },
+    {
+      "id": "adult:vod-3",
+      "type": "video",
+      "name": "Sensations Nocturnes (18+)",
+      "description": "Anthologie de charme et glamour pour adultes avertis. Contrôle parental actif.",
+      "releaseDate": "2023-11-20",
+      "ratings": {
+        "tmdb": 7.0
+      },
+      "images": {
+        "poster": "/logo.svg",
+        "backdrops": [
+          "/logo.svg"
+        ]
+      },
+      "genres": [
+        "Adulte",
+        "Glamour",
+        "18+"
+      ]
+    },
+    {
+      "id": "adult:vod-4",
+      "type": "video",
+      "name": "Étoiles Privées VIP (18+)",
+      "description": "Programme exclusif réservé aux abonnements Pro déverrouillés.",
+      "releaseDate": "2024-03-01",
+      "ratings": {
+        "tmdb": 7.6
+      },
+      "images": {
+        "poster": "/logo.svg",
+        "backdrops": [
+          "/logo.svg"
+        ]
+      },
+      "genres": [
+        "Adulte",
+        "VIP",
+        "18+"
+      ]
+    }
+  ]
+}

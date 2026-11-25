@@ -1,0 +1,14 @@
+{
+  "id": "bloomberg",
+  "name": "BLOOMBERG TELEVISION HD",
+  "type": "live",
+  "url": "https://mumbai-edge.smartplaytv.in/BloombergHT/index.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bloomberg_Television_logo.svg/512px-Bloomberg_Television_logo.svg.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bloomberg_Television_logo.svg/512px-Bloomberg_Television_logo.svg.png"
+  },
+  "tags": [
+    "Info",
+    "Finance"
+  ]
+}

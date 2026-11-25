@@ -2,8 +2,8 @@
   "id": "kibangou-direct",
   "name": "Kibangou TV",
   "specVersion": 2,
-  "version": "1.2.0",
-  "description": "Canal+, beIN Sports, Télé Congo, Films & Séries en streaming HD",
+  "version": "2.0.0",
+  "description": "Bouquet complet KibangouTV : CANAL+, Cinéma & Séries, Sport, Découverte, Jeunesse, Divertissement, Infos, Musique, Religions & Télé Congo",
   "icon": "/logo.svg",
   "resources": [
     "catalog",
@@ -27,7 +27,7 @@
   "catalogs": [
     {
       "id": "movie",
-      "name": "Films Populaires & Box Office",
+      "name": "🎬 Films Populaires & Box-Office",
       "type": "video",
       "options": {
         "shape": "portrait"
@@ -35,7 +35,7 @@
     },
     {
       "id": "series",
-      "name": "Séries & Nouveautés",
+      "name": "🍿 Séries & Nouveautés",
       "type": "series",
       "options": {
         "shape": "portrait"
@@ -43,7 +43,7 @@
     },
     {
       "id": "canal",
-      "name": "Canal+ & Cinéma",
+      "name": "⭐ Chaînes CANAL+",
       "type": "live",
       "options": {
         "shape": "landscape",
@@ -51,8 +51,71 @@
       }
     },
     {
-      "id": "bein",
-      "name": "beIN Sports & DAZN",
+      "id": "cinema_series",
+      "name": "🎬 Cinéma et Séries",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "sport",
+      "name": "⚽ Sport & Compétitions",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "decouverte",
+      "name": "🌍 Découverte & Documentaires",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "jeunesse",
+      "name": "🧸 Jeunesse & Éducation",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "divertissement",
+      "name": "🎭 Divertissement & TNT",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "infos",
+      "name": "📰 Informations & Monde",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "musique",
+      "name": "🎵 Musique & TRACE",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      }
+    },
+    {
+      "id": "religions",
+      "name": "🕊️ Religions & Spiritualités",
       "type": "live",
       "options": {
         "shape": "landscape",
@@ -61,7 +124,7 @@
     },
     {
       "id": "congo",
-      "name": "Télé Congo & Afrique",
+      "name": "🇨🇬 Télé Congo & Afrique",
       "type": "live",
       "options": {
         "shape": "landscape",
@@ -69,8 +132,8 @@
       }
     },
     {
-      "id": "tnt",
-      "name": "TNT France (TF1, M6...)",
+      "id": "bein",
+      "name": "🏆 beIN Sports & DAZN",
       "type": "live",
       "options": {
         "shape": "landscape",
@@ -80,6 +143,46 @@
   ],
   "dashboard": [
     {
+      "name": "⭐ Chaînes CANAL+",
+      "catalog": "canal"
+    },
+    {
+      "name": "🇨🇬 Télé Congo & Afrique",
+      "catalog": "congo"
+    },
+    {
+      "name": "⚽ Sport & Directs",
+      "catalog": "sport"
+    },
+    {
+      "name": "🎬 Cinéma et Séries",
+      "catalog": "cinema_series"
+    },
+    {
+      "name": "🌍 Découverte & Documentaires",
+      "catalog": "decouverte"
+    },
+    {
+      "name": "🧸 Jeunesse & Éducation",
+      "catalog": "jeunesse"
+    },
+    {
+      "name": "🎭 Divertissement & Généralistes",
+      "catalog": "divertissement"
+    },
+    {
+      "name": "📰 Informations & Monde",
+      "catalog": "infos"
+    },
+    {
+      "name": "🎵 Musique & TRACE",
+      "catalog": "musique"
+    },
+    {
+      "name": "🕊️ Religions & Spiritualités",
+      "catalog": "religions"
+    },
+    {
       "name": "🎬 Films Populaires & Box-Office",
       "catalog": "movie"
     },
@@ -88,20 +191,8 @@
       "catalog": "series"
     },
     {
-      "name": "⭐ Canal+ & Cinéma Français",
-      "catalog": "canal"
-    },
-    {
-      "name": "⚽ beIN Sports & Football Direct",
+      "name": "🏆 beIN Sports & DAZN",
       "catalog": "bein"
-    },
-    {
-      "name": "🇨🇬 Télé Congo & Afrique",
-      "catalog": "congo"
-    },
-    {
-      "name": "📺 TNT France & Divertissement",
-      "catalog": "tnt"
     }
   ],
   "cache": {

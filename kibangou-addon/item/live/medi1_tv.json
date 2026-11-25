@@ -1,0 +1,15 @@
+{
+  "id": "medi1_tv",
+  "name": "MEDI1 TV AFRIQUE",
+  "type": "live",
+  "url": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-afrique_tm7tu45/playlist.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_Medi1_TV.svg/512px-Logo_Medi1_TV.svg.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_Medi1_TV.svg/512px-Logo_Medi1_TV.svg.png"
+  },
+  "tags": [
+    "Info",
+    "Afrique",
+    "Maghreb"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "educa_tv",
+  "name": "EDUCA TV (Éducation & Savoir)",
+  "type": "live",
+  "url": "https://video1.getstreamhosting.com:1936/8294/8294/playlist.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/0zGkZg0.png",
+    "poster": "https://i.imgur.com/0zGkZg0.png"
+  },
+  "tags": [
+    "Découverte",
+    "Éducation"
+  ]
+}

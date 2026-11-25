@@ -1,0 +1,14 @@
+{
+  "id": "bbc_news",
+  "name": "BBC NEWS HD",
+  "type": "live",
+  "url": "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/uk/bbc-news.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png"
+  },
+  "tags": [
+    "Info",
+    "Monde"
+  ]
+}

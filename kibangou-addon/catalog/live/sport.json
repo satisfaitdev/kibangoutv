@@ -1,0 +1,158 @@
+{
+  "items": [
+    {
+      "id": "3208238801",
+      "name": "INFOSPORT+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3208238801",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "africa_sport",
+      "name": "AFRICA SPORT TV",
+      "type": "live",
+      "url": "https://live-hls-qunv.livepush.io/live_cdn/em8A-kbzIfHqu73/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Sport",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "2985310350",
+      "name": "MGG TV HD (Gaming & eSport)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2985310350",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "1808973403",
+      "name": "AUTOMOTO LA CHAÎNE FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1808973403",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "3404543565",
+      "name": "DISCOVERY CHANNEL HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3404543565",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Découverte & Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "2736388639",
+      "name": "MUSEUM TV",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2736388639",
+      "images": {
+        "logo": "/live2/logo/2736388639.png",
+        "poster": "/live2/logo/2736388639.png"
+      },
+      "tags": [
+        "Culture & Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "w_sport",
+      "name": "W SPORT HD",
+      "type": "live",
+      "url": "https://d36r8jifhgsk5j.cloudfront.net/Willow_TV1080p.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/W_Sport_Logo.svg/512px-W_Sport_Logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/W_Sport_Logo.svg/512px-W_Sport_Logo.svg.png"
+      },
+      "tags": [
+        "Sport",
+        "International"
+      ]
+    },
+    {
+      "id": "6981957",
+      "name": "CANAL+ TV (Grands Événements Sportifs)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/6981957",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "2846119468",
+      "name": "CANAL+ SPORT HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2846119468",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "1800295801",
+      "name": "EUROSPORT 1 FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1800295801",
+      "images": {
+        "logo": "/live2/logo/1800295801.png",
+        "poster": "/live2/logo/1800295801.png"
+      },
+      "tags": [
+        "Sport",
+        "HD"
+      ]
+    },
+    {
+      "id": "2532454558",
+      "name": "EUROSPORT 2 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2532454558",
+      "images": {
+        "logo": "/live2/logo/2532454558.png",
+        "poster": "/live2/logo/2532454558.png"
+      },
+      "tags": [
+        "Sport",
+        "HD"
+      ]
+    }
+  ]
+}

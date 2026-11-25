@@ -1,0 +1,14 @@
+{
+  "id": "ouii_africa",
+  "name": "OUII AFRICA TV",
+  "type": "live",
+  "url": "https://tv.voozmedia.fun/benietv/index.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/0zGkZg0.png",
+    "poster": "https://i.imgur.com/0zGkZg0.png"
+  },
+  "tags": [
+    "Jeunesse",
+    "Afrique"
+  ]
+}

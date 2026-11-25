@@ -1,0 +1,15 @@
+{
+  "id": "trace_mboa",
+  "name": "TRACE MBOA HD (Cameroun & Afrique Centrale)",
+  "type": "live",
+  "url": "https://channels.trace.plus/Traceprod/MBOA_hd/index.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/0zGkZg0.png",
+    "poster": "https://i.imgur.com/0zGkZg0.png"
+  },
+  "tags": [
+    "Musique",
+    "Makossa",
+    "Afrique"
+  ]
+}

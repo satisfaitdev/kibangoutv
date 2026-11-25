@@ -1,0 +1,285 @@
+{
+  "items": [
+    {
+      "id": "tmdb:96677",
+      "type": "series",
+      "name": "Lupin",
+      "ids": {
+        "tmdb": "96677"
+      },
+      "description": "Série télévisée (2021) disponible en version française intégrale.",
+      "releaseDate": "2021-01-01",
+      "ratings": {
+        "tmdb": 7.8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/sgxTK1K9d11mR8u96677.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/b9Z0XQ18v7m21c8u96677.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Crime",
+        "Mystère"
+      ]
+    },
+    {
+      "id": "tmdb:119569",
+      "type": "series",
+      "name": "HPI : Haut Potentiel Intellectuel",
+      "ids": {
+        "tmdb": "119569"
+      },
+      "description": "Série télévisée (2021) disponible en version française intégrale.",
+      "releaseDate": "2021-01-01",
+      "ratings": {
+        "tmdb": 7.6
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/k2QvM0w12n8b119569.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/r7Q1c0p8m9d119569.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "Policier"
+      ]
+    },
+    {
+      "id": "tmdb:62455",
+      "type": "series",
+      "name": "Le Bureau des Légendes",
+      "ids": {
+        "tmdb": "62455"
+      },
+      "description": "Série télévisée (2015) disponible en version française intégrale.",
+      "releaseDate": "2015-01-01",
+      "ratings": {
+        "tmdb": 8.2
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/n0s9d18v7m62455.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/p8Q1v9m2c62455.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Espionnage"
+      ]
+    },
+    {
+      "id": "tmdb:64188",
+      "type": "series",
+      "name": "Dix pour cent",
+      "ids": {
+        "tmdb": "64188"
+      },
+      "description": "Série télévisée (2015) disponible en version française intégrale.",
+      "releaseDate": "2015-01-01",
+      "ratings": {
+        "tmdb": 7.9
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/1m3W8v7c9b64188.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/8m0P1v8c7b64188.jpg"
+        ]
+      },
+      "genres": [
+        "Comédie",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:30981",
+      "type": "series",
+      "name": "Braquo",
+      "ids": {
+        "tmdb": "30981"
+      },
+      "description": "Série télévisée (2009) disponible en version française intégrale.",
+      "releaseDate": "2009-01-01",
+      "ratings": {
+        "tmdb": 7.7
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/m9Q2v8c7b30981.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/k1P0v8c7b30981.jpg"
+        ]
+      },
+      "genres": [
+        "Policier",
+        "Action",
+        "Drame"
+      ]
+    },
+    {
+      "id": "tmdb:65931",
+      "type": "series",
+      "name": "Baron Noir",
+      "ids": {
+        "tmdb": "65931"
+      },
+      "description": "Série télévisée (2016) disponible en version française intégrale.",
+      "releaseDate": "2016-01-01",
+      "ratings": {
+        "tmdb": 7.8
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/p8Q1v8c7b65931.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/m1P0v8c7b65931.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Politique"
+      ]
+    },
+    {
+      "id": "tmdb:94997",
+      "type": "series",
+      "name": "House of the Dragon (VF)",
+      "ids": {
+        "tmdb": "94997"
+      },
+      "description": "Série télévisée (2022) disponible en version française intégrale.",
+      "releaseDate": "2022-01-01",
+      "ratings": {
+        "tmdb": 8.4
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/etj5CuHaBvuGh5oY39RELLGEzW7.jpg"
+        ]
+      },
+      "genres": [
+        "Action",
+        "Drame",
+        "Fantastique"
+      ]
+    },
+    {
+      "id": "tmdb:100088",
+      "type": "series",
+      "name": "The Last of Us (VF)",
+      "ids": {
+        "tmdb": "100088"
+      },
+      "description": "Série télévisée (2023) disponible en version française intégrale.",
+      "releaseDate": "2023-01-01",
+      "ratings": {
+        "tmdb": 8.6
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/uKvVjHNqB5VmOrdxqAt2V7JMrqi.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/9zEwTUpF565wG1L3r88t6hY7AEv.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Science-Fiction",
+        "Aventure"
+      ]
+    },
+    {
+      "id": "tmdb:126308",
+      "type": "series",
+      "name": "Shōgun (VF)",
+      "ids": {
+        "tmdb": "126308"
+      },
+      "description": "Série télévisée (2024) disponible en version française intégrale.",
+      "releaseDate": "2024-01-01",
+      "ratings": {
+        "tmdb": 8.5
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/7O4iVfOMQmdCSxhOg1WnzG1AgYT.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/5Ww8w1K1N9p4a9n0m6p126308.jpg"
+        ]
+      },
+      "genres": [
+        "Drame",
+        "Histoire",
+        "Guerre"
+      ]
+    },
+    {
+      "id": "tmdb:106379",
+      "type": "series",
+      "name": "Fallout (VF)",
+      "ids": {
+        "tmdb": "106379"
+      },
+      "description": "Série télévisée (2024) disponible en version française intégrale.",
+      "releaseDate": "2024-01-01",
+      "ratings": {
+        "tmdb": 8.3
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/839d482v7m106379.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/b9Z0XQ18v7m106379.jpg"
+        ]
+      },
+      "genres": [
+        "Science-Fiction",
+        "Action"
+      ]
+    },
+    {
+      "id": "tmdb:76479",
+      "type": "series",
+      "name": "The Boys (VF)",
+      "ids": {
+        "tmdb": "76479"
+      },
+      "description": "Série télévisée (2019) disponible en version française intégrale.",
+      "releaseDate": "2019-01-01",
+      "ratings": {
+        "tmdb": 8.5
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/2ZmG4ZOG3c5520W7S5T8zZlPzZc.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/n7P0v8c7b76479.jpg"
+        ]
+      },
+      "genres": [
+        "Science-Fiction",
+        "Action"
+      ]
+    },
+    {
+      "id": "tmdb:66732",
+      "type": "series",
+      "name": "Stranger Things (VF)",
+      "ids": {
+        "tmdb": "66732"
+      },
+      "description": "Série télévisée (2016) disponible en version française intégrale.",
+      "releaseDate": "2016-01-01",
+      "ratings": {
+        "tmdb": 8.6
+      },
+      "images": {
+        "poster": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
+        "backdrops": [
+          "https://image.tmdb.org/t/p/original/56v2KjBlU4XaOv9rVYEQypROD7P.jpg"
+        ]
+      },
+      "genres": [
+        "Science-Fiction",
+        "Drame"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "kibangou-french-vod",
+  "name": "Cinéma & Séries VF",
+  "specVersion": 2,
+  "version": "1.2.0",
+  "description": "Box-Office Francophone, films en français (VF/VOSTFR) et séries françaises en streaming HD",
+  "icon": "/logo.svg",
+  "resources": [
+    "catalog",
+    "item",
+    "source",
+    "resolve"
+  ],
+  "types": [
+    "video",
+    "series"
+  ],
+  "idPrefixes": [
+    "tmdb",
+    "imdb"
+  ],
+  "catalogs": [
+    {
+      "id": "boxoffice-fr",
+      "name": "🇫🇷 Box-Office Francophone",
+      "type": "video",
+      "options": {
+        "shape": "portrait"
+      }
+    },
+    {
+      "id": "films-vf",
+      "name": "🎬 Nouveautés Films VF",
+      "type": "video",
+      "options": {
+        "shape": "portrait"
+      }
+    },
+    {
+      "id": "comedies-fr",
+      "name": "🎭 Comédies & Classiques Français",
+      "type": "video",
+      "options": {
+        "shape": "portrait"
+      }
+    },
+    {
+      "id": "series-vf",
+      "name": "🍿 Séries en VF",
+      "type": "series",
+      "options": {
+        "shape": "portrait"
+      }
+    }
+  ],
+  "dashboard": [
+    {
+      "name": "🇫🇷 Box-Office Francophone & Cinéma",
+      "catalog": "boxoffice-fr"
+    },
+    {
+      "name": "🎬 Nouveautés Films en Français (VF)",
+      "catalog": "films-vf"
+    },
+    {
+      "name": "🎭 Comédies & Classiques Français",
+      "catalog": "comedies-fr"
+    },
+    {
+      "name": "🍿 Séries en Version Française",
+      "catalog": "series-vf"
+    }
+  ],
+  "cache": {
+    "catalog": 300,
+    "item": 300
+  }
+}

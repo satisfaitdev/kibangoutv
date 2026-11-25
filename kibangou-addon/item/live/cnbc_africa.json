@@ -1,0 +1,15 @@
+{
+  "id": "cnbc_africa",
+  "name": "CNBC AFRICA (Économie Mondiale)",
+  "type": "live",
+  "url": "https://jmp2.uk/plu-679a973a97782f0008ff4bb6.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png"
+  },
+  "tags": [
+    "Info",
+    "Économie",
+    "Bourse"
+  ]
+}

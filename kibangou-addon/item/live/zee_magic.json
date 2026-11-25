@@ -1,0 +1,15 @@
+{
+  "id": "zee_magic",
+  "name": "ZEE MAGIC (Séries & Bollywood en Français)",
+  "type": "live",
+  "url": "https://video1.getstreamhosting.com:1936/8490/8490/playlist.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Zee_Magic_Logo.png/512px-Zee_Magic_Logo.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Zee_Magic_Logo.png/512px-Zee_Magic_Logo.png"
+  },
+  "tags": [
+    "Cinéma & Séries",
+    "Bollywood",
+    "Français"
+  ]
+}

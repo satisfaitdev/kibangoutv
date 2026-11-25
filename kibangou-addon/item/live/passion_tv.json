@@ -1,0 +1,14 @@
+{
+  "id": "passion_tv",
+  "name": "PASSION TV (Telenovelas & Émotions)",
+  "type": "live",
+  "url": "https://jmp2.uk/plu-6911c9704316999535eb21cf.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/gK97P92.png",
+    "poster": "https://i.imgur.com/gK97P92.png"
+  },
+  "tags": [
+    "Divertissement",
+    "Novelas"
+  ]
+}

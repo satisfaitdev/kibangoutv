@@ -1,0 +1,218 @@
+{
+  "items": [
+    {
+      "id": "africa24",
+      "name": "AFRICA 24 HD (L'Info du Continent)",
+      "type": "live",
+      "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/5f/Logo_Africa_24_2017.svg/512px-Logo_Africa_24_2017.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/5f/Logo_Africa_24_2017.svg/512px-Logo_Africa_24_2017.svg.png"
+      },
+      "tags": [
+        "Info",
+        "Afrique",
+        "Direct"
+      ]
+    },
+    {
+      "id": "2875346882",
+      "name": "FRANCE 24 (Français Direct)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2875346882",
+      "images": {
+        "logo": "/live2/logo/2875346882.png",
+        "poster": "/live2/logo/2875346882.png"
+      },
+      "tags": [
+        "Info",
+        "HD"
+      ]
+    },
+    {
+      "id": "business24",
+      "name": "BUSINESS 24 AFRICA (Économie & Finance)",
+      "type": "live",
+      "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Info",
+        "Économie",
+        "Afrique"
+      ]
+    },
+    {
+      "id": "africanews",
+      "name": "AFRICANEWS (En continu)",
+      "type": "live",
+      "url": "https://c3c275b999764df8a2dd55ffe2996818.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6576/bitok/eyJzdGlkIjoiOTU0NDAyODQtOTU0My00Yzc2LThmZjQtNDRhY2YwYmQxYTYwIiwibWt0IjoicGwiLCJjaCI6NjYwNiwicHRmIjo1fQ==/26036/africanews-en.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Africanews_logo.svg/512px-Africanews_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Africanews_logo.svg/512px-Africanews_logo.svg.png"
+      },
+      "tags": [
+        "Info",
+        "Panafricain"
+      ]
+    },
+    {
+      "id": "al_jazeera",
+      "name": "AL JAZEERA (International Direct)",
+      "type": "live",
+      "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Al_Jazeera_English_logo.svg/512px-Al_Jazeera_English_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Al_Jazeera_English_logo.svg/512px-Al_Jazeera_English_logo.svg.png"
+      },
+      "tags": [
+        "Info",
+        "International"
+      ]
+    },
+    {
+      "id": "medi1_tv",
+      "name": "MEDI1 TV AFRIQUE",
+      "type": "live",
+      "url": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-afrique_tm7tu45/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_Medi1_TV.svg/512px-Logo_Medi1_TV.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_Medi1_TV.svg/512px-Logo_Medi1_TV.svg.png"
+      },
+      "tags": [
+        "Info",
+        "Afrique",
+        "Maghreb"
+      ]
+    },
+    {
+      "id": "511277245",
+      "name": "CGTN FRANÇAIS",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/511277245",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD"
+      ]
+    },
+    {
+      "id": "nhk_world",
+      "name": "NHK WORLD JAPAN",
+      "type": "live",
+      "url": "https://tv-stream-test.daydreamer-json.cc/fe8bf835820fb530467f75a9cb761504/master.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/NHK_World_Japan_logo.svg/512px-NHK_World_Japan_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/NHK_World_Japan_logo.svg/512px-NHK_World_Japan_logo.svg.png"
+      },
+      "tags": [
+        "Info",
+        "Japon & Monde"
+      ]
+    },
+    {
+      "id": "3979475924",
+      "name": "CNEWS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3979475924",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD"
+      ]
+    },
+    {
+      "id": "cnbc_africa",
+      "name": "CNBC AFRICA (Économie Mondiale)",
+      "type": "live",
+      "url": "https://jmp2.uk/plu-679a973a97782f0008ff4bb6.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png"
+      },
+      "tags": [
+        "Info",
+        "Économie",
+        "Bourse"
+      ]
+    },
+    {
+      "id": "584773960",
+      "name": "EURONEWS (Français)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/584773960",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD"
+      ]
+    },
+    {
+      "id": "cnn",
+      "name": "CNN INTERNATIONAL HD",
+      "type": "live",
+      "url": "https://tv.a2news.com/live/smil:a2cnnweb.stream.smil/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/512px-CNN.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/512px-CNN.svg.png"
+      },
+      "tags": [
+        "Info",
+        "International"
+      ]
+    },
+    {
+      "id": "2019563148",
+      "name": "LCI HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2019563148",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD"
+      ]
+    },
+    {
+      "id": "bloomberg",
+      "name": "BLOOMBERG TELEVISION HD",
+      "type": "live",
+      "url": "https://mumbai-edge.smartplaytv.in/BloombergHT/index.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bloomberg_Television_logo.svg/512px-Bloomberg_Television_logo.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bloomberg_Television_logo.svg/512px-Bloomberg_Television_logo.svg.png"
+      },
+      "tags": [
+        "Info",
+        "Finance"
+      ]
+    },
+    {
+      "id": "bbc_news",
+      "name": "BBC NEWS HD",
+      "type": "live",
+      "url": "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/uk/bbc-news.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png"
+      },
+      "tags": [
+        "Info",
+        "Monde"
+      ]
+    }
+  ]
+}

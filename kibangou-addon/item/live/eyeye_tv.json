@@ -1,0 +1,15 @@
+{
+  "id": "eyeye_tv",
+  "name": "EYEYE TV (Afrique)",
+  "type": "live",
+  "url": "https://video1.getstreamhosting.com:1936/8306/8306/playlist.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/gK97P92.png",
+    "poster": "https://i.imgur.com/gK97P92.png"
+  },
+  "tags": [
+    "Cinéma & Séries",
+    "Afrique",
+    "Nollywood"
+  ]
+}

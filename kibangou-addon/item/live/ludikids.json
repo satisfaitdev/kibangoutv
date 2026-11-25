@@ -1,0 +1,14 @@
+{
+  "id": "ludikids",
+  "name": "LUDIKIDS TV (Apprendre en s'amusant)",
+  "type": "live",
+  "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/gK97P92.png",
+    "poster": "https://i.imgur.com/gK97P92.png"
+  },
+  "tags": [
+    "Jeunesse",
+    "Ludo-éducatif"
+  ]
+}

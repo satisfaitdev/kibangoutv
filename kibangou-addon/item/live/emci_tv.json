@@ -1,0 +1,15 @@
+{
+  "id": "emci_tv",
+  "name": "EMCI TV (Enseigne-Moi Canal International)",
+  "type": "live",
+  "url": "https://stream.emcitv.com/live/smil:direct.smil/playlist.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/b/b3/Logo_EMCI_TV.png/512px-Logo_EMCI_TV.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/b/b3/Logo_EMCI_TV.png/512px-Logo_EMCI_TV.png"
+  },
+  "tags": [
+    "Religions",
+    "Évangélique",
+    "Prière"
+  ]
+}

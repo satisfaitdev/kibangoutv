@@ -1,0 +1,15 @@
+{
+  "id": "al_bayane",
+  "name": "AL BAYANE TV (Foi Islamique & Éthique)",
+  "type": "live",
+  "url": "https://video1.getstreamhosting.com:1936/8302/8302/playlist.m3u8",
+  "images": {
+    "logo": "https://i.imgur.com/gK97P92.png",
+    "poster": "https://i.imgur.com/gK97P92.png"
+  },
+  "tags": [
+    "Religions",
+    "Islam",
+    "Spiritualité"
+  ]
+}

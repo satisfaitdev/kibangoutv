@@ -1,0 +1,14 @@
+{
+  "id": "africable",
+  "name": "AFRICABLE (La Chaîne du Continent)",
+  "type": "live",
+  "url": "http://51.254.199.122:8080/africable/index.m3u8",
+  "images": {
+    "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/53/Logo_africable_television.svg/512px-Logo_africable_television.svg.png",
+    "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/53/Logo_africable_television.svg/512px-Logo_africable_television.svg.png"
+  },
+  "tags": [
+    "Afrique",
+    "Culture"
+  ]
+}

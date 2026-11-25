@@ -13,6 +13,10 @@ export default async function handler(req, res) {
 
     if (rawUrl.includes("/kibangou-addon/source/")) {
       subPath = rawUrl.split("/kibangou-addon/source/")[1];
+    } else if (rawUrl.includes("/french-addon/source/")) {
+      subPath = rawUrl.split("/french-addon/source/")[1];
+    } else if (rawUrl.includes("/adult-addon/source/")) {
+      subPath = rawUrl.split("/adult-addon/source/")[1];
     } else if (rawUrl.includes("/source/")) {
       subPath = rawUrl.split("/source/")[1];
     } else {

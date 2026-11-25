@@ -1,0 +1,188 @@
+{
+  "items": [
+    {
+      "id": "1765873640",
+      "name": "A+ (Afrique Séries)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1765873640",
+      "images": {
+        "logo": "/live2/logo/1765873640.png",
+        "poster": "/live2/logo/1765873640.png"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD"
+      ]
+    },
+    {
+      "id": "215687074",
+      "name": "NOVELAS+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/215687074",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Telenovelas",
+        "HD"
+      ]
+    },
+    {
+      "id": "3253805798",
+      "name": "RTL9 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3253805798",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD"
+      ]
+    },
+    {
+      "id": "3638789513",
+      "name": "ACTION FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3638789513",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma",
+        "HD"
+      ]
+    },
+    {
+      "id": "4154938214",
+      "name": "PARAMOUNT CHANNEL FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4154938214",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma",
+        "HD"
+      ]
+    },
+    {
+      "id": "1562445425",
+      "name": "NOLLYWOOD TV",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1562445425",
+      "images": {
+        "logo": "/live2/logo/1562445425.png",
+        "poster": "/live2/logo/1562445425.png"
+      },
+      "tags": [
+        "Nollywood & Séries",
+        "HD"
+      ]
+    },
+    {
+      "id": "eyeye_tv",
+      "name": "EYEYE TV (Afrique)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8306/8306/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "Afrique",
+        "Nollywood"
+      ]
+    },
+    {
+      "id": "zee_magic",
+      "name": "ZEE MAGIC (Séries & Bollywood en Français)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8490/8490/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Zee_Magic_Logo.png/512px-Zee_Magic_Logo.png",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Zee_Magic_Logo.png/512px-Zee_Magic_Logo.png"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "Bollywood",
+        "Français"
+      ]
+    },
+    {
+      "id": "3049436856",
+      "name": "TF1 SÉRIES FILMS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3049436856",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD"
+      ]
+    },
+    {
+      "id": "1257230029",
+      "name": "SÉRIECLUB FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1257230029",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD"
+      ]
+    },
+    {
+      "id": "j3_replay",
+      "name": "J3 REPLAY (Cinéma & Séries Replay)",
+      "type": "live",
+      "url": "https://production-fast-sic.content.okast.tv/fa2e8c4385712f9a7dce4ff2dcebac2e/channels/d9070446-8448-455e-8075-773b1ba12562/d47eae0f-ad77-414a-9a1d-2a6628ba18c3/media_.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "Replay"
+      ]
+    },
+    {
+      "id": "1109038221",
+      "name": "FRÉQUENCE NOVELAS",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1109038221",
+      "images": {
+        "logo": "/live2/logo/1109038221.png",
+        "poster": "/live2/logo/1109038221.png"
+      },
+      "tags": [
+        "Telenovelas",
+        "HD"
+      ]
+    },
+    {
+      "id": "2509363888",
+      "name": "CANAL SÉRIES HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2509363888",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD"
+      ]
+    }
+  ]
+}
