@@ -36,7 +36,28 @@ export default async function handler(req, res) {
       }
     }
 
-    // 2. Redirection vers TMDB pour les métadonnées de Films et Séries
+    // 2. Si l'identifiant est direct sans préfixe de type (ex: tmdb:1726 ou imdb:tt0371746)
+    if (!cleanSub.includes("/")) {
+      const idJson = subPath.includes(".json") ? subPath : `${subPath}.json`;
+      for (const t of ["video", "series"]) {
+        try {
+          const testUrl = `https://www.mhub.mx/tmdb/item/${t}/${idJson}`;
+          const upstream = await fetch(testUrl, {
+            headers: {
+              "User-Agent": "Mozilla/5.0",
+              "Accept": "application/json"
+            }
+          });
+          if (upstream.ok) {
+            const body = await upstream.text();
+            res.setHeader("Content-Type", "application/json; charset=utf-8");
+            return res.status(200).send(body);
+          }
+        } catch (e) {}
+      }
+    }
+
+    // 3. Redirection vers TMDB pour les métadonnées de Films et Séries
     const tmdbUrl = `https://www.mhub.mx/tmdb/item/${subPath}`;
     const upstream = await fetch(tmdbUrl, {
       headers: {

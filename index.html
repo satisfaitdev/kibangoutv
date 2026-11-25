@@ -1197,11 +1197,11 @@
       // 3. Bottom Nav (Mobile)
       const bnav = document.querySelector(".bnav");
       if (bnav) {
-        // Masquer Recherche et Paramètres dans la bottom nav sur mobile
+        // Suppression définitive de Recherche et Paramètres dans la bottom nav sur mobile
         const bnavSearch = bnav.querySelector('a[href="#/search"], a[href*="search"]');
-        if (bnavSearch) bnavSearch.style.setProperty('display', 'none', 'important');
+        if (bnavSearch) bnavSearch.remove();
         const bnavSettings = bnav.querySelector('a[href="#/settings"], a[href*="settings"]');
-        if (bnavSettings) bnavSettings.style.setProperty('display', 'none', 'important');
+        if (bnavSettings) bnavSettings.remove();
 
         if (!bnav.querySelector("#bnav-films")) {
           const bChannels = bnav.querySelector('a[href^="#/channels"]');
@@ -1237,8 +1237,8 @@
         }
       }
 
-      // 5. Suppression des éléments Social
-      document.querySelectorAll('a[href="#/social"]').forEach(el => el.remove());
+      // 5. Suppression impitoyable des éléments Social, bouton flottant et bouton Inviter du player
+      document.querySelectorAll('a[href="#/social"], .player-action-invite, [class*="player-action-invite"], button[data-key="i"], button[data-key="I"], button[aria-label*="Inviter"], button[aria-label*="invit"], .sc-track, .sc-slot, .sc-pill, .sc-covers, .sc-plus, .sc-badge').forEach(el => el.remove());
 
       // 6. Nettoyage de la page Réglages (#/settings) et injection de la carte Déconnexion
       if (location.hash.startsWith("#/settings")) {

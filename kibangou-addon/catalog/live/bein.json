@@ -1,54 +1,6 @@
 {
   "items": [
     {
-      "id": "1363827223",
-      "name": "BEIN 1 FEED (720P) (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1363827223",
-      "images": {
-        "logo": "/live2/logo/1363827223.png",
-        "poster": "/live2/logo/1363827223.png"
-      },
-      "tags": [
-        "Turkey"
-      ],
-      "ids": {
-        "tvg": "beinsports1.tr"
-      }
-    },
-    {
-      "id": "2930746102",
-      "name": "BEIN BOX OFFICE 1 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2930746102",
-      "images": {
-        "logo": "/live2/logo/2930746102.png",
-        "poster": "/live2/logo/2930746102.png"
-      },
-      "tags": [
-        "Turkey"
-      ],
-      "ids": {
-        "tvg": "beINBoxOffice1.tr"
-      }
-    },
-    {
-      "id": "2500913164",
-      "name": "BEIN MOVIES STARS (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2500913164",
-      "images": {
-        "logo": "/live2/logo/2500913164.png",
-        "poster": "/live2/logo/2500913164.png"
-      },
-      "tags": [
-        "Turkey"
-      ],
-      "ids": {
-        "tvg": "beINMoviesStars.tr"
-      }
-    },
-    {
       "id": "3844916882",
       "name": "BEIN SPORTS 1 (1)",
       "type": "live",
@@ -65,14 +17,14 @@
       },
       "epg": [
         {
-          "title": "Basket-ball : NBA",
-          "start": "2026-11-25T10:00:00Z",
-          "end": "2026-11-25T11:45:00Z"
-        },
-        {
           "title": "NBA Extra",
           "start": "2026-11-25T11:45:00Z",
           "end": "2026-11-25T12:30:00Z"
+        },
+        {
+          "title": "Ça se passe sur beIN SPORTS",
+          "start": "2026-11-25T12:30:00Z",
+          "end": "2026-11-25T12:45:00Z"
         }
       ]
     },
@@ -93,14 +45,14 @@
       },
       "epg": [
         {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "ATP Review",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "ATP Classic",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
         }
       ]
     },
@@ -121,42 +73,14 @@
       },
       "epg": [
         {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "ATP Review",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1550443751",
-      "name": "BEIN SPORTS 1 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1550443751",
-      "images": {
-        "logo": "/live2/logo/1550443751.png",
-        "poster": "/live2/logo/1550443751.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "beINSports1.au"
-      },
-      "epg": [
-        {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
         },
         {
-          "title": "ATP Review",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
+          "title": "ATP Classic",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
         }
       ]
     },
@@ -177,32 +101,44 @@
       },
       "epg": [
         {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "ATP Review",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "ATP Classic",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
         }
       ]
     },
     {
-      "id": "2729088606",
-      "name": "BEIN SPORTS 1 FEED (6)",
+      "id": "181449693",
+      "name": "BEIN SPORTS 1 [LIVE DURING EVENTS ONLY] (7)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/2729088606",
+      "url": "https://www.vavoo.to/live/play/181449693",
       "images": {
-        "logo": "/live2/logo/2729088606.png",
-        "poster": "/live2/logo/2729088606.png"
+        "logo": "/live2/logo/181449693.png",
+        "poster": "/live2/logo/181449693.png"
       },
       "tags": [
-        "Turkey"
+        "France"
       ],
       "ids": {
-        "tvg": "BeinSports1Feed.tr"
-      }
+        "tvg": "BeinSports1LiveDuringEventsOnly.fr"
+      },
+      "epg": [
+        {
+          "title": "ATP Review",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "ATP Classic",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
+        }
+      ]
     },
     {
       "id": "3472596589",
@@ -221,14 +157,14 @@
       },
       "epg": [
         {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "ATP Review",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "ATP Classic",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
         }
       ]
     },
@@ -249,14 +185,14 @@
       },
       "epg": [
         {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "ATP Review",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "ATP Classic",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
         }
       ]
     },
@@ -277,14 +213,14 @@
       },
       "epg": [
         {
-          "title": "Basket-ball : NBA",
-          "start": "2026-11-25T10:00:00Z",
-          "end": "2026-11-25T11:45:00Z"
-        },
-        {
           "title": "NBA Extra",
           "start": "2026-11-25T11:45:00Z",
           "end": "2026-11-25T12:30:00Z"
+        },
+        {
+          "title": "Ça se passe sur beIN SPORTS",
+          "start": "2026-11-25T12:30:00Z",
+          "end": "2026-11-25T12:45:00Z"
         }
       ]
     },
@@ -305,102 +241,14 @@
       },
       "epg": [
         {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "ATP Review",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "679604721",
-      "name": "BEIN SPORTS 1 HQ (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/679604721",
-      "images": {
-        "logo": "/live2/logo/679604721.png",
-        "poster": "/live2/logo/679604721.png"
-      },
-      "tags": [
-        "Arabia"
-      ],
-      "ids": {
-        "tvg": "BeinSports1Hq.sa"
-      }
-    },
-    {
-      "id": "2902511239",
-      "name": "BEIN SPORTS 1 PL (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2902511239",
-      "images": {
-        "logo": "/live2/logo/2902511239.png",
-        "poster": "/live2/logo/2902511239.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "beINSports1.au"
-      }
-    },
-    {
-      "id": "181449693",
-      "name": "BEIN SPORTS 1 [LIVE DURING EVENTS ONLY] (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/181449693",
-      "images": {
-        "logo": "/live2/logo/181449693.png",
-        "poster": "/live2/logo/181449693.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "BeinSports1LiveDuringEventsOnly.fr"
-      },
-      "epg": [
-        {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
         },
         {
-          "title": "ATP Review",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3428984703",
-      "name": "BEIN SPORTS 1 [LIVE DURING EVENTS ONLY] (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3428984703",
-      "images": {
-        "logo": "/live2/logo/3428984703.png",
-        "poster": "/live2/logo/3428984703.png"
-      },
-      "tags": [
-        "Turkey"
-      ],
-      "ids": {
-        "tvg": "BeinSports1LiveDuringEventsOnly.tr"
-      },
-      "epg": [
-        {
-          "title": "ATP",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "ATP Review",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
+          "title": "ATP Classic",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
         }
       ]
     },
@@ -474,34 +322,6 @@
       ],
       "ids": {
         "tvg": "BeinSports2.fr"
-      },
-      "epg": [
-        {
-          "title": "PSG TV",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        },
-        {
-          "title": "This Is Paris",
-          "start": "2026-11-25T13:00:00Z",
-          "end": "2026-11-25T13:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "466198071",
-      "name": "BEIN SPORTS 2 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/466198071",
-      "images": {
-        "logo": "/live2/logo/466198071.png",
-        "poster": "/live2/logo/466198071.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "beINSports2.au"
       },
       "epg": [
         {
@@ -673,14 +493,14 @@
       },
       "epg": [
         {
-          "title": "Football américain : NFL",
-          "start": "2026-11-25T09:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "NFL Extra",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T12:45:00Z"
+        },
+        {
+          "title": "Ça se passe sur beIN SPORTS",
+          "start": "2026-11-25T12:45:00Z",
+          "end": "2026-11-25T13:00:00Z"
         }
       ]
     },
@@ -726,34 +546,6 @@
       ],
       "ids": {
         "tvg": "BeinSports3.fr"
-      },
-      "epg": [
-        {
-          "title": "EFL Championship",
-          "start": "2026-11-25T11:00:00Z",
-          "end": "2026-11-25T12:50:00Z"
-        },
-        {
-          "title": "EFL Classic",
-          "start": "2026-11-25T12:50:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "648656775",
-      "name": "BEIN SPORTS 3 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/648656775",
-      "images": {
-        "logo": "/live2/logo/648656775.png",
-        "poster": "/live2/logo/648656775.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "beINSports3.au"
       },
       "epg": [
         {
@@ -869,14 +661,14 @@
       },
       "epg": [
         {
-          "title": "Football américain : NFL",
-          "start": "2026-11-25T09:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "NFL Extra",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T12:45:00Z"
+        },
+        {
+          "title": "Ça se passe sur beIN SPORTS",
+          "start": "2026-11-25T12:45:00Z",
+          "end": "2026-11-25T13:00:00Z"
         }
       ]
     },
@@ -909,82 +701,6 @@
       ]
     },
     {
-      "id": "2113462398",
-      "name": "BEIN SPORTS 8K FEED (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2113462398",
-      "images": {
-        "logo": "/live2/logo/2113462398.png",
-        "poster": "/live2/logo/2113462398.png"
-      },
-      "tags": [
-        "Turkey"
-      ],
-      "ids": {
-        "tvg": "BeinSports8KFeed.tr"
-      }
-    },
-    {
-      "id": "3620837545",
-      "name": "BEIN SPORTS ENGLISH 2 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3620837545",
-      "images": {
-        "logo": "/live2/logo/3620837545.png",
-        "poster": "/live2/logo/3620837545.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "beIN.Sports.HD.ae"
-      },
-      "epg": [
-        {
-          "title": "Italy Vs Netherlands - Beach Volleyball Gold Medal - 2026 Youth Olympic Games – Dakar",
-          "start": "2026-11-25T11:40:00Z",
-          "end": "2026-11-25T12:40:00Z"
-        },
-        {
-          "title": "Germany Vs Austria - Beach Volleyball Gold Medal - 2026 Youth Olympic Games – Dakar",
-          "start": "2026-11-25T12:40:00Z",
-          "end": "2026-11-25T14:15:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3939390473",
-      "name": "BEIN SPORTS LA LIGA (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3939390473",
-      "images": {
-        "logo": "/live2/logo/3939390473.png",
-        "poster": "/live2/logo/3939390473.png"
-      },
-      "tags": [
-        "Spain"
-      ],
-      "ids": {
-        "tvg": "BeinSportsLaLiga.es"
-      }
-    },
-    {
-      "id": "1338646069",
-      "name": "BEIN SPORTS LA LIGA (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1338646069",
-      "images": {
-        "logo": "/live2/logo/1338646069.png",
-        "poster": "/live2/logo/1338646069.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "BeinSportsLaLiga.gb"
-      }
-    },
-    {
       "id": "3123667785",
       "name": "BEIN SPORTS MAX 10 (1)",
       "type": "live",
@@ -1002,13 +718,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1030,13 +746,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1058,13 +774,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1086,13 +802,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1114,13 +830,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1142,13 +858,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T19:55:00Z"
         }
       ]
     },
@@ -1170,13 +886,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T19:55:00Z"
         }
       ]
     },
@@ -1198,13 +914,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T19:55:00Z"
         }
       ]
     },
@@ -1226,13 +942,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T19:55:00Z"
         }
       ]
     },
@@ -1254,13 +970,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         }
       ]
     },
@@ -1282,13 +998,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T19:55:00Z"
         }
       ]
     },
@@ -1310,13 +1026,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1338,13 +1054,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1366,13 +1082,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1394,13 +1110,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1422,13 +1138,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         }
       ]
     },
@@ -1450,13 +1166,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1478,13 +1194,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1506,13 +1222,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1534,13 +1250,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1562,13 +1278,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1590,13 +1306,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1618,13 +1334,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1646,13 +1362,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1674,13 +1390,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1702,13 +1418,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1730,13 +1446,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1758,13 +1474,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         }
       ]
     },
@@ -1786,13 +1502,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1814,13 +1530,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1842,13 +1558,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1870,13 +1586,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1898,13 +1614,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1926,13 +1642,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         }
       ]
     },
@@ -1954,13 +1670,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -1982,13 +1698,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -2010,13 +1726,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
     },
@@ -2038,13 +1754,13 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         }
       ]
     },
@@ -2066,59 +1782,15 @@
       "epg": [
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T08:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         },
         {
           "title": "beIN SPORTS, le plus grand des spectacles",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T16:00:00Z"
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
         }
       ]
-    },
-    {
-      "id": "2404725296",
-      "name": "BEIN SPORTS USA (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2404725296",
-      "images": {
-        "logo": "/live2/logo/2404725296.png",
-        "poster": "/live2/logo/2404725296.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "beIN.Sports.USA.HD.us2"
-      },
-      "epg": [
-        {
-          "title": "Paid Programming",
-          "start": "2026-11-25T11:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "Paid Programming",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T12:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "979824657",
-      "name": "BEIN SPORTS XTRA Ñ (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/979824657",
-      "images": {
-        "logo": "/live2/logo/979824657.png",
-        "poster": "/live2/logo/979824657.png"
-      },
-      "tags": [
-        "Spain"
-      ],
-      "ids": {
-        "tvg": "BeinSportsXtra.es"
-      }
     },
     {
       "id": "2941093452",
@@ -2145,85 +1817,6 @@
           "title": "Serie A Top Goals 26/27",
           "start": "2026-11-25T12:15:00Z",
           "end": "2026-11-25T12:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3567590597",
-      "name": "DAZN 1 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3567590597",
-      "images": {
-        "logo": "/live2/logo/3567590597.png",
-        "poster": "/live2/logo/3567590597.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Dazn1.fr"
-      },
-      "epg": [
-        {
-          "title": "LaLiga 26/27",
-          "start": "2026-11-25T10:20:00Z",
-          "end": "2026-11-25T12:15:00Z"
-        },
-        {
-          "title": "Serie A Top Goals 26/27",
-          "start": "2026-11-25T12:15:00Z",
-          "end": "2026-11-25T12:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1376440573",
-      "name": "DAZN 1 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1376440573",
-      "images": {
-        "logo": "/live2/logo/1376440573.png",
-        "poster": "/live2/logo/1376440573.png"
-      },
-      "tags": [
-        "Italy"
-      ],
-      "ids": {
-        "tvg": "Dazn1.it"
-      },
-      "epg": [
-        {
-          "title": "LaLiga 26/27",
-          "start": "2026-11-25T10:20:00Z",
-          "end": "2026-11-25T12:15:00Z"
-        },
-        {
-          "title": "Serie A Top Goals 26/27",
-          "start": "2026-11-25T12:15:00Z",
-          "end": "2026-11-25T12:30:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2686192037",
-      "name": "DAZN 1 BAR HD+ (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2686192037",
-      "images": {
-        "logo": "/live2/logo/2686192037.png",
-        "poster": "/live2/logo/2686192037.png"
-      },
-      "tags": [
-        "Germany"
-      ],
-      "ids": {
-        "tvg": "Dazn1Bar.de"
-      },
-      "epg": [
-        {
-          "title": "Eishockey: NHL",
-          "start": "2026-11-25T10:30:00Z",
-          "end": "2026-11-25T19:49:00Z"
         }
       ]
     },
@@ -2256,54 +1849,6 @@
       ]
     },
     {
-      "id": "1063360744",
-      "name": "DAZN 2 BAR HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1063360744",
-      "images": {
-        "logo": "/live2/logo/1063360744.png",
-        "poster": "/live2/logo/1063360744.png"
-      },
-      "tags": [
-        "Germany"
-      ],
-      "ids": {
-        "tvg": "Dazn2Bar.de"
-      }
-    },
-    {
-      "id": "500589931",
-      "name": "DAZN 2 BAR HD+ (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/500589931",
-      "images": {
-        "logo": "/live2/logo/500589931.png",
-        "poster": "/live2/logo/500589931.png"
-      },
-      "tags": [
-        "Germany"
-      ],
-      "ids": {
-        "tvg": "Dazn2Bar.de"
-      }
-    },
-    {
-      "id": "2587190923",
-      "name": "DAZN 2 LEAUGE 1 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2587190923",
-      "images": {
-        "logo": "/live2/logo/2587190923.png",
-        "poster": "/live2/logo/2587190923.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Dazn2Leauge1.fr"
-      }
-    },
-    {
       "id": "3582842156",
       "name": "DAZN 3 (6)",
       "type": "live",
@@ -2320,32 +1865,16 @@
       },
       "epg": [
         {
-          "title": "Liga Endesa",
-          "start": "2026-11-25T10:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
           "title": "SL Benfica x Ovarense - Liga Betclic Basquetebol Masculino",
           "start": "2026-11-25T12:00:00Z",
           "end": "2026-11-25T14:00:00Z"
+        },
+        {
+          "title": "Hull City x Brighton & Hove Albion - Premier League",
+          "start": "2026-11-25T14:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
         }
       ]
-    },
-    {
-      "id": "121276413",
-      "name": "DAZN 3 LEAUGE 1 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/121276413",
-      "images": {
-        "logo": "/live2/logo/121276413.png",
-        "poster": "/live2/logo/121276413.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Dazn3Leauge1.fr"
-      }
     },
     {
       "id": "1739393340",
@@ -2374,22 +1903,6 @@
           "end": "2026-11-25T12:45:00Z"
         }
       ]
-    },
-    {
-      "id": "222932870",
-      "name": "DAZN EVENT 3 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/222932870",
-      "images": {
-        "logo": "/live2/logo/222932870.png",
-        "poster": "/live2/logo/222932870.png"
-      },
-      "tags": [
-        "Germany"
-      ],
-      "ids": {
-        "tvg": "DaznEvent3.de"
-      }
     },
     {
       "id": "3129220252",
@@ -2504,448 +2017,217 @@
       ]
     },
     {
-      "id": "1224881617",
-      "name": "DAZN LIGUE 1 LIVE 1 HD (1)",
+      "id": "2178025822",
+      "name": "LALIGA TV BAR (1)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/1224881617",
+      "url": "https://www.vavoo.to/live/play/2178025822",
       "images": {
-        "logo": "/live2/logo/1224881617.png",
-        "poster": "/live2/logo/1224881617.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "DaznLigue1Live1.fr"
-      }
-    },
-    {
-      "id": "187118252",
-      "name": "DAZN LIGUE 1 LIVE 3 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/187118252",
-      "images": {
-        "logo": "/live2/logo/187118252.png",
-        "poster": "/live2/logo/187118252.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "DaznLigue1Live3.fr"
-      }
-    },
-    {
-      "id": "2078862937",
-      "name": "4K TR: EUROSPORT 1 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2078862937",
-      "images": {
-        "logo": "/live2/logo/2078862937.png",
-        "poster": "/live2/logo/2078862937.png"
-      },
-      "tags": [
-        "Turkey"
-      ],
-      "ids": {
-        "tvg": "TrEurosport1.tr"
-      }
-    },
-    {
-      "id": "4117227962",
-      "name": "4K TR: EUROSPORT 2 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/4117227962",
-      "images": {
-        "logo": "/live2/logo/4117227962.png",
-        "poster": "/live2/logo/4117227962.png"
-      },
-      "tags": [
-        "Turkey"
-      ],
-      "ids": {
-        "tvg": "TrEurosport2.tr"
-      }
-    },
-    {
-      "id": "2935192752",
-      "name": "EUROSPORT 1 (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2935192752",
-      "images": {
-        "logo": "/live2/logo/2935192752.png",
-        "poster": "/live2/logo/2935192752.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Eurosport1.fr"
-      },
-      "epg": [
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T11:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "Radsport",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:15:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3481346857",
-      "name": "EUROSPORT 1 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3481346857",
-      "images": {
-        "logo": "/live2/logo/3481346857.png",
-        "poster": "/live2/logo/3481346857.png"
-      },
-      "tags": [
-        "Italy"
-      ],
-      "ids": {
-        "tvg": "Eurosport1.it"
-      },
-      "epg": [
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T11:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "Radsport",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:15:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3719734336",
-      "name": "EUROSPORT 1 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3719734336",
-      "images": {
-        "logo": "/live2/logo/3719734336.png",
-        "poster": "/live2/logo/3719734336.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Eurosport1.fr"
-      },
-      "epg": [
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T11:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "Radsport",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:15:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3448075317",
-      "name": "EUROSPORT 1 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3448075317",
-      "images": {
-        "logo": "/live2/logo/3448075317.png",
-        "poster": "/live2/logo/3448075317.png"
-      },
-      "tags": [
-        "Italy"
-      ],
-      "ids": {
-        "tvg": "Eurosport1.it"
-      }
-    },
-    {
-      "id": "3513558830",
-      "name": "EUROSPORT 1 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3513558830",
-      "images": {
-        "logo": "/live2/logo/3513558830.png",
-        "poster": "/live2/logo/3513558830.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Eurosport1.fr"
-      },
-      "epg": [
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T11:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "Radsport",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:15:00Z"
-        }
-      ]
-    },
-    {
-      "id": "3618771655",
-      "name": "EUROSPORT 1 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3618771655",
-      "images": {
-        "logo": "/live2/logo/3618771655.png",
-        "poster": "/live2/logo/3618771655.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "Abu.Dhabi.HD.ae"
-      }
-    },
-    {
-      "id": "2172924275",
-      "name": "EUROSPORT 1 FHD (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2172924275",
-      "images": {
-        "logo": "/live2/logo/2172924275.png",
-        "poster": "/live2/logo/2172924275.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Eurosport1.fr"
-      },
-      "epg": [
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T11:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "Radsport",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:15:00Z"
-        }
-      ]
-    },
-    {
-      "id": "1801327897",
-      "name": "EUROSPORT 1 HD (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/1801327897",
-      "images": {
-        "logo": "/live2/logo/1801327897.png",
-        "poster": "/live2/logo/1801327897.png"
-      },
-      "tags": [
-        "France"
-      ],
-      "ids": {
-        "tvg": "Eurosport1.fr"
-      },
-      "epg": [
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T11:30:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "Radsport",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:15:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2283887097",
-      "name": "EUROSPORT 2 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2283887097",
-      "images": {
-        "logo": "/live2/logo/2283887097.png",
-        "poster": "/live2/logo/2283887097.png"
-      },
-      "tags": [
-        "Italy"
-      ],
-      "ids": {
-        "tvg": "Eurosport2.it"
-      },
-      "epg": [
-        {
-          "title": "World Snooker Tour",
-          "start": "2026-11-25T10:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        }
-      ]
-    },
-    {
-      "id": "2670144662",
-      "name": "EUROSPORT 2 (6)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2670144662",
-      "images": {
-        "logo": "/live2/logo/2670144662.png",
-        "poster": "/live2/logo/2670144662.png"
+        "logo": "/live2/logo/2178025822.png",
+        "poster": "/live2/logo/2178025822.png"
       },
       "tags": [
         "Spain"
       ],
       "ids": {
-        "tvg": "Eurosport2.es"
+        "tvg": "LaLigaTVBar.es"
       },
-      "epg": [
-        {
-          "title": "World Snooker Tour",
-          "start": "2026-11-25T10:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
-        },
-        {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
-        }
-      ]
+      "epg": []
     },
     {
-      "id": "2317684453",
-      "name": "EUROSPORT 2 (7)",
+      "id": "1980907224",
+      "name": "LALIGA TV BAR (6)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/2317684453",
+      "url": "https://www.vavoo.to/live/play/1980907224",
       "images": {
-        "logo": "/live2/logo/2317684453.png",
-        "poster": "/live2/logo/2317684453.png"
-      },
-      "tags": [
-        "Italy"
-      ],
-      "ids": {
-        "tvg": "Eurosport2.it"
-      }
-    },
-    {
-      "id": "2417125399",
-      "name": "EUROSPORT 2 (7)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/2417125399",
-      "images": {
-        "logo": "/live2/logo/2417125399.png",
-        "poster": "/live2/logo/2417125399.png"
-      },
-      "tags": [
-        "United Kingdom"
-      ],
-      "ids": {
-        "tvg": "Abu.Dhabi.HD.ae"
-      }
-    },
-    {
-      "id": "3474692336",
-      "name": "EUROSPORT 2 (BACKUP) (1)",
-      "type": "live",
-      "url": "https://www.vavoo.to/live/play/3474692336",
-      "images": {
-        "logo": "/live2/logo/3474692336.png",
-        "poster": "/live2/logo/3474692336.png"
+        "logo": "/live2/logo/1980907224.png",
+        "poster": "/live2/logo/1980907224.png"
       },
       "tags": [
         "Spain"
       ],
       "ids": {
-        "tvg": "Eurosport2.es"
+        "tvg": "LaLigaTVBar.es"
       },
       "epg": [
         {
-          "title": "World Snooker Tour",
-          "start": "2026-11-25T10:00:00Z",
-          "end": "2026-11-25T12:00:00Z"
+          "title": "Mañaneros 360",
+          "start": "2026-11-25T09:36:00Z",
+          "end": "2026-11-25T13:55:00Z"
         },
         {
-          "title": "FIS Ski Alpin Weltcup",
-          "start": "2026-11-25T12:00:00Z",
-          "end": "2026-11-25T13:00:00Z"
+          "title": "Telediario 1",
+          "start": "2026-11-25T13:55:00Z",
+          "end": "2026-11-25T14:31:00Z"
         }
       ]
     },
     {
-      "id": "597408884",
-      "name": "EUROSPORT 360 1 [LIVE DURING EVENTS ONLY] (7)",
+      "id": "3958277473",
+      "name": "LALIGA TV HYPERMOTION (6)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/597408884",
+      "url": "https://www.vavoo.to/live/play/3958277473",
       "images": {
-        "logo": "/live2/logo/597408884.png",
-        "poster": "/live2/logo/597408884.png"
+        "logo": "/live2/logo/3958277473.png",
+        "poster": "/live2/logo/3958277473.png"
       },
       "tags": [
-        "France"
+        "Spain"
       ],
       "ids": {
-        "tvg": "Eurosport360HD1.fr"
-      }
+        "tvg": "LaligaTvHypermotion.es"
+      },
+      "epg": [
+        {
+          "title": "LaLiga TV Hypermotion",
+          "start": "2026-11-25T09:30:00Z",
+          "end": "2026-11-25T13:30:00Z"
+        },
+        {
+          "title": "LaLiga TV Hypermotion",
+          "start": "2026-11-25T13:30:00Z",
+          "end": "2026-11-25T17:30:00Z"
+        }
+      ]
     },
     {
-      "id": "1668185301",
-      "name": "EUROSPORT 4 TIMVISION (6)",
+      "id": "899887126",
+      "name": "LALIGA TV HYPERMOTION 2 (6)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/1668185301",
+      "url": "https://www.vavoo.to/live/play/899887126",
       "images": {
-        "logo": "/live2/logo/1668185301.png",
-        "poster": "/live2/logo/1668185301.png"
+        "logo": "/live2/logo/899887126.png",
+        "poster": "/live2/logo/899887126.png"
       },
       "tags": [
-        "Italy"
+        "Spain"
       ],
       "ids": {
-        "tvg": "Eurosport4Timvision.it"
-      }
+        "tvg": "LaligaTvHypermotion2.es"
+      },
+      "epg": [
+        {
+          "title": "LaLiga TV Hypermotion 2",
+          "start": "2026-11-25T12:00:00Z",
+          "end": "2026-11-25T16:00:00Z"
+        },
+        {
+          "title": "LaLiga TV Hypermotion 2",
+          "start": "2026-11-25T16:00:00Z",
+          "end": "2026-11-25T20:00:00Z"
+        }
+      ]
     },
     {
-      "id": "3421031748",
-      "name": "EUROSPORT 6 TIMVISION (6)",
+      "id": "147003814",
+      "name": "LALIGA TV HYPERMOTION 3 (6)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/3421031748",
+      "url": "https://www.vavoo.to/live/play/147003814",
       "images": {
-        "logo": "/live2/logo/3421031748.png",
-        "poster": "/live2/logo/3421031748.png"
+        "logo": "/live2/logo/147003814.png",
+        "poster": "/live2/logo/147003814.png"
       },
       "tags": [
-        "Italy"
+        "Spain"
       ],
       "ids": {
-        "tvg": "Eurosport6Timvision.it"
-      }
+        "tvg": "LaligaTvHypermotion3.es"
+      },
+      "epg": [
+        {
+          "title": "LaLiga TV Hypermotion 3",
+          "start": "2026-11-25T09:00:00Z",
+          "end": "2026-11-25T13:00:00Z"
+        },
+        {
+          "title": "LaLiga TV Hypermotion 3",
+          "start": "2026-11-25T13:00:00Z",
+          "end": "2026-11-25T17:00:00Z"
+        }
+      ]
     },
     {
-      "id": "3547851801",
-      "name": "EUROSPORT HD (7)",
+      "id": "3996529465",
+      "name": "M+ LALIGA (6)",
       "type": "live",
-      "url": "https://www.vavoo.to/live/play/3547851801",
+      "url": "https://www.vavoo.to/live/play/3996529465",
       "images": {
-        "logo": "/live2/logo/3547851801.png",
-        "poster": "/live2/logo/3547851801.png"
+        "logo": "/live2/logo/3996529465.png",
+        "poster": "/live2/logo/3996529465.png"
       },
       "tags": [
-        "United Kingdom"
+        "Spain"
       ],
       "ids": {
-        "tvg": "Eurosport.gb"
-      }
+        "tvg": "MLaliga.es"
+      },
+      "epg": [
+        {
+          "title": "LALIGA HYPERMOTION (T26/27): Real Sporting - UD Las Palmas",
+          "start": "2026-11-25T11:55:00Z",
+          "end": "2026-11-25T13:55:00Z"
+        },
+        {
+          "title": "Resúmenes LALIGA EA Sports (T26/27): Deportivo Alavés - RC Deportivo",
+          "start": "2026-11-25T13:55:00Z",
+          "end": "2026-11-25T14:07:00Z"
+        }
+      ]
+    },
+    {
+      "id": "2761614279",
+      "name": "MOVISTAR LIGA DE CAMPEONES 3 HD (ONLY EVENT) (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2761614279",
+      "images": {
+        "logo": "/live2/logo/2761614279.png",
+        "poster": "/live2/logo/2761614279.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "LigadeCampeones3porMovistarPlusPlus.es"
+      },
+      "epg": [
+        {
+          "title": "M+ Liga de Campeones 3",
+          "start": "2026-11-25T07:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
+        },
+        {
+          "title": "M+ Liga de Campeones 3",
+          "start": "2026-11-25T14:00:00Z",
+          "end": "2026-11-25T17:38:00Z"
+        }
+      ]
+    },
+    {
+      "id": "3447547295",
+      "name": "MOVISTAR LIGA DE CAMPEONES 4 HD (ONLY EVENT) (1)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3447547295",
+      "images": {
+        "logo": "/live2/logo/3447547295.png",
+        "poster": "/live2/logo/3447547295.png"
+      },
+      "tags": [
+        "Spain"
+      ],
+      "ids": {
+        "tvg": "LigadeCampeones4porMovistarPlusPlus.es"
+      },
+      "epg": [
+        {
+          "title": "Movistar Liga de Campeones 4",
+          "start": "2026-11-25T10:00:00Z",
+          "end": "2026-11-25T14:00:00Z"
+        },
+        {
+          "title": "Movistar Liga de Campeones 4",
+          "start": "2026-11-25T14:00:00Z",
+          "end": "2026-11-25T18:00:00Z"
+        }
+      ]
     }
   ]
 }

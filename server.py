@@ -280,6 +280,24 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 except Exception as e:
                     print("Error serving kibangou manifest:", e)
 
+        # 0b2. Résolution directe des identifiants TMDB / IMDb orphelins (ex: /tmdb:1726)
+        if clean_path.startswith("/tmdb:") or clean_path.startswith("/imdb:"):
+            clean_id = clean_path.lstrip("/").split("?")[0].replace(".json", "")
+            for mt in ["video", "series"]:
+                tmdb_url = f"https://www.mhub.mx/tmdb/item/{mt}/{clean_id}.json"
+                try:
+                    req = urllib.request.Request(tmdb_url, headers={"User-Agent": "Mozilla/5.0"})
+                    with urllib.request.urlopen(req, timeout=4) as tr:
+                        data = tr.read()
+                        self.send_response(200)
+                        self.send_header("Content-Type", "application/json; charset=utf-8")
+                        self.send_header("Content-Length", str(len(data)))
+                        self.end_headers()
+                        self.wfile.write(data)
+                        return
+                except Exception:
+                    pass
+
         # 0c. Interception de secours des segments TS / M3U8 relatifs orphelins (ex: /6b0585cf_84.ts)
         if (".ts" in self.path or ".m3u8" in self.path) and not self.path.startswith("/api/proxy?url="):
             seg_name = self.path.split("?", 1)[0].split("/")[-1]
@@ -383,35 +401,68 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             if len(parts) >= 2:
                 stype = parts[0]
                 sid = parts[1]
+                segs = sid.split(":")
+                is_episode = len(segs) >= 3 or stype == "series"
+                main_id = segs[1] if len(segs) > 1 else sid
+                season = segs[2] if len(segs) >= 3 else "1"
+                episode = segs[3] if len(segs) >= 4 else "1"
                 imdb_id = ""
-                season = "1"
-                episode = "1"
 
-                if sid.startswith("tmdb:"):
-                    segs = sid.split(":")
-                    tmdb_num = segs[1]
-                    if len(segs) >= 4:
-                        season = segs[2]
-                        episode = segs[3]
+                if segs[0] == "imdb":
+                    imdb_id = main_id.replace("tt", "")
+                elif segs[0] == "tmdb":
+                    meta_types = ["series", "video"] if is_episode else ["video", "series"]
+                    for mt in meta_types:
+                        try:
+                            tmdb_req = urllib.request.Request(f"https://www.mhub.mx/tmdb/item/{mt}/tmdb:{main_id}.json", headers={"User-Agent": "Mozilla/5.0"})
+                            with urllib.request.urlopen(tmdb_req, timeout=4) as tr:
+                                tdata = json.loads(tr.read().decode())
+                                if "ids" in tdata and "imdb" in tdata["ids"]:
+                                    imdb_id = str(tdata["ids"]["imdb"]).replace("tt", "")
+                                    break
+                        except Exception:
+                            pass
+
+                candidates = []
+                if is_episode:
+                    if imdb_id:
+                        candidates.append(f"https://vavoo.top/vod/source/series/imdb:tt{imdb_id}:{season}:{episode}.json?region=FR&language=fr")
+                        candidates.append(f"https://vavoo.top/vod/source/video/imdb:tt{imdb_id}:{season}:{episode}.json?region=FR&language=fr")
+                    candidates.append(f"https://vavoo.top/vod/source/series/tmdb:{main_id}:{season}:{episode}.json?region=FR&language=fr")
+                    candidates.append(f"https://vavoo.top/vod/source/video/tmdb:{main_id}:{season}:{episode}.json?region=FR&language=fr")
+                else:
+                    if imdb_id:
+                        candidates.append(f"https://vavoo.top/vod/source/video/imdb:tt{imdb_id}.json?region=FR&language=fr")
+                    candidates.append(f"https://vavoo.top/vod/source/video/tmdb:{main_id}.json?region=FR&language=fr")
+                    if imdb_id:
+                        candidates.append(f"https://vavoo.top/vod/source/series/imdb:tt{imdb_id}.json?region=FR&language=fr")
+
+                for cu in candidates:
                     try:
-                        tmdb_req = urllib.request.Request(f"https://www.mhub.mx/tmdb/item/{stype}/tmdb:{tmdb_num}.json", headers={"User-Agent": "Mozilla/5.0"})
-                        with urllib.request.urlopen(tmdb_req, timeout=5) as tr:
-                            tdata = json.loads(tr.read().decode())
-                            if "ids" in tdata and "imdb" in tdata["ids"]:
-                                imdb_id = tdata["ids"]["imdb"].replace("tt", "")
-                    except Exception as te:
-                        print("TMDB to IMDb error in server.py:", te)
-                elif sid.startswith("imdb:"):
-                    segs = sid.split(":")
-                    imdb_id = segs[1].replace("tt", "")
-                    if len(segs) >= 4:
-                        season = segs[2]
-                        episode = segs[3]
+                        req = urllib.request.Request(cu, headers={"User-Agent": "VAVOO/2.6"})
+                        with urllib.request.urlopen(req, timeout=3) as cr:
+                            cdata = cr.read()
+                            try:
+                                parsed = json.loads(cdata.decode('utf-8'))
+                                if parsed.get('sources'):
+                                    cdata = prioritize_french_sources(cdata)
+                                    self.send_response(200)
+                                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                                    self.send_header("Content-Length", str(len(cdata)))
+                                    self.end_headers()
+                                    self.wfile.write(cdata)
+                                    return
+                            except Exception:
+                                pass
+                    except Exception:
+                        pass
 
-                target_id = f"imdb:tt{imdb_id}:{season}:{episode}" if stype == "series" else f"imdb:tt{imdb_id}" if imdb_id else sid
-                vavoo_vod_url = f"https://vavoo.top/vod/source/{stype}/{target_id}.json?region=FR&language=fr"
-                self.path = f"/api/proxy?url={urllib.parse.quote(vavoo_vod_url)}"
-                self.forward_proxy("GET")
+                empty_resp = b'{"sources": []}'
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(empty_resp)))
+                self.end_headers()
+                self.wfile.write(empty_resp)
                 return
 
         # 5. Fichiers statiques normaux

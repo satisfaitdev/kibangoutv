@@ -30,8 +30,7 @@
       "name": "Films Populaires & Box Office",
       "type": "video",
       "options": {
-        "shape": "portrait",
-        "displayName": true
+        "shape": "portrait"
       }
     },
     {
@@ -39,8 +38,7 @@
       "name": "Séries & Nouveautés",
       "type": "series",
       "options": {
-        "shape": "portrait",
-        "displayName": true
+        "shape": "portrait"
       }
     },
     {

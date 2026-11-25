@@ -23,80 +23,98 @@ export default async function handler(req, res) {
     const parts = subPath.split("/").filter(Boolean);
 
     if (parts.length < 2) {
-      return res.status(400).json({ sources: [] });
+      return res.status(200).json({ sources: [] });
     }
 
     const type = parts[0]; // "video" ou "series"
-    let id = parts[1];    // "tmdb:1726", "imdb:tt0371746", ou "imdb:tt2531336:1:1"
+    const rawId = parts[1]; // "tmdb:1726", "tmdb:290826:1:1", "imdb:tt...", etc.
 
-    let imdbId = "";
+    const segments = rawId.split(":");
+    let isEpisode = segments.length >= 3 || type === "series";
+    let prefix = segments[0];
+    let mainId = segments[1] || rawId;
     let season = "1";
     let episode = "1";
 
-    if (id.includes(":")) {
-      const segments = id.split(":");
-      if (segments[0] === "imdb") {
-        imdbId = segments[1];
-        if (segments.length >= 4) {
-          season = segments[2];
-          episode = segments[3];
-        }
-      } else if (segments[0] === "tmdb") {
-        const tmdbNum = segments[1];
-        if (segments.length >= 4) {
-          season = segments[2];
-          episode = segments[3];
-        }
-        // Résolution de l'IMDb ID via l'API TMDB
+    if (segments.length >= 3) {
+      isEpisode = true;
+      season = segments[2];
+      episode = segments[3] || "1";
+    }
+
+    let imdbId = "";
+    if (prefix === "imdb") {
+      imdbId = mainId.replace(/^tt/, "");
+    } else if (prefix === "tmdb") {
+      // Résolution de l'identifiant IMDb auprès de TMDB
+      const metaTypes = isEpisode ? ["series", "video"] : ["video", "series"];
+      for (const mType of metaTypes) {
         try {
-          const tmdbMetaUrl = `https://www.mhub.mx/tmdb/item/${type}/tmdb:${tmdbNum}.json`;
+          const tmdbMetaUrl = `https://www.mhub.mx/tmdb/item/${mType}/tmdb:${mainId}.json`;
           const metaRes = await fetch(tmdbMetaUrl, {
             headers: { "User-Agent": "Mozilla/5.0" }
           });
           if (metaRes.ok) {
             const metaJson = await metaRes.json();
-            if (metaJson.ids && metaJson.ids.imdb) {
-              imdbId = metaJson.ids.imdb.replace(/^tt/, "");
+            if (metaJson && metaJson.ids && metaJson.ids.imdb) {
+              imdbId = String(metaJson.ids.imdb).replace(/^tt/, "");
+              break;
             }
           }
         } catch (e) {
-          console.error("TMDB to IMDb resolution error:", e);
+          // Continuer vers le type suivant
         }
       }
-    } else if (id.startsWith("tt")) {
-      imdbId = id.replace(/^tt/, "");
+    } else if (rawId.startsWith("tt")) {
+      imdbId = rawId.replace(/^tt/, "");
     }
 
-    // Construction de l'URL cible VAVOO VOD
-    let vavooVodUrl = "";
-    if (type === "series") {
-      const targetId = imdbId ? `imdb:tt${imdbId}:${season}:${episode}` : id;
-      vavooVodUrl = `https://vavoo.top/vod/source/series/${targetId}.json?region=FR&language=fr`;
-    } else {
-      const targetId = imdbId ? `imdb:tt${imdbId}` : id;
-      vavooVodUrl = `https://vavoo.top/vod/source/video/${targetId}.json?region=FR&language=fr`;
-    }
-
-    const upstreamRes = await fetch(vavooVodUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "application/json"
+    // Construction de la liste des URLs Vavoo VOD candidates à tester
+    const candidateUrls = [];
+    if (isEpisode) {
+      if (imdbId) {
+        candidateUrls.push(`https://vavoo.top/vod/source/series/imdb:tt${imdbId}:${season}:${episode}.json?region=FR&language=fr`);
+        candidateUrls.push(`https://vavoo.top/vod/source/video/imdb:tt${imdbId}:${season}:${episode}.json?region=FR&language=fr`);
       }
-    });
-
-    if (!upstreamRes.ok) {
-      return res.status(200).json({ sources: [] });
+      candidateUrls.push(`https://vavoo.top/vod/source/series/tmdb:${mainId}:${season}:${episode}.json?region=FR&language=fr`);
+      candidateUrls.push(`https://vavoo.top/vod/source/video/tmdb:${mainId}:${season}:${episode}.json?region=FR&language=fr`);
+    } else {
+      if (imdbId) {
+        candidateUrls.push(`https://vavoo.top/vod/source/video/imdb:tt${imdbId}.json?region=FR&language=fr`);
+      }
+      candidateUrls.push(`https://vavoo.top/vod/source/video/tmdb:${mainId}.json?region=FR&language=fr`);
+      if (imdbId) {
+        candidateUrls.push(`https://vavoo.top/vod/source/series/imdb:tt${imdbId}.json?region=FR&language=fr`);
+      }
     }
 
-    const data = await upstreamRes.json();
-    const rawSources = data.sources || [];
+    let finalSources = [];
+    for (const vUrl of candidateUrls) {
+      try {
+        const vRes = await fetch(vUrl, {
+          headers: {
+            "User-Agent": "VAVOO/2.6",
+            "Accept": "application/json"
+          }
+        });
+        if (vRes.ok) {
+          const vData = await vRes.json();
+          if (vData && Array.isArray(vData.sources) && vData.sources.length > 0) {
+            finalSources = vData.sources;
+            break;
+          }
+        }
+      } catch (err) {
+        // Essayer l'URL suivante
+      }
+    }
 
-    // Priorisation des sources francophones
+    // Priorisation des flux francophones (VF > VOSTFR > Autres)
     const fr = [];
     const en = [];
     const other = [];
 
-    for (const s of rawSources) {
+    for (const s of finalSources) {
       const langs = (s.languages || []).map(l => String(l).toLowerCase());
       const quality = s.quality || "HD";
       const name = s.name || "Serveur";
@@ -110,9 +128,10 @@ export default async function handler(req, res) {
       }
     }
 
-    data.sources = [...fr, ...en, ...other];
     res.setHeader("Content-Type", "application/json; charset=utf-8");
-    return res.status(200).json(data);
+    return res.status(200).json({
+      sources: [...fr, ...en, ...other]
+    });
 
   } catch (err) {
     console.error("Kibangou Source API Error:", err);
