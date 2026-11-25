@@ -8,8 +8,7 @@
   "resources": [
     "catalog",
     "item",
-    "source",
-    "resolve"
+    "source"
   ],
   "types": [
     "video",

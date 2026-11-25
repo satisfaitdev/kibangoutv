@@ -1,3 +1,5 @@
+import { sortAndLabelSources } from "./_sources.js";
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD");
@@ -125,34 +127,7 @@ export default async function handler(req, res) {
     // 2. VOD Sources filtering & French language prioritization
     if (finalUrl.includes("/vod/source/")) {
       const data = await upstreamRes.json();
-      const rawSources = (data.sources || []).filter((s) => {
-        const u = (s.url || "").toLowerCase();
-        return u && !u.includes("vidoza.");
-      });
-
-      if (rawSources.length > 0) {
-        const fr = [];
-        const en = [];
-        const other = [];
-
-        for (const s of rawSources) {
-          const langs = (s.languages || []).map((l) => String(l).toLowerCase());
-          const quality = s.quality || "HD";
-          const name = s.name || "Serveur";
-
-          if (langs.includes("fr")) {
-            fr.push({ ...s, name: `🇫🇷 Français VF (${quality})` });
-          } else if (langs.includes("en")) {
-            en.push({ ...s, name: `🇬🇧 VO / VOSTFR (${quality})` });
-          } else {
-            other.push({ ...s, name: `🌐 ${name} (${langs.join(",").toUpperCase()})` });
-          }
-        }
-        data.sources = [...fr, ...en, ...other];
-      } else {
-        data.sources = [];
-      }
-
+      data.sources = sortAndLabelSources(data.sources || []);
       const out = Buffer.from(JSON.stringify(data), "utf-8");
       res.setHeader("Content-Type", "application/json; charset=utf-8");
       res.setHeader("Content-Length", out.length);
@@ -166,6 +141,9 @@ export default async function handler(req, res) {
     if (isM3u8Url || isM3u8Type) {
       const text = await upstreamRes.text();
       if (text.includes("#EXTM3U")) {
+        const proto = (req.headers["x-forwarded-proto"] || "https").split(",")[0].trim();
+        const host = req.headers["x-forwarded-host"] || req.headers.host || "kibangoutv.vercel.app";
+        const fullStreamBase = `${proto}://${host}/api/stream`;
         const rewritten = text.split("\n").map((line) => {
           const sline = line.trim();
           if (!sline) return line;
@@ -174,7 +152,7 @@ export default async function handler(req, res) {
               return sline.replace(/URI="([^"]+)"/g, (match, rawUri) => {
                 try {
                   const absUri = new URL(rawUri, finalUrl).href;
-                  return `URI="/api/stream?u=${encodeURIComponent(absUri)}"`;
+                  return `URI="${fullStreamBase}?u=${encodeURIComponent(absUri)}"`;
                 } catch {
                   return match;
                 }
@@ -184,7 +162,7 @@ export default async function handler(req, res) {
           }
           try {
             const absUri = new URL(sline, finalUrl).href;
-            return `/api/stream?u=${encodeURIComponent(absUri)}`;
+            return `${fullStreamBase}?u=${encodeURIComponent(absUri)}`;
           } catch {
             return sline;
           }

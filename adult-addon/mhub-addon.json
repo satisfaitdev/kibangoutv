@@ -11,6 +11,10 @@
     "source",
     "resolve"
   ],
+  "urlPatterns": [
+    "*/live/play/*",
+    "*vavoo*"
+  ],
   "types": [
     "live",
     "video"

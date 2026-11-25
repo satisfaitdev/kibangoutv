@@ -1,3 +1,5 @@
+import { sortAndLabelSources } from "./_sources.js";
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD");
@@ -119,29 +121,9 @@ export default async function handler(req, res) {
       }
     }
 
-    // Priorisation des flux francophones (VF > VOSTFR > Autres)
-    const fr = [];
-    const en = [];
-    const other = [];
-
-    for (const s of finalSources) {
-      const langs = (s.languages || []).map(l => String(l).toLowerCase());
-      const quality = s.quality || "HD";
-      const name = s.name || "Serveur";
-
-      if (langs.includes("fr")) {
-        fr.push({ ...s, name: `🇫🇷 Français VF (${quality})` });
-      } else if (langs.includes("en")) {
-        en.push({ ...s, name: `🇬🇧 VO / VOSTFR (${quality})` });
-      } else {
-        other.push({ ...s, name: `🌐 ${name} (${langs.join(",").toUpperCase()})` });
-      }
-    }
-
+    const sources = sortAndLabelSources(finalSources);
     res.setHeader("Content-Type", "application/json; charset=utf-8");
-    return res.status(200).json({
-      sources: [...fr, ...en, ...other]
-    });
+    return res.status(200).json({ sources });
 
   } catch (err) {
     console.error("Kibangou Source API Error:", err);

@@ -12,12 +12,16 @@ export default async function handler(req, res) {
     const rawReqUrl = req.url || "";
     const parsed = new URL(rawReqUrl, "https://localhost");
 
-    // Extract optional encoded headers from path: /api/stream/h_<base64url>
+    // Extract optional encoded headers from query (?h=<b64>) or path (/api/stream/h_<b64>)
+    let hCode = parsed.searchParams.get("h") || "";
+    if (!hCode) {
+      const pathMatch = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
+      if (pathMatch) hCode = pathMatch[1];
+    }
     let customHeaders = {};
-    const pathMatch = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
-    if (pathMatch) {
+    if (hCode) {
       try {
-        const b64 = pathMatch[1].replace(/-/g, "+").replace(/_/g, "/");
+        const b64 = hCode.replace(/-/g, "+").replace(/_/g, "/");
         const padded = b64 + "=".repeat((4 - (b64.length % 4)) % 4);
         const decoded = Buffer.from(padded, "base64").toString("utf-8");
         const obj = JSON.parse(decoded);
@@ -103,7 +107,10 @@ export default async function handler(req, res) {
     if (isM3u8) {
       const text = await upstreamRes.text();
       if (text.includes("#EXTM3U")) {
-        const streamBasePath = parsed.pathname.startsWith("/api/stream") ? parsed.pathname : "/api/stream";
+        const proto = (req.headers["x-forwarded-proto"] || "https").split(",")[0].trim();
+        const host = req.headers["x-forwarded-host"] || req.headers.host || "kibangoutv.vercel.app";
+        const streamBasePath = hCode ? `/api/stream/h_${hCode}` : "/api/stream";
+        const fullStreamBase = `${proto}://${host}${streamBasePath}`;
         const rewritten = text.split("\n").map((line) => {
           const sline = line.trim();
           if (!sline) return line;
@@ -112,7 +119,7 @@ export default async function handler(req, res) {
               return sline.replace(/URI="([^"]+)"/g, (match, rawUri) => {
                 try {
                   const absUri = new URL(rawUri, finalUrl).href;
-                  return `URI="${streamBasePath}?u=${encodeURIComponent(absUri)}"`;
+                  return `URI="${fullStreamBase}?u=${encodeURIComponent(absUri)}"`;
                 } catch {
                   return match;
                 }
@@ -122,7 +129,7 @@ export default async function handler(req, res) {
           }
           try {
             const absUri = new URL(sline, finalUrl).href;
-            return `${streamBasePath}?u=${encodeURIComponent(absUri)}`;
+            return `${fullStreamBase}?u=${encodeURIComponent(absUri)}`;
           } catch {
             return sline;
           }

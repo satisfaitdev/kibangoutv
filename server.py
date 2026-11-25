@@ -48,6 +48,15 @@ def rewrite_m3u8(content_bytes, target_url):
         print("Erreur réécriture M3U8:", e)
         return content_bytes
 
+HLS_CLOUD_HOSTS = ["voe.sx", "dood.yt", "vidply", "myvidplay", "filemoon", "d000d", "supervideo"]
+
+def _host_priority(url):
+    lower = str(url or "").lower()
+    for i, h in enumerate(HLS_CLOUD_HOSTS):
+        if h in lower:
+            return i
+    return len(HLS_CLOUD_HOSTS)
+
 def prioritize_french_sources(content_bytes):
     try:
         data = json.loads(content_bytes.decode('utf-8'))
@@ -55,6 +64,8 @@ def prioritize_french_sources(content_bytes):
         if not sources:
             data['sources'] = []
             return json.dumps(data).encode('utf-8')
+
+        sources.sort(key=lambda s: _host_priority(s.get('url')))
 
         fr_sources = []
         en_sources = []
@@ -180,6 +191,8 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     text = raw.decode("utf-8", errors="ignore")
                     if "#EXTM3U" in text:
                         stream_base = parsed.path if parsed.path.startswith("/api/stream") else "/api/stream"
+                        host_hdr = self.headers.get("Host", f"localhost:{PORT}")
+                        full_stream_base = f"http://{host_hdr}{stream_base}"
                         lines = []
                         for line in text.splitlines():
                             sline = line.strip()
@@ -187,11 +200,11 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                                 lines.append(line)
                             elif sline.startswith("#"):
                                 if 'URI="' in sline:
-                                    sline = re.sub(r'URI="([^"]+)"', lambda mm: f'URI="{stream_base}?u={urllib.parse.quote(urllib.parse.urljoin(final_url, mm.group(1)))}"', sline)
+                                    sline = re.sub(r'URI="([^"]+)"', lambda mm: f'URI="{full_stream_base}?u={urllib.parse.quote(urllib.parse.urljoin(final_url, mm.group(1)))}"', sline)
                                 lines.append(sline)
                             else:
                                 abs_u = urllib.parse.urljoin(final_url, sline)
-                                lines.append(f'{stream_base}?u={urllib.parse.quote(abs_u)}')
+                                lines.append(f'{full_stream_base}?u={urllib.parse.quote(abs_u)}')
                         out = "\n".join(lines).encode("utf-8")
                         self.send_response(resp.status)
                         self.send_header("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8")

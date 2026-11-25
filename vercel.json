@@ -18,11 +18,11 @@
       "destination": "/api/proxy.js"
     },
     {
-      "source": "/api/stream",
-      "destination": "/api/stream.js"
+      "source": "/api/stream/h_:hdr",
+      "destination": "/api/stream.js?h=:hdr"
     },
     {
-      "source": "/api/stream/:meta*",
+      "source": "/api/stream",
       "destination": "/api/stream.js"
     },
     {
