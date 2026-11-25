@@ -13,7 +13,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:dorcel-tv"
+      }
     },
     {
       "id": "adult:dorcel-xxx",
@@ -28,7 +31,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:dorcel-xxx"
+      }
     },
     {
       "id": "adult:hustler-tv",
@@ -43,7 +49,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:hustler-tv"
+      }
     },
     {
       "id": "adult:penthouse-gold",
@@ -58,7 +67,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:penthouse-gold"
+      }
     },
     {
       "id": "adult:penthouse-passion",
@@ -73,7 +85,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:penthouse-passion"
+      }
     },
     {
       "id": "adult:playboy-tv",
@@ -88,7 +103,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:playboy-tv"
+      }
     },
     {
       "id": "adult:xxl",
@@ -103,7 +121,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:xxl"
+      }
     },
     {
       "id": "adult:private-tv",
@@ -118,7 +139,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:private-tv"
+      }
     },
     {
       "id": "adult:vivid-tv",
@@ -133,7 +157,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:vivid-tv"
+      }
     },
     {
       "id": "adult:colmax-tv",
@@ -148,7 +175,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:colmax-tv"
+      }
     },
     {
       "id": "adult:pink-x",
@@ -163,7 +193,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:pink-x"
+      }
     },
     {
       "id": "adult:brazzers-tv",
@@ -178,7 +211,10 @@
         "Adulte",
         "Pro",
         "18+"
-      ]
+      ],
+      "ids": {
+        "tmdb": "adult:brazzers-tv"
+      }
     }
   ]
 }

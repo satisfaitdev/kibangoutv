@@ -12,7 +12,6 @@ export default async function handler(req, res) {
     const rawReqUrl = req.url || "";
     const parsed = new URL(rawReqUrl, "https://localhost");
 
-    // Extract optional encoded headers from query (?h=<b64>) or path (/api/stream/h_<b64>)
     let hCode = parsed.searchParams.get("h") || "";
     if (!hCode) {
       const pathMatch = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
@@ -58,7 +57,6 @@ export default async function handler(req, res) {
       }
     }
 
-    // Open-ended byte range slicing for multi-GB MP4s on serverless (3 MB slices avoid Lambda timeouts)
     const lowerUrlPath = targetUrl.split("?")[0].toLowerCase();
     const isHlsPlaylistHint = lowerUrlPath.endsWith(".m3u8");
     const isTsSegmentHint = lowerUrlPath.endsWith(".ts") || lowerUrlPath.endsWith(".m4s") || lowerUrlPath.endsWith(".aac");
@@ -74,7 +72,6 @@ export default async function handler(req, res) {
         fetchHeaders["Range"] = incomingRange;
       }
     } else if (!isHlsPlaylistHint && !isTsSegmentHint && (lowerUrlPath.endsWith(".mp4") || lowerUrlPath.includes("cloudatacdn") || lowerUrlPath.includes("mxcontent"))) {
-      // Initial probe/fetch for MP4 without explicit Range: cap at first 3 MB
       fetchHeaders["Range"] = "bytes=0-3145727";
     }
 
@@ -86,31 +83,34 @@ export default async function handler(req, res) {
 
     const finalUrl = upstreamRes.url || targetUrl;
     const contentType = (upstreamRes.headers.get("content-type") || "application/octet-stream").toLowerCase();
-    const upstreamEncoding = upstreamRes.headers.get("content-encoding");
 
     if (req.method === "HEAD") {
       res.setHeader("Content-Type", contentType);
       if (upstreamRes.headers.get("accept-ranges")) {
         res.setHeader("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
       }
-      if (!upstreamEncoding && upstreamRes.headers.get("content-length")) {
-        res.setHeader("Content-Length", upstreamRes.headers.get("content-length"));
-      }
       return res.status(upstreamRes.status).end();
     }
 
-    // Handle HLS playlists (.m3u8): rewrite relative/external URIs to stay on /api/stream base
-    const isM3u8 = finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
+    // Check if it's an HLS M3U8 playlist
+    const isM3u8Name = finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
       targetUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
       contentType.includes("mpegurl");
 
-    if (isM3u8) {
-      const text = await upstreamRes.text();
+    // Fetch arrayBuffer for fast, non-blocking delivery
+    const arrayBuf = await upstreamRes.arrayBuffer();
+    const buf = Buffer.from(arrayBuf);
+
+    // If it's an M3U8 or content starts with #EXTM3U, rewrite it
+    const isM3u8Content = buf.length > 7 && buf.subarray(0, 10).toString("utf-8").includes("#EXTM3U");
+    if (isM3u8Name || isM3u8Content) {
+      const text = buf.toString("utf-8");
       if (text.includes("#EXTM3U")) {
         const proto = (req.headers["x-forwarded-proto"] || "https").split(",")[0].trim();
         const host = req.headers["x-forwarded-host"] || req.headers.host || "kibangoutv.vercel.app";
         const streamBasePath = hCode ? `/api/stream/h_${hCode}` : "/api/stream";
         const fullStreamBase = `${proto}://${host}${streamBasePath}`;
+
         const rewritten = text.split("\n").map((line) => {
           const sline = line.trim();
           if (!sline) return line;
@@ -135,18 +135,13 @@ export default async function handler(req, res) {
           }
         }).join("\n");
 
-        const outBuf = Buffer.from(rewritten, "utf-8");
         res.setHeader("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8");
-        res.setHeader("Content-Length", outBuf.length);
         res.setHeader("Cache-Control", "no-store");
-        return res.status(upstreamRes.status).send(outBuf);
+        return res.status(upstreamRes.status).send(Buffer.from(rewritten, "utf-8"));
       }
-      const fallbackBuf = Buffer.from(text, "utf-8");
-      res.setHeader("Content-Type", contentType);
-      res.setHeader("Content-Length", fallbackBuf.length);
-      return res.status(upstreamRes.status).send(fallbackBuf);
     }
 
+    // Deliver binary stream/segment instantaneously without backpressure locks
     res.setHeader("Content-Type", contentType);
     res.setHeader("Cache-Control", "no-store");
     if (upstreamRes.headers.get("content-range")) {
@@ -155,41 +150,9 @@ export default async function handler(req, res) {
     if (upstreamRes.headers.get("accept-ranges")) {
       res.setHeader("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
     }
-    // IMPORTANT: Never forward compressed Content-Length for decoded Web streams
-    if (!upstreamEncoding && upstreamRes.headers.get("content-length")) {
-      res.setHeader("Content-Length", upstreamRes.headers.get("content-length"));
-    }
 
-    res.status(upstreamRes.status);
+    return res.status(upstreamRes.status).send(buf);
 
-    if (upstreamRes.body) {
-      let clientClosed = false;
-      res.on("close", () => { clientClosed = true; });
-      try {
-        for await (const chunk of upstreamRes.body) {
-          if (clientClosed) break;
-          const ok = res.write(chunk);
-          if (!ok) {
-            await new Promise((resolve) => {
-              res.once("drain", resolve);
-              res.once("close", resolve);
-            });
-          }
-        }
-      } catch (streamErr) {
-        if (!clientClosed) {
-          console.error("Stream write loop error:", streamErr);
-        }
-      }
-      if (!clientClosed) {
-        res.end();
-      }
-      return;
-    }
-
-    const buf = Buffer.from(await upstreamRes.arrayBuffer());
-    res.setHeader("Content-Length", buf.length);
-    return res.send(buf);
   } catch (err) {
     if (err.name === "AbortError" || err.code === "ECONNRESET") {
       return;

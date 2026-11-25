@@ -57,7 +57,6 @@ export default async function handler(req, res) {
       fetchHeaders["Content-Type"] = req.headers["content-type"];
     }
 
-    // Forward custom browser-restricted headers (Referer, Origin, Cookie, User-Agent, etc.)
     const rawCustomHeaders = req.headers["x-proxy-headers"];
     if (rawCustomHeaders) {
       try {
@@ -94,7 +93,6 @@ export default async function handler(req, res) {
 
     const finalUrl = upstreamRes.url || targetUrl;
     const contentType = (upstreamRes.headers.get("content-type") || "application/octet-stream").toLowerCase();
-    const upstreamEncoding = upstreamRes.headers.get("content-encoding");
 
     res.setHeader("X-Final-Url", finalUrl);
     if (upstreamRes.headers.get("set-cookie")) {
@@ -102,25 +100,17 @@ export default async function handler(req, res) {
     }
 
     // 1. Resolution endpoints (/resolve & /client-fetch):
-    // Keep raw stream URL intact so Vuma sees .m3u8 / .ts / .mp4 extensions and routes via openStream
     if (finalUrl.includes("/resolve") || targetUrl.includes("/resolve") || finalUrl.includes("/client-fetch") || targetUrl.includes("/client-fetch")) {
       const text = await upstreamRes.text();
       try {
         const data = JSON.parse(text);
-        if (data && typeof data.url === "string") {
-          if (data.url.startsWith("http://")) {
-            data.proxy = true;
-          }
+        if (data && typeof data.url === "string" && data.url.startsWith("http://")) {
+          data.proxy = true;
         }
-        const out = Buffer.from(JSON.stringify(data), "utf-8");
-        res.setHeader("Content-Type", "application/json; charset=utf-8");
-        res.setHeader("Content-Length", out.length);
-        return res.status(upstreamRes.status).send(out);
+        return res.status(upstreamRes.status).json(data);
       } catch {
-        const buf = Buffer.from(text, "utf-8");
         res.setHeader("Content-Type", contentType);
-        res.setHeader("Content-Length", buf.length);
-        return res.status(upstreamRes.status).send(buf);
+        return res.status(upstreamRes.status).send(Buffer.from(text, "utf-8"));
       }
     }
 
@@ -128,13 +118,23 @@ export default async function handler(req, res) {
     if (finalUrl.includes("/vod/source/")) {
       const data = await upstreamRes.json();
       data.sources = sortAndLabelSources(data.sources || []);
-      const out = Buffer.from(JSON.stringify(data), "utf-8");
-      res.setHeader("Content-Type", "application/json; charset=utf-8");
-      res.setHeader("Content-Length", out.length);
-      return res.status(upstreamRes.status).send(out);
+      return res.status(upstreamRes.status).json(data);
     }
 
-    // 3. HLS M3U8 rewriting (when requested directly via /api/proxy)
+    // 3. JSON delivery (Channels catalog, mhub-addon.json, etc.):
+    // Use res.json() to prevent any Content-Length / compression mismatch!
+    const isJson = contentType.includes("json") || targetUrl.endsWith(".json") || targetUrl.includes(".json?");
+    if (isJson) {
+      try {
+        const text = await upstreamRes.text();
+        const parsed = JSON.parse(text);
+        return res.status(upstreamRes.status).json(parsed);
+      } catch {
+        // Fallback to text if JSON parse fails
+      }
+    }
+
+    // 4. HLS M3U8 rewriting (when requested directly via /api/proxy)
     const isM3u8Url = finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") || targetUrl.split("?")[0].toLowerCase().endsWith(".m3u8");
     const isM3u8Type = contentType.includes("mpegurl");
 
@@ -168,33 +168,14 @@ export default async function handler(req, res) {
           }
         }).join("\n");
 
-        const out = Buffer.from(rewritten, "utf-8");
         res.setHeader("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8");
-        res.setHeader("Content-Length", out.length);
-        return res.status(upstreamRes.status).send(out);
+        return res.status(upstreamRes.status).send(Buffer.from(rewritten, "utf-8"));
       }
     }
 
-    // 4. Buffered safe delivery for all JSON, HTML, text, SVG, images (never copy gzip Content-Length!)
-    const isTextOrStructured =
-      contentType.includes("json") ||
-      contentType.includes("html") ||
-      contentType.includes("text/") ||
-      contentType.includes("xml") ||
-      contentType.includes("javascript") ||
-      contentType.includes("image/") ||
-      targetUrl.includes(".json") ||
-      !!upstreamEncoding;
-
-    if (isTextOrStructured || !upstreamRes.body) {
-      const arrayBuffer = await upstreamRes.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-      res.setHeader("Content-Type", contentType);
-      res.setHeader("Content-Length", buffer.length);
-      return res.status(upstreamRes.status).send(buffer);
-    }
-
-    // 5. Real-time streaming for large uncompressed media/binary
+    // 5. Safe delivery for other resources (images, HTML, binary)
+    const arrayBuffer = await upstreamRes.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
     res.setHeader("Content-Type", contentType);
     if (upstreamRes.headers.get("content-range")) {
       res.setHeader("Content-Range", upstreamRes.headers.get("content-range"));
@@ -202,23 +183,8 @@ export default async function handler(req, res) {
     if (upstreamRes.headers.get("accept-ranges")) {
       res.setHeader("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
     }
-    if (upstreamRes.headers.get("content-length")) {
-      res.setHeader("Content-Length", upstreamRes.headers.get("content-length"));
-    }
-    res.status(upstreamRes.status);
+    return res.status(upstreamRes.status).send(buffer);
 
-    let clientClosed = false;
-    res.on("close", () => { clientClosed = true; });
-    for await (const chunk of upstreamRes.body) {
-      if (clientClosed) break;
-      if (!res.write(chunk)) {
-        await new Promise((resolve) => {
-          res.once("drain", resolve);
-          res.once("close", resolve);
-        });
-      }
-    }
-    if (!clientClosed) res.end();
   } catch (err) {
     if (err.name === "AbortError" || err.code === "ECONNRESET") {
       return;

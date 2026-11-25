@@ -98,7 +98,15 @@
       "destination": "/api/item.js"
     },
     {
+      "source": "/tmdb:match*",
+      "destination": "/api/item.js"
+    },
+    {
       "source": "/imdb\\::match*",
+      "destination": "/api/item.js"
+    },
+    {
+      "source": "/imdb:match*",
       "destination": "/api/item.js"
     },
     {

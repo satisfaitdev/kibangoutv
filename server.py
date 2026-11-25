@@ -569,10 +569,35 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     except Exception as e:
                         print("Error serving local item:", e)
 
-            # Sinon proxy vers TMDB
-            tmdb_url = f"https://www.mhub.mx/tmdb/item/{sub_path}"
-            self.path = f"/api/proxy?url={urllib.parse.quote(tmdb_url)}"
-            self.forward_proxy("GET")
+            # Sinon proxy vers TMDB avec préservation de l'ID demandé
+            req_type = "video"
+            req_id = clean_sub
+            if "/" in clean_sub:
+                parts = clean_sub.split("/", 1)
+                req_type = parts[0]
+                req_id = parts[1]
+            clean_id = req_id.replace("tmdb:", "").replace("imdb:", "")
+            types_to_try = ["series", "video"] if req_type == "series" else ["video", "series"]
+            for t in types_to_try:
+                try:
+                    u = f"https://www.mhub.mx/tmdb/item/{t}/tmdb:{clean_id}.json"
+                    tmdb_req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0", "Accept-Language": "fr-FR,fr;q=0.9"})
+                    with urllib.request.urlopen(tmdb_req, timeout=6) as resp:
+                        if resp.status == 200:
+                            item_data = json.loads(resp.read().decode("utf-8"))
+                            item_data["id"] = req_id
+                            if "ids" not in item_data: item_data["ids"] = {}
+                            if "tmdb" not in item_data["ids"]: item_data["ids"]["tmdb"] = clean_id
+                            payload = json.dumps(item_data).encode("utf-8")
+                            self.send_response(200)
+                            self.send_header("Content-Type", "application/json; charset=utf-8")
+                            self.send_header("Content-Length", str(len(payload)))
+                            self.end_headers()
+                            self.wfile.write(payload)
+                            return
+                except Exception:
+                    pass
+            self.send_error(404, "Item not found")
             return
 
         # 4b. Sources VOD pour Kibangou, French Cinema & Adult (gère /.../source/ ET /source/)

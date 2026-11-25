@@ -27,53 +27,72 @@ export default async function handler(req, res) {
     }
 
     subPath = decodeURIComponent(subPath);
-
-    // 1. Vérification si c'est un item live local (ex: live/drtv, live/tv5monde)
     const cleanSub = subPath.split("?")[0].replace(/\.json$/i, "");
+
+    // 1. Local live items (e.g. live/drtv, live/tv5monde, live/canalplus_pop, etc.)
     if (cleanSub.startsWith("live/")) {
       const channelId = cleanSub.replace(/^live\//, "");
-      const localFile = path.join(process.cwd(), "kibangou-addon", "item", "live", `${channelId}.json`);
-      if (fs.existsSync(localFile)) {
-        const content = fs.readFileSync(localFile, "utf-8");
-        res.setHeader("Content-Type", "application/json; charset=utf-8");
-        return res.status(200).send(content);
-      }
-    }
-
-    // 2. Si l'identifiant est direct sans préfixe de type (ex: tmdb:1726 ou imdb:tt0371746)
-    if (!cleanSub.includes("/")) {
-      const idJson = subPath.includes(".json") ? subPath : `${subPath}.json`;
-      for (const t of ["video", "series"]) {
-        try {
-          const testUrl = `https://www.mhub.mx/tmdb/item/${t}/${idJson}`;
-          const upstream = await fetch(testUrl, {
-            headers: {
-              "User-Agent": "Mozilla/5.0",
-              "Accept": "application/json"
-            }
-          });
-          if (upstream.ok) {
-            const body = await upstream.text();
+      for (const addonDir of ["kibangou-addon", "french-addon", "adult-addon"]) {
+        const localFile = path.join(process.cwd(), addonDir, "item", "live", `${channelId}.json`);
+        if (fs.existsSync(localFile)) {
+          const content = fs.readFileSync(localFile, "utf-8");
+          try {
+            const data = JSON.parse(content);
+            return res.status(200).json(data);
+          } catch {
             res.setHeader("Content-Type", "application/json; charset=utf-8");
-            return res.status(200).send(body);
+            return res.status(200).send(content);
           }
-        } catch (e) {}
+        }
       }
     }
 
-    // 3. Redirection vers TMDB pour les métadonnées de Films et Séries
-    const tmdbUrl = `https://www.mhub.mx/tmdb/item/${subPath}`;
-    const upstream = await fetch(tmdbUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "application/json",
-        "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
-      }
-    });
+    // 2. Determine requested type and ID
+    let reqType = "video";
+    let reqId = cleanSub;
+    if (cleanSub.includes("/")) {
+      const parts = cleanSub.split("/");
+      reqType = parts[0];
+      reqId = parts.slice(1).join("/");
+    }
 
-    const body = await upstream.text();
-    res.setHeader("Content-Type", "application/json; charset=utf-8");
-    return res.status(upstream.status).send(body);
+    // Extract raw numeric ID and prefix
+    let cleanId = reqId;
+    if (cleanId.startsWith("tmdb:")) cleanId = cleanId.slice(5);
+    else if (cleanId.startsWith("imdb:")) cleanId = cleanId.slice(5);
+
+    // Fetch from TMDB proxy
+    const typesToTry = reqType === "series" ? ["series", "video"] : ["video", "series"];
+    let fetchedData = null;
+
+    for (const t of typesToTry) {
+      try {
+        const tmdbUrl = `https://www.mhub.mx/tmdb/item/${t}/tmdb:${cleanId}.json`;
+        const upstream = await fetch(tmdbUrl, {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            "Accept": "application/json",
+            "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
+          }
+        });
+        if (upstream.ok) {
+          fetchedData = await upstream.json();
+          break;
+        }
+      } catch (e) {}
+    }
+
+    if (fetchedData) {
+      // CRITICAL FIX: Ensure returned item.id matches the format requested by Vuma route!
+      // If Vuma requested tmdb:1726, item.id must be "tmdb:1726" (or cleanId if requested bare)
+      fetchedData.id = reqId;
+      if (!fetchedData.ids) fetchedData.ids = {};
+      if (!fetchedData.ids.tmdb) fetchedData.ids.tmdb = cleanId;
+
+      return res.status(200).json(fetchedData);
+    }
+
+    return res.status(404).json({ error: "Item not found" });
 
   } catch (err) {
     console.error("Item handler error:", err);

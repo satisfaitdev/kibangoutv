@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "96677",
+      "id": "tmdb:96677",
       "type": "series",
       "name": "Lupin",
       "ids": {
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "id": "64165",
+      "id": "tmdb:64165",
       "type": "series",
       "name": "Dix pour cent",
       "ids": {
@@ -70,7 +70,7 @@
       ]
     },
     {
-      "id": "62476",
+      "id": "tmdb:62476",
       "type": "series",
       "name": "Le Bureau des légendes",
       "ids": {
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "id": "11726",
+      "id": "tmdb:11726",
       "type": "series",
       "name": "Engrenages",
       "ids": {
@@ -139,7 +139,7 @@
       ]
     },
     {
-      "id": "112738",
+      "id": "tmdb:112738",
       "type": "series",
       "name": "HPI : Haut Potentiel Intellectuel",
       "ids": {
@@ -175,7 +175,7 @@
       ]
     },
     {
-      "id": "60715",
+      "id": "tmdb:60715",
       "type": "series",
       "name": "Bref",
       "ids": {
@@ -207,7 +207,7 @@
       ]
     },
     {
-      "id": "90816",
+      "id": "tmdb:90816",
       "type": "series",
       "name": "Validé",
       "ids": {
@@ -240,7 +240,7 @@
       ]
     },
     {
-      "id": "84007",
+      "id": "tmdb:84007",
       "type": "series",
       "name": "The Family Business",
       "ids": {
@@ -272,7 +272,7 @@
       ]
     },
     {
-      "id": "65430",
+      "id": "tmdb:65430",
       "type": "series",
       "name": "Baron Noir",
       "ids": {
@@ -303,7 +303,7 @@
       ]
     },
     {
-      "id": "11466",
+      "id": "tmdb:11466",
       "type": "series",
       "name": "Kaamelott",
       "ids": {
@@ -337,7 +337,7 @@
       ]
     },
     {
-      "id": "46616",
+      "id": "tmdb:46616",
       "type": "series",
       "name": "Les Revenants",
       "ids": {
@@ -367,7 +367,7 @@
       ]
     },
     {
-      "id": "221120",
+      "id": "tmdb:221120",
       "type": "series",
       "name": "Fiasco",
       "ids": {

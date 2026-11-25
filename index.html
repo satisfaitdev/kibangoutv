@@ -802,7 +802,7 @@
         rawUrl.startsWith("/get?") ||
         rawUrl.startsWith("./") ||
         rawUrl.startsWith("../") ||
-        (rawUrl.startsWith("/") && !rawUrl.startsWith("//") && !rawUrl.startsWith("/item/")) ||
+        (rawUrl.startsWith("/") && !rawUrl.startsWith("//")) ||
         rawUrl.includes(location.host) ||
         rawUrl.includes(location.origin) ||
         rawUrl.includes("kibangoutv.vercel.app")
