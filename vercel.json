@@ -34,6 +34,18 @@
       "destination": "/api/proxy.js?url=https://vavoo.top/live2/logo/:match*"
     },
     {
+      "source": "/item/live/:match*",
+      "destination": "/kibangou-addon/item/live/:match*.json"
+    },
+    {
+      "source": "/kibangou-addon/item/live/:match*",
+      "destination": "/kibangou-addon/item/live/:match*.json"
+    },
+    {
+      "source": "/item/:match*",
+      "destination": "/api/proxy.js?url=https://www.mhub.mx/tmdb/item/:match*"
+    },
+    {
       "source": "/kibangou-addon/item/:match*",
       "destination": "/api/proxy.js?url=https://www.mhub.mx/tmdb/item/:match*"
     }

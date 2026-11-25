@@ -47,6 +47,10 @@ export default async function handler(req, res) {
       "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
     };
 
+    if (req.headers["content-type"]) {
+      fetchHeaders["Content-Type"] = req.headers["content-type"];
+    }
+
     const clientIp = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "";
     if (clientIp) {
       fetchHeaders["X-Forwarded-For"] = clientIp;
@@ -57,18 +61,30 @@ export default async function handler(req, res) {
       fetchHeaders["Range"] = req.headers.range;
     }
 
+    let reqBody = undefined;
+    if (req.method === "POST") {
+      if (typeof req.body === "string" || Buffer.isBuffer(req.body)) {
+        reqBody = req.body;
+      } else if (req.body && typeof req.body === "object") {
+        reqBody = JSON.stringify(req.body);
+      }
+    }
+
     const upstreamRes = await fetch(targetUrl, {
       method: req.method === "POST" ? "POST" : "GET",
       headers: fetchHeaders,
       redirect: "follow",
-      body: req.method === "POST" ? (typeof req.body === "string" ? req.body : JSON.stringify(req.body)) : undefined
+      body: reqBody
     });
 
     const finalUrl = upstreamRes.url || targetUrl;
-    const contentType = upstreamRes.headers.get("content-type") || "application/octet-stream";
+    const contentType = (upstreamRes.headers.get("content-type") || "application/octet-stream").toLowerCase();
 
     // 1. Détection et réécriture HLS M3U8
-    if (finalUrl.includes(".m3u8") || contentType.includes("mpegurl") || contentType.includes("x-mpegURL")) {
+    const isM3u8Url = finalUrl.includes(".m3u8") || targetUrl.includes(".m3u8");
+    const isM3u8Type = contentType.includes("mpegurl") || contentType.includes("x-mpegurl");
+
+    if (isM3u8Url || isM3u8Type) {
       const text = await upstreamRes.text();
       const lines = text.split("\n");
       const rewritten = [];
@@ -148,7 +164,11 @@ export default async function handler(req, res) {
 
     if (upstreamRes.body) {
       if (typeof Readable.fromWeb === "function") {
-        return Readable.fromWeb(upstreamRes.body).pipe(res);
+        const readable = Readable.fromWeb(upstreamRes.body);
+        readable.on("error", () => {
+          // Ignore les fermetures prématurées quand l'utilisateur change de chaîne/source
+        });
+        return readable.pipe(res);
       } else {
         const buffer = Buffer.from(await upstreamRes.arrayBuffer());
         return res.status(upstreamRes.status).send(buffer);
@@ -158,6 +178,9 @@ export default async function handler(req, res) {
     }
 
   } catch (err) {
+    if (err.name === "AbortError" || err.code === "ECONNRESET") {
+      return;
+    }
     console.error("Vercel Proxy Error:", err);
     return res.status(502).json({ error: String(err.message || err) });
   }

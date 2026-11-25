@@ -585,67 +585,50 @@
       if (
         rawUrl.startsWith("/api/proxy") || 
         rawUrl.startsWith("/get?") || 
-        rawUrl.startsWith("/") || 
         rawUrl.startsWith("./") || 
         rawUrl.startsWith("../") || 
+        (rawUrl.startsWith("/") && !rawUrl.startsWith("//")) || 
         rawUrl.includes(location.host) ||
         rawUrl.includes(location.origin) ||
-        rawUrl.includes("kibangoutv.vercel.app") ||
-        rawUrl.includes("vercel.app") ||
-        rawUrl.includes("localhost") ||
-        rawUrl.includes("127.0.0.1")
+        rawUrl.includes("kibangoutv.vercel.app")
       ) {
         return rawUrl;
       }
 
-      // Ne pas proxifier les pages iframes d'embed vidéo directes (évite les blocages CORS de lecteurs tiers)
-      if (
-        rawUrl.includes("youtube.com") ||
-        rawUrl.includes("youtu.be") ||
-        rawUrl.includes("dood.") ||
-        rawUrl.includes("voe.sx") ||
-        rawUrl.includes("vidoza.net") ||
-        rawUrl.includes("streamtape.com") ||
-        rawUrl.includes("mixdrop.co") ||
-        rawUrl.includes("upstream.to")
-      ) {
-        return rawUrl;
-      }
-
+      // VAVOO, MediaHub, TMDB et flux vidéo M3U8/TS doivent TOUJOURS être proxifiés avec CORS
       if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
         return `/api/proxy?url=${encodeURIComponent(rawUrl)}`;
       }
       return rawUrl;
     }
+    window.getProxiedUrl = getProxiedUrl;
 
-    window.mhub = {
-      ready: Promise.resolve(true),
-      capabilities: ["fetch", "clientFetch"],
-      device: { isTV: false, platform: "windows" },
-      async fetch(url, options = {}) {
-        let sUrl = typeof url === "string" ? url : (url?.url || String(url));
-        const proxyUrl = getProxiedUrl(sUrl);
-        showGlobalLoader();
-        try {
-          return await nativeFetch(proxyUrl, {
-            method: options.method || "GET",
-            headers: options.headers,
-            body: options.body
-          });
-        } finally {
-          hideGlobalLoader();
-        }
-      },
-      setImmersive() {},
-      openSearch() {},
-      requestPlayback() {},
-      exit() {},
-      notify() { return Promise.resolve(); }
-    };
-
-    window.fetch = function(input, init) {
+    function wrapFetch(input, init) {
       let isDataCall = false;
-      const urlStr = typeof input === "string" ? input : (input?.url || "");
+      let urlStr = "";
+      let options = init || {};
+
+      if (typeof input === "string") {
+        urlStr = input;
+      } else if (input instanceof URL) {
+        urlStr = input.href;
+      } else if (input && typeof input.url === "string") {
+        urlStr = input.url;
+        options = {
+          method: input.method || options.method,
+          headers: input.headers || options.headers,
+          credentials: input.credentials || options.credentials,
+          cache: input.cache || options.cache,
+          redirect: input.redirect || options.redirect,
+          ...init
+        };
+      } else {
+        urlStr = String(input || "");
+      }
+
+      if (!urlStr) {
+        return nativeFetch(input, init);
+      }
 
       // Détection des appels de données pour activer le loader KibangouTV
       if (
@@ -660,37 +643,35 @@
         showGlobalLoader();
       }
 
-      try {
-        let reqPromise;
-        if (typeof input === "string") {
-          const proxied = getProxiedUrl(input);
-          reqPromise = nativeFetch.call(this, proxied, init);
-        } else if (input instanceof Request) {
-          const proxied = getProxiedUrl(input.url);
-          if (proxied !== input.url) {
-            const newReq = new Request(proxied, input);
-            reqPromise = nativeFetch.call(this, newReq, init);
-          } else {
-            reqPromise = nativeFetch.call(this, input, init);
-          }
-        } else if (input && typeof input.url === "string") {
-          input.url = getProxiedUrl(input.url);
-          reqPromise = nativeFetch.call(this, input, init);
-        } else {
-          reqPromise = nativeFetch.call(this, input, init);
-        }
+      const proxiedUrl = getProxiedUrl(urlStr);
+      const promise = nativeFetch(proxiedUrl, options);
 
-        if (isDataCall) {
-          return reqPromise.finally(() => {
-            hideGlobalLoader();
-          });
-        }
-        return reqPromise;
-      } catch (err) {
-        if (isDataCall) hideGlobalLoader();
-        console.warn("fetch hook fallback:", err);
-        return nativeFetch.call(this, input, init);
+      if (isDataCall) {
+        return promise.finally(() => {
+          hideGlobalLoader();
+        });
       }
+      return promise;
+    }
+
+    window.fetch = wrapFetch;
+    globalThis.fetch = wrapFetch;
+
+    window.mhub = {
+      ready: Promise.resolve(true),
+      capabilities: ["fetch", "clientFetch"],
+      device: { isTV: false, platform: "windows" },
+      fetch(url, options) {
+        return wrapFetch(url, options);
+      },
+      clientFetch(url, options) {
+        return wrapFetch(url, options);
+      },
+      setImmersive() {},
+      openSearch() {},
+      requestPlayback() {},
+      exit() {},
+      notify() { return Promise.resolve(); }
     };
   </script>
 </head>
@@ -792,7 +773,7 @@
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
       </a>
-      <button type="button" class="m-header-icon-btn m-btn-logout" id="m-btn-logout" title="Déconnexion" aria-label="Se déconnecter">
+      <button type="button" class="m-header-icon-btn m-btn-logout" id="m-btn-logout" title="Déconnexion" aria-label="Se déconnecter" onclick="performLogout()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
           <polyline points="16 17 21 12 16 7"></polyline>
@@ -968,14 +949,14 @@
     import { mount } from "https://vuma.mx/latest/app.js";
 
     // Bouquet local Kibangou TV (URL propre sans injection de query string)
-    const bouquetKibangou = new URL("./kibangou-addon", location.href).href;
+    const bouquetKibangou = new URL("./kibangou-addon/mhub-addon.json", location.href).href;
 
     mount({
       addons: [
-        "https://vavoo.top/live",     // Moteur Live VAVOO en premier (Place 'Live TV' directement après Favoris)
-        bouquetKibangou,              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
-        "https://vavoo.top/vod",      // Moteur VAVOO VOD (Résolution des sources de streaming)
-        "https://vavoo.top/subtitle"  // Sous-titres
+        "https://vavoo.top/live/mhub-addon.json",     // Moteur Live VAVOO (Place 'Live TV' directement après Favoris)
+        bouquetKibangou,                              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
+        "https://vavoo.top/vod/mhub-addon.json",      // Moteur VAVOO VOD (Résolution des sources de streaming)
+        "https://vavoo.top/subtitle/mhub-addon.json"  // Sous-titres
       ],
 
       addonManager: "hidden",
@@ -1012,14 +993,22 @@
     const SVG_FILM = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>`;
     const SVG_SERIES = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>`;
 
-    function performLogout() {
-      if (confirm("Voulez-vous vraiment vous déconnecter de KibangouTV ?")) {
+    window.performLogout = function() {
+      try {
+        localStorage.removeItem("kibangoutv_auth");
         localStorage.removeItem("kibangou_auth");
         localStorage.removeItem("kibangou_auth_email");
+        localStorage.removeItem("kibangou_auth_time");
         sessionStorage.clear();
-        location.reload();
+      } catch (e) {}
+
+      const authGate = document.getElementById("auth-gate");
+      if (authGate) {
+        authGate.classList.remove("unlocked");
+        authGate.style.display = "flex";
       }
-    }
+      location.href = location.origin + location.pathname;
+    };
 
     function injectCustomNavItems() {
       // 0. Suppression impitoyable du widget Social / Watch Party flottant sur le bord droit

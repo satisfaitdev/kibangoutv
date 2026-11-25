@@ -1,23 +1,8 @@
 {
   "items": [
     {
-      "id": "telecongo",
-      "name": "Télé Congo (Brazzaville)",
-      "type": "live",
-      "url": "http://51.254.199.122:8080/telecongo/index.m3u8",
-      "images": {
-        "logo": "https://raw.githubusercontent.com/iptv-org/epg/master/sites/telecongo.cg/telecongo.cg.png",
-        "poster": "https://raw.githubusercontent.com/iptv-org/epg/master/sites/telecongo.cg/telecongo.cg.png"
-      },
-      "tags": [
-        "Congo",
-        "National",
-        "Direct"
-      ]
-    },
-    {
       "id": "drtv",
-      "name": "DRTV International",
+      "name": "DRTV International (Congo)",
       "type": "live",
       "url": "https://vps122407.serveur-vps.net/hls/drtv.m3u8",
       "images": {
@@ -26,48 +11,50 @@
       },
       "tags": [
         "Congo",
-        "Brazzaville"
+        "Brazzaville",
+        "Direct"
       ]
     },
     {
-      "id": "bebtv",
-      "name": "Beb TV (Congo)",
+      "id": "tv5monde",
+      "name": "TV5 Monde (Afrique & Monde)",
       "type": "live",
-      "url": "https://live-hls-qunv.livepush.io/live_cdn/em8A-kbzIfHqu73/index.m3u8",
+      "url": "https://n-5-2.eu.cdn-redge.media/livehls/oeu/mt/live/tv5_monde_fbs/live.livx/playlist.m3u8",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "https://i.imgur.com/WmRbudc.png",
+        "poster": "https://i.imgur.com/WmRbudc.png"
       },
       "tags": [
-        "Congo"
+        "Francophonie",
+        "Direct"
       ]
     },
     {
-      "id": "digitalcongo",
-      "name": "Digital Congo TV",
+      "id": "euronews",
+      "name": "Euronews Français",
       "type": "live",
-      "url": "http://51.254.199.122:8080/DigitalCongoTV/index.m3u8",
+      "url": "https://2f6c5bf4.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmxheHhUVi1ldV9FdXJvbmV3c0ZyYW5jYWlzX0hMUw/playlist.m3u8",
       "images": {
-        "logo": "https://i.imgur.com/0zGkZg0.png",
-        "poster": "https://i.imgur.com/0zGkZg0.png"
+        "logo": "https://i.imgur.com/8t9mdg9.png",
+        "poster": "https://i.imgur.com/8t9mdg9.png"
       },
       "tags": [
-        "RDC",
-        "Kinshasa"
+        "Info",
+        "Direct"
       ]
     },
     {
-      "id": "rtnc3",
-      "name": "RTNC 3",
+      "id": "bfmtv",
+      "name": "BFM TV HD",
       "type": "live",
-      "url": "http://51.254.199.122:8080/e-cableRTNC3/index.m3u8",
+      "url": "https://n-5-2.eu.cdn-redge.media/livehls/oeu/mt/live/bfm_tv/live.livx/playlist.m3u8",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "https://i.imgur.com/YJCcczD.png",
+        "poster": "https://i.imgur.com/YJCcczD.png"
       },
       "tags": [
-        "RDC",
-        "Kinshasa"
+        "Info",
+        "Direct"
       ]
     }
   ]

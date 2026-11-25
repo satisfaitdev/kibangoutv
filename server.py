@@ -22,7 +22,7 @@ LAST_STREAM_BASE = None
 def rewrite_m3u8(content_bytes, target_url):
     try:
         text = content_bytes.decode('utf-8', errors='ignore')
-        if not text.startswith('#EXTM3U'):
+        if '#EXTM3U' not in text:
             return content_bytes
         
         lines = []
@@ -148,9 +148,10 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 headers=headers,
                 method=method
             )
+
             with urllib.request.urlopen(req, timeout=20) as resp:
-                # Détection et réécriture automatique des playlists HLS (.m3u8)
-                is_m3u8 = ".m3u8" in target_url
+                ctype = resp.headers.get("Content-Type", "")
+                is_m3u8 = ".m3u8" in target_url or "mpegurl" in ctype.lower()
                 is_source = "/vod/source/" in target_url
 
                 if is_m3u8:
@@ -173,22 +174,21 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     self.end_headers()
                     self.wfile.write(content)
                 else:
-                    ctype = resp.headers.get("Content-Type", "application/octet-stream")
                     clength = resp.headers.get("Content-Length")
                     self.send_response(resp.status)
-                    self.send_header("Content-Type", ctype)
+                    self.send_header("Content-Type", ctype if ctype else "application/octet-stream")
                     if clength:
                         self.send_header("Content-Length", clength)
                     self.end_headers()
 
-                    # Streaming direct par blocs de 64KB (faible latence pour les segments vidéo)
+                    # Streaming direct par blocs de 64KB (faible latence)
                     while True:
                         chunk = resp.read(65536)
                         if not chunk:
                             break
                         try:
                             self.wfile.write(chunk)
-                        except (BrokenPipeError, ConnectionResetError):
+                        except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError):
                             break
 
         except Exception as e:
@@ -196,17 +196,23 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.serve_fallback_logo()
                 return
             if isinstance(e, urllib.error.HTTPError):
-                err_content = e.read()
+                try:
+                    err_content = e.read()
+                except Exception:
+                    err_content = b""
                 self.send_response(e.code)
                 ctype = e.headers.get("Content-Type", "application/json") if e.headers else "application/json"
                 self.send_header("Content-Type", ctype)
                 self.end_headers()
                 self.wfile.write(err_content if err_content else f'{{"error": "{e.reason}"}}\n'.encode("utf-8"))
             else:
-                self.send_response(502)
-                self.send_header("Content-Type", "application/json")
-                self.end_headers()
-                self.wfile.write(f'{{"error": "{str(e)}"}}\n'.encode("utf-8"))
+                try:
+                    self.send_response(502)
+                    self.send_header("Content-Type", "application/json")
+                    self.end_headers()
+                    self.wfile.write(f'{{"error": "{str(e)}"}}\n'.encode("utf-8"))
+                except Exception:
+                    pass
 
     def do_GET(self):
         # 0. Nettoyage de query au milieu d'un chemin local
@@ -239,7 +245,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.forward_proxy("GET")
                 return
 
-        # 0d. Résolution des flux Live TV (Canal+, beIN, TNT, etc.) avec proxy HTTPS automatique
+        # 0d. Résolution des flux Live TV avec proxy HTTPS automatique
         if "/kibangou-addon/resolve" in self.path or self.path.startswith("/resolve"):
             raw_url = self.path.split("url=", 1)[1] if "url=" in self.path else ""
             play_url = urllib.parse.unquote(raw_url)
@@ -266,17 +272,14 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             raw = raw.split("&", 1)[0]
             target = urllib.parse.unquote(raw)
 
-            # Si image locale /logo.svg ou vide
             if not target or target == "/logo.svg" or target == "logo.svg" or target.endswith("/logo.svg"):
                 self.serve_fallback_logo()
                 return
 
-            # Si logo de chaîne VAVOO relatif
             if "/live2/logo/" in target or "/live/logo/" in target:
                 logo_name = target.split("logo/", 1)[1]
                 target = f"https://vavoo.top/live2/logo/{logo_name}"
 
-            # Proxy de l'image avec fallback automatique sur le logo si 404
             self.path = f"/api/proxy?url={urllib.parse.quote(target)}"
             self.forward_proxy("GET", fallback_to_logo=True)
             return
@@ -294,10 +297,31 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.forward_proxy("GET")
             return
 
-        # 4. Métadonnées d'items pour le bouquet Kibangou (gère tmdb: et tmdb%3A)
+        # 4. Métadonnées d'items pour le bouquet Kibangou (gère /kibangou-addon/item/ ET /item/)
         unquoted_path = urllib.parse.unquote(self.path)
-        if "/kibangou-addon/item/" in unquoted_path:
-            sub_path = unquoted_path.split("/kibangou-addon/item/", 1)[1]
+        if "/kibangou-addon/item/" in unquoted_path or unquoted_path.startswith("/item/"):
+            if "/kibangou-addon/item/" in unquoted_path:
+                sub_path = unquoted_path.split("/kibangou-addon/item/", 1)[1]
+            else:
+                sub_path = unquoted_path.split("/item/", 1)[1]
+
+            # Vérifier d'abord si c'est un item local (ex: live/drtv, live/tv5monde)
+            clean_sub = sub_path.split("?", 1)[0].replace(".json", "")
+            local_json = os.path.join(DIRECTORY, "kibangou-addon", "item", clean_sub + ".json")
+            if os.path.isfile(local_json):
+                try:
+                    with open(local_json, "rb") as f:
+                        data = f.read()
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.send_header("Content-Length", str(len(data)))
+                    self.end_headers()
+                    self.wfile.write(data)
+                    return
+                except Exception as e:
+                    print("Error serving local item:", e)
+
+            # Sinon proxy vers TMDB
             tmdb_url = f"https://www.mhub.mx/tmdb/item/{sub_path}"
             self.path = f"/api/proxy?url={urllib.parse.quote(tmdb_url)}"
             self.forward_proxy("GET")
