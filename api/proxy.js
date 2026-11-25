@@ -40,6 +40,11 @@ export default async function handler(req, res) {
     targetUrl = "https://" + targetUrl.replace(/^\/+/, "");
   }
 
+  // Correction si le premier paramètre a été passé avec & au lieu de ?
+  if (!targetUrl.includes("?") && targetUrl.includes("&")) {
+    targetUrl = targetUrl.replace("&", "?");
+  }
+
   try {
     const fetchHeaders = {
       "User-Agent": targetUrl.includes("vavoo") ? "VAVOO/2.6" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -80,7 +85,19 @@ export default async function handler(req, res) {
     const finalUrl = upstreamRes.url || targetUrl;
     const contentType = (upstreamRes.headers.get("content-type") || "application/octet-stream").toLowerCase();
 
-    // 1. Détection et réécriture HLS M3U8
+    // 1. Détection et réécriture des réponses de résolution de flux vidéo (Live et VOD)
+    if (finalUrl.includes("/resolve") || targetUrl.includes("/resolve")) {
+      const data = await upstreamRes.json();
+      if (data && typeof data.url === "string") {
+        if (!data.url.startsWith("/api/proxy")) {
+          data.url = `/api/proxy?url=${encodeURIComponent(data.url)}`;
+        }
+      }
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      return res.status(upstreamRes.status).json(data);
+    }
+
+    // 2. Détection et réécriture HLS M3U8
     const isM3u8Url = finalUrl.includes(".m3u8") || targetUrl.includes(".m3u8");
     const isM3u8Type = contentType.includes("mpegurl") || contentType.includes("x-mpegurl");
 

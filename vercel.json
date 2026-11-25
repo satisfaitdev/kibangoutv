@@ -2,6 +2,18 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/sw.js",
+      "destination": "/sw.js"
+    },
+    {
+      "source": "/manifest.webmanifest",
+      "destination": "/manifest.webmanifest"
+    },
+    {
+      "source": "/manifest.json",
+      "destination": "/manifest.json"
+    },
+    {
       "source": "/api/proxy",
       "destination": "/api/proxy.js"
     },
@@ -34,23 +46,31 @@
       "destination": "/api/proxy.js?url=https://vavoo.top/live2/logo/:match*"
     },
     {
-      "source": "/item/live/:match*",
-      "destination": "/kibangou-addon/item/live/:match*.json"
-    },
-    {
-      "source": "/kibangou-addon/item/live/:match*",
-      "destination": "/kibangou-addon/item/live/:match*.json"
+      "source": "/kibangou-addon/item/:match*",
+      "destination": "/api/item.js"
     },
     {
       "source": "/item/:match*",
-      "destination": "/api/proxy.js?url=https://www.mhub.mx/tmdb/item/:match*"
-    },
-    {
-      "source": "/kibangou-addon/item/:match*",
-      "destination": "/api/proxy.js?url=https://www.mhub.mx/tmdb/item/:match*"
+      "destination": "/api/item.js"
     }
   ],
   "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Service-Worker-Allowed", "value": "/" },
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/manifest.webmanifest",
+      "headers": [
+        { "key": "Content-Type", "value": "application/manifest+json; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [

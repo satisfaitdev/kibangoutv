@@ -8,8 +8,18 @@
   <!-- Moteur Vuma -->
   <link rel="stylesheet" href="https://vuma.mx/latest/style.css">
   <link rel="icon" href="./logo.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#0E1318">
+  <meta name="theme-color" content="#00C853">
   
+  <!-- PWA Manifest & Icônes App -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KibangouTV">
+  <meta name="application-name" content="KibangouTV">
+
   <!-- Prise en charge télécommande TV (D-pad), tactile et PC -->
   <meta name="mhub" content="app dpad">
 
@@ -49,6 +59,16 @@
     /* ========================================================
        SUPPRESSION TOTALE DU BOUTON FLOTTANT SOCIAL SUR MOBILE & PC
        ======================================================== */
+    .sv-fab,
+    .feature-dock,
+    .feature-dock-bar,
+    .feature-bar,
+    .feature-bar-docked,
+    .modal-social,
+    .social-view,
+    .btn-party,
+    .btn-hero-glass.btn-party,
+    .modal-party,
     .sc-track,
     .sc-slot,
     .sc-pill,
@@ -56,11 +76,15 @@
     .sc-front,
     .sc-back,
     .sc-covers,
-    .btn-party,
-    .modal-party,
     [class*="sc-track"],
     [class*="sc-slot"],
-    [class*="sc-pill"] {
+    [class*="sc-pill"],
+    [class*="sv-fab"],
+    [class*="feature-dock"],
+    a[href="#/social"],
+    a.nav-item[href="#/social"],
+    a.bnav-item[href="#/social"],
+    .nav-social {
       display: none !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -70,6 +94,14 @@
       position: absolute !important;
       top: -9999px !important;
       left: -9999px !important;
+    }
+
+    /* Masquer Recherche et Paramètres de la barre du bas (.bnav) */
+    .bnav a[href="#/search"],
+    .bnav a[href*="search"],
+    .bnav a[href="#/settings"],
+    .bnav a[href*="settings"] {
+      display: none !important;
     }
 
     /* ========================================================
@@ -587,7 +619,7 @@
         rawUrl.startsWith("/get?") || 
         rawUrl.startsWith("./") || 
         rawUrl.startsWith("../") || 
-        (rawUrl.startsWith("/") && !rawUrl.startsWith("//")) || 
+        (rawUrl.startsWith("/") && !rawUrl.startsWith("//") && !rawUrl.startsWith("/item/")) || 
         rawUrl.includes(location.host) ||
         rawUrl.includes(location.origin) ||
         rawUrl.includes("kibangoutv.vercel.app")
@@ -602,6 +634,46 @@
       return rawUrl;
     }
     window.getProxiedUrl = getProxiedUrl;
+
+    // 1. Interception de XMLHttpRequest (utilisé par Hls.js pour m3u8 et fragments .ts)
+    const origXhrOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+      if (typeof url === "string" && (url.startsWith("http://") || url.startsWith("https://"))) {
+        url = getProxiedUrl(url);
+      }
+      return origXhrOpen.call(this, method, url, ...rest);
+    };
+
+    // 2. Interception de HTMLMediaElement.src (<video src="...">)
+    try {
+      const origSrcDesc = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "src");
+      if (origSrcDesc && origSrcDesc.set) {
+        Object.defineProperty(HTMLMediaElement.prototype, "src", {
+          set(val) {
+            if (typeof val === "string" && (val.startsWith("http://") || val.startsWith("https://"))) {
+              val = getProxiedUrl(val);
+            }
+            return origSrcDesc.set.call(this, val);
+          },
+          get() {
+            return origSrcDesc.get.call(this);
+          }
+        });
+      }
+    } catch(e) {}
+
+    // 3. Enregistrement du Service Worker PWA
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js", { scope: "/" })
+          .then(reg => {
+            console.log("KibangouTV Service Worker actif [scope:", reg.scope, "]");
+          })
+          .catch(err => {
+            console.warn("KibangouTV Service Worker notice:", err);
+          });
+      });
+    }
 
     function wrapFetch(input, init) {
       let isDataCall = false;
@@ -645,6 +717,26 @@
 
       const proxiedUrl = getProxiedUrl(urlStr);
       const promise = nativeFetch(proxiedUrl, options);
+
+      if (urlStr.includes("resolve")) {
+        return promise.then(async res => {
+          try {
+            const clone = res.clone();
+            const data = await clone.json();
+            if (data && typeof data.url === "string" && !data.url.startsWith("/api/proxy")) {
+              data.url = getProxiedUrl(data.url);
+              return new Response(JSON.stringify(data), {
+                status: res.status,
+                statusText: res.statusText,
+                headers: res.headers
+              });
+            }
+          } catch(e) {}
+          return res;
+        }).finally(() => {
+          if (isDataCall) hideGlobalLoader();
+        });
+      }
 
       if (isDataCall) {
         return promise.finally(() => {
@@ -761,6 +853,13 @@
       <span class="m-brand-name">Kibangou<span class="m-brand-accent">TV</span></span>
     </a>
     <div class="m-header-actions">
+      <button type="button" class="m-header-icon-btn" id="m-btn-pwa-install" title="Installer KibangouTV" aria-label="Installer l'application" style="display:none; color: #00C853; border-color: rgba(0,200,83,0.4);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </button>
       <a href="#/search" class="m-header-icon-btn" id="m-btn-search" title="Recherche" aria-label="Recherche">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="7"></circle>
@@ -955,6 +1054,7 @@
       addons: [
         "https://vavoo.top/live/mhub-addon.json",     // Moteur Live VAVOO (Place 'Live TV' directement après Favoris)
         bouquetKibangou,                              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
+        "https://www.mhub.mx/tmdb/mhub-addon.json",   // Moteur TMDB officiel (Résolution native des métadonnées)
         "https://vavoo.top/vod/mhub-addon.json",      // Moteur VAVOO VOD (Résolution des sources de streaming)
         "https://vavoo.top/subtitle/mhub-addon.json"  // Sous-titres
       ],
@@ -1010,9 +1110,35 @@
       location.href = location.origin + location.pathname;
     };
 
+    // Gestion de l'installation PWA
+    let deferredPrompt = null;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById("m-btn-pwa-install");
+      if (btn) {
+        btn.style.display = "flex";
+        btn.onclick = async () => {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === "accepted") {
+            btn.style.display = "none";
+          }
+          deferredPrompt = null;
+        };
+      }
+    });
+
+    window.addEventListener("appinstalled", () => {
+      deferredPrompt = null;
+      const btn = document.getElementById("m-btn-pwa-install");
+      if (btn) btn.style.display = "none";
+    });
+
     function injectCustomNavItems() {
       // 0. Suppression impitoyable du widget Social / Watch Party flottant sur le bord droit
-      document.querySelectorAll('.sc-track, .sc-slot, .sc-pill, .sc-front, .sc-back, .btn-party, .modal-party, a[href="#/social"]').forEach(el => el.remove());
+      document.querySelectorAll('.sc-track, .sc-slot, .sc-pill, .sc-front, .sc-back, .btn-party, .modal-party, .sv-fab, .feature-dock, .feature-dock-bar, .feature-bar, [class*="sv-fab"], a[href="#/social"]').forEach(el => el.remove());
 
       // 0b. Liaison du bouton déconnexion mobile
       const mLogout = document.getElementById("m-btn-logout");

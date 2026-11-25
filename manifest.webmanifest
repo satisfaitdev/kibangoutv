@@ -1,0 +1,70 @@
+{
+  "name": "KibangouTV",
+  "short_name": "KibangouTV",
+  "description": "Plateforme de streaming HD - Films, Séries et Chaînes Live TV en direct",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#0E1318",
+  "theme_color": "#00C853",
+  "lang": "fr-FR",
+  "categories": ["entertainment", "video", "multimedia"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Live TV",
+      "short_name": "Chaînes",
+      "description": "Regarder la télévision en direct",
+      "url": "/#/channels?src=vavoo-live%2Fchannels",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Films Populaires",
+      "short_name": "Films",
+      "description": "Explorer le catalogue de films",
+      "url": "/#/catalog/kibangou-direct/video/movie?name=Films",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Séries & Nouveautés",
+      "short_name": "Séries",
+      "description": "Explorer les séries",
+      "url": "/#/catalog/kibangou-direct/series/series?name=S%C3%A9ries",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -150,13 +150,13 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             )
 
             with urllib.request.urlopen(req, timeout=20) as resp:
+                final_url = resp.geturl() or target_url
                 ctype = resp.headers.get("Content-Type", "")
                 is_m3u8 = ".m3u8" in target_url or "mpegurl" in ctype.lower()
                 is_source = "/vod/source/" in target_url
 
                 if is_m3u8:
                     content = resp.read()
-                    final_url = resp.geturl() or target_url
                     global LAST_STREAM_BASE
                     LAST_STREAM_BASE = final_url.split("?", 1)[0].rsplit("/", 1)[0] + "/"
                     content = rewrite_m3u8(content, final_url)
@@ -168,6 +168,21 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 elif is_source:
                     content = resp.read()
                     content = prioritize_french_sources(content)
+                    self.send_response(resp.status)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.send_header("Content-Length", str(len(content)))
+                    self.end_headers()
+                    self.wfile.write(content)
+                elif "/resolve" in target_url or "/resolve" in final_url:
+                    content = resp.read()
+                    try:
+                        data = json.loads(content.decode("utf-8"))
+                        if isinstance(data, dict) and "url" in data and isinstance(data["url"], str):
+                            if not data["url"].startswith("/api/proxy"):
+                                data["url"] = f"/api/proxy?url={urllib.parse.quote(data['url'])}"
+                        content = json.dumps(data).encode("utf-8")
+                    except Exception as e:
+                        print("Error rewriting resolve json in server.py:", e)
                     self.send_response(resp.status)
                     self.send_header("Content-Type", "application/json; charset=utf-8")
                     self.send_header("Content-Length", str(len(content)))
@@ -215,7 +230,36 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     pass
 
     def do_GET(self):
-        # 0. Nettoyage de query au milieu d'un chemin local
+        # 0. Service des fichiers PWA (sw.js, manifest.webmanifest, etc.)
+        clean_path = self.path.split("?", 1)[0].rstrip("/")
+        if clean_path == "/sw.js":
+            sw_file = os.path.join(DIRECTORY, "sw.js")
+            if os.path.isfile(sw_file):
+                with open(sw_file, "rb") as f:
+                    data = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/javascript; charset=utf-8")
+                self.send_header("Service-Worker-Allowed", "/")
+                self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                return
+
+        if clean_path in ["/manifest.webmanifest", "/manifest.json"]:
+            m_name = "manifest.webmanifest" if clean_path == "/manifest.webmanifest" else "manifest.json"
+            m_file = os.path.join(DIRECTORY, m_name)
+            if os.path.isfile(m_file):
+                with open(m_file, "rb") as f:
+                    data = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/manifest+json; charset=utf-8")
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                return
+
+        # 0b. Nettoyage de query au milieu d'un chemin local
         if "/kibangou-addon/" in self.path:
             self.path = re.sub(r'\?v=[^/]+/?', '', self.path)
 
