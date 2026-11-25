@@ -86,16 +86,16 @@
       "destination": "/adult-addon/mhub-addon.json"
     },
     {
-      "source": "/kibangou-addon/catalog/:match*",
-      "destination": "/api/catalog.js"
+      "source": "/kibangou-addon/catalog/:type/:id",
+      "destination": "/api/catalog.js?addon=kibangou-addon&type=:type&id=:id"
     },
     {
-      "source": "/french-addon/catalog/:match*",
-      "destination": "/api/catalog.js"
+      "source": "/french-addon/catalog/:type/:id",
+      "destination": "/api/catalog.js?addon=french-addon&type=:type&id=:id"
     },
     {
-      "source": "/adult-addon/catalog/:match*",
-      "destination": "/api/catalog.js"
+      "source": "/adult-addon/catalog/:type/:id",
+      "destination": "/api/catalog.js?addon=adult-addon&type=:type&id=:id"
     },
     {
       "source": "/live2/logo/:match*",

@@ -11,52 +11,48 @@ export default async function handler(req, res) {
   }
 
   try {
-    const rawUrl = req.url || "";
-    let cleanPath = rawUrl.split("?")[0].replace(/\.json$/i, "");
-    
-    let addon = "kibangou-addon";
-    if (cleanPath.includes("french-addon")) addon = "french-addon";
-    else if (cleanPath.includes("adult-addon")) addon = "adult-addon";
+    const q = req.query || {};
+    let addon = q.addon || "kibangou-addon";
+    let type = q.type || "live";
+    let id = q.id || "canal_congo";
 
-    let parts = cleanPath.split("/catalog/")[1];
-    if (!parts) {
-      parts = cleanPath.replace(/^\/+/, "");
+    if (q.match) {
+      const matchParts = String(q.match).replace(/\.json$/i, "").split("/").filter(Boolean);
+      if (matchParts.length >= 2) {
+        type = matchParts[0];
+        id = matchParts[1];
+      } else if (matchParts.length === 1) {
+        id = matchParts[0];
+      }
     }
-    const [type, id] = parts.split("/").filter(Boolean);
 
-    if (!type || !id) {
-      return res.status(404).json({ error: "Catalog not found" });
-    }
+    id = String(id).replace(/\.json$/i, "");
 
     const filePath = path.join(process.cwd(), addon, "catalog", type, `${id}.json`);
     if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ error: "Catalog file not found" });
+      return res.status(404).json({ error: `Catalog not found: ${filePath}` });
     }
 
     const fileContent = fs.readFileSync(filePath, "utf8");
     const catalogData = JSON.parse(fileContent);
     let items = Array.isArray(catalogData.items) ? catalogData.items : (Array.isArray(catalogData) ? catalogData : []);
 
-    const urlObj = new URL(req.url, "http://localhost");
-    const searchParams = urlObj.searchParams;
-
     // Filter by category or group
-    const catFilter = searchParams.get("filter.category") || searchParams.get("filter[category]") || searchParams.get("category");
+    const catFilter = q["filter.category"] || q["filter[category]"] || q.category;
     if (catFilter && catFilter !== "all" && catFilter !== "Tous") {
+      const cfLower = String(catFilter).toLowerCase();
       items = items.filter(it => {
-        const cat = it.category || it.group || "";
-        const genres = Array.isArray(it.genres) ? it.genres : [];
-        const tags = Array.isArray(it.tags) ? it.tags : [];
-        return cat.toLowerCase().includes(catFilter.toLowerCase()) ||
-               genres.some(g => g.toLowerCase().includes(catFilter.toLowerCase())) ||
-               tags.some(t => t.toLowerCase().includes(catFilter.toLowerCase()));
+        const cat = (it.category || it.group || "").toLowerCase();
+        const genres = Array.isArray(it.genres) ? it.genres.map(g => String(g).toLowerCase()) : [];
+        const tags = Array.isArray(it.tags) ? it.tags.map(t => String(t).toLowerCase()) : [];
+        return cat.includes(cfLower) || genres.some(g => g.includes(cfLower)) || tags.some(t => t.includes(cfLower));
       });
     }
 
     // Search query filter
-    const query = searchParams.get("search") || searchParams.get("q") || searchParams.get("query");
+    const query = q.search || q.q || q.query;
     if (query) {
-      const qLower = query.toLowerCase().trim();
+      const qLower = String(query).toLowerCase().trim();
       items = items.filter(it => {
         const name = (it.name || "").toLowerCase();
         const desc = (it.description || "").toLowerCase();
