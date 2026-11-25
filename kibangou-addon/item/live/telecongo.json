@@ -4,8 +4,12 @@
   "type": "live",
   "url": "http://51.254.199.122:8080/telecongo/index.m3u8",
   "images": {
-    "logo": "https://raw.githubusercontent.com/iptv-org/epg/master/sites/telecongo.cg/telecongo.cg.png",
-    "poster": "https://raw.githubusercontent.com/iptv-org/epg/master/sites/telecongo.cg/telecongo.cg.png"
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
   },
-  "tags": ["Congo", "National", "Direct"]
+  "tags": [
+    "Congo",
+    "National",
+    "Direct"
+  ]
 }

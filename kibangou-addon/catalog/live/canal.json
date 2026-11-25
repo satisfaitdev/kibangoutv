@@ -20,8 +20,8 @@
       "type": "live",
       "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/cplus_pop/live.livx/playlist.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Canal%2B_Pop_logo_2020.svg/512px-Canal%2B_Pop_logo_2020.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Canal%2B_Pop_logo_2020.svg/512px-Canal%2B_Pop_logo_2020.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Canal+",

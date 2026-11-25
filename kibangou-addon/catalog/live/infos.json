@@ -6,8 +6,8 @@
       "type": "live",
       "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/5f/Logo_Africa_24_2017.svg/512px-Logo_Africa_24_2017.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/5f/Logo_Africa_24_2017.svg/512px-Logo_Africa_24_2017.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Info",
@@ -48,10 +48,10 @@
       "id": "africanews",
       "name": "AFRICANEWS (En continu)",
       "type": "live",
-      "url": "https://c3c275b999764df8a2dd55ffe2996818.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6576/bitok/eyJzdGlkIjoiOTU0NDAyODQtOTU0My00Yzc2LThmZjQtNDRhY2YwYmQxYTYwIiwibWt0IjoicGwiLCJjaCI6NjYwNiwicHRmIjo1fQ==/26036/africanews-en.m3u8",
+      "url": "https://cdn-euronews.akamaized.net/live/eds/africanews-fr/25050/index.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Africanews_logo.svg/512px-Africanews_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Africanews_logo.svg/512px-Africanews_logo.svg.png"
+        "logo": "https://i.imgur.com/5UxU4zc.png",
+        "poster": "https://i.imgur.com/5UxU4zc.png"
       },
       "tags": [
         "Info",
@@ -64,8 +64,8 @@
       "type": "live",
       "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Al_Jazeera_English_logo.svg/512px-Al_Jazeera_English_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Al_Jazeera_English_logo.svg/512px-Al_Jazeera_English_logo.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Info",
@@ -78,8 +78,8 @@
       "type": "live",
       "url": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-afrique_tm7tu45/playlist.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_Medi1_TV.svg/512px-Logo_Medi1_TV.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_Medi1_TV.svg/512px-Logo_Medi1_TV.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Info",
@@ -107,8 +107,8 @@
       "type": "live",
       "url": "https://tv-stream-test.daydreamer-json.cc/fe8bf835820fb530467f75a9cb761504/master.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/NHK_World_Japan_logo.svg/512px-NHK_World_Japan_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/NHK_World_Japan_logo.svg/512px-NHK_World_Japan_logo.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Info",
@@ -135,8 +135,8 @@
       "type": "live",
       "url": "https://jmp2.uk/plu-679a973a97782f0008ff4bb6.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Info",
@@ -159,13 +159,13 @@
       ]
     },
     {
-      "id": "cnn",
+      "id": "1962567354",
       "name": "CNN INTERNATIONAL HD",
       "type": "live",
-      "url": "https://tv.a2news.com/live/smil:a2cnnweb.stream.smil/playlist.m3u8",
+      "url": "https://www.vavoo.to/live/play/1962567354",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/512px-CNN.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/512px-CNN.svg.png"
+        "logo": "/live2/logo/1962567354.png",
+        "poster": "/live2/logo/1962567354.png"
       },
       "tags": [
         "Info",
@@ -192,8 +192,8 @@
       "type": "live",
       "url": "https://mumbai-edge.smartplaytv.in/BloombergHT/index.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bloomberg_Television_logo.svg/512px-Bloomberg_Television_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bloomberg_Television_logo.svg/512px-Bloomberg_Television_logo.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Info",
@@ -201,13 +201,13 @@
       ]
     },
     {
-      "id": "bbc_news",
+      "id": "3018021932",
       "name": "BBC NEWS HD",
       "type": "live",
-      "url": "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/uk/bbc-news.m3u8",
+      "url": "https://www.vavoo.to/live/play/3018021932",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png"
+        "logo": "/live2/logo/3018021932.png",
+        "poster": "/live2/logo/3018021932.png"
       },
       "tags": [
         "Info",

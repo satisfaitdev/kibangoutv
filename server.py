@@ -51,19 +51,20 @@ def rewrite_m3u8(content_bytes, target_url):
 def prioritize_french_sources(content_bytes):
     try:
         data = json.loads(content_bytes.decode('utf-8'))
-        sources = data.get('sources', [])
+        sources = [s for s in data.get('sources', []) if s.get('url') and 'vidoza.' not in s.get('url', '').lower()]
         if not sources:
-            return content_bytes
-        
+            data['sources'] = []
+            return json.dumps(data).encode('utf-8')
+
         fr_sources = []
         en_sources = []
         other_sources = []
-        
+
         for s in sources:
             langs = [l.lower() for l in s.get('languages', [])]
             name = s.get('name', 'Serveur')
             quality = s.get('quality', 'HD')
-            
+
             if 'fr' in langs:
                 s_copy = dict(s)
                 s_copy['name'] = f"🇫🇷 Français VF ({quality})"
@@ -76,7 +77,7 @@ def prioritize_french_sources(content_bytes):
                 s_copy = dict(s)
                 s_copy['name'] = f"🌐 {name} ({','.join(langs).upper()})"
                 other_sources.append(s_copy)
-        
+
         data['sources'] = fr_sources + en_sources + other_sources
         return json.dumps(data).encode('utf-8')
     except Exception as e:
@@ -121,6 +122,108 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             target = "https://" + target.lstrip("/")
         return target
 
+    def handle_stream(self, method="GET"):
+        import base64
+        parsed = urllib.parse.urlparse(self.path)
+        qs = urllib.parse.parse_qs(parsed.query)
+        target_url = (qs.get("u") or qs.get("url") or [""])[0]
+        if not target_url:
+            self.send_response(400)
+            self.end_headers()
+            return
+        if target_url.startswith("//"):
+            target_url = "https:" + target_url
+        elif not target_url.startswith("http://") and not target_url.startswith("https://"):
+            target_url = "https://" + target_url.lstrip("/")
+
+        headers = {
+            "User-Agent": "VAVOO/2.6" if "vavoo" in target_url else "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            "Accept": "*/*",
+            "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
+        }
+
+        m = re.search(r'/h_([A-Za-z0-9_-]+)', parsed.path)
+        if m:
+            try:
+                b64 = m.group(1).replace('-', '+').replace('_', '/')
+                b64 += '=' * ((4 - len(b64) % 4) % 4)
+                custom = json.loads(base64.b64decode(b64).decode('utf-8'))
+                if isinstance(custom, dict):
+                    for k, v in custom.items():
+                        if isinstance(v, str) and v and k.lower() in ("referer", "origin", "user-agent", "cookie", "x-requested-with", "accept", "accept-language"):
+                            headers[k] = v
+            except Exception:
+                pass
+
+        if "Range" in self.headers:
+            headers["Range"] = self.headers["Range"]
+
+        try:
+            req = urllib.request.Request(target_url, headers=headers, method=method)
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                final_url = resp.geturl() or target_url
+                ctype = resp.headers.get("Content-Type", "application/octet-stream")
+                is_m3u8 = final_url.split("?", 1)[0].lower().endswith(".m3u8") or target_url.split("?", 1)[0].lower().endswith(".m3u8") or "mpegurl" in ctype.lower()
+
+                if method == "HEAD":
+                    self.send_response(resp.status)
+                    self.send_header("Content-Type", ctype)
+                    if resp.headers.get("Accept-Ranges"):
+                        self.send_header("Accept-Ranges", resp.headers.get("Accept-Ranges"))
+                    if resp.headers.get("Content-Length"):
+                        self.send_header("Content-Length", resp.headers.get("Content-Length"))
+                    self.end_headers()
+                    return
+
+                if is_m3u8:
+                    raw = resp.read()
+                    text = raw.decode("utf-8", errors="ignore")
+                    if "#EXTM3U" in text:
+                        stream_base = parsed.path if parsed.path.startswith("/api/stream") else "/api/stream"
+                        lines = []
+                        for line in text.splitlines():
+                            sline = line.strip()
+                            if not sline:
+                                lines.append(line)
+                            elif sline.startswith("#"):
+                                if 'URI="' in sline:
+                                    sline = re.sub(r'URI="([^"]+)"', lambda mm: f'URI="{stream_base}?u={urllib.parse.quote(urllib.parse.urljoin(final_url, mm.group(1)))}"', sline)
+                                lines.append(sline)
+                            else:
+                                abs_u = urllib.parse.urljoin(final_url, sline)
+                                lines.append(f'{stream_base}?u={urllib.parse.quote(abs_u)}')
+                        out = "\n".join(lines).encode("utf-8")
+                        self.send_response(resp.status)
+                        self.send_header("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8")
+                        self.send_header("Content-Length", str(len(out)))
+                        self.end_headers()
+                        self.wfile.write(out)
+                        return
+
+                self.send_response(resp.status)
+                self.send_header("Content-Type", ctype)
+                if resp.headers.get("Content-Range"):
+                    self.send_header("Content-Range", resp.headers.get("Content-Range"))
+                if resp.headers.get("Accept-Ranges"):
+                    self.send_header("Accept-Ranges", resp.headers.get("Accept-Ranges"))
+                if resp.headers.get("Content-Length"):
+                    self.send_header("Content-Length", resp.headers.get("Content-Length"))
+                self.end_headers()
+                while True:
+                    chunk = resp.read(65536)
+                    if not chunk:
+                        break
+                    try:
+                        self.wfile.write(chunk)
+                    except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError):
+                        break
+        except urllib.error.HTTPError as e:
+            self.send_response(e.code)
+            self.end_headers()
+        except Exception as e:
+            self.send_response(502)
+            self.end_headers()
+
     def forward_proxy(self, method="GET", body=None, fallback_to_logo=False):
         target_url = self.clean_target_url(self.path)
 
@@ -135,12 +238,23 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         try:
             headers = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "User-Agent": "VAVOO/2.6" if "vavoo" in target_url else "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                 "Accept": "*/*",
                 "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
             }
             if "Content-Type" in self.headers:
                 headers["Content-Type"] = self.headers["Content-Type"]
+            if "X-Proxy-Headers" in self.headers:
+                try:
+                    custom = json.loads(self.headers["X-Proxy-Headers"])
+                    if isinstance(custom, dict):
+                        for k, v in custom.items():
+                            if isinstance(v, str) and v:
+                                headers[k] = v
+                except Exception:
+                    pass
+            if "Range" in self.headers:
+                headers["Range"] = self.headers["Range"]
 
             req = urllib.request.Request(
                 target_url,
@@ -152,7 +266,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             with urllib.request.urlopen(req, timeout=20) as resp:
                 final_url = resp.geturl() or target_url
                 ctype = resp.headers.get("Content-Type", "")
-                is_m3u8 = ".m3u8" in target_url or "mpegurl" in ctype.lower()
+                is_m3u8 = final_url.split("?", 1)[0].lower().endswith(".m3u8") or target_url.split("?", 1)[0].lower().endswith(".m3u8") or "mpegurl" in ctype.lower()
                 is_source = "/vod/source/" in target_url
 
                 if is_m3u8:
@@ -161,6 +275,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     LAST_STREAM_BASE = final_url.split("?", 1)[0].rsplit("/", 1)[0] + "/"
                     content = rewrite_m3u8(content, final_url)
                     self.send_response(resp.status)
+                    self.send_header("X-Final-Url", final_url)
                     self.send_header("Content-Type", "application/vnd.apple.mpegurl")
                     self.send_header("Content-Length", str(len(content)))
                     self.end_headers()
@@ -169,21 +284,22 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     content = resp.read()
                     content = prioritize_french_sources(content)
                     self.send_response(resp.status)
+                    self.send_header("X-Final-Url", final_url)
                     self.send_header("Content-Type", "application/json; charset=utf-8")
                     self.send_header("Content-Length", str(len(content)))
                     self.end_headers()
                     self.wfile.write(content)
-                elif "/resolve" in target_url or "/resolve" in final_url:
+                elif "/resolve" in target_url or "/resolve" in final_url or "/client-fetch" in target_url or "/client-fetch" in final_url:
                     content = resp.read()
                     try:
                         data = json.loads(content.decode("utf-8"))
-                        if isinstance(data, dict) and "url" in data and isinstance(data["url"], str):
-                            if not data["url"].startswith("/api/proxy"):
-                                data["url"] = f"/api/proxy?url={urllib.parse.quote(data['url'])}"
+                        if isinstance(data, dict) and isinstance(data.get("url"), str) and data["url"].startswith("http://"):
+                            data["proxy"] = True
                         content = json.dumps(data).encode("utf-8")
                     except Exception as e:
-                        print("Error rewriting resolve json in server.py:", e)
+                        print("Error handling resolve json in server.py:", e)
                     self.send_response(resp.status)
+                    self.send_header("X-Final-Url", final_url)
                     self.send_header("Content-Type", "application/json; charset=utf-8")
                     self.send_header("Content-Length", str(len(content)))
                     self.end_headers()
@@ -191,12 +307,12 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 else:
                     clength = resp.headers.get("Content-Length")
                     self.send_response(resp.status)
+                    self.send_header("X-Final-Url", final_url)
                     self.send_header("Content-Type", ctype if ctype else "application/octet-stream")
                     if clength:
                         self.send_header("Content-Length", clength)
                     self.end_headers()
 
-                    # Streaming direct par blocs de 64KB (faible latence)
                     while True:
                         chunk = resp.read(65536)
                         if not chunk:
@@ -353,17 +469,17 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 self.forward_proxy("GET")
                 return
 
-        # 0d. Résolution des flux Live TV avec proxy HTTPS automatique
         if any(p in self.path for p in ["/kibangou-addon/resolve", "/french-addon/resolve", "/adult-addon/resolve"]) or self.path.startswith("/resolve"):
             raw_url = self.path.split("url=", 1)[1] if "url=" in self.path else ""
             play_url = urllib.parse.unquote(raw_url)
             try:
-                vavoo_resolve = f"https://vavoo.top/live/resolve?url={urllib.parse.quote(play_url)}"
-                req = urllib.request.Request(vavoo_resolve, headers={"User-Agent": "Mozilla/5.0"})
+                is_live = "/live/play/" in play_url or "vavoo" in play_url
+                vavoo_resolve = f"https://vavoo.top/{'live' if is_live else 'vod'}/resolve?url={urllib.parse.quote(play_url)}"
+                req = urllib.request.Request(vavoo_resolve, headers={"User-Agent": "VAVOO/2.6"})
                 with urllib.request.urlopen(req, timeout=10) as r:
                     data = json.loads(r.read().decode())
-                if data and "url" in data:
-                    data["url"] = f"/api/proxy?url={urllib.parse.quote(data['url'])}"
+                if isinstance(data, dict) and isinstance(data.get("url"), str) and data["url"].startswith("http://"):
+                    data["proxy"] = True
                 resp_bytes = json.dumps(data).encode("utf-8")
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -373,6 +489,10 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 return
             except Exception as e:
                 print("Resolve error:", e)
+
+        if self.path.startswith("/api/stream"):
+            self.handle_stream("GET")
+            return
 
         # 1. Redimensionneur et cache d'images de Vuma /get?url=...
         if self.path.startswith("/get?url=") or self.path.startswith("/get?"):
@@ -526,6 +646,12 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         # 5. Fichiers statiques normaux
         super().do_GET()
+
+    def do_HEAD(self):
+        if self.path.startswith("/api/stream"):
+            self.handle_stream("HEAD")
+        else:
+            super().do_HEAD()
 
     def do_POST(self):
         if self.path.startswith("/api/proxy?url="):

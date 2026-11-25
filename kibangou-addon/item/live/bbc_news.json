@@ -1,11 +1,11 @@
 {
-  "id": "bbc_news",
+  "id": "3018021932",
   "name": "BBC NEWS HD",
   "type": "live",
-  "url": "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/uk/bbc-news.m3u8",
+  "url": "https://www.vavoo.to/live/play/3018021932",
   "images": {
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2022.svg/512px-BBC_News_2022.svg.png"
+    "logo": "/live2/logo/3018021932.png",
+    "poster": "/live2/logo/3018021932.png"
   },
   "tags": [
     "Info",

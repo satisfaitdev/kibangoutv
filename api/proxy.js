@@ -1,9 +1,8 @@
-import { Readable } from "stream";
-
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD");
   res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Expose-Headers", "*");
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
@@ -23,7 +22,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing url parameter" });
   }
 
-  // Nettoyage des éventuels wrappers imbriqués
   while (targetUrl && (targetUrl.includes("/api/proxy?url=") || targetUrl.includes("/api/proxy.js?url="))) {
     const parts = targetUrl.split(/\/api\/proxy(?:\.js)?\?url=/);
     const lastPart = parts[parts.length - 1];
@@ -40,14 +38,15 @@ export default async function handler(req, res) {
     targetUrl = "https://" + targetUrl.replace(/^\/+/, "");
   }
 
-  // Correction si le premier paramètre a été passé avec & au lieu de ?
   if (!targetUrl.includes("?") && targetUrl.includes("&")) {
     targetUrl = targetUrl.replace("&", "?");
   }
 
   try {
     const fetchHeaders = {
-      "User-Agent": targetUrl.includes("vavoo") ? "VAVOO/2.6" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      "User-Agent": targetUrl.includes("vavoo")
+        ? "VAVOO/2.6"
+        : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
       "Accept": "*/*",
       "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
     };
@@ -56,10 +55,19 @@ export default async function handler(req, res) {
       fetchHeaders["Content-Type"] = req.headers["content-type"];
     }
 
-    const clientIp = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "";
-    if (clientIp) {
-      fetchHeaders["X-Forwarded-For"] = clientIp;
-      fetchHeaders["X-Real-IP"] = clientIp;
+    // Forward custom browser-restricted headers (Referer, Origin, Cookie, User-Agent, etc.)
+    const rawCustomHeaders = req.headers["x-proxy-headers"];
+    if (rawCustomHeaders) {
+      try {
+        const parsedCustom = JSON.parse(String(rawCustomHeaders));
+        if (parsedCustom && typeof parsedCustom === "object") {
+          for (const [k, v] of Object.entries(parsedCustom)) {
+            if (typeof v === "string" && v) {
+              fetchHeaders[k] = v;
+            }
+          }
+        }
+      } catch {}
     }
 
     if (req.headers.range) {
@@ -84,71 +92,51 @@ export default async function handler(req, res) {
 
     const finalUrl = upstreamRes.url || targetUrl;
     const contentType = (upstreamRes.headers.get("content-type") || "application/octet-stream").toLowerCase();
+    const upstreamEncoding = upstreamRes.headers.get("content-encoding");
 
-    // 1. Détection et réécriture des réponses de résolution de flux vidéo (Live et VOD)
-    if (finalUrl.includes("/resolve") || targetUrl.includes("/resolve")) {
-      const data = await upstreamRes.json();
-      if (data && typeof data.url === "string") {
-        if (!data.url.startsWith("/api/proxy")) {
-          data.url = `/api/proxy?url=${encodeURIComponent(data.url)}`;
-        }
-      }
-      res.setHeader("Content-Type", "application/json; charset=utf-8");
-      return res.status(upstreamRes.status).json(data);
+    res.setHeader("X-Final-Url", finalUrl);
+    if (upstreamRes.headers.get("set-cookie")) {
+      res.setHeader("X-Upstream-Set-Cookie", upstreamRes.headers.get("set-cookie"));
     }
 
-    // 2. Détection et réécriture HLS M3U8
-    const isM3u8Url = finalUrl.includes(".m3u8") || targetUrl.includes(".m3u8");
-    const isM3u8Type = contentType.includes("mpegurl") || contentType.includes("x-mpegurl");
-
-    if (isM3u8Url || isM3u8Type) {
+    // 1. Resolution endpoints (/resolve & /client-fetch):
+    // Keep raw stream URL intact so Vuma sees .m3u8 / .ts / .mp4 extensions and routes via openStream
+    if (finalUrl.includes("/resolve") || targetUrl.includes("/resolve") || finalUrl.includes("/client-fetch") || targetUrl.includes("/client-fetch")) {
       const text = await upstreamRes.text();
-      const lines = text.split("\n");
-      const rewritten = [];
-
-      for (let line of lines) {
-        const sline = line.trim();
-        if (!sline) {
-          rewritten.push(line);
-        } else if (sline.startsWith("#")) {
-          if (sline.includes('URI="')) {
-            const replaced = sline.replace(/URI="([^"]+)"/g, (match, rawUri) => {
-              try {
-                const absUri = new URL(rawUri, finalUrl).href;
-                return `URI="/api/proxy?url=${encodeURIComponent(absUri)}"`;
-              } catch {
-                return match;
-              }
-            });
-            rewritten.push(replaced);
-          } else {
-            rewritten.push(sline);
-          }
-        } else {
-          try {
-            const absUri = new URL(sline, finalUrl).href;
-            rewritten.push(`/api/proxy?url=${encodeURIComponent(absUri)}`);
-          } catch {
-            rewritten.push(sline);
+      try {
+        const data = JSON.parse(text);
+        if (data && typeof data.url === "string") {
+          if (data.url.startsWith("http://")) {
+            data.proxy = true;
           }
         }
+        const out = Buffer.from(JSON.stringify(data), "utf-8");
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
+        res.setHeader("Content-Length", out.length);
+        return res.status(upstreamRes.status).send(out);
+      } catch {
+        const buf = Buffer.from(text, "utf-8");
+        res.setHeader("Content-Type", contentType);
+        res.setHeader("Content-Length", buf.length);
+        return res.status(upstreamRes.status).send(buf);
       }
-
-      res.setHeader("Content-Type", "application/vnd.apple.mpegurl");
-      return res.status(upstreamRes.status).send(rewritten.join("\n"));
     }
 
-    // 2. Détection et priorisation des sources francophones VOD
+    // 2. VOD Sources filtering & French language prioritization
     if (finalUrl.includes("/vod/source/")) {
       const data = await upstreamRes.json();
-      const sources = data.sources || [];
-      if (sources.length > 0) {
+      const rawSources = (data.sources || []).filter((s) => {
+        const u = (s.url || "").toLowerCase();
+        return u && !u.includes("vidoza.");
+      });
+
+      if (rawSources.length > 0) {
         const fr = [];
         const en = [];
         const other = [];
 
-        for (const s of sources) {
-          const langs = (s.languages || []).map(l => String(l).toLowerCase());
+        for (const s of rawSources) {
+          const langs = (s.languages || []).map((l) => String(l).toLowerCase());
           const quality = s.quality || "HD";
           const name = s.name || "Serveur";
 
@@ -161,13 +149,74 @@ export default async function handler(req, res) {
           }
         }
         data.sources = [...fr, ...en, ...other];
+      } else {
+        data.sources = [];
       }
 
+      const out = Buffer.from(JSON.stringify(data), "utf-8");
       res.setHeader("Content-Type", "application/json; charset=utf-8");
-      return res.status(upstreamRes.status).json(data);
+      res.setHeader("Content-Length", out.length);
+      return res.status(upstreamRes.status).send(out);
     }
 
-    // 3. Réponse standard complète par streaming temps-réel (segments TS, catalogs JSON, images)
+    // 3. HLS M3U8 rewriting (when requested directly via /api/proxy)
+    const isM3u8Url = finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") || targetUrl.split("?")[0].toLowerCase().endsWith(".m3u8");
+    const isM3u8Type = contentType.includes("mpegurl");
+
+    if (isM3u8Url || isM3u8Type) {
+      const text = await upstreamRes.text();
+      if (text.includes("#EXTM3U")) {
+        const rewritten = text.split("\n").map((line) => {
+          const sline = line.trim();
+          if (!sline) return line;
+          if (sline.startsWith("#")) {
+            if (sline.includes('URI="')) {
+              return sline.replace(/URI="([^"]+)"/g, (match, rawUri) => {
+                try {
+                  const absUri = new URL(rawUri, finalUrl).href;
+                  return `URI="/api/stream?u=${encodeURIComponent(absUri)}"`;
+                } catch {
+                  return match;
+                }
+              });
+            }
+            return sline;
+          }
+          try {
+            const absUri = new URL(sline, finalUrl).href;
+            return `/api/stream?u=${encodeURIComponent(absUri)}`;
+          } catch {
+            return sline;
+          }
+        }).join("\n");
+
+        const out = Buffer.from(rewritten, "utf-8");
+        res.setHeader("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8");
+        res.setHeader("Content-Length", out.length);
+        return res.status(upstreamRes.status).send(out);
+      }
+    }
+
+    // 4. Buffered safe delivery for all JSON, HTML, text, SVG, images (never copy gzip Content-Length!)
+    const isTextOrStructured =
+      contentType.includes("json") ||
+      contentType.includes("html") ||
+      contentType.includes("text/") ||
+      contentType.includes("xml") ||
+      contentType.includes("javascript") ||
+      contentType.includes("image/") ||
+      targetUrl.includes(".json") ||
+      !!upstreamEncoding;
+
+    if (isTextOrStructured || !upstreamRes.body) {
+      const arrayBuffer = await upstreamRes.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+      res.setHeader("Content-Type", contentType);
+      res.setHeader("Content-Length", buffer.length);
+      return res.status(upstreamRes.status).send(buffer);
+    }
+
+    // 5. Real-time streaming for large uncompressed media/binary
     res.setHeader("Content-Type", contentType);
     if (upstreamRes.headers.get("content-range")) {
       res.setHeader("Content-Range", upstreamRes.headers.get("content-range"));
@@ -180,26 +229,18 @@ export default async function handler(req, res) {
     }
     res.status(upstreamRes.status);
 
-    if (upstreamRes.body && typeof Readable.fromWeb === "function") {
-      const nodeStream = Readable.fromWeb(upstreamRes.body);
-      await new Promise((resolve, reject) => {
-        nodeStream.pipe(res);
-        nodeStream.on("end", resolve);
-        nodeStream.on("error", (err) => {
-          if (err.name === "AbortError" || err.code === "ECONNRESET") resolve();
-          else reject(err);
+    let clientClosed = false;
+    res.on("close", () => { clientClosed = true; });
+    for await (const chunk of upstreamRes.body) {
+      if (clientClosed) break;
+      if (!res.write(chunk)) {
+        await new Promise((resolve) => {
+          res.once("drain", resolve);
+          res.once("close", resolve);
         });
-        res.on("finish", resolve);
-        res.on("close", resolve);
-      });
-      return;
+      }
     }
-
-    const arrayBuffer = await upstreamRes.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    res.setHeader("Content-Length", buffer.length);
-    return res.send(buffer);
-
+    if (!clientClosed) res.end();
   } catch (err) {
     if (err.name === "AbortError" || err.code === "ECONNRESET") {
       return;

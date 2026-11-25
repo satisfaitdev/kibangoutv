@@ -6,42 +6,38 @@
  * Standards Congo-Dev Engineering & Software Craftsmanship.
  */
 
-import OriginalHls, * as HlsModule from "https://vuma.mx/latest/hls.mjs?orig=1";
+import OriginalHls from "https://vuma.mx/v/1.5.111/hls.mjs?orig=1";
 
-export * from "https://vuma.mx/latest/hls.mjs?orig=1";
+export * from "https://vuma.mx/v/1.5.111/hls.mjs?orig=1";
 
 export class KibangouHls extends OriginalHls {
   constructor(userConfig = {}) {
-    // Profil ABR optimisé pour réseaux mobiles 2G/3G instables (Afrique)
+    // Profil ABR optimisé pour réseaux mobiles 2G/3G instables et gros segments VOD
     const abrConfig = {
-      // 1. Démarrage rapide et conservateur (évite le freeze initial de 10-15s en 1080p)
-      abrEwmaDefaultEstimate: 450000, // 450 kbps
-      abrBandWidthFactor: 0.80, // Marge de sécurité de 20% face aux chutes subites
-      abrBandWidthUpFactor: 0.70, // Montée progressive (évite le phénomène d'oscillation ping-pong)
+      abrEwmaDefaultEstimate: 450000,
+      abrBandWidthFactor: 0.80,
+      abrBandWidthUpFactor: 0.70,
       abrMaxWithRealBitrate: true,
-      capLevelToPlayerSize: true, // Limite la résolution à la taille physique du lecteur/écran
+      capLevelToPlayerSize: true,
 
-      // 2. Gestion adaptative des niveaux
-      startLevel: -1, // Démarrage en Auto ABR
+      startLevel: -1,
       autoStartLoad: true,
 
-      // 3. Tampons et buffers durcis contre la gigue réseau
-      maxBufferLength: 30, // 30s de buffer
+      maxBufferLength: 30,
       maxMaxBufferLength: 60,
-      maxBufferSize: 30 * 1024 * 1024, // 30 Mo
+      maxBufferSize: 60 * 1024 * 1024,
       backBufferLength: 15,
       maxBufferHole: 0.5,
       highBufferWatchdogPeriod: 2,
       nudgeOffset: 0.2,
       nudgeMaxRetry: 6,
 
-      // 4. Tolérances de chargement et réessais automatiques
-      fragLoadingTimeOut: 25000,
-      fragLoadingMaxRetry: 6,
+      fragLoadingTimeOut: 60000,
+      fragLoadingMaxRetry: 8,
       fragLoadingRetryDelay: 600,
-      manifestLoadingTimeOut: 25000,
+      manifestLoadingTimeOut: 30000,
       manifestLoadingMaxRetry: 4,
-      levelLoadingTimeOut: 25000,
+      levelLoadingTimeOut: 30000,
       levelLoadingMaxRetry: 4,
 
       ...userConfig

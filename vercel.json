@@ -18,6 +18,14 @@
       "destination": "/api/proxy.js"
     },
     {
+      "source": "/api/stream",
+      "destination": "/api/stream.js"
+    },
+    {
+      "source": "/api/stream/:meta*",
+      "destination": "/api/stream.js"
+    },
+    {
       "source": "/get",
       "destination": "/api/get.js"
     },

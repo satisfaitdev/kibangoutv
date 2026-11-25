@@ -2,10 +2,10 @@
   "id": "kto_tv",
   "name": "KTO TV (Télévision Catholique Direct)",
   "type": "live",
-  "url": "https://live-kto.akamaized.net/hls/live/2033284/KTO/master.m3u8",
+  "url": "https://video1.getstreamhosting.com:1936/8294/8294/playlist.m3u8",
   "images": {
-    "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_KTO.svg/512px-Logo_KTO.svg.png",
-    "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/52/Logo_KTO.svg/512px-Logo_KTO.svg.png"
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/b/be/Nicktoons_Logo_2023.svg",
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/b/be/Nicktoons_Logo_2023.svg"
   },
   "tags": [
     "Religions",

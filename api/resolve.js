@@ -13,24 +13,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    const vavooResolveUrl = `https://vavoo.top/live/resolve?url=${encodeURIComponent(playUrl)}`;
-    const clientIp = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.socket?.remoteAddress || "";
-    const headers = { "User-Agent": "Mozilla/5.0" };
-    if (clientIp) {
-      headers["X-Forwarded-For"] = clientIp;
-      headers["X-Real-IP"] = clientIp;
-    }
+    const isLive = playUrl.includes("/live/play/") || playUrl.includes("vavoo");
+    const vavooResolveUrl = isLive
+      ? `https://vavoo.top/live/resolve?url=${encodeURIComponent(playUrl)}`
+      : `https://vavoo.top/vod/resolve?url=${encodeURIComponent(playUrl)}`;
 
-    const r = await fetch(vavooResolveUrl, { headers });
+    const r = await fetch(vavooResolveUrl, {
+      headers: { "User-Agent": "VAVOO/2.6", "Accept": "application/json" }
+    });
     const data = await r.json();
 
-    if (data && data.url) {
-      // Sécurisation HTTPS et proxy pour éviter le blocage Mixed Content
-      data.url = `/api/proxy?url=${encodeURIComponent(data.url)}`;
+    if (data && typeof data.url === "string" && data.url.startsWith("http://")) {
+      data.proxy = true;
     }
 
     res.setHeader("Content-Type", "application/json; charset=utf-8");
-    return res.status(200).json(data);
+    return res.status(r.status).json(data);
   } catch (err) {
     console.error("Kibangou Resolve Error:", err);
     return res.status(502).json({ error: String(err.message || err) });

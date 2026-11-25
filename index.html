@@ -27,7 +27,8 @@
   <script type="importmap">
   {
     "imports": {
-      "https://vuma.mx/latest/hls.mjs": "./kibangou-abr-hls.js"
+      "https://vuma.mx/latest/hls.mjs": "/kibangou-abr-hls.js",
+      "https://vuma.mx/v/1.5.111/hls.mjs": "/kibangou-abr-hls.js"
     }
   }
   </script>
@@ -796,13 +797,12 @@
     function getProxiedUrl(rawUrl) {
       if (!rawUrl || typeof rawUrl !== "string") return rawUrl;
 
-      // Déjà sur le proxy ou ressources internes du site
       if (
-        rawUrl.startsWith("/api/proxy") || 
-        rawUrl.startsWith("/get?") || 
-        rawUrl.startsWith("./") || 
-        rawUrl.startsWith("../") || 
-        (rawUrl.startsWith("/") && !rawUrl.startsWith("//") && !rawUrl.startsWith("/item/")) || 
+        rawUrl.startsWith("/api/") ||
+        rawUrl.startsWith("/get?") ||
+        rawUrl.startsWith("./") ||
+        rawUrl.startsWith("../") ||
+        (rawUrl.startsWith("/") && !rawUrl.startsWith("//") && !rawUrl.startsWith("/item/")) ||
         rawUrl.includes(location.host) ||
         rawUrl.includes(location.origin) ||
         rawUrl.includes("kibangoutv.vercel.app")
@@ -810,7 +810,6 @@
         return rawUrl;
       }
 
-      // VAVOO, MediaHub, TMDB et flux vidéo M3U8/TS doivent TOUJOURS être proxifiés avec CORS
       if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
         return `/api/proxy?url=${encodeURIComponent(rawUrl)}`;
       }
@@ -818,23 +817,29 @@
     }
     window.getProxiedUrl = getProxiedUrl;
 
-    // 1. Interception de XMLHttpRequest (utilisé par Hls.js pour m3u8 et fragments .ts)
+    function toBase64Url(str) {
+      const bytes = new TextEncoder().encode(str);
+      let bin = "";
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+
+    // Repli Mixed-Content strict uniquement pour les flux HTTP non-routés sur page HTTPS
     const origXhrOpen = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function(method, url, ...rest) {
-      if (typeof url === "string" && (url.startsWith("http://") || url.startsWith("https://"))) {
-        url = getProxiedUrl(url);
+      if (typeof url === "string" && location.protocol === "https:" && url.startsWith("http://")) {
+        url = `/api/stream?u=${encodeURIComponent(url)}`;
       }
       return origXhrOpen.call(this, method, url, ...rest);
     };
 
-    // 2. Interception de HTMLMediaElement.src (<video src="...">)
     try {
       const origSrcDesc = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, "src");
       if (origSrcDesc && origSrcDesc.set) {
         Object.defineProperty(HTMLMediaElement.prototype, "src", {
           set(val) {
-            if (typeof val === "string" && (val.startsWith("http://") || val.startsWith("https://"))) {
-              val = getProxiedUrl(val);
+            if (typeof val === "string" && location.protocol === "https:" && val.startsWith("http://")) {
+              val = `/api/stream?u=${encodeURIComponent(val)}`;
             }
             return origSrcDesc.set.call(this, val);
           },
@@ -845,11 +850,11 @@
       }
     } catch(e) {}
 
-    // 3. Enregistrement du Service Worker PWA
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("/sw.js", { scope: "/" })
           .then(reg => {
+            reg.update().catch(() => {});
             console.log("KibangouTV Service Worker actif [scope:", reg.scope, "]");
           })
           .catch(err => {
@@ -858,10 +863,23 @@
       });
     }
 
+    function normalizeHeadersObj(h) {
+      const out = {};
+      if (!h) return out;
+      if (typeof Headers !== "undefined" && h instanceof Headers) {
+        h.forEach((v, k) => { out[k] = v; });
+      } else if (Array.isArray(h)) {
+        for (const [k, v] of h) { if (k && v != null) out[k] = String(v); }
+      } else if (typeof h === "object") {
+        for (const [k, v] of Object.entries(h)) { if (v != null) out[k] = String(v); }
+      }
+      return out;
+    }
+
     function wrapFetch(input, init) {
       let isDataCall = false;
       let urlStr = "";
-      let options = init || {};
+      let options = init ? { ...init } : {};
 
       if (typeof input === "string") {
         urlStr = input;
@@ -871,11 +889,11 @@
         urlStr = input.url;
         options = {
           method: input.method || options.method,
-          headers: input.headers || options.headers,
-          credentials: input.credentials || options.credentials,
-          cache: input.cache || options.cache,
-          redirect: input.redirect || options.redirect,
-          ...init
+          headers: options.headers || input.headers,
+          credentials: options.credentials || input.credentials,
+          cache: options.cache || input.cache,
+          redirect: options.redirect || input.redirect,
+          ...options
         };
       } else {
         urlStr = String(input || "");
@@ -885,20 +903,19 @@
         return nativeFetch(input, init);
       }
 
-      // Détection des appels de données pour activer le loader KibangouTV
       if (
-        urlStr.includes("addon") || 
-        urlStr.includes("catalog") || 
-        urlStr.includes("item") || 
-        urlStr.includes("tmdb") || 
+        urlStr.includes("addon") ||
+        urlStr.includes("catalog") ||
+        urlStr.includes("item") ||
+        urlStr.includes("tmdb") ||
         urlStr.includes("vod/source") ||
-        urlStr.includes("resolve")
+        urlStr.includes("resolve") ||
+        urlStr.includes("client-fetch")
       ) {
         isDataCall = true;
         showGlobalLoader();
       }
 
-      // Injection automatique des credentials Pro pour l'addon adulte si déverrouillé
       if (urlStr.includes("/adult-addon/catalog/") && !urlStr.includes("pin=")) {
         const pin = localStorage.getItem("kibangou_pro_pin") || "8888";
         const sep = urlStr.includes("?") ? "&" : "?";
@@ -906,27 +923,29 @@
       }
 
       const proxiedUrl = getProxiedUrl(urlStr);
-      const promise = nativeFetch(proxiedUrl, options);
+      const isProxied = proxiedUrl !== urlStr && proxiedUrl.startsWith("/api/proxy");
 
-      if (urlStr.includes("resolve")) {
-        return promise.then(async res => {
-          try {
-            const clone = res.clone();
-            const data = await clone.json();
-            if (data && typeof data.url === "string" && !data.url.startsWith("/api/proxy")) {
-              data.url = getProxiedUrl(data.url);
-              return new Response(JSON.stringify(data), {
-                status: res.status,
-                statusText: res.statusText,
-                headers: res.headers
-              });
-            }
-          } catch(e) {}
-          return res;
-        }).finally(() => {
-          if (isDataCall) hideGlobalLoader();
-        });
+      if (isProxied && options.headers) {
+        const customHeaders = normalizeHeadersObj(options.headers);
+        const safeHeaders = {};
+        if (customHeaders["content-type"] || customHeaders["Content-Type"]) {
+          safeHeaders["Content-Type"] = customHeaders["content-type"] || customHeaders["Content-Type"];
+        }
+        if (Object.keys(customHeaders).length > 0) {
+          safeHeaders["X-Proxy-Headers"] = JSON.stringify(customHeaders);
+        }
+        options.headers = safeHeaders;
       }
+
+      const promise = nativeFetch(proxiedUrl, options).then((res) => {
+        const realUrl = res.headers.get("X-Final-Url");
+        if (realUrl && isProxied) {
+          try {
+            Object.defineProperty(res, "url", { value: realUrl, configurable: true });
+          } catch {}
+        }
+        return res;
+      });
 
       if (isDataCall) {
         return promise.finally(() => {
@@ -941,13 +960,24 @@
 
     window.mhub = {
       ready: Promise.resolve(true),
-      capabilities: ["fetch", "clientFetch"],
-      device: { isTV: false, platform: "windows" },
+      capabilities: ["fetch", "clientFetch", "streamProxy"],
+      device: { isTV: false, platform: /Android|iPhone|iPad/i.test(navigator.userAgent) ? "mobile" : "windows" },
       fetch(url, options) {
         return wrapFetch(url, options);
       },
       clientFetch(url, options) {
         return wrapFetch(url, options);
+      },
+      openStream({ url, headers } = {}) {
+        let base = "/api/stream";
+        const hdrObj = normalizeHeadersObj(headers);
+        if (Object.keys(hdrObj).length > 0) {
+          base = `/api/stream/h_${toBase64Url(JSON.stringify(hdrObj))}`;
+        }
+        return Promise.resolve({
+          base,
+          entry: `${base}?u=${encodeURIComponent(url || "")}`
+        });
       },
       setImmersive() {},
       openSearch() {},
@@ -1235,7 +1265,7 @@
        APPLICATION KIBANGOUTV (VUMA CORE + NAVIGATION SUR MESURE)
        ======================================================== -->
   <script type="module">
-    import { mount } from "https://vuma.mx/latest/app.js";
+    import { mount } from "https://vuma.mx/v/1.5.111/app.js";
 
     // Bouquets locaux Kibangou TV, French Cinema VF & Espace Adulte Pro
     const bouquetKibangou = new URL("./kibangou-addon/mhub-addon.json", location.href).href;

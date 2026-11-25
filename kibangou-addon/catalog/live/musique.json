@@ -20,8 +20,8 @@
       "type": "live",
       "url": "https://channels.trace.plus/Traceprod/AFRICA_FR_hd/index.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Trace_Africa_logo.svg/512px-Trace_Africa_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Trace_Africa_logo.svg/512px-Trace_Africa_logo.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Musique",
@@ -78,10 +78,10 @@
       "id": "trace_gospel",
       "name": "TRACE GOSPEL HD (Louange & Adoration)",
       "type": "live",
-      "url": "https://channels.trace.plus/Traceprod/GOSPEL_hd/index.m3u8",
+      "url": "https://channels.trace.plus/Traceprod/GOSPEL_FR_hd/index.m3u8",
       "images": {
-        "logo": "https://i.imgur.com/0zGkZg0.png",
-        "poster": "https://i.imgur.com/0zGkZg0.png"
+        "logo": "https://i.imgur.com/X0UmU3K.png",
+        "poster": "https://i.imgur.com/X0UmU3K.png"
       },
       "tags": [
         "Musique",
@@ -136,10 +136,10 @@
       "id": "trace_urban",
       "name": "TRACE URBAN HD (Hip-Hop & R&B)",
       "type": "live",
-      "url": "https://channels.trace.plus/Traceprod/URBAN_hd/index.m3u8",
+      "url": "https://lightning-traceurban-samsungau.amagi.tv/playlist.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Trace_Urban_logo.svg/512px-Trace_Urban_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Trace_Urban_logo.svg/512px-Trace_Urban_logo.svg.png"
+        "logo": "https://i.imgur.com/DLIbUMx.png",
+        "poster": "https://i.imgur.com/DLIbUMx.png"
       },
       "tags": [
         "Musique",

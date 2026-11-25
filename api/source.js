@@ -104,8 +104,14 @@ export default async function handler(req, res) {
         if (vRes.ok) {
           const vData = await vRes.json();
           if (vData && Array.isArray(vData.sources) && vData.sources.length > 0) {
-            finalSources = vData.sources;
-            break;
+            const valid = vData.sources.filter((s) => {
+              const u = (s.url || "").toLowerCase();
+              return u && !u.includes("vidoza.");
+            });
+            if (valid.length > 0) {
+              finalSources = valid;
+              break;
+            }
           }
         }
       } catch (err) {

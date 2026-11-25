@@ -4,8 +4,8 @@
   "type": "live",
   "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
   "images": {
-    "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/5f/Logo_Africa_24_2017.svg/512px-Logo_Africa_24_2017.svg.png",
-    "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/5f/Logo_Africa_24_2017.svg/512px-Logo_Africa_24_2017.svg.png"
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
   },
   "tags": [
     "Info",

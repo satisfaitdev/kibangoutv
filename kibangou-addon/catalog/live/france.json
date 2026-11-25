@@ -6,21 +6,29 @@
       "type": "live",
       "url": "https://static.france24.com/live/F24_FR_LO_HLS/live_tv.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/France_24_logo.svg/512px-France_24_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/France_24_logo.svg/512px-France_24_logo.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
-      "tags": ["France", "Info", "Direct"]
+      "tags": [
+        "France",
+        "Info",
+        "Direct"
+      ]
     },
     {
       "id": "euronews-fr",
       "name": "Euronews Français",
       "type": "live",
-      "url": "https://euronews-euronews-french-1-eu.rakuten.wurl.tv/playlist.m3u8",
+      "url": "https://2f6c5bf4.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmxheHhUVi1ldV9FdXJvbmV3c0ZyYW5jYWlzX0hMUw/playlist.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Euronews_2016_logo.svg/512px-Euronews_2016_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Euronews_2016_logo.svg/512px-Euronews_2016_logo.svg.png"
+        "logo": "https://i.imgur.com/8t9mdg9.png",
+        "poster": "https://i.imgur.com/8t9mdg9.png"
       },
-      "tags": ["France", "Europe", "Info"]
+      "tags": [
+        "France",
+        "Europe",
+        "Info"
+      ]
     },
     {
       "id": "tv5monde",
@@ -28,32 +36,41 @@
       "type": "live",
       "url": "https://ott.tv5monde.com/Content/HLS/Live/channel(info)/index.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/TV5MONDE_logo.svg/512px-TV5MONDE_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/TV5MONDE_logo.svg/512px-TV5MONDE_logo.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
-      "tags": ["France", "International"]
+      "tags": [
+        "France",
+        "International"
+      ]
     },
     {
-      "id": "bfmtv",
+      "id": "1572961311",
       "name": "BFM TV",
       "type": "live",
-      "url": "https://live-bfmtv.digiteka.net/bfmtv_hls/live/index.m3u8",
+      "url": "https://www.vavoo.to/live/play/1572961311",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/BFMTV_logo_2019.svg/512px-BFMTV_logo_2019.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/BFMTV_logo_2019.svg/512px-BFMTV_logo_2019.svg.png"
+        "logo": "/live2/logo/1572961311.png",
+        "poster": "/live2/logo/1572961311.png"
       },
-      "tags": ["France", "Direct"]
+      "tags": [
+        "France",
+        "Direct"
+      ]
     },
     {
       "id": "cnews",
       "name": "CNEWS",
       "type": "live",
-      "url": "https://cnews-live.dailymotion.com/live/x3b68qk.m3u8",
+      "url": "https://raw.githubusercontent.com/Paradise-91/ParaTV/main/streams/canalplus/cnews-dm.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/CNews_logo.svg/512px-CNews_logo.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/CNews_logo.svg/512px-CNews_logo.svg.png"
+        "logo": "https://i.imgur.com/sSNhk2g.png",
+        "poster": "https://i.imgur.com/sSNhk2g.png"
       },
-      "tags": ["France", "Actu"]
+      "tags": [
+        "France",
+        "Actu"
+      ]
     }
   ]
 }

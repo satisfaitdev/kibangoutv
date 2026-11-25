@@ -1,11 +1,11 @@
 {
-  "id": "cnn",
+  "id": "1962567354",
   "name": "CNN INTERNATIONAL HD",
   "type": "live",
-  "url": "https://tv.a2news.com/live/smil:a2cnnweb.stream.smil/playlist.m3u8",
+  "url": "https://www.vavoo.to/live/play/1962567354",
   "images": {
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/512px-CNN.svg.png",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/CNN.svg/512px-CNN.svg.png"
+    "logo": "/live2/logo/1962567354.png",
+    "poster": "/live2/logo/1962567354.png"
   },
   "tags": [
     "Info",

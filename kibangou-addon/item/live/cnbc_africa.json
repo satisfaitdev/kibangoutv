@@ -4,8 +4,8 @@
   "type": "live",
   "url": "https://jmp2.uk/plu-679a973a97782f0008ff4bb6.m3u8",
   "images": {
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png",
-    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/CNBC_logo.svg/512px-CNBC_logo.svg.png"
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
   },
   "tags": [
     "Info",

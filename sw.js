@@ -1,34 +1,26 @@
 /* ========================================================
-   KIBANGOUTV - SERVICE WORKER PWA (V1.2.0)
-   Mise en cache intelligente de l'App Shell & Pass-through Streaming
+   KIBANGOUTV - SERVICE WORKER PWA (V2.0.0)
+   Network-First pour App Shell/Catalogs & Pass-through Streaming
    ======================================================== */
 
-const CACHE_NAME = "kibangoutv-core-v1.2.0";
-const STATIC_ASSETS = [
-  "/",
-  "/index.html",
+const CACHE_NAME = "kibangoutv-core-v2.0.0";
+const ICON_ASSETS = [
   "/logo.svg",
   "/icon-192.png",
   "/icon-512.png",
   "/icon-maskable-192.png",
   "/icon-maskable-512.png",
   "/apple-touch-icon.png",
-  "/favicon.png",
-  "/manifest.webmanifest",
-  "/manifest.json"
+  "/favicon.png"
 ];
 
-// Installation : Mise en cache initiale de l'App Shell
 self.addEventListener("install", (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ICON_ASSETS)).catch(() => {})
   );
 });
 
-// Activation : Nettoyage automatique des anciens caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -43,60 +35,62 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Interception des requêtes réseau
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // 1. NE JAMAIS INTERCEPTER NI METTRE EN CACHE LES FLUX VIDÉO ET APPELS DE PROXY
-  // (Évite les saturations de quota de stockage et les latences sur le direct)
+  // 1. Pass-through direct pour tous les flux vidéo, API proxy/stream, range et résolution
   if (
     req.method !== "GET" ||
+    url.origin !== self.location.origin ||
     url.pathname.includes(".m3u8") ||
     url.pathname.includes(".ts") ||
-    url.pathname.startsWith("/api/proxy") ||
-    url.pathname.startsWith("/kibangou-addon/resolve") ||
-    url.pathname.startsWith("/resolve") ||
+    url.pathname.includes(".mp4") ||
+    url.pathname.startsWith("/api/") ||
+    url.pathname.includes("/resolve") ||
+    url.pathname.includes("/source/") ||
+    url.searchParams.has("u") ||
     url.searchParams.has("url") ||
     req.headers.has("range")
   ) {
     return;
   }
 
-  // 2. Navigation de pages (HTML / App Shell) : Réseau en priorité, repli sur le cache hors-ligne
-  if (req.mode === "navigate") {
+  // 2. HTML / App Shell / JS / JSON manifests & catalogs : Network-First (toujours à jour en prod)
+  if (
+    req.mode === "navigate" ||
+    url.pathname === "/" ||
+    url.pathname === "/index.html" ||
+    url.pathname.endsWith(".js") ||
+    url.pathname.endsWith(".json") ||
+    url.pathname.endsWith(".webmanifest")
+  ) {
     event.respondWith(
-      fetch(req).catch(() => {
-        return caches.match("/index.html") || caches.match("/");
-      })
+      fetch(req).then((networkRes) => {
+        if (networkRes && networkRes.status === 200) {
+          const clone = networkRes.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
+        }
+        return networkRes;
+      }).catch(() => caches.match(req).then((c) => c || caches.match("/index.html")))
     );
     return;
   }
 
-  // 3. Fichiers statiques et icônes : Cache First avec rafraîchissement en arrière-plan
-  if (
-    STATIC_ASSETS.includes(url.pathname) ||
-    url.pathname.endsWith(".png") ||
-    url.pathname.endsWith(".svg") ||
-    url.pathname.endsWith(".webmanifest") ||
-    url.pathname.endsWith(".json")
-  ) {
+  // 3. Icônes & images locales statiques : Cache-First avec revalidation
+  if (ICON_ASSETS.includes(url.pathname) || url.pathname.endsWith(".png") || url.pathname.endsWith(".svg")) {
     event.respondWith(
       caches.match(req).then((cached) => {
-        const fetchPromise = fetch(req).then((networkRes) => {
+        const net = fetch(req).then((networkRes) => {
           if (networkRes && networkRes.status === 200) {
-            const resClone = networkRes.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+            const clone = networkRes.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
           }
           return networkRes;
         }).catch(() => null);
-
-        return cached || fetchPromise;
+        return cached || net;
       })
     );
     return;
   }
-
-  // 4. Par défaut : Réseau standard
-  event.respondWith(fetch(req));
 });

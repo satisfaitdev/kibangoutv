@@ -77,8 +77,8 @@
       "type": "live",
       "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/VoxAfrica_Logo.png/512px-VoxAfrica_Logo.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/VoxAfrica_Logo.png/512px-VoxAfrica_Logo.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Afrique",
@@ -91,8 +91,8 @@
       "type": "live",
       "url": "http://51.254.199.122:8080/africable/index.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/53/Logo_africable_television.svg/512px-Logo_africable_television.svg.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/5/53/Logo_africable_television.svg/512px-Logo_africable_television.svg.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Afrique",
@@ -105,8 +105,8 @@
       "type": "live",
       "url": "https://5cbd3bc28341f.streamlock.net:444/telesud/live/playlist.m3u8",
       "images": {
-        "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/9/91/T%C3%A9l%C3%A9sud_logo_2016.png/512px-T%C3%A9l%C3%A9sud_logo_2016.png",
-        "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/9/91/T%C3%A9l%C3%A9sud_logo_2016.png/512px-T%C3%A9l%C3%A9sud_logo_2016.png"
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
       },
       "tags": [
         "Afrique",

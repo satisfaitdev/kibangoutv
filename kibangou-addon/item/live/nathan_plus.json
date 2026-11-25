@@ -4,8 +4,8 @@
   "type": "live",
   "url": "https://ott.tv5monde.com/Content/HLS/Live/channel(tivi5)/variant.m3u8",
   "images": {
-    "logo": "https://upload.wikimedia.org/wikipedia/fr/thumb/a/a2/Logo_Nathan.svg/512px-Logo_Nathan.svg.png",
-    "poster": "https://upload.wikimedia.org/wikipedia/fr/thumb/a/a2/Logo_Nathan.svg/512px-Logo_Nathan.svg.png"
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
   },
   "tags": [
     "Jeunesse",
