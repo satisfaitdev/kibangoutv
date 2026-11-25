@@ -417,43 +417,50 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 except Exception as e:
                     print("Error serving addon manifest:", e)
 
-        # 0b1. Contrôle d'accès et verrouillage du catalogue Adulte (+18) Pro
-        if "/adult-addon/catalog/" in clean_path:
-            auth_ok = False
-            qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
-            pin = qs.get("pin", [""])[0]
-            header_pin = self.headers.get("X-Pro-PIN", "") or self.headers.get("X-Kibangou-PIN", "")
-            effective_pin = pin or header_pin
-            auth_token = qs.get("pro", [""])[0] or self.headers.get("X-Pro-Auth", "")
+        # 0b1. Service et filtrage dynamique des catalogues (Canal+ Congo, Chaînes Locales, beIN, etc.)
+        for addon_prefix in ["/kibangou-addon/catalog/", "/french-addon/catalog/", "/adult-addon/catalog/"]:
+            if addon_prefix in clean_path:
+                addon_name = addon_prefix.split("/")[1]
+                sub_catalog = clean_path.split(addon_prefix, 1)[1].replace(".json", "")
+                cat_file = os.path.join(DIRECTORY, addon_name, "catalog", sub_catalog + ".json")
+                if os.path.isfile(cat_file):
+                    try:
+                        with open(cat_file, "r", encoding="utf-8") as f:
+                            cat_data = json.load(f)
+                        items = cat_data.get("items", []) if isinstance(cat_data, dict) else (cat_data if isinstance(cat_data, list) else [])
 
-            # PINs autorisés par défaut: 8888, 1234, 123456, 0000 ou token pro
-            if effective_pin in ["8888", "1234", "123456", "0000"] or auth_token == "1" or auth_token == "true":
-                auth_ok = True
+                        # Parsing des paramètres de requête (filtre catégorie & recherche)
+                        qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+                        cat_filter = qs.get("filter.category", [""])[0] or qs.get("filter[category]", [""])[0] or qs.get("category", [""])[0]
+                        if cat_filter and cat_filter.lower() not in ["all", "tous"]:
+                            cf_lower = cat_filter.lower()
+                            items = [
+                                it for it in items
+                                if cf_lower in (it.get("category") or "").lower()
+                                or cf_lower in (it.get("group") or "").lower()
+                                or any(cf_lower in str(g).lower() for g in it.get("genres", []))
+                                or any(cf_lower in str(t).lower() for t in it.get("tags", []))
+                            ]
 
-            # Si non déverrouillé, retourner un message sécurisé conforme
-            if not auth_ok:
-                locked_payload = {
-                    "items": [
-                        {
-                            "id": "adult:locked-info",
-                            "name": "🔒 Espace Adulte +18 Verrouillé",
-                            "type": "live" if "live" in clean_path else "video",
-                            "description": "Ce contenu est réservé aux abonnés Pro (18+). Veuillez activer l'accès adulte dans les Réglages avec votre code PIN.",
-                            "images": {
-                                "logo": "/logo.svg",
-                                "poster": "/logo.svg"
-                            },
-                            "tags": ["Verrouillé", "Pro", "18+"]
-                        }
-                    ]
-                }
-                data = json.dumps(locked_payload, ensure_ascii=False).encode("utf-8")
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json; charset=utf-8")
-                self.send_header("Content-Length", str(len(data)))
-                self.end_headers()
-                self.wfile.write(data)
-                return
+                        search_q = qs.get("search", [""])[0] or qs.get("q", [""])[0] or qs.get("query", [""])[0]
+                        if search_q:
+                            sq_lower = search_q.lower().strip()
+                            items = [
+                                it for it in items
+                                if sq_lower in (it.get("name") or "").lower()
+                                or sq_lower in (it.get("description") or "").lower()
+                                or any(sq_lower in str(t).lower() for t in it.get("tags", []))
+                            ]
+
+                        out_bytes = json.dumps({"items": items}, ensure_ascii=False).encode("utf-8")
+                        self.send_response(200)
+                        self.send_header("Content-Type", "application/json; charset=utf-8")
+                        self.send_header("Content-Length", str(len(out_bytes)))
+                        self.end_headers()
+                        self.wfile.write(out_bytes)
+                        return
+                    except Exception as e:
+                        print("Error serving catalog in server.py:", e)
 
         # 0b2. Résolution directe des identifiants TMDB / IMDb orphelins (ex: /tmdb:1726)
         if clean_path.startswith("/tmdb:") or clean_path.startswith("/imdb:"):
@@ -692,7 +699,45 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             super().do_HEAD()
 
     def do_POST(self):
-        if self.path.startswith("/api/proxy?url="):
+        if "/client-fetch" in self.path or any(p in self.path for p in ["/kibangou-addon/resolve", "/french-addon/resolve", "/adult-addon/resolve", "/resolve"]):
+            content_length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(content_length) if content_length > 0 else None
+            try:
+                req = urllib.request.Request(
+                    "https://vavoo.top/vod/client-fetch",
+                    data=body,
+                    headers={
+                        "Content-Type": "application/json",
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+                    }
+                )
+                with urllib.request.urlopen(req, timeout=12) as upstream:
+                    data = json.loads(upstream.read().decode())
+                    if isinstance(data, dict) and isinstance(data.get("url"), str) and data["url"].startswith("http://"):
+                        data["proxy"] = True
+                    out_bytes = json.dumps(data).encode("utf-8")
+                    self.send_response(upstream.status)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.send_header("Content-Length", str(len(out_bytes)))
+                    self.end_headers()
+                    self.wfile.write(out_bytes)
+                    return
+            except urllib.error.HTTPError as e:
+                err_content = e.read()
+                self.send_response(e.code)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(err_content)))
+                self.end_headers()
+                self.wfile.write(err_content)
+                return
+            except Exception as e:
+                print("Server.py client-fetch error:", e)
+                self.send_response(502)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(f'{{"error": "{str(e)}"}}\n'.encode("utf-8"))
+                return
+        elif self.path.startswith("/api/proxy?url="):
             content_length = int(self.headers.get("Content-Length", 0))
             body = self.rfile.read(content_length) if content_length > 0 else None
             self.forward_proxy("POST", body)

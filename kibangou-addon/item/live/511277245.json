@@ -1,0 +1,21 @@
+{
+  "id": "511277245",
+  "name": "CGTN FRANÇAIS",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/511277245",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Info",
+    "HD",
+    "G. Informations",
+    "Canal+ Congo"
+  ],
+  "category": "G. Informations",
+  "group": "G. Informations",
+  "genres": [
+    "G. Informations"
+  ]
+}

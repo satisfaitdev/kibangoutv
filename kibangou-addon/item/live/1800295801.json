@@ -1,0 +1,21 @@
+{
+  "id": "1800295801",
+  "name": "EUROSPORT 1 FHD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/1800295801",
+  "images": {
+    "logo": "/live2/logo/1800295801.png",
+    "poster": "/live2/logo/1800295801.png"
+  },
+  "tags": [
+    "Sport",
+    "HD",
+    "C. Sport",
+    "Canal+ Congo"
+  ],
+  "category": "C. Sport",
+  "group": "C. Sport",
+  "genres": [
+    "C. Sport"
+  ]
+}

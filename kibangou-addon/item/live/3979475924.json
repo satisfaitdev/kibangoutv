@@ -1,0 +1,21 @@
+{
+  "id": "3979475924",
+  "name": "CNEWS HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/3979475924",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Info",
+    "HD",
+    "G. Informations",
+    "Canal+ Congo"
+  ],
+  "category": "G. Informations",
+  "group": "G. Informations",
+  "genres": [
+    "G. Informations"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "554541779",
+  "name": "CANAL+ SPORT 3 HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/554541779",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Canal+",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

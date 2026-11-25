@@ -1,0 +1,21 @@
+{
+  "id": "3118025835",
+  "name": "FRANCE 2 HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/3118025835",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Généraliste",
+    "HD",
+    "F. Divertissement",
+    "Canal+ Congo"
+  ],
+  "category": "F. Divertissement",
+  "group": "F. Divertissement",
+  "genres": [
+    "F. Divertissement"
+  ]
+}

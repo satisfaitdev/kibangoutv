@@ -7,5 +7,16 @@
     "logo": "https://i.imgur.com/8t9mdg9.png",
     "poster": "https://i.imgur.com/8t9mdg9.png"
   },
-  "tags": ["Info", "Direct"]
+  "tags": [
+    "Info",
+    "Direct",
+    "Chaînes Locales",
+    "Congo"
+  ],
+  "category": "Chaînes Locales",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Chaînes Locales",
+    "Congo"
+  ]
 }

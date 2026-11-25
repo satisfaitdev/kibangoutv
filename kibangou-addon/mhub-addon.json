@@ -2,8 +2,8 @@
   "id": "kibangou-direct",
   "name": "Kibangou TV",
   "specVersion": 2,
-  "version": "2.0.0",
-  "description": "Bouquet complet KibangouTV : CANAL+, Cinéma & Séries, Sport, Découverte, Jeunesse, Divertissement, Infos, Musique, Religions & Télé Congo",
+  "version": "2.1.0",
+  "description": "Bouquet complet KibangouTV : Canal+ Congo (A-I), Chaînes Locales (Télé Congo, DRTV), beIN Sports & DAZN, Films et Séries",
   "icon": "/logo.svg",
   "resources": [
     "catalog",
@@ -26,8 +26,61 @@
   ],
   "catalogs": [
     {
+      "id": "canal_congo",
+      "name": "Canal+ Congo",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      },
+      "features": {
+        "search": true,
+        "filter": [
+          {
+            "id": "category",
+            "name": "Catégorie",
+            "values": [
+              { "id": "A. Chaînes CANAL+", "name": "A. Chaînes CANAL+" },
+              { "id": "B. Cinéma & Séries", "name": "B. Cinéma & Séries" },
+              { "id": "C. Sport", "name": "C. Sport" },
+              { "id": "D. Découverte & Documentaires", "name": "D. Découverte & Documentaires" },
+              { "id": "E. Jeunesse & Éducation", "name": "E. Jeunesse & Éducation" },
+              { "id": "F. Divertissement", "name": "F. Divertissement" },
+              { "id": "G. Informations", "name": "G. Informations" },
+              { "id": "H. Musique", "name": "H. Musique" },
+              { "id": "I. Religions", "name": "I. Religions" }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "local_channels",
+      "name": "Chaînes Locales",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      },
+      "features": {
+        "search": true
+      }
+    },
+    {
+      "id": "bein",
+      "name": "beIN Sports & DAZN",
+      "type": "live",
+      "options": {
+        "shape": "landscape",
+        "displayName": true
+      },
+      "features": {
+        "search": true
+      }
+    },
+    {
       "id": "movie",
-      "name": "🎬 Films Populaires & Box-Office",
+      "name": "🎬 Films Populaires",
       "type": "video",
       "options": {
         "shape": "portrait"
@@ -40,147 +93,20 @@
       "options": {
         "shape": "portrait"
       }
-    },
-    {
-      "id": "canal",
-      "name": "⭐ Chaînes CANAL+",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "cinema_series",
-      "name": "🎬 Cinéma et Séries",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "sport",
-      "name": "⚽ Sport & Compétitions",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "decouverte",
-      "name": "🌍 Découverte & Documentaires",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "jeunesse",
-      "name": "🧸 Jeunesse & Éducation",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "divertissement",
-      "name": "🎭 Divertissement & TNT",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "infos",
-      "name": "📰 Informations & Monde",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "musique",
-      "name": "🎵 Musique & TRACE",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "religions",
-      "name": "🕊️ Religions & Spiritualités",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "congo",
-      "name": "🇨🇬 Télé Congo & Afrique",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
-      "id": "bein",
-      "name": "🏆 beIN Sports & DAZN",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
     }
   ],
   "dashboard": [
     {
-      "name": "⭐ Chaînes CANAL+",
-      "catalog": "canal"
+      "name": "Canal+ Congo",
+      "catalog": "canal_congo"
     },
     {
-      "name": "🇨🇬 Télé Congo & Afrique",
-      "catalog": "congo"
+      "name": "Chaînes Locales",
+      "catalog": "local_channels"
     },
     {
-      "name": "⚽ Sport & Directs",
-      "catalog": "sport"
-    },
-    {
-      "name": "🎬 Cinéma et Séries",
-      "catalog": "cinema_series"
-    },
-    {
-      "name": "🌍 Découverte & Documentaires",
-      "catalog": "decouverte"
-    },
-    {
-      "name": "🧸 Jeunesse & Éducation",
-      "catalog": "jeunesse"
-    },
-    {
-      "name": "🎭 Divertissement & Généralistes",
-      "catalog": "divertissement"
-    },
-    {
-      "name": "📰 Informations & Monde",
-      "catalog": "infos"
-    },
-    {
-      "name": "🎵 Musique & TRACE",
-      "catalog": "musique"
-    },
-    {
-      "name": "🕊️ Religions & Spiritualités",
-      "catalog": "religions"
+      "name": "beIN Sports & DAZN HQ",
+      "catalog": "bein"
     },
     {
       "name": "🎬 Films Populaires & Box-Office",
@@ -189,10 +115,6 @@
     {
       "name": "🍿 Séries & Nouveautés",
       "catalog": "series"
-    },
-    {
-      "name": "🏆 beIN Sports & DAZN",
-      "catalog": "bein"
     }
   ],
   "cache": {

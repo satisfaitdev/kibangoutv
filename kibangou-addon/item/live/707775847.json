@@ -1,0 +1,21 @@
+{
+  "id": "707775847",
+  "name": "CANAL+ SPORT 360 FHD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/707775847",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Canal+",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

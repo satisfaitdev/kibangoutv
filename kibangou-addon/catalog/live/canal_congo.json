@@ -1,0 +1,2613 @@
+{
+  "items": [
+    {
+      "id": "1296369071",
+      "name": "CANAL+ PREMIÈRE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1296369071",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "canalplus_pop",
+      "name": "CANAL+ POP HD",
+      "type": "live",
+      "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/cplus_pop/live.livx/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "Afrique",
+        "Généraliste",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "2904368955",
+      "name": "CANAL+ ELLES HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2904368955",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "3856042964",
+      "name": "CANAL+ ACTION HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3856042964",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "289838749",
+      "name": "CANAL+ CINÉMA FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/289838749",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "4007062954",
+      "name": "CANAL+ FAMILY HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4007062954",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "869256388",
+      "name": "CANAL+ KIDS FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/869256388",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "1663608238",
+      "name": "CANAL+ SPORT 1 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1663608238",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "3987186253",
+      "name": "CANAL+ SPORT 2 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3987186253",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "554541779",
+      "name": "CANAL+ SPORT 3 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/554541779",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "734571466",
+      "name": "CANAL+ SPORT 4 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/734571466",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "3882003284",
+      "name": "CANAL+ SPORT 5 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3882003284",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "3625345371",
+      "name": "CANAL+ DOCS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3625345371",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "6981957",
+      "name": "CANAL+ HD (Direct)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/6981957",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "2141653939",
+      "name": "CANAL+ SÉRIES FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2141653939",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "707775847",
+      "name": "CANAL+ SPORT 360 FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/707775847",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "821044379",
+      "name": "CANAL+ BOX OFFICE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/821044379",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "1765873640",
+      "name": "A+ (Afrique Séries)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1765873640",
+      "images": {
+        "logo": "/live2/logo/1765873640.png",
+        "poster": "/live2/logo/1765873640.png"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "215687074",
+      "name": "NOVELAS+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/215687074",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Telenovelas",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "3253805798",
+      "name": "RTL9 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3253805798",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "3638789513",
+      "name": "ACTION FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3638789513",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "4154938214",
+      "name": "PARAMOUNT CHANNEL FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4154938214",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "1562445425",
+      "name": "NOLLYWOOD TV",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1562445425",
+      "images": {
+        "logo": "/live2/logo/1562445425.png",
+        "poster": "/live2/logo/1562445425.png"
+      },
+      "tags": [
+        "Nollywood & Séries",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "eyeye_tv",
+      "name": "EYEYE TV (Afrique)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8306/8306/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "Afrique",
+        "Nollywood",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "zee_magic",
+      "name": "ZEE MAGIC (Séries & Bollywood en Français)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8490/8490/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "Bollywood",
+        "Français",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "3049436856",
+      "name": "TF1 SÉRIES FILMS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3049436856",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "1257230029",
+      "name": "SÉRIECLUB FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1257230029",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "j3_replay",
+      "name": "J3 REPLAY (Cinéma & Séries Replay)",
+      "type": "live",
+      "url": "https://production-fast-sic.content.okast.tv/fa2e8c4385712f9a7dce4ff2dcebac2e/channels/d9070446-8448-455e-8075-773b1ba12562/d47eae0f-ad77-414a-9a1d-2a6628ba18c3/media_.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "Replay",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "1109038221",
+      "name": "FRÉQUENCE NOVELAS",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1109038221",
+      "images": {
+        "logo": "/live2/logo/1109038221.png",
+        "poster": "/live2/logo/1109038221.png"
+      },
+      "tags": [
+        "Telenovelas",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "2509363888",
+      "name": "CANAL SÉRIES HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2509363888",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Cinéma & Séries",
+        "HD",
+        "B. Cinéma & Séries",
+        "Canal+ Congo"
+      ],
+      "category": "B. Cinéma & Séries",
+      "group": "B. Cinéma & Séries",
+      "genres": [
+        "B. Cinéma & Séries"
+      ]
+    },
+    {
+      "id": "3208238801",
+      "name": "INFOSPORT+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3208238801",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "africa_sport",
+      "name": "AFRICA SPORT TV",
+      "type": "live",
+      "url": "https://live-hls-qunv.livepush.io/live_cdn/em8A-kbzIfHqu73/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Sport",
+        "Afrique",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "2985310350",
+      "name": "MGG TV HD (Gaming & eSport)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2985310350",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "1808973403",
+      "name": "AUTOMOTO LA CHAÎNE FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1808973403",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "3404543565",
+      "name": "DISCOVERY CHANNEL HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3404543565",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Découverte & Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "2736388639",
+      "name": "MUSEUM TV",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2736388639",
+      "images": {
+        "logo": "/live2/logo/2736388639.png",
+        "poster": "/live2/logo/2736388639.png"
+      },
+      "tags": [
+        "Culture & Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "w_sport",
+      "name": "W SPORT HD",
+      "type": "live",
+      "url": "https://d36r8jifhgsk5j.cloudfront.net/Willow_TV1080p.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "International",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "6981957",
+      "name": "CANAL+ TV (Grands Événements Sportifs)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/6981957",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "2846119468",
+      "name": "CANAL+ SPORT HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2846119468",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "1800295801",
+      "name": "EUROSPORT 1 FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1800295801",
+      "images": {
+        "logo": "/live2/logo/1800295801.png",
+        "poster": "/live2/logo/1800295801.png"
+      },
+      "tags": [
+        "Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "2532454558",
+      "name": "EUROSPORT 2 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2532454558",
+      "images": {
+        "logo": "/live2/logo/2532454558.png",
+        "poster": "/live2/logo/2532454558.png"
+      },
+      "tags": [
+        "Sport",
+        "HD",
+        "C. Sport",
+        "Canal+ Congo"
+      ],
+      "category": "C. Sport",
+      "group": "C. Sport",
+      "genres": [
+        "C. Sport"
+      ]
+    },
+    {
+      "id": "86541107",
+      "name": "PLANÈTE+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/86541107",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Découverte",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "737756046",
+      "name": "USHUAÏA TV FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/737756046",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Nature & Découverte",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "capital_sante",
+      "name": "CAPITAL SANTÉ TV",
+      "type": "live",
+      "url": "https://tv3.bitstreaming.net:3540/live/santeltvlive.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Découverte",
+        "Santé",
+        "Afrique",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "educa_tv",
+      "name": "EDUCA TV (Éducation & Savoir)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8294/8294/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Découverte",
+        "Éducation",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "english_club_tv",
+      "name": "ENGLISH CLUB TV HD",
+      "type": "live",
+      "url": "https://dash2.antik.sk/live/test_ectv_hd_1200/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Découverte",
+        "Éducation",
+        "Langues",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "386194247",
+      "name": "SCIENCE & VIE TV",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/386194247",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Science",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "2332499529",
+      "name": "CRIME DISTRICT HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2332499529",
+      "images": {
+        "logo": "/live2/logo/2332499529.png",
+        "poster": "/live2/logo/2332499529.png"
+      },
+      "tags": [
+        "Investigation",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "439248258",
+      "name": "ANIMAUX HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/439248258",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Animaux",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "299772643",
+      "name": "PLANÈTE+ AVENTURE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/299772643",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Aventure",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "3552349294",
+      "name": "PLANÈTE+ CRIME HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3552349294",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Investigation",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "665994240",
+      "name": "HISTOIRE TV HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/665994240",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Histoire",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "3780297604",
+      "name": "TOUTE L'HISTOIRE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3780297604",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Histoire",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "3625345371",
+      "name": "CANAL+ DOCS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3625345371",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Documentaire",
+        "HD",
+        "D. Découverte & Documentaires",
+        "Canal+ Congo"
+      ],
+      "category": "D. Découverte & Documentaires",
+      "group": "D. Découverte & Documentaires",
+      "genres": [
+        "D. Découverte & Documentaires"
+      ]
+    },
+    {
+      "id": "nathan_plus",
+      "name": "NATHAN+ (Éducation & Éveil)",
+      "type": "live",
+      "url": "https://ott.tv5monde.com/Content/HLS/Live/channel(tivi5)/variant.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "Éducation",
+        "Afrique",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "3381221567",
+      "name": "TÉLÉTOON+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3381221567",
+      "images": {
+        "logo": "/live2/logo/3381221567.png",
+        "poster": "/live2/logo/3381221567.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "tivi5_monde",
+      "name": "TiVi5 MONDE (TV5 Jeunesse)",
+      "type": "live",
+      "url": "https://ott.tv5monde.com/Content/HLS/Live/channel(tivi5)/variant.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "Dessins Animés",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "2460597330",
+      "name": "PIWI+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2460597330",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "kids_music_africa",
+      "name": "KIDS MUSIC AFRICA",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/KITOKO_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Musique",
+        "Afrique",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "ludikids",
+      "name": "LUDIKIDS TV (Apprendre en s'amusant)",
+      "type": "live",
+      "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Ludo-éducatif",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "ouii_africa",
+      "name": "OUII AFRICA TV",
+      "type": "live",
+      "url": "https://tv.voozmedia.fun/benietv/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Jeunesse",
+        "Afrique",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "844122489",
+      "name": "NICKELODEON HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/844122489",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "2127297858",
+      "name": "CARTOON NETWORK FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2127297858",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "3812280294",
+      "name": "TIJI FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3812280294",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "869256388",
+      "name": "CANAL+ KIDS FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/869256388",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeunesse",
+        "HD",
+        "E. Jeunesse & Éducation",
+        "Canal+ Congo"
+      ],
+      "category": "E. Jeunesse & Éducation",
+      "group": "E. Jeunesse & Éducation",
+      "genres": [
+        "E. Jeunesse & Éducation"
+      ]
+    },
+    {
+      "id": "975685108",
+      "name": "C8 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/975685108",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Divertissement",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3408455707",
+      "name": "TV5 MONDE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3408455707",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Francophonie",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "fashion_africa",
+      "name": "FASHION AFRICA TV",
+      "type": "live",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/nxss.m3u8?auth=testpub",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Mode",
+        "Afrique",
+        "Style",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3093319007",
+      "name": "E! ENTERTAINMENT",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3093319007",
+      "images": {
+        "logo": "/live2/logo/3093319007.png",
+        "poster": "/live2/logo/3093319007.png"
+      },
+      "tags": [
+        "People & Séries",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3794086467",
+      "name": "TFX HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3794086467",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Divertissement",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "voxafrica",
+      "name": "VOXAFRICA (Panafricain)",
+      "type": "live",
+      "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Afrique",
+        "Généraliste",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "africable",
+      "name": "AFRICABLE (La Chaîne du Continent)",
+      "type": "live",
+      "url": "http://51.254.199.122:8080/africable/index.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Afrique",
+        "Culture",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "telesud",
+      "name": "TÉLÉSUD (La Télévision des Suds)",
+      "type": "live",
+      "url": "https://5cbd3bc28341f.streamlock.net:444/telesud/live/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Afrique",
+        "Diaspora",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "africa_infinity",
+      "name": "AFRICA INFINITY TV",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8306/8306/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Divertissement",
+        "Afrique",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "passion_tv",
+      "name": "PASSION TV (Telenovelas & Émotions)",
+      "type": "live",
+      "url": "https://jmp2.uk/plu-6911c9704316999535eb21cf.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Divertissement",
+        "Novelas",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "2550219127",
+      "name": "CUISINES (My Cuisine HD)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2550219127",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Art de vivre & Cuisine",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "1334669376",
+      "name": "TF1 FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1334669376",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3118025835",
+      "name": "FRANCE 2 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3118025835",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "1970490613",
+      "name": "FRANCE 3 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1970490613",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3813068770",
+      "name": "M6 FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3813068770",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Généraliste",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "1317243355",
+      "name": "MTV FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1317243355",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique & Séries",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "959272147",
+      "name": "GAME ONE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/959272147",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Jeux Vidéo & Anime",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "874035777",
+      "name": "J-ONE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/874035777",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Anime & Manga",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "4228507215",
+      "name": "TMC HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/4228507215",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Divertissement",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "401237472",
+      "name": "MANGAS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/401237472",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Animation Japonaise",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3631271424",
+      "name": "AB1 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3631271424",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Séries & Catch",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "621108426",
+      "name": "ARTE FHD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/621108426",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Culture",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3004974450",
+      "name": "FRANCE 5 HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3004974450",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Société & Docs",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "3738924449",
+      "name": "TLC HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3738924449",
+      "images": {
+        "logo": "/live2/logo/3738924449.png",
+        "poster": "/live2/logo/3738924449.png"
+      },
+      "tags": [
+        "Téléréalité & Vie",
+        "HD",
+        "F. Divertissement",
+        "Canal+ Congo"
+      ],
+      "category": "F. Divertissement",
+      "group": "F. Divertissement",
+      "genres": [
+        "F. Divertissement"
+      ]
+    },
+    {
+      "id": "africa24",
+      "name": "AFRICA 24 HD (L'Info du Continent)",
+      "type": "live",
+      "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "Afrique",
+        "Direct",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "2875346882",
+      "name": "FRANCE 24 (Français Direct)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2875346882",
+      "images": {
+        "logo": "/live2/logo/2875346882.png",
+        "poster": "/live2/logo/2875346882.png"
+      },
+      "tags": [
+        "Info",
+        "HD",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "business24",
+      "name": "BUSINESS 24 AFRICA (Économie & Finance)",
+      "type": "live",
+      "url": "https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Info",
+        "Économie",
+        "Afrique",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "africanews",
+      "name": "AFRICANEWS (En continu)",
+      "type": "live",
+      "url": "https://cdn-euronews.akamaized.net/live/eds/africanews-fr/25050/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/5UxU4zc.png",
+        "poster": "https://i.imgur.com/5UxU4zc.png"
+      },
+      "tags": [
+        "Info",
+        "Panafricain",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "al_jazeera",
+      "name": "AL JAZEERA (International Direct)",
+      "type": "live",
+      "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "International",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "medi1_tv",
+      "name": "MEDI1 TV AFRIQUE",
+      "type": "live",
+      "url": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-afrique_tm7tu45/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "Afrique",
+        "Maghreb",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "511277245",
+      "name": "CGTN FRANÇAIS",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/511277245",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "nhk_world",
+      "name": "NHK WORLD JAPAN",
+      "type": "live",
+      "url": "https://tv-stream-test.daydreamer-json.cc/fe8bf835820fb530467f75a9cb761504/master.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "Japon & Monde",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "3979475924",
+      "name": "CNEWS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3979475924",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "cnbc_africa",
+      "name": "CNBC AFRICA (Économie Mondiale)",
+      "type": "live",
+      "url": "https://jmp2.uk/plu-679a973a97782f0008ff4bb6.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "Économie",
+        "Bourse",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "584773960",
+      "name": "EURONEWS (Français)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/584773960",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "1962567354",
+      "name": "CNN INTERNATIONAL HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1962567354",
+      "images": {
+        "logo": "/live2/logo/1962567354.png",
+        "poster": "/live2/logo/1962567354.png"
+      },
+      "tags": [
+        "Info",
+        "International",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "2019563148",
+      "name": "LCI HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2019563148",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "HD",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "bloomberg",
+      "name": "BLOOMBERG TELEVISION HD",
+      "type": "live",
+      "url": "https://mumbai-edge.smartplaytv.in/BloombergHT/index.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Info",
+        "Finance",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "3018021932",
+      "name": "BBC NEWS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3018021932",
+      "images": {
+        "logo": "/live2/logo/3018021932.png",
+        "poster": "/live2/logo/3018021932.png"
+      },
+      "tags": [
+        "Info",
+        "Monde",
+        "G. Informations",
+        "Canal+ Congo"
+      ],
+      "category": "G. Informations",
+      "group": "G. Informations",
+      "genres": [
+        "G. Informations"
+      ]
+    },
+    {
+      "id": "3480426017",
+      "name": "C STAR FHD (Hits & Concerts)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3480426017",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique",
+        "HD",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "trace_africa",
+      "name": "TRACE AFRICA HD (Afrobeats & Coupé-Décalé)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/AFRICA_FR_hd/index.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique",
+        "Afrobeats",
+        "Afrique",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "trace_teranga",
+      "name": "TRACE TERANGA HD (Sénégal & Afrique de l'Ouest)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/TERANGA_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Musique",
+        "Mbalax",
+        "Afrique",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "trace_mboa",
+      "name": "TRACE MBOA HD (Cameroun & Afrique Centrale)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/MBOA_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Musique",
+        "Makossa",
+        "Afrique",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "trace_kitoko",
+      "name": "TRACE KITOKO HD (Congo Rumba & Ndombolo)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/KITOKO_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Musique",
+        "Rumba Congolaise",
+        "Brazzaville & Kinshasa",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "trace_gospel",
+      "name": "TRACE GOSPEL HD (Louange & Adoration)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/GOSPEL_FR_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/X0UmU3K.png",
+        "poster": "https://i.imgur.com/X0UmU3K.png"
+      },
+      "tags": [
+        "Musique",
+        "Gospel",
+        "Chrétien",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "trace_mziki",
+      "name": "TRACE MZIKI HD (Afrique de l'Est & Swahili)",
+      "type": "live",
+      "url": "https://channels.trace.plus/Traceprod/MZIKI_hd/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Musique",
+        "Bongo Flava",
+        "Afrique",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "1047683403",
+      "name": "BLACK! (Digital Black Music DBM)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1047683403",
+      "images": {
+        "logo": "/live2/logo/1047683403.png",
+        "poster": "/live2/logo/1047683403.png"
+      },
+      "tags": [
+        "Musique",
+        "HD",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "1317243355",
+      "name": "MTV HITS HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1317243355",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique",
+        "HD",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "trace_urban",
+      "name": "TRACE URBAN HD (Hip-Hop & R&B)",
+      "type": "live",
+      "url": "https://lightning-traceurban-samsungau.amagi.tv/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/DLIbUMx.png",
+        "poster": "https://i.imgur.com/DLIbUMx.png"
+      },
+      "tags": [
+        "Musique",
+        "Urban",
+        "Hip-Hop",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "1071808933",
+      "name": "MEZZO LIVE HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/1071808933",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Musique",
+        "HD",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "melody_afrique",
+      "name": "MELODY D'AFRIQUE (Rétro & Souvenirs d'Afrique)",
+      "type": "live",
+      "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/melody/live.livx/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Musique",
+        "Classiques Africains",
+        "H. Musique",
+        "Canal+ Congo"
+      ],
+      "category": "H. Musique",
+      "group": "H. Musique",
+      "genres": [
+        "H. Musique"
+      ]
+    },
+    {
+      "id": "al_bayane",
+      "name": "AL BAYANE TV (Foi Islamique & Éthique)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8302/8302/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Religions",
+        "Islam",
+        "Spiritualité",
+        "I. Religions",
+        "Canal+ Congo"
+      ],
+      "category": "I. Religions",
+      "group": "I. Religions",
+      "genres": [
+        "I. Religions"
+      ]
+    },
+    {
+      "id": "ecclesia_tv",
+      "name": "ECCLESIA TV (Chaîne Catholique Nationale)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8294/8294/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Religions",
+        "Catholique",
+        "Messe",
+        "I. Religions",
+        "Canal+ Congo"
+      ],
+      "category": "I. Religions",
+      "group": "I. Religions",
+      "genres": [
+        "I. Religions"
+      ]
+    },
+    {
+      "id": "kto_tv",
+      "name": "KTO TV (Télévision Catholique Direct)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8294/8294/playlist.m3u8",
+      "images": {
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/b/be/Nicktoons_Logo_2023.svg",
+        "poster": "https://upload.wikimedia.org/wikipedia/commons/b/be/Nicktoons_Logo_2023.svg"
+      },
+      "tags": [
+        "Religions",
+        "Catholique",
+        "Vatican",
+        "I. Religions",
+        "Canal+ Congo"
+      ],
+      "category": "I. Religions",
+      "group": "I. Religions",
+      "genres": [
+        "I. Religions"
+      ]
+    },
+    {
+      "id": "ewtn",
+      "name": "EWTN / ESPÉRANCE TV",
+      "type": "live",
+      "url": "https://dash3.antik.sk/live/test_ewtn_tizen/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Religions",
+        "Chrétien",
+        "Monde",
+        "I. Religions",
+        "Canal+ Congo"
+      ],
+      "category": "I. Religions",
+      "group": "I. Religions",
+      "genres": [
+        "I. Religions"
+      ]
+    },
+    {
+      "id": "emci_tv",
+      "name": "EMCI TV (Enseigne-Moi Canal International)",
+      "type": "live",
+      "url": "https://stream.emcitv.com/live/smil:direct.smil/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Religions",
+        "Évangélique",
+        "Prière",
+        "I. Religions",
+        "Canal+ Congo"
+      ],
+      "category": "I. Religions",
+      "group": "I. Religions",
+      "genres": [
+        "I. Religions"
+      ]
+    },
+    {
+      "id": "benie_tv",
+      "name": "BÉNIE.TV (La Chaîne de la Bénédiction)",
+      "type": "live",
+      "url": "https://tv.voozmedia.fun/benietv/index.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/gK97P92.png",
+        "poster": "https://i.imgur.com/gK97P92.png"
+      },
+      "tags": [
+        "Religions",
+        "Chrétien",
+        "Afrique",
+        "I. Religions",
+        "Canal+ Congo"
+      ],
+      "category": "I. Religions",
+      "group": "I. Religions",
+      "genres": [
+        "I. Religions"
+      ]
+    },
+    {
+      "id": "lmtv",
+      "name": "LMTV FRENCH (Lumière du Monde Télévision)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8282/8282/playlist.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/0zGkZg0.png",
+        "poster": "https://i.imgur.com/0zGkZg0.png"
+      },
+      "tags": [
+        "Religions",
+        "Chrétien",
+        "Panafricain",
+        "I. Religions",
+        "Canal+ Congo"
+      ],
+      "category": "I. Religions",
+      "group": "I. Religions",
+      "genres": [
+        "I. Religions"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "734571466",
+  "name": "CANAL+ SPORT 4 HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/734571466",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Canal+",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

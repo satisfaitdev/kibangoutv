@@ -46,6 +46,22 @@
       "destination": "/api/resolve.js"
     },
     {
+      "source": "/kibangou-addon/client-fetch",
+      "destination": "/api/client-fetch.js"
+    },
+    {
+      "source": "/french-addon/client-fetch",
+      "destination": "/api/client-fetch.js"
+    },
+    {
+      "source": "/adult-addon/client-fetch",
+      "destination": "/api/client-fetch.js"
+    },
+    {
+      "source": "/client-fetch",
+      "destination": "/api/client-fetch.js"
+    },
+    {
       "source": "/kibangou-addon",
       "destination": "/kibangou-addon/mhub-addon.json"
     },
@@ -68,6 +84,18 @@
     {
       "source": "/adult-addon/",
       "destination": "/adult-addon/mhub-addon.json"
+    },
+    {
+      "source": "/kibangou-addon/catalog/:match*",
+      "destination": "/api/catalog.js"
+    },
+    {
+      "source": "/french-addon/catalog/:match*",
+      "destination": "/api/catalog.js"
+    },
+    {
+      "source": "/adult-addon/catalog/:match*",
+      "destination": "/api/catalog.js"
     },
     {
       "source": "/live2/logo/:match*",

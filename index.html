@@ -1274,16 +1274,17 @@
 
     const addonsList = [
       "https://vavoo.top/live/mhub-addon.json",     // Moteur Live VAVOO (Place 'Live TV' directement après Favoris)
-      bouquetKibangou,                              // Bouquet Kibangou (Canal+, beIN, TNT, Télé Congo, Films, Séries)
+      bouquetKibangou,                              // Bouquet Kibangou (Canal+ Congo, Chaînes Locales, beIN, Films, Séries)
       frenchAddon,                                  // Addon 100% Films & Séries VF, Box-Office Francophone
+      adultAddon,                                   // Espace Adulte +18 (Accès direct sans code PIN)
       "https://www.mhub.mx/tmdb",                   // Moteur TMDB officiel (Requis par vavoo-vod)
       "https://vavoo.top/vod/mhub-addon.json",      // Moteur VAVOO VOD (Résolution des sources de streaming)
       "https://vavoo.top/subtitle/mhub-addon.json"  // Sous-titres
     ];
 
-    if (localStorage.getItem("kibangou_pro_adult_unlocked") === "true") {
-      addonsList.push(adultAddon);
-    }
+    try {
+      localStorage.setItem("kibangou_pro_adult_unlocked", "true");
+    } catch (e) {}
 
     mount({
       addons: addonsList,
@@ -1476,87 +1477,24 @@
 
         const sContainer = document.querySelector(".settings-view") || document.querySelector(".s-panel") || document.querySelector(".main-inner");
         if (sContainer && !sContainer.querySelector("#settings-pro-adult-card")) {
-          const isProAdult = localStorage.getItem("kibangou_pro_adult_unlocked") === "true";
           const adultCard = document.createElement("div");
           adultCard.id = "settings-pro-adult-card";
           adultCard.style.cssText = "margin: 20px var(--pad, 16px); padding: 18px 20px; border-radius: 16px; background: rgba(0, 200, 83, 0.06); border: 1px solid rgba(0, 200, 83, 0.25); display: flex; flex-direction: column; gap: 12px;";
-          
-          if (isProAdult) {
-            adultCard.innerHTML = `
-              <div style="display:flex; align-items:center; justify-content:space-between;">
-                <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem; display:flex; align-items:center; gap:8px;">
-                  <span>🔞 Espace Adulte +18 (Abonnement Pro)</span>
-                </div>
-                <span style="font-size:0.75rem; background:#00C853; color:#0E1318; padding:3px 10px; border-radius:12px; font-weight:800; text-transform:uppercase;">Actif</span>
+          adultCard.innerHTML = `
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem; display:flex; align-items:center; gap:8px;">
+                <span>🔞 Espace Adulte +18</span>
               </div>
-              <div style="font-size:0.85rem; color:#8E99A4;">Le catalogue VOD adulte et les chaînes directes +18 sont déverrouillés sur cet appareil.</div>
-              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
-                <a href="#/catalog/kibangou-adult-pro/live/adult-channels?name=Cha%C3%AEnes%20%2B18" style="height:38px; padding:0 16px; border-radius:8px; background:#00C853; color:#0E1318; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:0.85rem;">
-                  Accéder aux chaînes +18 →
-                </a>
-                <button type="button" id="btn-lock-adult" style="height:38px; padding:0 16px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:#FFFFFF; font-weight:600; cursor:pointer; font-size:0.85rem;">
-                  🔒 Verrouiller immédiatement
-                </button>
-              </div>
-            `;
-          } else {
-            adultCard.innerHTML = `
-              <div style="display:flex; align-items:center; justify-content:space-between;">
-                <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem;">
-                  <span>🔞 Espace Adulte +18 (Abonnement Pro)</span>
-                </div>
-                <span style="font-size:0.75rem; background:rgba(255,255,255,0.12); color:#8E99A4; padding:3px 10px; border-radius:12px; font-weight:700;">Verrouillé</span>
-              </div>
-              <div style="font-size:0.85rem; color:#8E99A4;">L'accès aux chaînes directes +18 et films VOD adultes nécessite l'activation Pro ou la saisie de votre code PIN parental (Code par défaut : <strong>8888</strong>).</div>
-              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:4px;">
-                <input type="password" id="input-pro-adult-pin" placeholder="Code PIN (8888)" maxlength="6" style="height:38px; width:160px; border-radius:8px; border:1px solid rgba(255,255,255,0.25); background:rgba(0,0,0,0.3); color:#FFF; padding:0 12px; font-size:0.95rem; text-align:center; letter-spacing:2px;">
-                <button type="button" id="btn-unlock-adult" style="height:38px; padding:0 18px; border-radius:8px; border:none; background:#00C853; color:#0E1318; font-weight:700; cursor:pointer; font-size:0.85rem;">
-                  Déverrouiller
-                </button>
-                <button type="button" id="btn-request-pro" style="height:38px; padding:0 14px; border-radius:8px; border:1px solid rgba(0,200,83,0.4); background:rgba(0,200,83,0.1); color:#00C853; font-weight:600; cursor:pointer; font-size:0.85rem;">
-                  Demande d'accès Pro
-                </button>
-              </div>
-              <div id="pro-adult-feedback" style="font-size:0.8rem; color:#F87171; display:none;"></div>
-            `;
-          }
-
+              <span style="font-size:0.75rem; background:#00C853; color:#0E1318; padding:3px 10px; border-radius:12px; font-weight:800; text-transform:uppercase;">Actif</span>
+            </div>
+            <div style="font-size:0.85rem; color:#8E99A4;">Le catalogue Cinéma & Séries Adulte +18 est déverrouillé et accessible directement dans vos films et séries.</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+              <a href="#/catalog/kibangou-adult-pro/video/adult-vod?name=Films%20%2B18" style="height:38px; padding:0 16px; border-radius:8px; background:#00C853; color:#0E1318; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:0.85rem;">
+                Explorer les films +18 →
+              </a>
+            </div>
+          `;
           sContainer.appendChild(adultCard);
-
-          const btnLock = adultCard.querySelector("#btn-lock-adult");
-          if (btnLock) {
-            btnLock.addEventListener("click", () => {
-              localStorage.removeItem("kibangou_pro_adult_unlocked");
-              location.reload();
-            });
-          }
-
-          const btnUnlock = adultCard.querySelector("#btn-unlock-adult");
-          if (btnUnlock) {
-            btnUnlock.addEventListener("click", () => {
-              const input = adultCard.querySelector("#input-pro-adult-pin");
-              const feedback = adultCard.querySelector("#pro-adult-feedback");
-              const val = (input?.value || "").trim();
-              const validPins = ["8888", "1234", "123456", "0000", localStorage.getItem("kibangoutv_custom_pin") || "123456"];
-              if (validPins.includes(val)) {
-                localStorage.setItem("kibangou_pro_adult_unlocked", "true");
-                localStorage.setItem("kibangou_pro_pin", val);
-                location.reload();
-              } else {
-                if (feedback) {
-                  feedback.style.display = "block";
-                  feedback.textContent = "Code PIN incorrect (Code par défaut : 8888).";
-                }
-              }
-            });
-          }
-
-          const btnReq = adultCard.querySelector("#btn-request-pro");
-          if (btnReq) {
-            btnReq.addEventListener("click", () => {
-              alert("Pour activer votre bouquet Adulte +18 Abonnement Pro KibangouTV, utilisez le code PIN parental par défaut : 8888 ou contactez le support KibangouTV.");
-            });
-          }
         }
 
         if (sContainer && !sContainer.querySelector("#settings-logout-card")) {

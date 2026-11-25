@@ -1,0 +1,21 @@
+{
+  "id": "4154938214",
+  "name": "PARAMOUNT CHANNEL FHD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/4154938214",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Cinéma",
+    "HD",
+    "B. Cinéma & Séries",
+    "Canal+ Congo"
+  ],
+  "category": "B. Cinéma & Séries",
+  "group": "B. Cinéma & Séries",
+  "genres": [
+    "B. Cinéma & Séries"
+  ]
+}

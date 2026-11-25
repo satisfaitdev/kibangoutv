@@ -1,9 +1,9 @@
 {
   "id": "kibangou-adult-pro",
-  "name": "Adulte +18 (Abonnement Pro)",
+  "name": "Espace Adulte +18",
   "specVersion": 2,
-  "version": "1.0.0",
-  "description": "Catalogue VOD Adulte et Chaînes TV Live +18 verrouillé par abonnement Pro et Code PIN Parental",
+  "version": "2.0.0",
+  "description": "Catalogue Cinéma & Séries Adulte +18 (Films érotiques cultes et nouveautés en streaming HD)",
   "icon": "/logo.svg",
   "resources": [
     "catalog",
@@ -12,43 +12,34 @@
     "resolve"
   ],
   "urlPatterns": [
-    "*/live/play/*",
+    "*//dood.*/*",
+    "*//voe.sx/*",
+    "*//filemoon.*/*",
     "*vavoo*"
   ],
   "types": [
-    "live",
     "video"
   ],
   "idPrefixes": [
-    "adult",
-    "tmdb"
+    "tmdb",
+    "imdb"
   ],
   "catalogs": [
     {
-      "id": "adult-channels",
-      "name": "🔞 Chaînes Live +18 (Pro)",
-      "type": "live",
-      "options": {
-        "shape": "landscape",
-        "displayName": true
-      }
-    },
-    {
       "id": "adult-vod",
-      "name": "🔞 Films VOD +18 (Pro)",
+      "name": "🔞 Films & Séries +18",
       "type": "video",
       "options": {
         "shape": "portrait"
+      },
+      "features": {
+        "search": true
       }
     }
   ],
   "dashboard": [
     {
-      "name": "🔞 Chaînes TV Directes +18 (Pro)",
-      "catalog": "adult-channels"
-    },
-    {
-      "name": "🔞 VOD Films +18 (Pro)",
+      "name": "🔞 Films & Séries +18",
       "catalog": "adult-vod"
     }
   ],

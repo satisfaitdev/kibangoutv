@@ -1,0 +1,21 @@
+{
+  "id": "6981957",
+  "name": "CANAL+ TV (Grands Événements Sportifs)",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/6981957",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Sport",
+    "HD",
+    "C. Sport",
+    "Canal+ Congo"
+  ],
+  "category": "C. Sport",
+  "group": "C. Sport",
+  "genres": [
+    "C. Sport"
+  ]
+}

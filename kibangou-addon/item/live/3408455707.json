@@ -1,0 +1,21 @@
+{
+  "id": "3408455707",
+  "name": "TV5 MONDE HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/3408455707",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Francophonie",
+    "HD",
+    "F. Divertissement",
+    "Canal+ Congo"
+  ],
+  "category": "F. Divertissement",
+  "group": "F. Divertissement",
+  "genres": [
+    "F. Divertissement"
+  ]
+}

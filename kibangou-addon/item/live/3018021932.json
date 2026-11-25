@@ -1,0 +1,21 @@
+{
+  "id": "3018021932",
+  "name": "BBC NEWS HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/3018021932",
+  "images": {
+    "logo": "/live2/logo/3018021932.png",
+    "poster": "/live2/logo/3018021932.png"
+  },
+  "tags": [
+    "Info",
+    "Monde",
+    "G. Informations",
+    "Canal+ Congo"
+  ],
+  "category": "G. Informations",
+  "group": "G. Informations",
+  "genres": [
+    "G. Informations"
+  ]
+}

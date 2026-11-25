@@ -1,0 +1,21 @@
+{
+  "id": "3208238801",
+  "name": "INFOSPORT+ HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/3208238801",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Sport",
+    "HD",
+    "C. Sport",
+    "Canal+ Congo"
+  ],
+  "category": "C. Sport",
+  "group": "C. Sport",
+  "genres": [
+    "C. Sport"
+  ]
+}

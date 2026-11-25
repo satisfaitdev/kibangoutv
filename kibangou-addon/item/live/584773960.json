@@ -1,0 +1,21 @@
+{
+  "id": "584773960",
+  "name": "EURONEWS (Français)",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/584773960",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Info",
+    "HD",
+    "G. Informations",
+    "Canal+ Congo"
+  ],
+  "category": "G. Informations",
+  "group": "G. Informations",
+  "genres": [
+    "G. Informations"
+  ]
+}

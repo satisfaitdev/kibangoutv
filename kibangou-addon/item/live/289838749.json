@@ -1,0 +1,21 @@
+{
+  "id": "289838749",
+  "name": "CANAL+ CINÉMA FHD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/289838749",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Canal+",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

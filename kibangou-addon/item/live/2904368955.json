@@ -1,0 +1,21 @@
+{
+  "id": "2904368955",
+  "name": "CANAL+ ELLES HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/2904368955",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Canal+",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

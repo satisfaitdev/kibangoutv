@@ -1,0 +1,21 @@
+{
+  "id": "2141653939",
+  "name": "CANAL+ SÉRIES FHD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/2141653939",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Canal+",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

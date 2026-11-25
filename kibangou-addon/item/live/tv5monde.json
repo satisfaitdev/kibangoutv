@@ -7,5 +7,16 @@
     "logo": "https://i.imgur.com/WmRbudc.png",
     "poster": "https://i.imgur.com/WmRbudc.png"
   },
-  "tags": ["Francophonie", "Direct"]
+  "tags": [
+    "Francophonie",
+    "Direct",
+    "Chaînes Locales",
+    "Congo"
+  ],
+  "category": "Chaînes Locales",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Chaînes Locales",
+    "Congo"
+  ]
 }

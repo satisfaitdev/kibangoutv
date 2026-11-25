@@ -1,9 +1,9 @@
 /* ========================================================
-   KIBANGOUTV - SERVICE WORKER PWA (V2.1.0)
+   KIBANGOUTV - SERVICE WORKER PWA (V2.2.0)
    Network-First pour App Shell/Catalogs & Pass-through Streaming
    ======================================================== */
 
-const CACHE_NAME = "kibangoutv-core-v2.1.0";
+const CACHE_NAME = "kibangoutv-core-v2.2.0";
 const ICON_ASSETS = [
   "/logo.svg",
   "/icon-192.png",
