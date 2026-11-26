@@ -104,7 +104,7 @@ export default async function handler(req, res) {
       const text = await upstreamRes.text();
       try {
         const data = JSON.parse(text);
-        if (data && typeof data.url === "string" && data.url.startsWith("http://")) {
+        if (data && typeof data.url === "string" && (data.live || targetUrl.includes("/live/resolve") || data.url.startsWith("http://"))) {
           data.proxy = true;
         }
         return res.status(upstreamRes.status).json(data);

@@ -7,3 +7,4 @@ test_*.py
 build_bouquet.py
 
 .vercel
+node_modules/

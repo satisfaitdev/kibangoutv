@@ -3,6 +3,10 @@ import socketserver
 import urllib.request
 import urllib.parse
 import urllib.error
+import ipaddress
+import shutil
+import subprocess
+import threading
 import time
 import os
 import re
@@ -11,6 +15,140 @@ import json
 PORT = 8080
 DIRECTORY = r"C:\Users\SATISFAIT\.gemini\antigravity\scratch\iptv-vuma-app"
 LOGO_FILE = os.path.join(DIRECTORY, "logo.svg")
+
+TRANSCODE_PROFILES = {
+    "720p": {"height": 720, "bandwidth": 1200000, "resolution": "1280x720", "name": "720p HD", "v_br": "1050k", "max_br": "1200k", "buf": "2400k", "a_br": "96k", "ac": "2", "fps_f": ""},
+    "480p": {"height": 480, "bandwidth": 550000, "resolution": "854x480", "name": "480p 3G", "v_br": "450k", "max_br": "550k", "buf": "1100k", "a_br": "64k", "ac": "2", "fps_f": ""},
+    "360p": {"height": 360, "bandwidth": 260000, "resolution": "640x360", "name": "360p 2G/3G", "v_br": "210k", "max_br": "260k", "buf": "520k", "a_br": "48k", "ac": "2", "fps_f": ""},
+    "240p": {"height": 240, "bandwidth": 130000, "resolution": "426x240", "name": "240p Ultra-Éco", "v_br": "95k", "max_br": "120k", "buf": "240k", "a_br": "32k", "ac": "1", "fps_f": ",fps=20"},
+}
+ORDERED_DOWNSCALE_IDS = ["720p", "480p", "360p", "240p"]
+
+
+def resolve_ffmpeg_bin():
+    win_static = os.path.join(DIRECTORY, "node_modules", "ffmpeg-static", "ffmpeg.exe" if os.name == "nt" else "ffmpeg")
+    if os.path.isfile(win_static):
+        return win_static
+    return shutil.which("ffmpeg")
+
+
+FFMPEG_BIN = resolve_ffmpeg_bin()
+
+
+def validate_public_stream_url(raw_url):
+    target = str(raw_url or "").strip()
+    if not target:
+        return None
+    if target.startswith("//"):
+        target = "https:" + target
+    elif not target.startswith("http://") and not target.startswith("https://"):
+        target = "https://" + target.lstrip("/")
+    try:
+        parsed = urllib.parse.urlparse(target)
+    except Exception:
+        return None
+    if parsed.scheme not in ("http", "https") or not parsed.hostname:
+        return None
+    host = parsed.hostname.lower()
+    if host in ("localhost", "0.0.0.0", "::1") or host.endswith(".local"):
+        return None
+    try:
+        ip = ipaddress.ip_address(host)
+        if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved:
+            return None
+    except ValueError:
+        pass
+    return target
+
+
+def normalize_quality_id(raw_q):
+    if not raw_q:
+        return ""
+    q = str(raw_q).strip().lower()
+    if q in ("orig", "original", "1080p"):
+        return "orig"
+    return q if q in TRANSCODE_PROFILES else ""
+
+
+def build_adaptive_m3u8(text, final_url, full_stream_base, requested_q, can_transcode):
+    is_master = "#EXT-X-STREAM-INF" in text
+    has_fmp4_map = "#EXT-X-MAP" in text
+    is_encrypted = "#EXT-X-KEY" in text and "METHOD=NONE" not in text
+    allow_transcode = bool(can_transcode and not has_fmp4_map and not is_encrypted)
+    lines = text.splitlines()
+
+    if not is_master:
+        if not requested_q and allow_transcode and "#EXTINF:" in text:
+            enc_src = urllib.parse.quote(final_url, safe="")
+            master = [
+                "#EXTM3U",
+                "#EXT-X-VERSION:3",
+                "#EXT-X-INDEPENDENT-SEGMENTS",
+                '#EXT-X-STREAM-INF:BANDWIDTH=4500000,RESOLUTION=1920x1080,NAME="Original HD"',
+                f"{full_stream_base}?u={enc_src}&q=orig",
+            ]
+            for pid in ORDERED_DOWNSCALE_IDS:
+                p = TRANSCODE_PROFILES[pid]
+                master.append(f'#EXT-X-STREAM-INF:BANDWIDTH={p["bandwidth"]},RESOLUTION={p["resolution"]},NAME="{p["name"]}"')
+                master.append(f"{full_stream_base}?u={enc_src}&q={pid}")
+            return "\n".join(master)
+
+        q_suffix = f"&q={requested_q}" if (requested_q and requested_q != "orig" and not has_fmp4_map and not is_encrypted) else ""
+        out_lines = []
+        for line in lines:
+            sline = line.strip()
+            if not sline:
+                out_lines.append(line)
+            elif sline.startswith("#"):
+                if 'URI="' in sline:
+                    sline = re.sub(
+                        r'URI="([^"]+)"',
+                        lambda mm: f'URI="{full_stream_base}?u={urllib.parse.quote(urllib.parse.urljoin(final_url, mm.group(1)), safe="")}"',
+                        sline,
+                    )
+                out_lines.append(sline)
+            else:
+                abs_u = urllib.parse.urljoin(final_url, sline)
+                out_lines.append(f'{full_stream_base}?u={urllib.parse.quote(abs_u, safe="")}{q_suffix}')
+        return "\n".join(out_lines)
+
+    lowest_bw = float("inf")
+    lowest_variant = None
+    rewritten = []
+    for idx, line in enumerate(lines):
+        sline = line.strip()
+        if not sline:
+            rewritten.append(line)
+            continue
+        if sline.startswith("#EXT-X-STREAM-INF:"):
+            bw_match = re.search(r"BANDWIDTH=(\d+)", sline)
+            bw = int(bw_match.group(1)) if bw_match else float("inf")
+            nxt = lines[idx + 1].strip() if idx + 1 < len(lines) else ""
+            if nxt and not nxt.startswith("#") and bw < lowest_bw:
+                lowest_bw = bw
+                lowest_variant = urllib.parse.urljoin(final_url, nxt)
+            rewritten.append(sline)
+            continue
+        if sline.startswith("#"):
+            if 'URI="' in sline:
+                sline = re.sub(
+                    r'URI="([^"]+)"',
+                    lambda mm: f'URI="{full_stream_base}?u={urllib.parse.quote(urllib.parse.urljoin(final_url, mm.group(1)), safe="")}"',
+                    sline,
+                )
+            rewritten.append(sline)
+            continue
+        abs_u = urllib.parse.urljoin(final_url, sline)
+        rewritten.append(f'{full_stream_base}?u={urllib.parse.quote(abs_u, safe="")}&q=orig')
+
+    if allow_transcode and lowest_variant and lowest_bw > 650000:
+        enc_lowest = urllib.parse.quote(lowest_variant, safe="")
+        for pid in ("480p", "360p", "240p"):
+            p = TRANSCODE_PROFILES[pid]
+            if p["bandwidth"] < lowest_bw:
+                rewritten.append(f'#EXT-X-STREAM-INF:BANDWIDTH={p["bandwidth"]},RESOLUTION={p["resolution"]},NAME="{p["name"]}"')
+                rewritten.append(f"{full_stream_base}?u={enc_lowest}&q={pid}")
+    return "\n".join(rewritten)
 
 # Cache mémoire ultra-rapide (TTL 10 min)
 CACHE = {}
@@ -137,15 +275,14 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         import base64
         parsed = urllib.parse.urlparse(self.path)
         qs = urllib.parse.parse_qs(parsed.query)
-        target_url = (qs.get("u") or qs.get("url") or [""])[0]
+        raw_target = (qs.get("u") or qs.get("url") or [""])[0]
+        target_url = validate_public_stream_url(raw_target)
         if not target_url:
             self.send_response(400)
             self.end_headers()
             return
-        if target_url.startswith("//"):
-            target_url = "https:" + target_url
-        elif not target_url.startswith("http://") and not target_url.startswith("https://"):
-            target_url = "https://" + target_url.lstrip("/")
+
+        req_quality = normalize_quality_id((qs.get("q") or [""])[0])
 
         headers = {
             "User-Agent": "VAVOO/2.6" if "vavoo" in target_url else "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -193,25 +330,75 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                         stream_base = parsed.path if parsed.path.startswith("/api/stream") else "/api/stream"
                         host_hdr = self.headers.get("Host", f"localhost:{PORT}")
                         full_stream_base = f"http://{host_hdr}{stream_base}"
-                        lines = []
-                        for line in text.splitlines():
-                            sline = line.strip()
-                            if not sline:
-                                lines.append(line)
-                            elif sline.startswith("#"):
-                                if 'URI="' in sline:
-                                    sline = re.sub(r'URI="([^"]+)"', lambda mm: f'URI="{full_stream_base}?u={urllib.parse.quote(urllib.parse.urljoin(final_url, mm.group(1)))}"', sline)
-                                lines.append(sline)
-                            else:
-                                abs_u = urllib.parse.urljoin(final_url, sline)
-                                lines.append(f'{full_stream_base}?u={urllib.parse.quote(abs_u)}')
-                        out = "\n".join(lines).encode("utf-8")
+                        out_text = build_adaptive_m3u8(text, final_url, full_stream_base, req_quality, bool(FFMPEG_BIN))
+                        out = out_text.encode("utf-8")
                         self.send_response(resp.status)
                         self.send_header("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8")
+                        self.send_header("Cache-Control", "no-store")
+                        self.send_header("X-Kibangou-ABR", "adaptive-ffmpeg" if FFMPEG_BIN else "passthrough")
                         self.send_header("Content-Length", str(len(out)))
                         self.end_headers()
                         self.wfile.write(out)
                         return
+
+                if req_quality and req_quality != "orig" and req_quality in TRANSCODE_PROFILES and FFMPEG_BIN:
+                    prof = TRANSCODE_PROFILES[req_quality]
+                    cmd = [
+                        FFMPEG_BIN, "-hide_banner", "-loglevel", "error",
+                        "-fflags", "+genpts+discardcorrupt",
+                        "-i", "pipe:0",
+                        "-map", "0:v:0?", "-map", "0:a:0?",
+                        "-vf", f'scale=-2:{prof["height"]}:flags=fast_bilinear{prof["fps_f"]}',
+                        "-c:v", "libx264", "-preset", "ultrafast", "-tune", "zerolatency",
+                        "-profile:v", "baseline", "-level", "3.0", "-pix_fmt", "yuv420p",
+                        "-bf", "0", "-force_key_frames", "expr:eq(n,0)",
+                        "-b:v", prof["v_br"], "-maxrate", prof["max_br"], "-bufsize", prof["buf"],
+                        "-c:a", "aac", "-b:a", prof["a_br"], "-ac", prof["ac"], "-ar", "44100",
+                        "-copyts", "-muxdelay", "0",
+                        "-f", "mpegts", "pipe:1",
+                    ]
+                    popen_kw = {"creationflags": 0x08000000} if os.name == "nt" else {}
+                    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, **popen_kw)
+
+                    def feed_stdin():
+                        try:
+                            while True:
+                                chunk = resp.read(65536)
+                                if not chunk:
+                                    break
+                                proc.stdin.write(chunk)
+                        except Exception:
+                            pass
+                        finally:
+                            try:
+                                proc.stdin.close()
+                            except Exception:
+                                pass
+
+                    t = threading.Thread(target=feed_stdin, daemon=True)
+                    t.start()
+
+                    self.send_response(200)
+                    self.send_header("Content-Type", "video/mp2t")
+                    self.send_header("Cache-Control", "no-store")
+                    self.send_header("X-Kibangou-Quality", req_quality)
+                    self.send_header("X-Kibangou-Transcoded", "ffmpeg-pipe")
+                    self.end_headers()
+                    try:
+                        while True:
+                            out_chunk = proc.stdout.read(32768)
+                            if not out_chunk:
+                                break
+                            self.wfile.write(out_chunk)
+                    except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError, ConnectionError, OSError):
+                        pass
+                    finally:
+                        try:
+                            proc.kill()
+                            proc.wait(timeout=2)
+                        except Exception:
+                            pass
+                    return
 
                 self.send_response(resp.status)
                 self.send_header("Content-Type", ctype)
@@ -306,7 +493,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     content = resp.read()
                     try:
                         data = json.loads(content.decode("utf-8"))
-                        if isinstance(data, dict) and isinstance(data.get("url"), str) and data["url"].startswith("http://"):
+                        if isinstance(data, dict) and isinstance(data.get("url"), str) and (data.get("live") or "/live/resolve" in target_url or data["url"].startswith("http://")):
                             data["proxy"] = True
                         content = json.dumps(data).encode("utf-8")
                     except Exception as e:
@@ -498,7 +685,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 req = urllib.request.Request(vavoo_resolve, headers={"User-Agent": "VAVOO/2.6"})
                 with urllib.request.urlopen(req, timeout=10) as r:
                     data = json.loads(r.read().decode())
-                if isinstance(data, dict) and isinstance(data.get("url"), str) and data["url"].startswith("http://"):
+                if isinstance(data, dict) and isinstance(data.get("url"), str) and (is_live or data.get("live") or data["url"].startswith("http://")):
                     data["proxy"] = True
                 resp_bytes = json.dumps(data).encode("utf-8")
                 self.send_response(200)

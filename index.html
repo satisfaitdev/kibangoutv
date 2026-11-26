@@ -753,7 +753,55 @@
       .kibangou-quality-menu {
         bottom: calc(110px + var(--player-foot, 0px));
         right: 12px;
-        width: 230px;
+        width: 248px;
+      }
+    }
+
+    .kibangou-abr-toast {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(14, 19, 24, 0.92);
+      border: 1px solid rgba(0, 200, 83, 0.45);
+      color: #FFFFFF;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 999998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+      white-space: nowrap;
+      max-width: 92vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .kibangou-abr-toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .kibangou-abr-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00C853;
+      flex-shrink: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kibangou-abr-toast,
+      .kibangou-quality-menu,
+      .kibangou-quality-btn {
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
@@ -1568,15 +1616,44 @@
        SÉLECTEUR & CONVERTISSEUR DE QUALITÉ ADAPTATIF (ABR)
        ======================================================== */
     const QUALITY_OPTIONS = [
-      { id: "auto", label: "Auto", badge: "2G/3G", desc: "Débit adaptatif (anti-coupure)" },
-      { id: "1080p", label: "1080p", badge: "FHD", desc: "Full HD (Fibre & 4G)" },
-      { id: "720p", label: "720p", badge: "HD", desc: "Haute définition équilibrée" },
-      { id: "480p", label: "480p", badge: "SD", desc: "Standard (Recommandé 3G)" },
-      { id: "360p", label: "360p", badge: "Éco", desc: "Économie de données (2G/3G faible)" }
+      { id: "auto", label: "Auto (Recommandé)", badge: "ABR", desc: "Baisse automatiquement si 2G/3G faible" },
+      { id: "1080p", label: "Original (HD/4K)", badge: "SRC", desc: "Flux source sans compression (Fibre/4G)" },
+      { id: "720p", label: "720p HD", badge: "HD", desc: "Haute définition compressée (~1.1 Mbps)" },
+      { id: "480p", label: "480p Standard", badge: "3G", desc: "Fluide sur réseau 3G (~500 kbps)" },
+      { id: "360p", label: "360p Éco", badge: "2G/3G", desc: "Faible consommation (~250 kbps)" },
+      { id: "240p", label: "240p Ultra-Éco", badge: "2G", desc: "Connexion très faible / Edge (~120 kbps)" }
     ];
 
     let currentSelectedQuality = localStorage.getItem("kibangoutv_preferred_quality") || "auto";
     let isQualityMenuOpen = false;
+    let lastNetworkStats = null;
+    let abrToastTimer = null;
+
+    function formatNetLabel(stats) {
+      if (!stats) return "ABR 2G/3G";
+      const kbps = stats.measuredKbps ? `${stats.measuredKbps} kbps` : "";
+      return [stats.tier || "Réseau", kbps].filter(Boolean).join(" • ");
+    }
+
+    function showAbrToast(message) {
+      const root = document.querySelector(".player-root") || document.querySelector(".player-controls")?.parentElement;
+      if (!root) return;
+      let toast = root.querySelector("#kibangou-abr-toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "kibangou-abr-toast";
+        toast.className = "kibangou-abr-toast";
+        toast.innerHTML = `<span class="kibangou-abr-dot"></span><span class="kibangou-abr-toast-text"></span>`;
+        root.appendChild(toast);
+      }
+      const txtEl = toast.querySelector(".kibangou-abr-toast-text");
+      if (txtEl) txtEl.textContent = message;
+      toast.classList.add("visible");
+      clearTimeout(abrToastTimer);
+      abrToastTimer = setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 3400);
+    }
 
     window.setKibangouQuality = function(qualityId, save = true) {
       currentSelectedQuality = qualityId;
@@ -1617,7 +1694,11 @@
 
       const labelEl = document.getElementById("kibangou-quality-current-label");
       if (labelEl) {
-        labelEl.textContent = qualityId === "auto" ? "Auto" : qualityId;
+        if (qualityId === "auto" && lastNetworkStats && lastNetworkStats.activeHeight) {
+          labelEl.textContent = `Auto • ${lastNetworkStats.activeHeight}p`;
+        } else {
+          labelEl.textContent = qualityId === "auto" ? "Auto" : (qualityId === "1080p" ? "Orig" : qualityId);
+        }
       }
 
       document.querySelectorAll(".kibangou-quality-menu .kibangou-menu-item").forEach(item => {
@@ -1643,6 +1724,7 @@
       const playerControls = document.querySelector(".player-controls") || document.querySelector(".player-root");
       if (!playerControls) return;
 
+      const netText = formatNetLabel(lastNetworkStats);
       const menu = document.createElement("div");
       menu.id = "kibangou-quality-menu";
       menu.className = "player-menu player-menu-quality kibangou-quality-menu";
@@ -1650,8 +1732,8 @@
 
       menu.innerHTML = `
         <div class="kibangou-menu-header">
-          <div class="kibangou-menu-title">Qualité vidéo</div>
-          <span class="kibangou-abr-indicator" title="Adaptive Bitrate actif pour éviter toute coupure">ABR 2G/3G</span>
+          <div class="kibangou-menu-title">Convertisseur</div>
+          <span class="kibangou-abr-indicator" id="kibangou-net-badge" title="Débit mesuré en temps réel">${netText}</span>
         </div>
         <div class="kibangou-menu-items">
           ${QUALITY_OPTIONS.map(opt => `
@@ -1703,7 +1785,7 @@
       btn.id = "kibangou-quality-btn";
       btn.className = "player-ctrl-btn kibangou-quality-btn";
       btn.setAttribute("aria-label", "Qualité vidéo");
-      btn.setAttribute("title", "Qualité & Débit adaptatif ABR (Auto, 1080p, 720p, 480p, 360p)");
+      btn.setAttribute("title", "Convertisseur de qualité 2G/3G/4G (Auto, Original, 720p, 480p, 360p, 240p)");
       btn.innerHTML = `
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="4" width="20" height="16" rx="3"></rect>
@@ -1711,7 +1793,7 @@
           <path d="M14 9h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-3z"></path>
         </svg>
         <span class="kibangou-quality-label" id="kibangou-quality-current-label">
-          ${currentSelectedQuality === "auto" ? "Auto" : currentSelectedQuality}
+          ${currentSelectedQuality === "auto" ? "Auto" : (currentSelectedQuality === "1080p" ? "Orig" : currentSelectedQuality)}
         </span>
       `;
 
@@ -1749,13 +1831,38 @@
         const lvl = e.detail && e.detail.level;
         const hls = e.detail && e.detail.hls;
         if (hls && hls.levels && hls.levels[lvl]) {
-          const height = hls.levels[lvl].height;
+          const height = typeof hls._inferHeight === "function"
+            ? hls._inferHeight(hls.levels[lvl])
+            : (hls.levels[lvl].height || 0);
           const labelEl = document.getElementById("kibangou-quality-current-label");
-          if (labelEl) {
-            labelEl.textContent = `Auto (${height}p)`;
+          if (labelEl && height > 0) {
+            labelEl.textContent = `Auto • ${height}p`;
           }
         }
       }
+    });
+
+    window.addEventListener("kibangou-network-stats", (e) => {
+      if (!e.detail) return;
+      lastNetworkStats = e.detail;
+      const badgeEl = document.getElementById("kibangou-net-badge");
+      if (badgeEl) {
+        badgeEl.textContent = formatNetLabel(lastNetworkStats);
+      }
+      if (currentSelectedQuality === "auto" && lastNetworkStats.activeHeight) {
+        const labelEl = document.getElementById("kibangou-quality-current-label");
+        if (labelEl) {
+          labelEl.textContent = `Auto • ${lastNetworkStats.activeHeight}p`;
+        }
+      }
+    });
+
+    window.addEventListener("kibangou-auto-downgrade", (e) => {
+      if (!e.detail) return;
+      const h = e.detail.height || 360;
+      const snap = e.detail.snapshot;
+      const netDesc = snap ? `${snap.tier} • ${snap.measuredKbps} kbps` : "connexion faible";
+      showAbrToast(`Connexion faible (${netDesc}) — Passage en ${h}p`);
     });
 
     const navObserver = new MutationObserver(() => {

@@ -49,7 +49,7 @@ export default async function handler(req, res) {
     });
     const data = await r.json();
 
-    if (data && typeof data.url === "string" && data.url.startsWith("http://")) {
+    if (data && typeof data.url === "string" && (isLive || data.live || data.url.startsWith("http://"))) {
       data.proxy = true;
     }
 

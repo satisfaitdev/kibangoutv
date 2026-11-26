@@ -1,46 +1,73 @@
-export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  res.setHeader("Access-Control-Expose-Headers", "*");
+import {
+  TRANSCODE_PROFILES,
+  buildAdaptiveM3u8,
+  createTranscodedStream,
+  normalizeQualityId,
+  resolveFfmpegPath,
+  validatePublicStreamUrl
+} from "./_streamUtils.js";
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+  "Access-Control-Allow-Headers": "*",
+  "Access-Control-Expose-Headers": "*"
+};
+
+const ALLOWED_FORWARD_HEADERS = new Set([
+  "referer",
+  "origin",
+  "user-agent",
+  "cookie",
+  "x-requested-with",
+  "accept",
+  "accept-language"
+]);
+
+function decodeHeaderToken(parsed) {
+  let hCode = parsed.searchParams.get("h") || "";
+  if (!hCode) {
+    const m = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
+    if (m) hCode = m[1];
   }
+  if (!hCode) return {};
 
   try {
-    const rawReqUrl = req.url || "";
-    const parsed = new URL(rawReqUrl, "https://localhost");
+    const b64 = hCode.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = b64 + "=".repeat((4 - (b64.length % 4)) % 4);
+    const obj = JSON.parse(Buffer.from(padded, "base64").toString("utf-8"));
+    return obj && typeof obj === "object" ? obj : {};
+  } catch {
+    return {};
+  }
+}
 
-    let hCode = parsed.searchParams.get("h") || "";
-    if (!hCode) {
-      const pathMatch = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
-      if (pathMatch) hCode = pathMatch[1];
-    }
-    let customHeaders = {};
-    if (hCode) {
-      try {
-        const b64 = hCode.replace(/-/g, "+").replace(/_/g, "/");
-        const padded = b64 + "=".repeat((4 - (b64.length % 4)) % 4);
-        const decoded = Buffer.from(padded, "base64").toString("utf-8");
-        const obj = JSON.parse(decoded);
-        if (obj && typeof obj === "object") {
-          customHeaders = obj;
-        }
-      } catch {}
-    }
+export async function OPTIONS() {
+  return new Response(null, { status: 204, headers: CORS_HEADERS });
+}
 
-    let targetUrl = parsed.searchParams.get("u") || parsed.searchParams.get("url") || "";
+export async function HEAD(request) {
+  return handleStreamRequest(request, "HEAD");
+}
+
+export async function GET(request) {
+  return handleStreamRequest(request, "GET");
+}
+
+async function handleStreamRequest(request, method) {
+  try {
+    const parsed = new URL(request.url, "https://kibangoutv.vercel.app");
+    const rawTarget = parsed.searchParams.get("u") || parsed.searchParams.get("url") || "";
+    const targetUrl = validatePublicStreamUrl(rawTarget);
+
     if (!targetUrl) {
-      return res.status(400).json({ error: "Missing u parameter" });
+      return Response.json(
+        { error: "Invalid or missing public stream URL" },
+        { status: 400, headers: CORS_HEADERS }
+      );
     }
 
-    if (targetUrl.startsWith("//")) {
-      targetUrl = "https:" + targetUrl;
-    } else if (!targetUrl.startsWith("http://") && !targetUrl.startsWith("https://")) {
-      targetUrl = "https://" + targetUrl.replace(/^\/+/, "");
-    }
-
+    const customHeaders = decodeHeaderToken(parsed);
     const fetchHeaders = {
       "User-Agent": targetUrl.includes("vavoo")
         ? "VAVOO/2.6"
@@ -50,114 +77,141 @@ export default async function handler(req, res) {
     };
 
     for (const [k, v] of Object.entries(customHeaders)) {
-      if (typeof v !== "string" || !v) continue;
-      const lk = k.toLowerCase();
-      if (["referer", "origin", "user-agent", "cookie", "x-requested-with", "accept", "accept-language"].includes(lk)) {
+      if (typeof v === "string" && v && ALLOWED_FORWARD_HEADERS.has(k.toLowerCase())) {
         fetchHeaders[k] = v;
       }
     }
 
     const lowerUrlPath = targetUrl.split("?")[0].toLowerCase();
     const isHlsPlaylistHint = lowerUrlPath.endsWith(".m3u8");
-    const isTsSegmentHint = lowerUrlPath.endsWith(".ts") || lowerUrlPath.endsWith(".m4s") || lowerUrlPath.endsWith(".aac");
-    const incomingRange = req.headers.range;
+    const isTsSegmentHint =
+      lowerUrlPath.endsWith(".ts") ||
+      lowerUrlPath.endsWith(".m4s") ||
+      lowerUrlPath.endsWith(".aac") ||
+      lowerUrlPath.endsWith(".key");
+    const isMp4Hint = lowerUrlPath.endsWith(".mp4") || lowerUrlPath.endsWith(".mkv");
 
+    const incomingRange = request.headers.get("range");
     if (incomingRange) {
       const openMatch = !isHlsPlaylistHint && !isTsSegmentHint && /^bytes=(\d+)-$/i.exec(incomingRange.trim());
       if (openMatch) {
         const start = Number(openMatch[1]);
-        const sliceEnd = start + 3 * 1024 * 1024 - 1;
-        fetchHeaders["Range"] = `bytes=${start}-${sliceEnd}`;
+        fetchHeaders["Range"] = `bytes=${start}-${start + 3 * 1024 * 1024 - 1}`;
       } else {
         fetchHeaders["Range"] = incomingRange;
       }
-    } else if (!isHlsPlaylistHint && !isTsSegmentHint && (lowerUrlPath.endsWith(".mp4") || lowerUrlPath.includes("cloudatacdn") || lowerUrlPath.includes("mxcontent"))) {
+    } else if (
+      !isHlsPlaylistHint &&
+      !isTsSegmentHint &&
+      (isMp4Hint || lowerUrlPath.includes("cloudatacdn") || lowerUrlPath.includes("mxcontent"))
+    ) {
       fetchHeaders["Range"] = "bytes=0-3145727";
     }
 
     const upstreamRes = await fetch(targetUrl, {
-      method: req.method === "HEAD" ? "HEAD" : "GET",
+      method,
       headers: fetchHeaders,
-      redirect: "follow"
+      redirect: "follow",
+      signal: request.signal
     });
 
     const finalUrl = upstreamRes.url || targetUrl;
     const contentType = (upstreamRes.headers.get("content-type") || "application/octet-stream").toLowerCase();
 
-    if (req.method === "HEAD") {
-      res.setHeader("Content-Type", contentType);
+    if (method === "HEAD") {
+      const headHeaders = new Headers(CORS_HEADERS);
+      headHeaders.set("Content-Type", contentType);
       if (upstreamRes.headers.get("accept-ranges")) {
-        res.setHeader("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
+        headHeaders.set("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
       }
-      return res.status(upstreamRes.status).end();
+      return new Response(null, { status: upstreamRes.status, headers: headHeaders });
     }
 
-    // Check if it's an HLS M3U8 playlist
-    const isM3u8Name = finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
-      targetUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
+    const isPlaylistCandidate =
+      isHlsPlaylistHint ||
+      finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
       contentType.includes("mpegurl");
 
-    // Fetch arrayBuffer for fast, non-blocking delivery
-    const arrayBuf = await upstreamRes.arrayBuffer();
-    const buf = Buffer.from(arrayBuf);
+    const q = normalizeQualityId(parsed.searchParams.get("q"));
+    const ffmpegBin = await resolveFfmpegPath();
 
-    // If it's an M3U8 or content starts with #EXTM3U, rewrite it
-    const isM3u8Content = buf.length > 7 && buf.subarray(0, 10).toString("utf-8").includes("#EXTM3U");
-    if (isM3u8Name || isM3u8Content) {
-      const text = buf.toString("utf-8");
+    if (isPlaylistCandidate) {
+      const text = await upstreamRes.text();
       if (text.includes("#EXTM3U")) {
-        const proto = (req.headers["x-forwarded-proto"] || "https").split(",")[0].trim();
-        const host = req.headers["x-forwarded-host"] || req.headers.host || "kibangoutv.vercel.app";
+        const proto = (request.headers.get("x-forwarded-proto") || parsed.protocol.replace(":", "") || "https")
+          .split(",")[0]
+          .trim();
+        const host =
+          request.headers.get("x-forwarded-host") ||
+          request.headers.get("host") ||
+          parsed.host ||
+          "kibangoutv.vercel.app";
+
+        let hCode = parsed.searchParams.get("h") || "";
+        if (!hCode) {
+          const m = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
+          if (m) hCode = m[1];
+        }
         const streamBasePath = hCode ? `/api/stream/h_${hCode}` : "/api/stream";
         const fullStreamBase = `${proto}://${host}${streamBasePath}`;
 
-        const rewritten = text.split("\n").map((line) => {
-          const sline = line.trim();
-          if (!sline) return line;
-          if (sline.startsWith("#")) {
-            if (sline.includes('URI="')) {
-              return sline.replace(/URI="([^"]+)"/g, (match, rawUri) => {
-                try {
-                  const absUri = new URL(rawUri, finalUrl).href;
-                  return `URI="${fullStreamBase}?u=${encodeURIComponent(absUri)}"`;
-                } catch {
-                  return match;
-                }
-              });
-            }
-            return sline;
+        const rewritten = buildAdaptiveM3u8(text, finalUrl, fullStreamBase, q, Boolean(ffmpegBin));
+        return new Response(rewritten, {
+          status: upstreamRes.status,
+          headers: {
+            ...CORS_HEADERS,
+            "Content-Type": "application/vnd.apple.mpegurl; charset=utf-8",
+            "Cache-Control": "no-store",
+            "X-Kibangou-ABR": ffmpegBin ? "adaptive-ffmpeg" : "passthrough"
           }
-          try {
-            const absUri = new URL(sline, finalUrl).href;
-            return `${fullStreamBase}?u=${encodeURIComponent(absUri)}`;
-          } catch {
-            return sline;
-          }
-        }).join("\n");
-
-        res.setHeader("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8");
-        res.setHeader("Cache-Control", "no-store");
-        return res.status(upstreamRes.status).send(Buffer.from(rewritten, "utf-8"));
+        });
       }
+
+      return new Response(text, {
+        status: upstreamRes.status,
+        headers: { ...CORS_HEADERS, "Content-Type": contentType, "Cache-Control": "no-store" }
+      });
     }
 
-    // Deliver binary stream/segment instantaneously without backpressure locks
-    res.setHeader("Content-Type", contentType);
-    res.setHeader("Cache-Control", "no-store");
+    // Transcodage adaptatif à la volée des segments MPEG-TS quand un profil bas débit est demandé
+    if (q && q !== "orig" && ffmpegBin && TRANSCODE_PROFILES[q] && upstreamRes.ok && upstreamRes.body) {
+      const profile = TRANSCODE_PROFILES[q];
+      const transcodedStream = createTranscodedStream(ffmpegBin, upstreamRes.body, profile, request.signal);
+      return new Response(transcodedStream, {
+        status: 200,
+        headers: {
+          ...CORS_HEADERS,
+          "Content-Type": "video/mp2t",
+          "Cache-Control": "no-store",
+          "X-Kibangou-Quality": q,
+          "X-Kibangou-Transcoded": "ffmpeg-pipe"
+        }
+      });
+    }
+
+    // Streaming direct zéro-bufferisation pour passthrough 1080p/4K et VOD
+    const outHeaders = new Headers(CORS_HEADERS);
+    outHeaders.set("Content-Type", contentType);
+    outHeaders.set("Cache-Control", "no-store");
     if (upstreamRes.headers.get("content-range")) {
-      res.setHeader("Content-Range", upstreamRes.headers.get("content-range"));
+      outHeaders.set("Content-Range", upstreamRes.headers.get("content-range"));
     }
     if (upstreamRes.headers.get("accept-ranges")) {
-      res.setHeader("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
+      outHeaders.set("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
     }
 
-    return res.status(upstreamRes.status).send(buf);
-
+    return new Response(upstreamRes.body, {
+      status: upstreamRes.status,
+      headers: outHeaders
+    });
   } catch (err) {
-    if (err.name === "AbortError" || err.code === "ECONNRESET") {
-      return;
+    if (err?.name === "AbortError" || err?.code === "ECONNRESET") {
+      return new Response(null, { status: 499, headers: CORS_HEADERS });
     }
     console.error("Kibangou Stream Error:", err);
-    return res.status(502).json({ error: String(err.message || err) });
+    return Response.json(
+      { error: String(err?.message || err) },
+      { status: 502, headers: CORS_HEADERS }
+    );
   }
 }
