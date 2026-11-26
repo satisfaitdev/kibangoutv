@@ -398,6 +398,14 @@ export class KibangouHls extends OriginalHls {
       this._applyNetworkPolicy("manifest_init");
     });
 
+    this.on(OriginalHls.Events.LEVEL_LOADED, (_event, data) => {
+      if (data?.details && data.details.live === false) {
+        this.config.maxBufferLength = 60;
+        this.config.maxMaxBufferLength = 120;
+        this.config.maxBufferSize = 60 * 1024 * 1024;
+      }
+    });
+
     this.on(OriginalHls.Events.FRAG_LOADED, (_event, data) => {
       const stats = data?.frag?.stats;
       const durSec = data?.frag?.duration || 6;

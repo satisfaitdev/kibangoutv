@@ -49,8 +49,12 @@
       "dest": "/download.html"
     },
     {
-      "src": "^/analytics/?$",
-      "dest": "/analytics.html"
+      "src": "^/kibangoumboungoujustesatisfait0647307010002/?$",
+      "dest": "/admin-kibangou.html"
+    },
+    {
+      "src": "^/api/admin/?$",
+      "dest": "/api/admin.js"
     },
     {
       "src": "^/api/telemetry/?$",

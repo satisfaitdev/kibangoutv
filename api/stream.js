@@ -110,7 +110,7 @@ async function handleStreamRequest(request, method) {
       const openMatch = !isHlsPlaylistHint && !isTsSegmentHint && /^bytes=(\d+)-$/i.exec(incomingRange.trim());
       if (openMatch) {
         const start = Number(openMatch[1]);
-        fetchHeaders["Range"] = `bytes=${start}-${start + 3 * 1024 * 1024 - 1}`;
+        fetchHeaders["Range"] = `bytes=${start}-${start + 6 * 1024 * 1024 - 1}`;
       } else {
         fetchHeaders["Range"] = incomingRange;
       }
@@ -119,7 +119,7 @@ async function handleStreamRequest(request, method) {
       !isTsSegmentHint &&
       (isMp4Hint || lowerUrlPath.includes("cloudatacdn") || lowerUrlPath.includes("mxcontent") || lowerUrlPath.includes("mxdrop"))
     ) {
-      fetchHeaders["Range"] = "bytes=0-3145727";
+      fetchHeaders["Range"] = "bytes=0-6291455";
     }
 
     const q = normalizeQualityId(parsed.searchParams.get("q"));

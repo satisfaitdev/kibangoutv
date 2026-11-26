@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>KibangouTV — Administration Privée</title>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0E1318;
+      --surface: #151C24;
+      --surface-2: #1B242F;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --accent: #00C853;
+      --accent-soft: rgba(0, 200, 83, 0.14);
+      --danger: #EF4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; line-height: 1.5; min-height: 100vh; }
+    header { border-bottom: 1px solid var(--border); background: rgba(14, 19, 24, 0.92); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 20; }
+    .nav { max-width: 1180px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.15rem; }
+    .brand img { width: 32px; height: 32px; }
+    .brand span { color: var(--accent); }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn, .tab-btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      text-decoration: none; font-size: 0.88rem; font-weight: 600; cursor: pointer;
+    }
+    .tab-btn.active, .btn-primary { background: var(--accent); color: #07120B; border-color: var(--accent); }
+    .btn-danger { background: rgba(239, 68, 68, 0.15); color: #F87171; border-color: rgba(239, 68, 68, 0.35); }
+    main { max-width: 1180px; margin: 0 auto; padding: 28px 20px 64px; }
+    .gate { max-width: 420px; margin: 60px auto; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+    input, select, textarea { width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font-size: 0.92rem; font-family: inherit; }
+    .err { color: #F87171; font-size: 0.85rem; min-height: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 22px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+    .metric-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; }
+    .metric-value { font-family: "Space Grotesk", sans-serif; font-size: 1.85rem; font-weight: 700; margin: 6px 0 4px; color: var(--accent); }
+    .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+    .table-head { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; font-size: 0.76rem; text-transform: uppercase; }
+    tr:last-child td { border-bottom: none; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: var(--accent-soft); color: var(--accent); }
+    .pill-red { background: rgba(239, 68, 68, 0.15); color: #F87171; }
+    .empty { padding: 24px; text-align: center; color: var(--muted); }
+    .ad-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; padding: 18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="/">
+        <img src="./logo.svg" alt="KibangouTV">
+        Kibangou<span>TV</span> Admin
+      </a>
+      <div class="tabs" id="admin-nav-tabs" style="display:none;">
+        <button type="button" class="tab-btn active" data-tab="analytics">Analytics &amp; Clics</button>
+        <button type="button" class="tab-btn" data-tab="users">Utilisateurs</button>
+        <button type="button" class="tab-btn" data-tab="ads">Publicités (Ads)</button>
+        <button type="button" class="btn" id="refresh-btn">Actualiser</button>
+        <button type="button" class="btn btn-danger" id="lock-btn">Verrouiller</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="admin-gate" class="gate" style="display:none;">
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-size:1.35rem;">Administration KibangouTV</h1>
+      <p style="color:var(--muted);font-size:0.9rem;">Espace strictement privé : Analytics, Utilisateurs &amp; Publicités.</p>
+      <form id="admin-unlock-form" style="display:flex;flex-direction:column;gap:12px;">
+        <input type="password" id="admin-key-input" placeholder="Clé administrateur" required>
+        <div class="err" id="admin-err"></div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;">Déverrouiller</button>
+      </form>
+    </section>
+
+    <div id="admin-panel" style="display:none;">
+      <!-- TAB ANALYTICS -->
+      <section id="tab-analytics">
+        <div class="grid" id="activity-grid"></div>
+        <div class="grid" id="summary-grid"></div>
+        <div class="split">
+          <div class="table-card">
+            <div class="table-head"><strong>Top éléments cliqués</strong></div>
+            <table><thead><tr><th>Élément</th><th>Clics</th></tr></thead><tbody id="top-clicks-body"></tbody></table>
+          </div>
+          <div class="table-card">
+            <div class="table-head"><strong>Pages &amp; Mouvements</strong></div>
+            <table><thead><tr><th>Route</th><th>Visites</th></tr></thead><tbody id="top-routes-body"></tbody></table>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-head"><strong>Journal complet (Clics &amp; Mouvements)</strong><span class="pill" id="event-count">0</span></div>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead><tr><th>Action</th><th>Détail</th><th>Page</th><th>Appareil</th><th>Réseau</th><th>Heure</th></tr></thead>
+              <tbody id="events-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB UTILISATEURS -->
+      <section id="tab-users" style="display:none;">
+        <div class="table-card">
+          <div class="table-head"><strong>Utilisateurs inscrits &amp; connectés</strong><span class="pill" id="users-count">0</span></div>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead><tr><th>Nom</th><th>E-mail</th><th>Méthode</th><th>Statut</th><th>Actions</th></tr></thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB PUBLICITES -->
+      <section id="tab-ads" style="display:none;">
+        <div class="table-card">
+          <div class="table-head"><strong>Créer une publicité / bannière</strong></div>
+          <form id="ad-form" class="ad-form">
+            <input type="text" id="ad-title" placeholder="Titre de la pub (ex: Offre VIP Canal+)" required>
+            <input type="text" id="ad-text" placeholder="Message court / description">
+            <input type="url" id="ad-link" placeholder="Lien de redirection (https://...)">
+            <input type="url" id="ad-image" placeholder="URL image bannière (optionnel)">
+            <select id="ad-placement">
+              <option value="home_banner">Bannière Accueil</option>
+              <option value="player_preroll">Lecteur Vidéo</option>
+            </select>
+            <button type="submit" class="btn btn-primary" style="justify-content:center;">Publier la pub</button>
+          </form>
+        </div>
+
+        <div class="table-card">
+          <div class="table-head"><strong>Publicités actives &amp; archivées</strong><span class="pill" id="ads-count">0</span></div>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead><tr><th>Titre</th><th>Emplacement</th><th>Lien</th><th>Statut</th><th>Actions</th></tr></thead>
+              <tbody id="ads-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const VITALS = {
+      LCP: { name: "LCP", unit: "ms" },
+      FCP: { name: "FCP", unit: "ms" },
+      TTFB: { name: "TTFB", unit: "ms" },
+      CLS: { name: "CLS", unit: "" },
+      BUFFER_STALL: { name: "Buffering", unit: "" }
+    };
+    let currentTab = "analytics";
+    const esc = (s) => String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        currentTab = btn.dataset.tab;
+        document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b === btn));
+        ["analytics", "users", "ads"].forEach((t) => {
+          document.getElementById("tab-" + t).style.display = t === currentTab ? "block" : "none";
+        });
+        refreshAll();
+      });
+    });
+
+    async function refreshAll() {
+      const res = await fetch("/api/telemetry", { credentials: "same-origin", cache: "no-store" });
+      if (res.status === 401) {
+        document.getElementById("admin-panel").style.display = "none";
+        document.getElementById("admin-nav-tabs").style.display = "none";
+        document.getElementById("admin-gate").style.display = "flex";
+        return;
+      }
+      document.getElementById("admin-gate").style.display = "none";
+      document.getElementById("admin-panel").style.display = "block";
+      document.getElementById("admin-nav-tabs").style.display = "flex";
+
+      const data = await res.json();
+      document.getElementById("event-count").textContent = `${data.totalEvents || 0} événements`;
+      const act = data.activity || {};
+      document.getElementById("activity-grid").innerHTML = [
+        { label: "Total Clics", val: act.totalClicks || 0 },
+        { label: "Mouvements / Pages", val: act.totalMoves || 0 },
+        { label: "Lectures Vidéo", val: act.totalPlays || 0 },
+        { label: "Téléchargements", val: act.totalDownloads || 0 }
+      ].map((c) => `<div class="card"><div class="metric-label">${c.label}</div><div class="metric-value">${c.val}</div></div>`).join("");
+
+      document.getElementById("summary-grid").innerHTML = Object.entries(VITALS).map(([k, m]) => {
+        const s = data.summary?.[k] || { count: 0, avg: null, p75: null };
+        const v = s.p75 ?? s.avg;
+        return `<div class="card"><div class="metric-label">${m.name}</div><div class="metric-value" style="color:var(--text)">${v ?? "—"}${v !== null && m.unit ? " " + m.unit : ""}</div><div style="font-size:0.78rem;color:var(--muted)">${s.count} relevés</div></div>`;
+      }).join("");
+
+      document.getElementById("top-clicks-body").innerHTML = (data.topClicks || []).map((r) => `<tr><td>${esc(r.name)}</td><td><strong>${r.count}</strong></td></tr>`).join("") || '<tr><td colspan="2" class="empty">Aucun clic</td></tr>';
+      document.getElementById("top-routes-body").innerHTML = (data.topRoutes || []).map((r) => `<tr><td>${esc(r.name)}</td><td><strong>${r.count}</strong></td></tr>`).join("") || '<tr><td colspan="2" class="empty">Aucun mouvement</td></tr>';
+      document.getElementById("events-body").innerHTML = (data.recent || []).map((ev) => `<tr><td><strong>${esc(ev.metric)}</strong></td><td>${esc(ev.label || ev.value || "—")}</td><td>${esc(ev.path)}</td><td>${esc(ev.device)}</td><td>${esc(ev.connection)}</td><td>${new Date(ev.ts || Date.now()).toLocaleTimeString("fr-FR")}</td></tr>`).join("") || '<tr><td colspan="6" class="empty">Aucun événement</td></tr>';
+
+      if (currentTab === "users") await loadUsers();
+      if (currentTab === "ads") await loadAds();
+    }
+
+    async function loadUsers() {
+      const r = await fetch("/api/admin?action=users", { credentials: "same-origin", cache: "no-store" });
+      if (!r.ok) return;
+      const { users = [] } = await r.json();
+      document.getElementById("users-count").textContent = `${users.length} utilisateur(s)`;
+      document.getElementById("users-body").innerHTML = users.length ? users.map((u) => `
+        <tr>
+          <td>${esc(u.name)}</td>
+          <td>${esc(u.email)}</td>
+          <td><span class="pill">${esc(u.provider)}</span></td>
+          <td><span class="pill ${u.banned ? "pill-red" : ""}">${u.banned ? "Suspendu" : "Actif"}</span></td>
+          <td style="display:flex;gap:6px;">
+            <button type="button" class="btn" onclick="toggleBan('${esc(u.email)}', ${!u.banned})">${u.banned ? "Réactiver" : "Suspendre"}</button>
+            <button type="button" class="btn btn-danger" onclick="deleteUser('${esc(u.email)}')">Supprimer</button>
+          </td>
+        </tr>`).join("") : '<tr><td colspan="5" class="empty">Aucun utilisateur enregistré sur cette session serveur.</td></tr>';
+    }
+
+    async function toggleBan(email, banned) {
+      await fetch("/api/admin?action=user_toggle_ban", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ email, banned })
+      });
+      loadUsers();
+    }
+
+    async function deleteUser(email) {
+      await fetch("/api/admin?action=user_delete", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ email })
+      });
+      loadUsers();
+    }
+
+    async function loadAds() {
+      const r = await fetch("/api/admin?action=ads", { credentials: "same-origin", cache: "no-store" });
+      if (!r.ok) return;
+      const { ads = [] } = await r.json();
+      document.getElementById("ads-count").textContent = `${ads.length} pub(s)`;
+      document.getElementById("ads-body").innerHTML = ads.length ? ads.map((a) => `
+        <tr>
+          <td><strong>${esc(a.title)}</strong><div style="font-size:0.78rem;color:var(--muted)">${esc(a.text)}</div></td>
+          <td>${esc(a.placement)}</td>
+          <td>${a.linkUrl ? `<a href="${esc(a.linkUrl)}" target="_blank" style="color:var(--accent)">Ouvrir</a>` : "—"}</td>
+          <td><span class="pill ${a.active ? "" : "pill-red"}">${a.active ? "Active" : "En pause"}</span></td>
+          <td style="display:flex;gap:6px;">
+            <button type="button" class="btn" onclick="toggleAd('${esc(a.id)}', ${!a.active})">${a.active ? "Pause" : "Activer"}</button>
+            <button type="button" class="btn btn-danger" onclick="deleteAd('${esc(a.id)}')">Supprimer</button>
+          </td>
+        </tr>`).join("") : '<tr><td colspan="5" class="empty">Aucune publicité configurée.</td></tr>';
+    }
+
+    async function toggleAd(id, active) {
+      await fetch("/api/admin?action=ad_toggle", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ id, active })
+      });
+      loadAds();
+    }
+
+    async function deleteAd(id) {
+      await fetch("/api/admin?action=ad_delete", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ id })
+      });
+      loadAds();
+    }
+
+    document.getElementById("ad-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      await fetch("/api/admin?action=ad_save", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({
+          title: document.getElementById("ad-title").value,
+          text: document.getElementById("ad-text").value,
+          linkUrl: document.getElementById("ad-link").value,
+          imageUrl: document.getElementById("ad-image").value,
+          placement: document.getElementById("ad-placement").value,
+          active: true
+        })
+      });
+      e.target.reset();
+      loadAds();
+    });
+
+    document.getElementById("admin-unlock-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const errEl = document.getElementById("admin-err");
+      errEl.textContent = "";
+      const res = await fetch("/api/telemetry?action=unlock", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ key: document.getElementById("admin-key-input").value })
+      });
+      if (!res.ok) {
+        errEl.textContent = "Clé administrateur incorrecte.";
+        return;
+      }
+      refreshAll();
+    });
+
+    document.getElementById("lock-btn").addEventListener("click", async () => {
+      await fetch("/api/telemetry?action=lock", { method: "POST", credentials: "same-origin" });
+      refreshAll();
+    });
+    document.getElementById("refresh-btn").addEventListener("click", refreshAll);
+    refreshAll();
+  </script>
+</body>
+</html>

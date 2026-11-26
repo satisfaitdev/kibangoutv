@@ -211,6 +211,21 @@ export async function GET(request) {
         exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SEC
       });
 
+      const users = loadUsers();
+      const gEmail = String(profile.email).toLowerCase();
+      if (users[gEmail]?.banned) {
+        return Response.redirect(`${origin}/?auth_error=account_suspended`, 302);
+      }
+      users[gEmail] = {
+        ...(users[gEmail] || {}),
+        email: gEmail,
+        name: profile.name || gEmail.split("@")[0],
+        provider: "google",
+        createdAt: users[gEmail]?.createdAt || Date.now(),
+        lastSeen: Date.now()
+      };
+      saveUsers(users);
+
       return new Response(null, {
         status: 302,
         headers: {
@@ -267,16 +282,23 @@ export async function POST(request) {
   } else if (action === "login") {
     const existing = users[email];
     if (existing) {
+      if (existing.banned) {
+        return Response.json({ error: "Ce compte a été suspendu par l'administrateur." }, { status: 403 });
+      }
       if (!verifyPassword(password, existing.passwordHash)) {
         return Response.json({ error: "Mot de passe incorrect." }, { status: 401 });
       }
+      existing.lastSeen = Date.now();
+      saveUsers(users);
     } else {
       // Première connexion sur cette instance sans compte pré-enregistré : crée le profil haché
       users[email] = {
         email,
         name: name || email.split("@")[0],
+        provider: "email",
         passwordHash: hashPassword(password),
-        createdAt: Date.now()
+        createdAt: Date.now(),
+        lastSeen: Date.now()
       };
       saveUsers(users);
     }

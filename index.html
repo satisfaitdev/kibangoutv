@@ -2423,6 +2423,7 @@
       const video = playerRoot.querySelector("video.player-video");
       if (video && !video.dataset.kibangouPlayFixBound) {
         video.dataset.kibangouPlayFixBound = "1";
+        try { video.preload = "auto"; } catch {}
         video.addEventListener("play", () => {
           const hls = window.__kibangouHls;
           if (hls) {
@@ -2629,7 +2630,6 @@
               <div class="kibangou-adult-links">
                 <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Vidéos hors-ligne (PWA)</button>
                 <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC (.exe) &amp; TV →</a>
-                <a href="/analytics" class="kibangou-adult-link kibangou-adult-link-secondary">Performances du site →</a>
               </div>
             `;
             appsCard.querySelector("#btn-open-offline-videos").addEventListener("click", openOfflineModal);
@@ -2843,6 +2843,31 @@
         } catch {}
       }
       window.addEventListener("kibangou-auto-downgrade", () => pushMetric("BUFFER_STALL", 1));
+    })();
+
+    (async function initKibangouAds() {
+      try {
+        const res = await fetch("/api/admin?action=public_ads", { cache: "no-store" });
+        if (!res.ok) return;
+        const { ads = [] } = await res.json();
+        const banner = ads.find((a) => a && a.active && a.placement === "home_banner");
+        if (!banner) return;
+        const bar = document.createElement("div");
+        bar.id = "kibangou-ad-banner";
+        bar.style.cssText = "position:fixed;bottom:74px;left:50%;transform:translateX(-50%);z-index:9990;max-width:460px;width:calc(100% - 24px);background:#151C24;border:1px solid rgba(0,200,83,0.4);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 12px 32px rgba(0,0,0,0.55);";
+        bar.innerHTML = `
+          <div style="min-width:0;flex:1;">
+            <div style="font-size:0.7rem;color:#00C853;font-weight:700;text-transform:uppercase;">Sponsorisé</div>
+            <div style="font-weight:700;color:#fff;font-size:0.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(banner.title)}</div>
+            ${banner.text ? `<div style="font-size:0.8rem;color:#94A3B8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(banner.text)}</div>` : ""}
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+            ${banner.linkUrl ? `<a href="${escapeHtml(banner.linkUrl)}" target="_blank" rel="noopener" style="padding:7px 12px;border-radius:8px;background:#00C853;color:#07120B;font-weight:700;font-size:0.8rem;text-decoration:none;">Voir</a>` : ""}
+            <button type="button" aria-label="Fermer" style="background:none;border:none;color:#94A3B8;font-size:18px;cursor:pointer;padding:4px;">✕</button>
+          </div>`;
+        bar.querySelector("button").addEventListener("click", () => bar.remove());
+        document.body.appendChild(bar);
+      } catch {}
     })();
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
