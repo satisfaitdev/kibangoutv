@@ -235,7 +235,7 @@ export function buildAdaptiveM3u8(playlistText, finalUrl, fullStreamBase, reques
         "#EXTM3U",
         "#EXT-X-VERSION:3",
         "#EXT-X-INDEPENDENT-SEGMENTS",
-        `#EXT-X-STREAM-INF:BANDWIDTH=4500000,RESOLUTION=1920x1080,NAME="Original HD"`,
+        `#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1920x1080,NAME="Original HD"`,
         `${fullStreamBase}?u=${encodedSrc}&q=orig`
       ];
       for (const pid of ORDERED_DOWNSCALE_IDS) {

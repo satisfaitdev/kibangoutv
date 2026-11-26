@@ -187,7 +187,7 @@ async function handleStreamRequest(request, method) {
     if (isPlaylistCandidate) {
       const text = await upstreamRes.text();
       if (text.includes("#EXTM3U")) {
-        if (!q && upstreamRes.ok) {
+        if (!q && upstreamRes.ok && text.includes("#EXT-X-STREAM-INF")) {
           if (m3u8Cache.size >= MAX_M3U8_CACHE) {
             m3u8Cache.delete(m3u8Cache.keys().next().value);
           }

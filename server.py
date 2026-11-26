@@ -265,7 +265,7 @@ def build_adaptive_m3u8(text, final_url, full_stream_base, requested_q, can_tran
                 "#EXTM3U",
                 "#EXT-X-VERSION:3",
                 "#EXT-X-INDEPENDENT-SEGMENTS",
-                '#EXT-X-STREAM-INF:BANDWIDTH=4500000,RESOLUTION=1920x1080,NAME="Original HD"',
+                '#EXT-X-STREAM-INF:BANDWIDTH=2500000,RESOLUTION=1920x1080,NAME="Original HD"',
                 f"{full_stream_base}?u={enc_src}&q=orig",
             ]
             for pid in ORDERED_DOWNSCALE_IDS:
@@ -639,7 +639,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     raw = resp.read()
                     text = raw.decode("utf-8", errors="ignore")
                     if "#EXTM3U" in text:
-                        if not req_quality and 200 <= resp.status < 300:
+                        if not req_quality and 200 <= resp.status < 300 and "#EXT-X-STREAM-INF" in text:
                             with CACHE_LOCK:
                                 if len(M3U8_CACHE) >= MAX_M3U8_CACHE:
                                     oldest = next(iter(M3U8_CACHE))

@@ -409,7 +409,39 @@
       width: auto !important;
       font-size: 12px;
       font-weight: 700;
-      color: #4ADE80 !important;
+      color: inherit !important;
+    }
+
+    @media (max-width: 768px) {
+      .item-view .btn-hero-glass.kibangou-download-btn {
+        width: 44px !important;
+        min-width: 44px !important;
+        padding: 0 !important;
+        color: inherit !important;
+      }
+
+      .item-view .btn-hero-glass.kibangou-download-btn .kibangou-dl-word,
+      .kibangou-player-dl-btn span,
+      .kibangou-src-dl-btn span {
+        display: none !important;
+      }
+
+      .kibangou-player-dl-btn {
+        width: 36px !important;
+        min-width: 36px !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        color: inherit !important;
+      }
+
+      .kibangou-src-dl-btn {
+        padding: 6px !important;
+        min-width: 32px;
+        justify-content: center;
+        color: inherit !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-color: rgba(255, 255, 255, 0.16) !important;
+      }
     }
 
     /* Profil / Paramètres cartes propres sans doublon */
@@ -1508,12 +1540,16 @@
       return `${base}.${ext}`;
     }
 
-    function buildStreamDownloadUrl(streamUrl, headers, filename) {
+    function buildStreamProxyUrl(streamUrl, headers) {
       const hdrs = headers && typeof headers === "object" && Object.keys(headers).length > 0 ? headers : null;
       const base = hdrs && typeof window.__kibangouToBase64Url === "function"
         ? `/api/stream/h_${window.__kibangouToBase64Url(JSON.stringify(hdrs))}`
         : "/api/stream";
-      return `${base}?u=${encodeURIComponent(streamUrl)}&download=1&filename=${encodeURIComponent(filename)}`;
+      return `${base}?u=${encodeURIComponent(streamUrl)}`;
+    }
+
+    function buildStreamDownloadUrl(streamUrl, headers, filename) {
+      return `${buildStreamProxyUrl(streamUrl, headers)}&download=1&filename=${encodeURIComponent(filename)}`;
     }
 
     function triggerDownloadUrl(dlUrl, filename) {
@@ -1526,6 +1562,110 @@
       a.click();
       setTimeout(() => a.remove(), 500);
       showToast(`Téléchargement lancé : ${filename}`);
+    }
+
+    async function downloadHlsAsVideo(m3u8Url, headers, title) {
+      const base = sanitizeFilename(title, "video.mp4").replace(/\.[^.]+$/, "");
+      showToast("Analyse du flux vidéo en cours...");
+      let playlistUrl = buildStreamProxyUrl(m3u8Url, headers);
+      let res = await fetch(playlistUrl);
+      if (!res.ok) throw new Error("Playlist fetch failed");
+      let text = await res.text();
+
+      if (text.includes("#EXT-X-STREAM-INF")) {
+        const lines = text.split(/\r?\n/);
+        let bestUrl = null;
+        let bestBw = -1;
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (line.startsWith("#EXT-X-STREAM-INF:")) {
+            const bwMatch = line.match(/BANDWIDTH=(\d+)/);
+            const bw = bwMatch ? Number(bwMatch[1]) : 0;
+            const nextLine = (lines[i + 1] || "").trim();
+            if (nextLine && !nextLine.startsWith("#") && (bw > bestBw || nextLine.includes("q=orig"))) {
+              bestBw = nextLine.includes("q=orig") ? Infinity : bw;
+              bestUrl = nextLine.startsWith("http") || nextLine.startsWith("/") ? nextLine : new URL(nextLine, m3u8Url).href;
+            }
+          }
+        }
+        if (bestUrl) {
+          const r2 = await fetch(bestUrl.startsWith("/api/stream") ? bestUrl : buildStreamProxyUrl(bestUrl, headers));
+          if (r2.ok) text = await r2.text();
+        }
+      }
+
+      if (text.includes("#EXTINF:") && !text.includes("#EXT-X-ENDLIST")) {
+        showToast("Ce flux est un direct continu, utilisez un film/série MP4 pour télécharger.");
+        return false;
+      }
+
+      const segUrls = [];
+      let isFmp4 = false;
+      for (const rawLine of text.split(/\r?\n/)) {
+        const s = rawLine.trim();
+        if (!s) continue;
+        if (s.startsWith("#EXT-X-MAP:")) {
+          isFmp4 = true;
+          const m = s.match(/URI="([^"]+)"/);
+          if (m && m[1]) {
+            segUrls.push(m[1].startsWith("http") || m[1].startsWith("/") ? m[1] : new URL(m[1], m3u8Url).href);
+          }
+        } else if (!s.startsWith("#")) {
+          segUrls.push(s.startsWith("http") || s.startsWith("/") ? s : new URL(s, m3u8Url).href);
+        }
+      }
+
+      if (!segUrls.length) {
+        showToast("Aucun segment vidéo trouvé pour le téléchargement.");
+        return false;
+      }
+
+      const chunks = new Array(segUrls.length);
+      let completed = 0;
+      let nextIdx = 0;
+      const concurrency = 4;
+
+      async function worker() {
+        while (nextIdx < segUrls.length) {
+          const idx = nextIdx++;
+          const u = segUrls[idx].startsWith("/api/stream") ? segUrls[idx] : buildStreamProxyUrl(segUrls[idx], headers);
+          const sr = await fetch(u);
+          if (!sr.ok) throw new Error("Segment failed");
+          chunks[idx] = await sr.arrayBuffer();
+          completed++;
+          if (completed === 1 || completed % 25 === 0 || completed === segUrls.length) {
+            const pct = Math.round((completed / segUrls.length) * 100);
+            showToast(`Téléchargement vidéo : ${pct}%`);
+          }
+        }
+      }
+
+      await Promise.all(Array.from({ length: Math.min(concurrency, segUrls.length) }, worker));
+      const ext = isFmp4 ? "mp4" : "ts";
+      const outName = `${base}.${ext}`;
+      const blob = new Blob(chunks, { type: isFmp4 ? "video/mp4" : "video/mp2t" });
+      const blobUrl = URL.createObjectURL(blob);
+      triggerDownloadUrl(blobUrl, outName);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+      return true;
+    }
+
+    async function downloadResolvedVideo(resolved, title) {
+      if (!resolved || !resolved.url) return false;
+      if (isHlsUrl(resolved.url)) {
+        return await downloadHlsAsVideo(resolved.url, resolved.headers, title);
+      }
+      const dlUrl = buildStreamDownloadUrl(resolved.url, resolved.headers, sanitizeFilename(title, resolved.url));
+      try {
+        const head = await fetch(dlUrl, { method: "HEAD" });
+        const ct = (head.headers.get("content-type") || "").toLowerCase();
+        if (ct.includes("mpegurl")) {
+          return await downloadHlsAsVideo(resolved.url, resolved.headers, title);
+        }
+      } catch {}
+      const filename = sanitizeFilename(title, resolved.url);
+      triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+      return true;
     }
 
     async function resolveSourceToPlayable(sourceUrl) {
@@ -1685,8 +1825,7 @@
           showToast("Impossible de résoudre cette source pour le téléchargement.");
           return;
         }
-        const filename = sanitizeFilename(title, resolved.url);
-        triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+        await downloadResolvedVideo(resolved, title);
       } catch {
         showToast("Erreur lors de la préparation du téléchargement.");
       } finally {
@@ -1754,6 +1893,7 @@
           return hostRank(a.url) - hostRank(b.url);
         });
 
+        let hlsFallback = null;
         for (const src of prioritized) {
           if (!src || !src.url) continue;
           if (location.hash !== startHash) return;
@@ -1761,11 +1901,19 @@
             const resolved = await resolveSourceToPlayable(src.url);
             if (location.hash !== startHash) return;
             if (resolved && resolved.url && !isEmbedHostUrl(resolved.url)) {
-              const filename = sanitizeFilename(title, resolved.url);
-              triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+              if (isHlsUrl(resolved.url)) {
+                if (!hlsFallback) hlsFallback = resolved;
+                continue;
+              }
+              await downloadResolvedVideo(resolved, title);
               return;
             }
           } catch {}
+        }
+
+        if (hlsFallback) {
+          await downloadResolvedVideo(hlsFallback, title);
+          return;
         }
 
         if (location.hash === startHash) {
@@ -1974,21 +2122,33 @@
             e.stopPropagation();
             const streamInfo = window.__kibangouCurrentStream;
             if (streamInfo && streamInfo.url && !isEmbedHostUrl(streamInfo.url)) {
-              const filename = sanitizeFilename(getActiveItemTitle(), streamInfo.url);
-              triggerDownloadUrl(buildStreamDownloadUrl(streamInfo.url, streamInfo.headers, filename), filename);
+              dlBtn.disabled = true;
+              try {
+                await downloadResolvedVideo(streamInfo, getActiveItemTitle());
+              } finally {
+                dlBtn.disabled = false;
+              }
               return;
             }
             if (Array.isArray(window.__kibangouSourceList) && window.__kibangouSourceList.length > 0) {
               dlBtn.disabled = true;
               try {
-                for (const src of window.__kibangouSourceList.slice(0, 3)) {
+                let hlsFallback = null;
+                for (const src of window.__kibangouSourceList.slice(0, 5)) {
                   if (!src || !src.url) continue;
                   const resolved = await resolveSourceToPlayable(src.url).catch(() => null);
                   if (resolved && resolved.url && !isEmbedHostUrl(resolved.url)) {
-                    const filename = sanitizeFilename(getActiveItemTitle(), resolved.url);
-                    triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+                    if (isHlsUrl(resolved.url)) {
+                      if (!hlsFallback) hlsFallback = resolved;
+                      continue;
+                    }
+                    await downloadResolvedVideo(resolved, getActiveItemTitle());
                     return;
                   }
+                }
+                if (hlsFallback) {
+                  await downloadResolvedVideo(hlsFallback, getActiveItemTitle());
+                  return;
                 }
               } finally {
                 dlBtn.disabled = false;
@@ -1998,8 +2158,40 @@
           });
           barRight.prepend(dlBtn);
         }
+      }
 
-        const video = playerRoot.querySelector("video.player-video");
+      const video = playerRoot.querySelector("video.player-video");
+      if (video && !video.dataset.kibangouPlayFixBound) {
+        video.dataset.kibangouPlayFixBound = "1";
+        video.addEventListener("play", () => {
+          const hls = window.__kibangouHls;
+          if (hls) {
+            hls._lastResumeAt = Date.now();
+            if (live && typeof hls.liveSyncPosition === "number" && isFinite(hls.liveSyncPosition)) {
+              if (hls.liveSyncPosition - video.currentTime > 6) {
+                try {
+                  video.currentTime = Math.max(0, hls.liveSyncPosition - 1);
+                  hls.startLoad(-1);
+                } catch {}
+              }
+            }
+          }
+        });
+
+        playerRoot.addEventListener("click", (ev) => {
+          const t = ev.target instanceof Element ? ev.target : null;
+          if (!t || t.closest("button, a, input, select, .player-bar, .player-top, .modal-sources")) return;
+          if (video.paused) {
+            setTimeout(() => {
+              if (video.paused && !video.ended) {
+                video.play().catch(() => {});
+              }
+            }, 90);
+          }
+        });
+      }
+
+      if (!live) {
         if (video && !video.dataset.vodWatchdogBound) {
           video.dataset.vodWatchdogBound = "1";
           video.addEventListener("playing", () => {

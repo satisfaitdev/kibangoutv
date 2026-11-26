@@ -71,10 +71,13 @@ export class KibangouHls extends OriginalHls {
     this._hasRealSample = false;
     this._cooldownUntil = 0;
     this._consecutiveFastSegments = 0;
+    this._consecutiveSlowSegments = 0;
+    this._lastResumeAt = 0;
     this._stallTimer = null;
     this._attachedMedia = null;
     this._waitingListener = null;
     this._playingListener = null;
+    this._playListener = null;
     this._connChangeListener = null;
 
     this._bindNetworkMonitor();
@@ -86,17 +89,13 @@ export class KibangouHls extends OriginalHls {
   }
 
   static computeInitialBandwidthEstimate(conn) {
-    if (!conn) return 2800000;
+    if (!conn) return 4800000;
     if (conn.saveData || conn.effectiveType === "slow-2g" || conn.effectiveType === "2g") {
-      return 160000;
+      return 220000;
     }
     if (conn.effectiveType === "3g") {
-      return 420000;
+      return 650000;
     }
-    const dlMbps = typeof conn.downlink === "number" && conn.downlink > 0 ? conn.downlink : 4.5;
-    if (dlMbps <= 0.4) return 160000;
-    if (dlMbps <= 1.2) return 420000;
-    if (dlMbps <= 3.0) return 900000;
     return 4800000;
   }
 
@@ -132,15 +131,33 @@ export class KibangouHls extends OriginalHls {
 
     this._waitingListener = () => {
       if (this._stallTimer) return;
+      if (Date.now() - this._lastResumeAt < 4000) return;
       this._stallTimer = setTimeout(() => {
         this._stallTimer = null;
+        if (Date.now() - this._lastResumeAt < 4000) return;
         if (!media.paused && !media.ended && media.readyState < 3) {
           this._handleBandwidthDrop("buffering_wait");
         }
-      }, 1400);
+      }, 3500);
+    };
+
+    this._playListener = () => {
+      this._lastResumeAt = Date.now();
+      try {
+        const liveSync = typeof this.liveSyncPosition === "number" && isFinite(this.liveSyncPosition)
+          ? this.liveSyncPosition
+          : null;
+        if (liveSync !== null && liveSync - media.currentTime > 6) {
+          media.currentTime = Math.max(0, liveSync - 1);
+          this.startLoad(-1);
+        } else if (media.readyState < 3) {
+          this.startLoad();
+        }
+      } catch {}
     };
 
     this._playingListener = () => {
+      this._lastResumeAt = Date.now();
       if (this._stallTimer) {
         clearTimeout(this._stallTimer);
         this._stallTimer = null;
@@ -148,6 +165,7 @@ export class KibangouHls extends OriginalHls {
     };
 
     media.addEventListener("waiting", this._waitingListener);
+    media.addEventListener("play", this._playListener);
     media.addEventListener("playing", this._playingListener);
   }
 
@@ -168,6 +186,7 @@ export class KibangouHls extends OriginalHls {
     }
     if (this._attachedMedia) {
       if (this._waitingListener) this._attachedMedia.removeEventListener("waiting", this._waitingListener);
+      if (this._playListener) this._attachedMedia.removeEventListener("play", this._playListener);
       if (this._playingListener) this._attachedMedia.removeEventListener("playing", this._playingListener);
       this._attachedMedia = null;
     }
@@ -319,14 +338,14 @@ export class KibangouHls extends OriginalHls {
 
     const effectiveKbps = this._hasRealSample && this._measuredKbps > 0
       ? this._measuredKbps
-      : (dlMbps ? Math.round(dlMbps * 1000) : 2800);
+      : (dlMbps ? Math.round(dlMbps * 1000) : 4800);
 
     let tier = "4G";
-    if (saveData || eff === "slow-2g" || eff === "2g" || effectiveKbps < 240 || (dlMbps !== null && dlMbps <= 0.35)) {
+    if (saveData || eff === "slow-2g" || eff === "2g" || (this._hasRealSample && effectiveKbps < 240)) {
       tier = "2G";
-    } else if (eff === "3g" || effectiveKbps < 600 || (dlMbps !== null && dlMbps <= 1.2)) {
+    } else if (eff === "3g" || (this._hasRealSample && effectiveKbps < 550)) {
       tier = "3G";
-    } else if (effectiveKbps < 1500 || (dlMbps !== null && dlMbps <= 3.0)) {
+    } else if (this._hasRealSample && effectiveKbps < 1100) {
       tier = "3G+";
     }
 
@@ -373,13 +392,21 @@ export class KibangouHls extends OriginalHls {
       const curLvl = this.levels && this.levels[this.currentLevel];
       const curLvlKbps = curLvl && curLvl.bitrate ? Math.round(curLvl.bitrate / 1000) : 800;
 
-      if (loadRatio > 0.78 || this._measuredKbps < curLvlKbps * 0.90) {
-        this._handleBandwidthDrop("slow_download");
-        return;
+      if (loadRatio > 0.92 || this._measuredKbps < curLvlKbps * 0.45) {
+        this._consecutiveSlowSegments++;
+        this._consecutiveFastSegments = 0;
+        if (this._consecutiveSlowSegments >= 2) {
+          this._consecutiveSlowSegments = 0;
+          this._cooldownUntil = Date.now() + 12000;
+          this._handleBandwidthDrop("slow_download");
+          return;
+        }
+      } else {
+        this._consecutiveSlowSegments = 0;
       }
 
       if (Date.now() > this._cooldownUntil) {
-        if (loadRatio < 0.35 && this._measuredKbps > curLvlKbps * 1.6) {
+        if (loadRatio < 0.65 && this._measuredKbps > curLvlKbps * 1.15) {
           this._consecutiveFastSegments++;
           if (this._consecutiveFastSegments >= 2) {
             this._consecutiveFastSegments = 0;
@@ -387,6 +414,9 @@ export class KibangouHls extends OriginalHls {
             const pos = sorted.findIndex((e) => e.idx === this.autoLevelCapping);
             if (pos >= 0 && pos + 1 < sorted.length) {
               this.autoLevelCapping = sorted[pos + 1].idx;
+              this.nextLevel = -1;
+            } else if (this.autoLevelCapping >= 0) {
+              this.autoLevelCapping = -1;
               this.nextLevel = -1;
             }
           }
