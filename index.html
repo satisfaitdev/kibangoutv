@@ -196,6 +196,32 @@
       }
     }
 
+    /* ========================================================
+       MODE TV (ANDROID TV / SMART TV / TÉLÉCOMMANDE D-PAD)
+       ======================================================== */
+    html.tv-mode #mobile-top-header,
+    html.tv-mode .bnav {
+      display: none !important;
+    }
+
+    html.tv-mode .app-root > .main {
+      padding-top: 0 !important;
+    }
+
+    html.tv-mode a:focus,
+    html.tv-mode button:focus,
+    html.tv-mode [tabindex]:focus,
+    html.tv-mode .card:focus,
+    html.tv-mode .ep-pill:focus,
+    html.tv-mode .ch-row:focus,
+    html.tv-mode .source-item:focus {
+      outline: 3px solid #00C853 !important;
+      outline-offset: 3px !important;
+      box-shadow: 0 0 0 6px rgba(0, 200, 83, 0.25) !important;
+      transform: scale(1.02);
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
+    }
+
     .m-header-left {
       display: flex;
       align-items: center;
@@ -2666,19 +2692,28 @@
           }
 
           if (!targetContainer.querySelector("#settings-apps-offline-card")) {
+            const tvActive = document.documentElement.classList.contains("tv-mode");
             const appsCard = document.createElement("div");
             appsCard.id = "settings-apps-offline-card";
             appsCard.className = "s-group kibangou-settings-card";
             appsCard.setAttribute("data-zone", "v");
             appsCard.innerHTML = `
-              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Hors-ligne, Applications &amp; Performances</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos enregistrées sans connexion, téléchargez les apps Mobile/PC/TV ou consultez les Web Vitals.</div>
+              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Hors-ligne, Mode TV &amp; Applications</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos hors-ligne, activez l'interface Télécommande TV ou téléchargez les apps Mobile/PC/TV.</div>
               <div class="kibangou-adult-links">
                 <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Vidéos hors-ligne (PWA)</button>
+                <button type="button" id="btn-toggle-tv-mode" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:none;cursor:pointer;">${tvActive ? "Désactiver Mode TV" : "Activer Mode TV (Télécommande)"}</button>
                 <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC (.exe) &amp; TV →</a>
               </div>
             `;
             appsCard.querySelector("#btn-open-offline-videos").addEventListener("click", openOfflineModal);
+            appsCard.querySelector("#btn-toggle-tv-mode").addEventListener("click", () => {
+              const next = !document.documentElement.classList.contains("tv-mode");
+              try { localStorage.setItem("kibangoutv_tv_mode", next ? "1" : "0"); } catch {}
+              document.documentElement.classList.toggle("tv-mode", next);
+              appsCard.querySelector("#btn-toggle-tv-mode").textContent = next ? "Désactiver Mode TV" : "Activer Mode TV (Télécommande)";
+              showToast(next ? "Mode TV (Télécommande) activé" : "Mode TV désactivé");
+            });
             targetContainer.appendChild(appsCard);
           }
 
@@ -2934,6 +2969,93 @@
         bar.querySelector("button").addEventListener("click", () => bar.remove());
         document.body.appendChild(bar);
       } catch {}
+    })();
+
+    (function initTvModeAndDpad() {
+      const isTvUa = /Android TV|SmartTV|SMART-TV|Tizen|Web0S|BRAVIA|AFTB|AFTT|Shield|MiBOX|GoogleTV/i.test(navigator.userAgent);
+      const sp = new URLSearchParams(location.search);
+      const tvParam = sp.get("tv");
+      if (tvParam === "1") {
+        try { localStorage.setItem("kibangoutv_tv_mode", "1"); } catch {}
+      }
+      const tvEnabled = tvParam === "1" || localStorage.getItem("kibangoutv_tv_mode") === "1" || isTvUa;
+      document.documentElement.classList.toggle("tv-mode", tvEnabled);
+
+      function getFocusables() {
+        const list = Array.from(document.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"]), .card, .ep-pill, .ch-row, .source-item'));
+        return list.filter((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.width <= 0 || r.height <= 0) return false;
+          const st = getComputedStyle(el);
+          return st.visibility !== "hidden" && st.display !== "none";
+        });
+      }
+
+      function moveSpatialFocus(dir) {
+        const active = document.activeElement;
+        const items = getFocusables();
+        if (!items.length) return;
+        items.forEach((el) => { if (!el.hasAttribute("tabindex") && el.tagName !== "A" && el.tagName !== "BUTTON" && el.tagName !== "INPUT" && el.tagName !== "SELECT") el.setAttribute("tabindex", "0"); });
+        if (!active || !items.includes(active)) {
+          items[0].focus();
+          items[0].scrollIntoView({ block: "nearest", inline: "nearest" });
+          return;
+        }
+        const cur = active.getBoundingClientRect();
+        const cx = cur.left + cur.width / 2;
+        const cy = cur.top + cur.height / 2;
+        let best = null;
+        let bestScore = Infinity;
+
+        for (const el of items) {
+          if (el === active) continue;
+          const r = el.getBoundingClientRect();
+          const ex = r.left + r.width / 2;
+          const ey = r.top + r.height / 2;
+          const dx = ex - cx;
+          const dy = ey - cy;
+
+          if (dir === "ArrowRight" && dx <= 8) continue;
+          if (dir === "ArrowLeft" && dx >= -8) continue;
+          if (dir === "ArrowDown" && dy <= 8) continue;
+          if (dir === "ArrowUp" && dy >= -8) continue;
+
+          const primary = (dir === "ArrowLeft" || dir === "ArrowRight") ? Math.abs(dx) : Math.abs(dy);
+          const secondary = (dir === "ArrowLeft" || dir === "ArrowRight") ? Math.abs(dy) : Math.abs(dx);
+          const score = primary + secondary * 2.4;
+          if (score < bestScore) {
+            bestScore = score;
+            best = el;
+          }
+        }
+
+        if (best) {
+          best.focus();
+          best.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+        }
+      }
+
+      window.addEventListener("keydown", (e) => {
+        if (!document.documentElement.classList.contains("tv-mode")) return;
+        const authGate = document.getElementById("auth-gate");
+        if (authGate && authGate.style.display !== "none" && !authGate.classList.contains("unlocked")) return;
+
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+          const activeTag = document.activeElement?.tagName;
+          if (activeTag === "INPUT" || activeTag === "SELECT" || activeTag === "TEXTAREA") return;
+          e.preventDefault();
+          moveSpatialFocus(e.key);
+        } else if (e.key === "Enter") {
+          const active = document.activeElement;
+          if (active && active !== document.body && active.tagName !== "INPUT") {
+            e.preventDefault();
+            active.click();
+          }
+        } else if (e.key === "MediaPlayPause") {
+          const v = document.querySelector("video.player-video");
+          if (v) { if (v.paused) v.play().catch(() => {}); else v.pause(); }
+        }
+      });
     })();
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
