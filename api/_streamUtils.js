@@ -67,36 +67,109 @@ export const ORDERED_DOWNSCALE_IDS = ["720p", "480p", "360p", "240p"];
 let cachedFfmpegPath = undefined;
 
 /**
- * Résout le chemin vers le binaire statique FFmpeg (node_modules ou PATH système).
+ * Résout le chemin vers le binaire statique FFmpeg sans bloquer les requêtes passthrough.
  */
 export async function resolveFfmpegPath() {
   if (cachedFfmpegPath !== undefined) return cachedFfmpegPath;
 
-  const candidates = [
-    path.join(process.cwd(), "node_modules", "ffmpeg-static", process.platform === "win32" ? "ffmpeg.exe" : "ffmpeg")
-  ];
+  const localBin = path.join(
+    process.cwd(),
+    "node_modules",
+    "ffmpeg-static",
+    process.platform === "win32" ? "ffmpeg.exe" : "ffmpeg"
+  );
+  if (fs.existsSync(localBin)) {
+    try {
+      if (process.platform !== "win32") fs.chmodSync(localBin, 0o755);
+    } catch {}
+    cachedFfmpegPath = localBin;
+    return cachedFfmpegPath;
+  }
 
   try {
     const mod = await import("ffmpeg-static");
-    if (mod && typeof mod.default === "string") {
-      candidates.unshift(mod.default);
+    const modPath = mod && typeof mod.default === "string" ? mod.default : null;
+    if (modPath && fs.existsSync(modPath)) {
+      try {
+        if (process.platform !== "win32") fs.chmodSync(modPath, 0o755);
+      } catch {}
+      cachedFfmpegPath = modPath;
+      return cachedFfmpegPath;
     }
   } catch {}
 
-  for (const cand of candidates) {
-    if (cand && fs.existsSync(cand)) {
-      try {
-        if (process.platform !== "win32") {
-          fs.chmodSync(cand, 0o755);
-        }
-      } catch {}
-      cachedFfmpegPath = cand;
-      return cachedFfmpegPath;
+  cachedFfmpegPath = null;
+  return null;
+}
+
+/**
+ * Fusionne des en-têtes personnalisés de façon insensible à la casse
+ * pour éviter les doublons (ex: "User-Agent" + "user-agent" provoquant 403 sur mixdrop).
+ */
+export function mergeHeadersCaseInsensitive(baseHeaders, extraHeaders, allowedLowerSet = null) {
+  const out = {};
+  const lowerToKey = new Map();
+
+  for (const [k, v] of Object.entries(baseHeaders || {})) {
+    if (typeof v !== "string" || !v) continue;
+    out[k] = v;
+    lowerToKey.set(k.toLowerCase(), k);
+  }
+
+  if (extraHeaders && typeof extraHeaders === "object") {
+    for (const [k, v] of Object.entries(extraHeaders)) {
+      if (typeof v !== "string" || !v) continue;
+      const lk = k.toLowerCase();
+      if (allowedLowerSet && !allowedLowerSet.has(lk)) continue;
+      const prevKey = lowerToKey.get(lk);
+      if (prevKey && prevKey !== k) {
+        delete out[prevKey];
+      }
+      out[k] = v;
+      lowerToKey.set(lk, k);
     }
   }
 
-  cachedFfmpegPath = null;
-  return null;
+  return out;
+}
+
+/**
+ * Nettoie et déduit un nom de fichier sûr pour Content-Disposition: attachment.
+ */
+export function buildContentDisposition(rawFilename, finalUrl, contentType) {
+  let base = String(rawFilename || "").trim();
+  base = base.replace(/[/\\]/g, " ").replace(/\.\.+/g, ".").replace(/[\r\n"<>:|?*]+/g, "").trim();
+
+  if (!base) {
+    try {
+      const urlPath = new URL(finalUrl).pathname.split("/").filter(Boolean).pop() || "";
+      base = decodeURIComponent(urlPath).replace(/[\r\n"<>:|?*]+/g, "").trim();
+    } catch {}
+  }
+  if (!base) base = "kibangoutv-video";
+
+  const hasKnownExt = /\.(mp4|mkv|webm|mov|avi|ts|m4v|mp3|aac)$/i.test(base);
+  if (!hasKnownExt) {
+    const lowerUrl = String(finalUrl || "").split("?")[0].toLowerCase();
+    const lowerCt = String(contentType || "").toLowerCase();
+    let ext = ".mp4";
+    if (lowerUrl.endsWith(".mkv") || lowerCt.includes("matroska")) ext = ".mkv";
+    else if (lowerUrl.endsWith(".webm") || lowerCt.includes("webm")) ext = ".webm";
+    else if (lowerUrl.endsWith(".ts") || lowerCt.includes("mp2t")) ext = ".ts";
+    else if (lowerUrl.endsWith(".m4v")) ext = ".m4v";
+    else if (lowerUrl.endsWith(".mov")) ext = ".mov";
+    base = `${base}${ext}`;
+  }
+
+  if (base.length > 140) {
+    const dotIdx = base.lastIndexOf(".");
+    const ext = dotIdx > 0 ? base.slice(dotIdx) : ".mp4";
+    base = `${base.slice(0, 140 - ext.length)}${ext}`;
+  }
+
+  const asciiSafe = base.replace(/[^\x20-\x7E]/g, "_").replace(/["\\]/g, "_") || "kibangoutv-video.mp4";
+  const encodedUtf8 = encodeURIComponent(base).replace(/['()]/g, escape).replace(/\*/g, "%2A");
+  return `attachment; filename="${asciiSafe}"; filename*=UTF-8''${encodedUtf8}`;
 }
 
 /**
@@ -156,7 +229,6 @@ export function buildAdaptiveM3u8(playlistText, finalUrl, fullStreamBase, reques
   const lines = playlistText.split(/\r?\n/);
 
   if (!isMaster) {
-    // Premier appel sans ?q= sur un flux mono-qualité MPEG-TS : générer le Master Playlist adaptatif
     if (!requestedQuality && allowTranscode && playlistText.includes("#EXTINF:")) {
       const encodedSrc = encodeURIComponent(finalUrl);
       const masterLines = [
@@ -174,7 +246,6 @@ export function buildAdaptiveM3u8(playlistText, finalUrl, fullStreamBase, reques
       return masterLines.join("\n");
     }
 
-    // Appel ciblé (?q=360p, etc. ou passthrough) : réécrire chaque segment .ts avec &q=
     const qSuffix = requestedQuality && requestedQuality !== "orig" && !hasFmp4Map && !isEncrypted ? `&q=${requestedQuality}` : "";
     return lines
       .map((line) => {
@@ -203,7 +274,6 @@ export function buildAdaptiveM3u8(playlistText, finalUrl, fullStreamBase, reques
       .join("\n");
   }
 
-  // Playlist déjà multi-qualités en amont : réécrire et compléter avec des profils bas-débit si manquants
   let lowestBandwidth = Infinity;
   let lowestVariantUrl = null;
   const rewritten = [];
@@ -270,7 +340,8 @@ export function buildAdaptiveM3u8(playlistText, finalUrl, fullStreamBase, reques
 }
 
 /**
- * Transcode un flux ReadableStream MPEG-TS en continu via FFmpeg (pipe:0 -> pipe:1).
+ * Transcode un flux ReadableStream MPEG-TS en continu via FFmpeg (pipe:0 -> pipe:1)
+ * avec flush immédiat des paquets (-flush_packets 1) pour un démarrage sans latence.
  */
 export function createTranscodedStream(ffmpegBin, upstreamBody, profile, signal) {
   const args = [
@@ -322,6 +393,8 @@ export function createTranscodedStream(ffmpegBin, upstreamBody, profile, signal)
     "0",
     "-f",
     "mpegts",
+    "-flush_packets",
+    "1",
     "pipe:1"
   ];
 

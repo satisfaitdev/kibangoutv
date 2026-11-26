@@ -1,7 +1,9 @@
 import {
   TRANSCODE_PROFILES,
   buildAdaptiveM3u8,
+  buildContentDisposition,
   createTranscodedStream,
+  mergeHeadersCaseInsensitive,
   normalizeQualityId,
   resolveFfmpegPath,
   validatePublicStreamUrl
@@ -14,6 +16,9 @@ const CORS_HEADERS = {
   "Access-Control-Expose-Headers": "*"
 };
 
+const CHROME_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+
 const ALLOWED_FORWARD_HEADERS = new Set([
   "referer",
   "origin",
@@ -23,6 +28,11 @@ const ALLOWED_FORWARD_HEADERS = new Set([
   "accept",
   "accept-language"
 ]);
+
+// Cache court (2.5s) pour éviter le double aller-retour amont lors du passage Master -> Variante ABR
+const M3U8_BURST_TTL_MS = 2500;
+const MAX_M3U8_CACHE = 100;
+const m3u8Cache = new Map();
 
 function decodeHeaderToken(parsed) {
   let hCode = parsed.searchParams.get("h") || "";
@@ -67,20 +77,20 @@ async function handleStreamRequest(request, method) {
       );
     }
 
-    const customHeaders = decodeHeaderToken(parsed);
-    const fetchHeaders = {
-      "User-Agent": targetUrl.includes("vavoo")
-        ? "VAVOO/2.6"
-        : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-      "Accept": "*/*",
-      "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
-    };
+    const dlParam = (parsed.searchParams.get("download") || "").trim().toLowerCase();
+    const isDownload = dlParam === "1" || dlParam === "true";
+    const requestedFilename = parsed.searchParams.get("filename") || "";
 
-    for (const [k, v] of Object.entries(customHeaders)) {
-      if (typeof v === "string" && v && ALLOWED_FORWARD_HEADERS.has(k.toLowerCase())) {
-        fetchHeaders[k] = v;
-      }
-    }
+    const customHeaders = decodeHeaderToken(parsed);
+    const fetchHeaders = mergeHeadersCaseInsensitive(
+      {
+        "User-Agent": targetUrl.includes("vavoo") ? "VAVOO/2.6" : CHROME_UA,
+        "Accept": "*/*",
+        "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.8"
+      },
+      customHeaders,
+      ALLOWED_FORWARD_HEADERS
+    );
 
     const lowerUrlPath = targetUrl.split("?")[0].toLowerCase();
     const isHlsPlaylistHint = lowerUrlPath.endsWith(".m3u8");
@@ -92,7 +102,11 @@ async function handleStreamRequest(request, method) {
     const isMp4Hint = lowerUrlPath.endsWith(".mp4") || lowerUrlPath.endsWith(".mkv");
 
     const incomingRange = request.headers.get("range");
-    if (incomingRange) {
+    if (isDownload) {
+      if (incomingRange) {
+        fetchHeaders["Range"] = incomingRange;
+      }
+    } else if (incomingRange) {
       const openMatch = !isHlsPlaylistHint && !isTsSegmentHint && /^bytes=(\d+)-$/i.exec(incomingRange.trim());
       if (openMatch) {
         const start = Number(openMatch[1]);
@@ -103,9 +117,32 @@ async function handleStreamRequest(request, method) {
     } else if (
       !isHlsPlaylistHint &&
       !isTsSegmentHint &&
-      (isMp4Hint || lowerUrlPath.includes("cloudatacdn") || lowerUrlPath.includes("mxcontent"))
+      (isMp4Hint || lowerUrlPath.includes("cloudatacdn") || lowerUrlPath.includes("mxcontent") || lowerUrlPath.includes("mxdrop"))
     ) {
       fetchHeaders["Range"] = "bytes=0-3145727";
+    }
+
+    const q = normalizeQualityId(parsed.searchParams.get("q"));
+    const headerCacheKey = `${targetUrl}|${customHeaders.referer || customHeaders.Referer || ""}`;
+
+    // Hit rapide du cache M3U8 sur le passage Master -> Variante ABR
+    if (method === "GET" && !isDownload && q) {
+      const cachedM3u8 = m3u8Cache.get(headerCacheKey);
+      if (cachedM3u8 && Date.now() - cachedM3u8.ts < M3U8_BURST_TTL_MS) {
+        const ffmpegBin = q !== "orig" ? await resolveFfmpegPath() : null;
+        const fullStreamBase = buildStreamBaseUrl(request, parsed);
+        const rewritten = buildAdaptiveM3u8(cachedM3u8.text, cachedM3u8.finalUrl, fullStreamBase, q, Boolean(ffmpegBin));
+        return new Response(rewritten, {
+          status: cachedM3u8.status,
+          headers: {
+            ...CORS_HEADERS,
+            "Content-Type": "application/vnd.apple.mpegurl; charset=utf-8",
+            "Cache-Control": "no-store",
+            "X-Kibangou-ABR": ffmpegBin ? "adaptive-ffmpeg" : "passthrough",
+            "X-Kibangou-M3U8-Cache": "HIT"
+          }
+        });
+      }
     }
 
     const upstreamRes = await fetch(targetUrl, {
@@ -117,6 +154,14 @@ async function handleStreamRequest(request, method) {
 
     const finalUrl = upstreamRes.url || targetUrl;
     const contentType = (upstreamRes.headers.get("content-type") || "application/octet-stream").toLowerCase();
+    const isHtmlResponse = contentType.includes("text/html") || contentType.includes("application/xhtml");
+
+    if (isDownload && isHtmlResponse) {
+      return Response.json(
+        { error: "Upstream returned HTML instead of downloadable video media" },
+        { status: 422, headers: CORS_HEADERS }
+      );
+    }
 
     if (method === "HEAD") {
       const headHeaders = new Headers(CORS_HEADERS);
@@ -124,37 +169,39 @@ async function handleStreamRequest(request, method) {
       if (upstreamRes.headers.get("accept-ranges")) {
         headHeaders.set("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
       }
+      if (upstreamRes.headers.get("content-length")) {
+        headHeaders.set("Content-Length", upstreamRes.headers.get("content-length"));
+      }
+      if (isDownload) {
+        headHeaders.set("Content-Disposition", buildContentDisposition(requestedFilename, finalUrl, contentType));
+      }
       return new Response(null, { status: upstreamRes.status, headers: headHeaders });
     }
 
     const isPlaylistCandidate =
-      isHlsPlaylistHint ||
-      finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
-      contentType.includes("mpegurl");
-
-    const q = normalizeQualityId(parsed.searchParams.get("q"));
-    const ffmpegBin = await resolveFfmpegPath();
+      !isDownload &&
+      (isHlsPlaylistHint ||
+        finalUrl.split("?")[0].toLowerCase().endsWith(".m3u8") ||
+        contentType.includes("mpegurl"));
 
     if (isPlaylistCandidate) {
       const text = await upstreamRes.text();
       if (text.includes("#EXTM3U")) {
-        const proto = (request.headers.get("x-forwarded-proto") || parsed.protocol.replace(":", "") || "https")
-          .split(",")[0]
-          .trim();
-        const host =
-          request.headers.get("x-forwarded-host") ||
-          request.headers.get("host") ||
-          parsed.host ||
-          "kibangoutv.vercel.app";
-
-        let hCode = parsed.searchParams.get("h") || "";
-        if (!hCode) {
-          const m = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
-          if (m) hCode = m[1];
+        if (!q && upstreamRes.ok) {
+          if (m3u8Cache.size >= MAX_M3U8_CACHE) {
+            m3u8Cache.delete(m3u8Cache.keys().next().value);
+          }
+          m3u8Cache.set(headerCacheKey, {
+            text,
+            finalUrl,
+            status: upstreamRes.status,
+            ts: Date.now()
+          });
         }
-        const streamBasePath = hCode ? `/api/stream/h_${hCode}` : "/api/stream";
-        const fullStreamBase = `${proto}://${host}${streamBasePath}`;
 
+        const needFfmpeg = !q || (q !== "orig" && Boolean(TRANSCODE_PROFILES[q]));
+        const ffmpegBin = needFfmpeg ? await resolveFfmpegPath() : null;
+        const fullStreamBase = buildStreamBaseUrl(request, parsed);
         const rewritten = buildAdaptiveM3u8(text, finalUrl, fullStreamBase, q, Boolean(ffmpegBin));
         return new Response(rewritten, {
           status: upstreamRes.status,
@@ -162,6 +209,7 @@ async function handleStreamRequest(request, method) {
             ...CORS_HEADERS,
             "Content-Type": "application/vnd.apple.mpegurl; charset=utf-8",
             "Cache-Control": "no-store",
+            "X-Accel-Buffering": "no",
             "X-Kibangou-ABR": ffmpegBin ? "adaptive-ffmpeg" : "passthrough"
           }
         });
@@ -174,30 +222,43 @@ async function handleStreamRequest(request, method) {
     }
 
     // Transcodage adaptatif à la volée des segments MPEG-TS quand un profil bas débit est demandé
-    if (q && q !== "orig" && ffmpegBin && TRANSCODE_PROFILES[q] && upstreamRes.ok && upstreamRes.body) {
-      const profile = TRANSCODE_PROFILES[q];
-      const transcodedStream = createTranscodedStream(ffmpegBin, upstreamRes.body, profile, request.signal);
-      return new Response(transcodedStream, {
-        status: 200,
-        headers: {
-          ...CORS_HEADERS,
-          "Content-Type": "video/mp2t",
-          "Cache-Control": "no-store",
-          "X-Kibangou-Quality": q,
-          "X-Kibangou-Transcoded": "ffmpeg-pipe"
-        }
-      });
+    if (!isDownload && q && q !== "orig" && TRANSCODE_PROFILES[q] && upstreamRes.ok && upstreamRes.body) {
+      const ffmpegBin = await resolveFfmpegPath();
+      if (ffmpegBin) {
+        const profile = TRANSCODE_PROFILES[q];
+        const transcodedStream = createTranscodedStream(ffmpegBin, upstreamRes.body, profile, request.signal);
+        return new Response(transcodedStream, {
+          status: 200,
+          headers: {
+            ...CORS_HEADERS,
+            "Content-Type": "video/mp2t",
+            "Cache-Control": "no-store",
+            "X-Accel-Buffering": "no",
+            "X-Kibangou-Quality": q,
+            "X-Kibangou-Transcoded": "ffmpeg-pipe"
+          }
+        });
+      }
     }
 
-    // Streaming direct zéro-bufferisation pour passthrough 1080p/4K et VOD
+    // Streaming direct zéro-bufferisation pour passthrough 1080p/4K, VOD et téléchargements
     const outHeaders = new Headers(CORS_HEADERS);
     outHeaders.set("Content-Type", contentType);
     outHeaders.set("Cache-Control", "no-store");
+    outHeaders.set("X-Accel-Buffering", "no");
+
+    if (isDownload) {
+      outHeaders.set("Content-Disposition", buildContentDisposition(requestedFilename, finalUrl, contentType));
+    }
+
     if (upstreamRes.headers.get("content-range")) {
       outHeaders.set("Content-Range", upstreamRes.headers.get("content-range"));
     }
     if (upstreamRes.headers.get("accept-ranges")) {
       outHeaders.set("Accept-Ranges", upstreamRes.headers.get("accept-ranges"));
+    }
+    if (upstreamRes.headers.get("content-length") && !upstreamRes.headers.get("content-encoding")) {
+      outHeaders.set("Content-Length", upstreamRes.headers.get("content-length"));
     }
 
     return new Response(upstreamRes.body, {
@@ -214,4 +275,23 @@ async function handleStreamRequest(request, method) {
       { status: 502, headers: CORS_HEADERS }
     );
   }
+}
+
+function buildStreamBaseUrl(request, parsed) {
+  const proto = (request.headers.get("x-forwarded-proto") || parsed.protocol.replace(":", "") || "https")
+    .split(",")[0]
+    .trim();
+  const host =
+    request.headers.get("x-forwarded-host") ||
+    request.headers.get("host") ||
+    parsed.host ||
+    "kibangoutv.vercel.app";
+
+  let hCode = parsed.searchParams.get("h") || "";
+  if (!hCode) {
+    const m = parsed.pathname.match(/\/h_([A-Za-z0-9_-]+)/);
+    if (m) hCode = m[1];
+  }
+  const streamBasePath = hCode ? `/api/stream/h_${hCode}` : "/api/stream";
+  return `${proto}://${host}${streamBasePath}`;
 }

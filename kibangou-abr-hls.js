@@ -1,17 +1,18 @@
 /**
- * KibangouTV - Convertisseur de Qualité Réel & Moniteur Réseau 2G/3G/4G
- * =====================================================================
- * - Route les flux HLS via le transcodeur adaptatif (/api/stream)
- * - Surveille en temps réel la connexion (Network Information API + débit réel des segments)
- * - Rétrograde automatiquement (1080p -> 720p -> 480p -> 360p -> 240p) en cas de chute réseau
- * - Empêche les saccades avec période de stabilisation anti-yoyo
+ * KibangouTV - Adaptive Bitrate (ABR) Engine & Network Monitor (100% Automatique)
  */
 
 import OriginalHls from "https://vuma.mx/v/1.5.111/hls.mjs?orig=1";
 
 export * from "https://vuma.mx/v/1.5.111/hls.mjs?orig=1";
 
-const DEFAULT_PREF_KEY = "kibangoutv_preferred_quality";
+const LEGACY_PREF_KEY = "kibangoutv_preferred_quality";
+
+function clearLegacyManualQuality() {
+  try {
+    localStorage.removeItem(LEGACY_PREF_KEY);
+  } catch {}
+}
 
 function getNavigatorConnection() {
   return navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
@@ -19,35 +20,44 @@ function getNavigatorConnection() {
 
 export class KibangouHls extends OriginalHls {
   constructor(userConfig = {}) {
+    clearLegacyManualQuality();
+
     const conn = getNavigatorConnection();
     const initialEstimate = KibangouHls.computeInitialBandwidthEstimate(conn);
 
     const abrConfig = {
       abrEwmaDefaultEstimate: initialEstimate,
-      abrBandWidthFactor: 0.75,
-      abrBandWidthUpFactor: 0.60,
+      abrBandWidthFactor: 0.78,
+      abrBandWidthUpFactor: 0.65,
       abrMaxWithRealBitrate: true,
       capLevelToPlayerSize: false,
 
       startLevel: -1,
       autoStartLoad: true,
+      startFragPrefetch: true,
 
-      maxBufferLength: 24,
-      maxMaxBufferLength: 45,
-      maxBufferSize: 40 * 1024 * 1024,
-      backBufferLength: 10,
+      maxBufferLength: 10,
+      maxMaxBufferLength: 24,
+      maxBufferSize: 24 * 1024 * 1024,
+      backBufferLength: 6,
       maxBufferHole: 0.5,
-      highBufferWatchdogPeriod: 2,
-      nudgeOffset: 0.2,
-      nudgeMaxRetry: 6,
+      highBufferWatchdogPeriod: 1.5,
+      nudgeOffset: 0.15,
+      nudgeMaxRetry: 5,
 
-      fragLoadingTimeOut: 45000,
-      fragLoadingMaxRetry: 6,
-      fragLoadingRetryDelay: 500,
-      manifestLoadingTimeOut: 25000,
-      manifestLoadingMaxRetry: 3,
-      levelLoadingTimeOut: 25000,
-      levelLoadingMaxRetry: 3,
+      liveSyncDurationCount: 2,
+      liveMaxLatencyDurationCount: 5,
+      initialLiveManifestSize: 1,
+
+      fragLoadingTimeOut: 25000,
+      fragLoadingMaxRetry: 4,
+      fragLoadingRetryDelay: 300,
+      manifestLoadingTimeOut: 15000,
+      manifestLoadingMaxRetry: 2,
+      manifestLoadingRetryDelay: 250,
+      levelLoadingTimeOut: 15000,
+      levelLoadingMaxRetry: 2,
+      levelLoadingRetryDelay: 250,
 
       ...userConfig
     };
@@ -57,7 +67,8 @@ export class KibangouHls extends OriginalHls {
     window.__kibangouHls = this;
     window.Hls = KibangouHls;
 
-    this._measuredKbps = Math.round(initialEstimate / 1000);
+    this._measuredKbps = 0;
+    this._hasRealSample = false;
     this._cooldownUntil = 0;
     this._consecutiveFastSegments = 0;
     this._stallTimer = null;
@@ -75,23 +86,35 @@ export class KibangouHls extends OriginalHls {
   }
 
   static computeInitialBandwidthEstimate(conn) {
-    if (!conn) return 650000;
+    if (!conn) return 2800000;
     if (conn.saveData || conn.effectiveType === "slow-2g" || conn.effectiveType === "2g") {
-      return 140000;
+      return 160000;
     }
     if (conn.effectiveType === "3g") {
-      return 320000;
+      return 420000;
     }
-    const dlMbps = typeof conn.downlink === "number" && conn.downlink > 0 ? conn.downlink : 2.5;
-    if (dlMbps <= 0.4) return 150000;
-    if (dlMbps <= 1.2) return 350000;
-    if (dlMbps <= 3.0) return 650000;
-    return 1400000; // Démarrage prudent en 720p pour éviter les gels initiaux en 4K/1080p
+    const dlMbps = typeof conn.downlink === "number" && conn.downlink > 0 ? conn.downlink : 4.5;
+    if (dlMbps <= 0.4) return 160000;
+    if (dlMbps <= 1.2) return 420000;
+    if (dlMbps <= 3.0) return 900000;
+    return 4800000;
   }
 
   loadSource(url) {
     let target = url;
-    if (typeof target === "string" && target && !target.startsWith("blob:") && !target.startsWith("data:")) {
+    const hasCustomLoader = Boolean(
+      this.config &&
+      this.config.loader &&
+      this.config.loader !== OriginalHls.DefaultConfig.loader
+    );
+
+    if (
+      !hasCustomLoader &&
+      typeof target === "string" &&
+      target &&
+      !target.startsWith("blob:") &&
+      !target.startsWith("data:")
+    ) {
       const streamPrefix = `${location.origin}/api/stream`;
       if (!target.startsWith(streamPrefix) && !target.startsWith("/api/stream")) {
         target = `${streamPrefix}?u=${encodeURIComponent(target)}`;
@@ -114,7 +137,7 @@ export class KibangouHls extends OriginalHls {
         if (!media.paused && !media.ended && media.readyState < 3) {
           this._handleBandwidthDrop("buffering_wait");
         }
-      }, 1600);
+      }, 1400);
     };
 
     this._playingListener = () => {
@@ -148,11 +171,6 @@ export class KibangouHls extends OriginalHls {
       if (this._playingListener) this._attachedMedia.removeEventListener("playing", this._playingListener);
       this._attachedMedia = null;
     }
-  }
-
-  _isAutoMode() {
-    const pref = localStorage.getItem(DEFAULT_PREF_KEY) || "auto";
-    return pref === "auto";
   }
 
   _inferHeight(lvl) {
@@ -199,10 +217,10 @@ export class KibangouHls extends OriginalHls {
   }
 
   _applyNetworkPolicy(reason = "network_change") {
-    if (!this.levels || !this.levels.length || !this._isAutoMode()) return;
+    if (!this.levels || !this.levels.length) return;
 
     const snap = this.getNetworkSnapshot();
-    let startH = 720;
+    let startH = 1080;
     let capH = 1080;
 
     if (snap.tier === "2G") {
@@ -216,19 +234,35 @@ export class KibangouHls extends OriginalHls {
       capH = 720;
     }
 
+    if (capH >= 1080) {
+      this.autoLevelCapping = -1;
+      if (reason === "manifest_init") {
+        const origIdx = this._pickLevelForTargetHeight(1080, true);
+        if (origIdx >= 0) {
+          this.startLevel = origIdx;
+          this.loadLevel = origIdx;
+        }
+      }
+      this._emitNetworkStats(snap);
+      return;
+    }
+
     const capIdx = this._pickLevelForTargetHeight(capH, true);
     this.autoLevelCapping = capIdx >= 0 ? capIdx : -1;
 
     const currentLvlObj = this.levels[this.currentLevel];
-    const currentH = currentLvlObj ? (currentLvlObj.height || 0) : 0;
+    const currentH = currentLvlObj ? this._inferHeight(currentLvlObj) : 0;
 
     if (this.currentLevel < 0 || (currentH > capH && capIdx >= 0)) {
       const startIdx = this._pickLevelForTargetHeight(startH, true);
       if (startIdx >= 0) {
+        if (reason === "manifest_init") {
+          this.startLevel = startIdx;
+        }
         this.nextLevel = startIdx;
         this.loadLevel = startIdx;
         if (reason !== "manifest_init" && currentH > capH) {
-          this._emitAutoDowngrade(this.levels[startIdx]?.height || startH, snap, reason);
+          this._emitAutoDowngrade(this._inferHeight(this.levels[startIdx]) || startH, snap, reason);
         }
       }
     }
@@ -237,7 +271,7 @@ export class KibangouHls extends OriginalHls {
   }
 
   _handleBandwidthDrop(reason) {
-    if (!this.levels || !this.levels.length || !this._isAutoMode()) return;
+    if (!this.levels || !this.levels.length) return;
 
     const sorted = this._getSortedLevelIndices();
     if (sorted.length <= 1) return;
@@ -250,7 +284,7 @@ export class KibangouHls extends OriginalHls {
     if (!targetEntry || targetEntry.idx === curIdx) return;
 
     this._consecutiveFastSegments = 0;
-    this._cooldownUntil = Date.now() + 45000;
+    this._cooldownUntil = Date.now() + 35000;
     this.autoLevelCapping = targetEntry.idx;
     this.nextLevel = targetEntry.idx;
     this.loadLevel = targetEntry.idx;
@@ -271,7 +305,7 @@ export class KibangouHls extends OriginalHls {
     window.dispatchEvent(new CustomEvent("kibangou-network-stats", {
       detail: {
         ...snap,
-        activeHeight: activeLvl ? activeLvl.height : null,
+        activeHeight: activeLvl ? this._inferHeight(activeLvl) : null,
         activeBitrateKbps: activeLvl && activeLvl.bitrate ? Math.round(activeLvl.bitrate / 1000) : null
       }
     }));
@@ -283,9 +317,9 @@ export class KibangouHls extends OriginalHls {
     const dlMbps = conn && typeof conn.downlink === "number" && conn.downlink > 0 ? conn.downlink : null;
     const saveData = Boolean(conn && conn.saveData);
 
-    const effectiveKbps = this._measuredKbps > 0
+    const effectiveKbps = this._hasRealSample && this._measuredKbps > 0
       ? this._measuredKbps
-      : (dlMbps ? Math.round(dlMbps * 1000) : 1200);
+      : (dlMbps ? Math.round(dlMbps * 1000) : 2800);
 
     let tier = "4G";
     if (saveData || eff === "slow-2g" || eff === "2g" || effectiveKbps < 240 || (dlMbps !== null && dlMbps <= 0.35)) {
@@ -319,13 +353,7 @@ export class KibangouHls extends OriginalHls {
       window.dispatchEvent(new CustomEvent("kibangou-levels-updated", {
         detail: { levels: this.levels, hls: this }
       }));
-
-      const savedPref = localStorage.getItem(DEFAULT_PREF_KEY) || "auto";
-      if (savedPref === "auto") {
-        this._applyNetworkPolicy("manifest_init");
-      } else {
-        this.setQualityLevel(savedPref);
-      }
+      this._applyNetworkPolicy("manifest_init");
     });
 
     this.on(OriginalHls.Events.FRAG_LOADED, (_event, data) => {
@@ -335,21 +363,22 @@ export class KibangouHls extends OriginalHls {
 
       const loadMs = Math.max(1, (stats.loading.end || performance.now()) - (stats.loading.start || 0));
       const instantKbps = Math.round((stats.loaded * 8) / loadMs);
-      this._measuredKbps = this._measuredKbps > 0
-        ? Math.round(this._measuredKbps * 0.65 + instantKbps * 0.35)
+      this._measuredKbps = this._hasRealSample && this._measuredKbps > 0
+        ? Math.round(this._measuredKbps * 0.6 + instantKbps * 0.4)
         : instantKbps;
+      this._hasRealSample = true;
 
       const snap = this.getNetworkSnapshot();
       const loadRatio = loadMs / (durSec * 1000);
       const curLvl = this.levels && this.levels[this.currentLevel];
       const curLvlKbps = curLvl && curLvl.bitrate ? Math.round(curLvl.bitrate / 1000) : 800;
 
-      if (this._isAutoMode() && (loadRatio > 0.78 || this._measuredKbps < curLvlKbps * 0.95)) {
+      if (loadRatio > 0.78 || this._measuredKbps < curLvlKbps * 0.90) {
         this._handleBandwidthDrop("slow_download");
         return;
       }
 
-      if (this._isAutoMode() && Date.now() > this._cooldownUntil) {
+      if (Date.now() > this._cooldownUntil) {
         if (loadRatio < 0.35 && this._measuredKbps > curLvlKbps * 1.6) {
           this._consecutiveFastSegments++;
           if (this._consecutiveFastSegments >= 2) {
@@ -395,32 +424,15 @@ export class KibangouHls extends OriginalHls {
     });
   }
 
-  /**
-   * Applique une qualité cible ("auto", "1080p", "720p", "480p", "360p", "240p").
-   */
-  setQualityLevel(targetQuality) {
-    if (targetQuality === "auto" || targetQuality === -1) {
-      this._cooldownUntil = 0;
-      this.autoLevelCapping = -1;
-      this.currentLevel = -1;
-      this.loadLevel = -1;
-      this.nextLevel = -1;
-      this._applyNetworkPolicy("manual_auto");
-      return -1;
-    }
-
-    if (!this.levels || !this.levels.length) return -1;
-
-    const targetHeight = parseInt(targetQuality, 10);
-    if (isNaN(targetHeight)) return -1;
-
+  setQualityLevel() {
+    clearLegacyManualQuality();
+    this._cooldownUntil = 0;
     this.autoLevelCapping = -1;
-    const bestIdx = this._pickLevelForTargetHeight(targetHeight, false);
-    this.currentLevel = bestIdx;
-    this.loadLevel = bestIdx;
-    this.nextLevel = bestIdx;
-    this._emitNetworkStats(this.getNetworkSnapshot());
-    return bestIdx;
+    this.currentLevel = -1;
+    this.loadLevel = -1;
+    this.nextLevel = -1;
+    this._applyNetworkPolicy("auto_reset");
+    return -1;
   }
 }
 

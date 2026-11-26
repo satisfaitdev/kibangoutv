@@ -1,0 +1,23 @@
+{
+  "id": "4177424223",
+  "name": "CANAL+ POP / CANAL+ FHD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/4177424223",
+  "images": {
+    "logo": "/live2/logo/4177424223.png",
+    "poster": "/live2/logo/4177424223.png"
+  },
+  "tags": [
+    "Canal+",
+    "Afrique",
+    "Généraliste",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

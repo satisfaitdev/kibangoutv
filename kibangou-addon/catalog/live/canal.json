@@ -15,18 +15,19 @@
       ]
     },
     {
-      "id": "canalplus_pop",
-      "name": "CANAL+ POP HD",
+      "id": "4177424223",
+      "name": "CANAL+ POP / CANAL+ FHD",
       "type": "live",
-      "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/cplus_pop/live.livx/playlist.m3u8",
+      "url": "https://www.vavoo.to/live/play/4177424223",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/4177424223.png",
+        "poster": "/live2/logo/4177424223.png"
       },
       "tags": [
         "Canal+",
         "Afrique",
-        "Généraliste"
+        "Généraliste",
+        "HD"
       ]
     },
     {

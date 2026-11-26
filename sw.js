@@ -1,9 +1,9 @@
 /* ========================================================
-   KIBANGOUTV - SERVICE WORKER PWA (V2.3.0)
+   KIBANGOUTV - SERVICE WORKER PWA (V2.4.1)
    Network-First pour App Shell/Catalogs & Pass-through Streaming
    ======================================================== */
 
-const CACHE_NAME = "kibangoutv-core-v2.3.0";
+const CACHE_NAME = "kibangoutv-core-v2.4.1";
 const ICON_ASSETS = [
   "/logo.svg",
   "/icon-192.png",
@@ -39,7 +39,6 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // 1. Pass-through direct pour tous les flux vidéo, API proxy/stream, range et résolution
   if (
     req.method !== "GET" ||
     url.origin !== self.location.origin ||
@@ -51,12 +50,12 @@ self.addEventListener("fetch", (event) => {
     url.pathname.includes("/source/") ||
     url.searchParams.has("u") ||
     url.searchParams.has("url") ||
+    url.searchParams.has("download") ||
     req.headers.has("range")
   ) {
     return;
   }
 
-  // 2. HTML / App Shell / JS / JSON manifests & catalogs : Network-First (toujours à jour en prod)
   if (
     req.mode === "navigate" ||
     url.pathname === "/" ||
@@ -77,7 +76,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // 3. Icônes & images locales statiques : Cache-First avec revalidation
   if (ICON_ASSETS.includes(url.pathname) || url.pathname.endsWith(".png") || url.pathname.endsWith(".svg")) {
     event.respondWith(
       caches.match(req).then((cached) => {

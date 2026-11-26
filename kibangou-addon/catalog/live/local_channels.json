@@ -1,13 +1,13 @@
 {
   "items": [
     {
-      "id": "drtv",
-      "name": "DRTV International (Congo)",
+      "id": "esaie45_congo",
+      "name": "Ésaïe 45 TV (Congo)",
       "type": "live",
-      "url": "https://vps122407.serveur-vps.net/hls/drtv.m3u8",
+      "url": "https://stream.berosat.live/hls/esaie45-tv/esaie45-tv.m3u8",
       "images": {
-        "logo": "https://i.imgur.com/gK97P92.png",
-        "poster": "https://i.imgur.com/gK97P92.png"
+        "logo": "https://i.imgur.com/nc9QBnD.png",
+        "poster": "https://i.imgur.com/nc9QBnD.png"
       },
       "tags": [
         "Congo",
@@ -15,10 +15,29 @@
         "Direct",
         "Chaînes Locales"
       ],
-      "category": "Chaînes Locales",
+      "category": "Congo",
       "group": "Chaînes Locales",
       "genres": [
-        "Chaînes Locales",
+        "Congo"
+      ]
+    },
+    {
+      "id": "baraka_congo",
+      "name": "Baraka TV HD (Congo)",
+      "type": "live",
+      "url": "https://stream.berosat.live:19360/baraka-hd/baraka-hd.m3u8",
+      "images": {
+        "logo": "https://i.imgur.com/IKXddHN.png",
+        "poster": "https://i.imgur.com/IKXddHN.png"
+      },
+      "tags": [
+        "Congo",
+        "Direct",
+        "Chaînes Locales"
+      ],
+      "category": "Congo",
+      "group": "Chaînes Locales",
+      "genres": [
         "Congo"
       ]
     },
@@ -34,14 +53,12 @@
       "tags": [
         "Francophonie",
         "Direct",
-        "Chaînes Locales",
-        "Congo"
+        "Chaînes Locales"
       ],
-      "category": "Chaînes Locales",
+      "category": "Francophonie",
       "group": "Chaînes Locales",
       "genres": [
-        "Chaînes Locales",
-        "Congo"
+        "Francophonie"
       ]
     },
     {
@@ -56,14 +73,12 @@
       "tags": [
         "Info",
         "Direct",
-        "Chaînes Locales",
-        "Congo"
+        "Chaînes Locales"
       ],
-      "category": "Chaînes Locales",
+      "category": "Info",
       "group": "Chaînes Locales",
       "genres": [
-        "Chaînes Locales",
-        "Congo"
+        "Info"
       ]
     },
     {
@@ -78,14 +93,12 @@
       "tags": [
         "Info",
         "Direct",
-        "Chaînes Locales",
-        "Congo"
+        "Chaînes Locales"
       ],
-      "category": "Chaînes Locales",
+      "category": "Info",
       "group": "Chaînes Locales",
       "genres": [
-        "Chaînes Locales",
-        "Congo"
+        "Info"
       ]
     }
   ]

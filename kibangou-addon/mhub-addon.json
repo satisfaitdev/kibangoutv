@@ -2,8 +2,8 @@
   "id": "kibangou-direct",
   "name": "Kibangou TV",
   "specVersion": 2,
-  "version": "2.1.0",
-  "description": "Bouquet complet KibangouTV : Canal+ Congo (A-I), Chaînes Locales (Télé Congo, DRTV), beIN Sports & DAZN, Films et Séries",
+  "version": "2.2.0",
+  "description": "Bouquet complet KibangouTV : Canal+ Congo (A-I), Chaînes Locales (Congo, Info), beIN Sports & DAZN, Films et Séries",
   "icon": "/logo.svg",
   "resources": [
     "catalog",
@@ -63,7 +63,18 @@
         "displayName": true
       },
       "features": {
-        "search": true
+        "search": true,
+        "filter": [
+          {
+            "id": "category",
+            "name": "Catégorie",
+            "values": [
+              { "id": "Congo", "name": "Congo" },
+              { "id": "Info", "name": "Informations" },
+              { "id": "Francophonie", "name": "Francophonie" }
+            ]
+          }
+        ]
       }
     },
     {
@@ -75,7 +86,22 @@
         "displayName": true
       },
       "features": {
-        "search": true
+        "search": true,
+        "sort": [
+          { "id": "name", "name": "A-Z" }
+        ],
+        "filter": [
+          {
+            "id": "category",
+            "name": "Catégorie",
+            "values": [
+              { "id": "BEIN SPORTS", "name": "beIN Sports" },
+              { "id": "DAZN", "name": "DAZN" },
+              { "id": "France", "name": "France" },
+              { "id": "Spain", "name": "Espagne" }
+            ]
+          }
+        ]
       }
     },
     {
@@ -84,6 +110,9 @@
       "type": "video",
       "options": {
         "shape": "portrait"
+      },
+      "features": {
+        "search": true
       }
     },
     {
@@ -92,6 +121,9 @@
       "type": "series",
       "options": {
         "shape": "portrait"
+      },
+      "features": {
+        "search": true
       }
     }
   ],

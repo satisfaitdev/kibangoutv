@@ -52,6 +52,10 @@
       "destination": "/api/resolve.js"
     },
     {
+      "source": "/api/resolve",
+      "destination": "/api/resolve.js"
+    },
+    {
       "source": "/kibangou-addon/client-fetch",
       "destination": "/api/client-fetch.js"
     },
@@ -65,6 +69,10 @@
     },
     {
       "source": "/client-fetch",
+      "destination": "/api/client-fetch.js"
+    },
+    {
+      "source": "/api/client-fetch",
       "destination": "/api/client-fetch.js"
     },
     {

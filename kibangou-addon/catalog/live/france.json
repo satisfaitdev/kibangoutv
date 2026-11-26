@@ -1,13 +1,13 @@
 {
   "items": [
     {
-      "id": "france24",
+      "id": "2875346882",
       "name": "France 24 Français (Direct)",
       "type": "live",
-      "url": "https://static.france24.com/live/F24_FR_LO_HLS/live_tv.m3u8",
+      "url": "https://www.vavoo.to/live/play/2875346882",
       "images": {
-        "logo": "/logo.svg",
-        "poster": "/logo.svg"
+        "logo": "/live2/logo/2875346882.png",
+        "poster": "/live2/logo/2875346882.png"
       },
       "tags": [
         "France",

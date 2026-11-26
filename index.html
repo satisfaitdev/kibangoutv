@@ -46,34 +46,27 @@
       --text-muted: #8E99A4;
     }
 
-    /* 1. Masquer l'option Social dans la sidebar et la bottom nav */
+    /* Masquer l'option Social dans la sidebar et la bottom nav */
     a.nav-item[href="#/social"],
     a.bnav-item[href="#/social"],
     .nav-social {
       display: none !important;
     }
 
-    /* 2. Masquer le bouton 'Supprimer les données de ce site' et la section Social dans Paramètres */
+    /* Masquer le bouton 'Supprimer les données de ce site' et la section Social dans Profil/Paramètres */
     .s-label-danger,
     div:has(> .s-label-danger),
     .s-group:has(.s-label-danger) {
       display: none !important;
     }
 
-    /* Masquer le groupe Social dans les réglages */
     .s-group[data-group="social"],
     .s-group:has(.s-gicon):has(.toggle) {
       display: none !important;
     }
 
-    /* ========================================================
-       SUPPRESSION TOTALE DU BOUTON FLOTTANT SOCIAL SUR MOBILE & PC
-       ======================================================== */
+    /* Suppression stricte des widgets Social / Watch Party (sans jamais masquer .feature-bar/.feature-dock) */
     .sv-fab,
-    .feature-dock,
-    .feature-dock-bar,
-    .feature-bar,
-    .feature-bar-docked,
     .modal-social,
     .social-view,
     .btn-party,
@@ -97,7 +90,6 @@
     [class*="sc-slot"],
     [class*="sc-pill"],
     [class*="sv-fab"],
-    [class*="feature-dock"],
     a[href="#/social"],
     a.nav-item[href="#/social"],
     a.bnav-item[href="#/social"],
@@ -122,13 +114,13 @@
     }
 
     /* ========================================================
-       EN-TÊTE MOBILE & BOTTOM NAVBAR SUR MOBILE (< 768px)
+       EN-TÊTE MOBILE & PWA STANDALONE
        ======================================================== */
     #mobile-top-header {
       display: none;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 768px), (display-mode: standalone) {
       #mobile-top-header {
         display: flex !important;
         position: fixed;
@@ -137,8 +129,8 @@
         right: 0;
         height: calc(54px + var(--sat, 0px));
         padding-top: var(--sat, 0px);
-        padding-left: 14px;
-        padding-right: 14px;
+        padding-left: 12px;
+        padding-right: 12px;
         align-items: center;
         justify-content: space-between;
         background: rgba(14, 19, 24, 0.94);
@@ -150,27 +142,69 @@
         transition: transform 0.25s ease, opacity 0.25s ease;
       }
 
-      /* Masquer l'en-tête mobile si le lecteur plein écran est ouvert */
       html.player-open #mobile-top-header {
         transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
       }
 
-      /* Masquer Recherche et Paramètres de la barre du bas (.bnav) sur mobile */
+      .app-root > .main {
+        padding-top: calc(54px + var(--sat, 0px)) !important;
+        box-sizing: border-box !important;
+      }
+
+      .sidebar {
+        top: calc(54px + var(--sat, 0px) + min(var(--host-solid-top, 0px), var(--rail-gap, 14px))) !important;
+      }
+    }
+
+    html.pwa-standalone #mobile-top-header {
+      display: flex !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: calc(54px + var(--sat, 0px));
+      padding-top: var(--sat, 0px);
+      padding-left: 12px;
+      padding-right: 12px;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(14, 19, 24, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 99999 !important;
+      box-sizing: border-box;
+    }
+
+    html.pwa-standalone .app-root > .main {
+      padding-top: calc(54px + var(--sat, 0px)) !important;
+      box-sizing: border-box !important;
+    }
+
+    html.pwa-standalone .sidebar {
+      top: calc(54px + var(--sat, 0px) + min(var(--host-solid-top, 0px), var(--rail-gap, 14px))) !important;
+    }
+
+    @media (max-width: 768px) {
       .bnav a[href="#/search"],
       .bnav a[href*="search"],
       .bnav a[href="#/settings"],
       .bnav a[href*="settings"] {
         display: none !important;
       }
+    }
 
-      /* Ajustement du décalage de contenu pour les pages sans hero */
-      body:not(.is-home) .main-inner,
-      body:not(.is-home) .main,
-      body:not(.is-home) .stage {
-        padding-top: calc(54px + var(--sat, 0px)) !important;
-      }
+    .m-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    body.is-home #m-btn-back {
+      display: none !important;
     }
 
     .m-brand-link {
@@ -179,20 +213,23 @@
       gap: 10px;
       text-decoration: none;
       color: #FFFFFF;
+      min-width: 0;
     }
 
     .m-brand-logo {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 8px;
       filter: drop-shadow(0 2px 8px rgba(0, 200, 83, 0.55));
+      flex-shrink: 0;
     }
 
     .m-brand-name {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       font-weight: 800;
       letter-spacing: -0.01em;
       color: #FFFFFF;
+      white-space: nowrap;
     }
 
     .m-brand-accent {
@@ -203,6 +240,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-shrink: 0;
     }
 
     .m-header-icon-btn {
@@ -212,12 +250,13 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #B8B8B8;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #CBD5E1;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .m-header-icon-btn svg {
@@ -234,111 +273,235 @@
       transform: scale(1.04);
     }
 
-    .m-header-icon-btn.m-btn-logout:hover,
-    .m-header-icon-btn.m-btn-logout:active {
-      background: rgba(248, 113, 113, 0.2);
-      border-color: rgba(248, 113, 113, 0.5);
-      color: #f87171;
-    }
-
-    /* Style du bouton déconnexion dans la sidebar desktop */
-    .nav-item-logout {
-      margin-top: auto;
-      color: #f87171 !important;
-      cursor: pointer;
-    }
-    .nav-item-logout:hover {
-      background: rgba(248, 113, 113, 0.12) !important;
-    }
-
-    /* ========================================================
-       LOADER UNIVERSEL AVEC LOGO KIBANGOUTV
-       ======================================================== */
+    /* Ne jamais bloquer les requêtes/résolutions/lecture avec un overlay plein écran */
     #kibangou-global-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 9999999;
-      background: rgba(14, 19, 24, 0.76);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      display: flex;
+      display: none !important;
+      pointer-events: none !important;
+    }
+
+    /* Masquer tout bouton manuel de qualité dans le lecteur (100% ABR automatique) */
+    .player-bar-right .player-ctrl-btn[data-key="Q"],
+    .player-bar-right .player-ctrl-btn[aria-label="Quality"],
+    .player-bar-right .player-ctrl-btn[aria-label="Qualité"] {
+      display: none !important;
+    }
+
+    /* Chaînes : barre de recherche et filtres par catégorie bien visibles */
+    .channels-view .feature-bar {
+      display: block !important;
+      visibility: visible !important;
+    }
+
+    .channels-view .controls.ch-controls {
+      display: flex !important;
+      flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.22s ease;
+      gap: 10px;
+      width: 100%;
     }
 
-    #kibangou-global-loader.is-visible {
-      opacity: 1;
-      pointer-events: auto;
+    .channels-view .controls .search-wrap {
+      flex: 1 1 220px;
+      min-width: 180px;
     }
 
-    .kibangou-loader-box {
-      background: rgba(21, 28, 36, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      padding: 24px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 200, 83, 0.25);
-      animation: loaderPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    .channels-view .controls .glass-input,
+    .channels-view .controls .sort-select {
+      min-height: 40px;
+      background-color: rgba(21, 28, 36, 0.92);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.14);
+      color-scheme: dark;
     }
 
-    @keyframes loaderPop {
-      from { transform: scale(0.92); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .kibangou-loader-logo-wrap {
-      position: relative;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .kibangou-loader-img {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      filter: drop-shadow(0 4px 14px rgba(0, 200, 83, 0.6));
-      animation: logoPulse 1.6s ease-in-out infinite;
-    }
-
-    @keyframes logoPulse {
-      0%, 100% { transform: scale(1); filter: drop-shadow(0 4px 14px rgba(0, 200, 83, 0.6)); }
-      50% { transform: scale(1.08); filter: drop-shadow(0 6px 20px rgba(0, 200, 83, 0.85)); }
-    }
-
-    .kibangou-loader-spin {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 3px solid rgba(255, 255, 255, 0.12);
-      border-top-color: #00C853;
-      border-right-color: #00C853;
-      animation: spinRing 0.75s linear infinite;
-    }
-
-    @keyframes spinRing {
-      to { transform: rotate(360deg); }
-    }
-
-    .kibangou-loader-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
+    .channels-view .controls .sort-select option {
+      background-color: #151C24;
       color: #FFFFFF;
     }
 
-    .kibangou-loader-subtitle {
-      font-size: 0.82rem;
-      color: #8E99A4;
-      font-weight: 500;
+    /* Badges de langue & bouton Télécharger sur VOD */
+    .kibangou-lang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      color: #E2E8F0;
+    }
+
+    .kibangou-lang-badge.lang-vf {
+      background: rgba(0, 200, 83, 0.16);
+      border-color: rgba(0, 200, 83, 0.42);
+      color: #4ADE80;
+    }
+
+    .kibangou-lang-badge.lang-vostfr {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.38);
+      color: #7DD3FC;
+    }
+
+    .kibangou-lang-badge.lang-en {
+      background: rgba(148, 163, 184, 0.16);
+      border-color: rgba(148, 163, 184, 0.35);
+      color: #CBD5E1;
+    }
+
+    .kibangou-src-dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 8px;
+      padding: 6px 10px;
+      min-height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 200, 83, 0.35);
+      background: rgba(0, 200, 83, 0.12);
+      color: #4ADE80;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.14s ease;
+    }
+
+    .kibangou-src-dl-btn:hover,
+    .kibangou-src-dl-btn:focus-visible {
+      background: rgba(0, 200, 83, 0.24);
+      border-color: #00C853;
+      color: #FFFFFF;
+      outline: none;
+    }
+
+    .kibangou-src-dl-btn svg,
+    .kibangou-download-btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .item-view .btn-hero-glass.kibangou-download-btn {
+      width: auto !important;
+      padding: 0 16px !important;
+      gap: 7px;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .item-view .btn-hero-glass.kibangou-download-btn .kibangou-dl-word {
+      display: inline !important;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .kibangou-player-dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px !important;
+      width: auto !important;
+      font-size: 12px;
+      font-weight: 700;
+      color: #4ADE80 !important;
+    }
+
+    /* Profil / Paramètres cartes propres sans doublon */
+    .settings-groups .kibangou-settings-card {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .kibangou-adult-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .kibangou-adult-link {
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: filter 0.16s ease, transform 0.14s ease;
+    }
+
+    .kibangou-adult-link:hover {
+      filter: brightness(1.08);
+    }
+
+    .kibangou-adult-link-primary {
+      background: #00C853;
+      color: #0E1318;
+    }
+
+    .kibangou-adult-link-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #FFFFFF;
+    }
+
+    /* Notifications légères (ABR & Bascule VOD) */
+    .kibangou-abr-toast {
+      position: fixed;
+      top: calc(64px + var(--sat, 0px));
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(14, 19, 24, 0.94);
+      border: 1px solid rgba(0, 200, 83, 0.45);
+      color: #FFFFFF;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 999998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+      white-space: nowrap;
+      max-width: 92vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .kibangou-abr-toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .kibangou-abr-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00C853;
+      flex-shrink: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kibangou-abr-toast,
+      .m-header-icon-btn,
+      .kibangou-src-dl-btn {
+        animation: none !important;
+        transition: none !important;
+      }
     }
 
     /* ========================================================
@@ -412,7 +575,6 @@
       line-height: 1.45;
     }
 
-    /* Affichage des 6 chiffres PIN */
     .pin-display {
       display: flex;
       gap: 12px;
@@ -446,7 +608,6 @@
       color: #00C853;
     }
 
-    /* Clavier virtuel PIN */
     .pin-keypad {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -485,7 +646,6 @@
       color: var(--text-muted);
     }
 
-    /* Formulaire de connexion par e-mail (Web) */
     .email-form {
       width: 100%;
       display: flex;
@@ -589,258 +749,23 @@
     .shake {
       animation: pin-shake 0.35s ease;
     }
-
-    /* ========================================================
-       KIBANGOUTV - SELECTEUR & CONVERTISSEUR DE QUALITE ABR (2G/3G)
-       ======================================================== */
-    .kibangou-quality-btn {
-      display: inline-flex !important;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 6px 10px;
-      min-width: 44px;
-      height: 36px;
-      border-radius: 8px;
-      color: #FFFFFF;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 700;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-      user-select: none;
-      position: relative;
-    }
-
-    .kibangou-quality-btn:hover {
-      background: rgba(0, 200, 83, 0.16);
-      border-color: rgba(0, 200, 83, 0.45);
-      color: #00C853;
-      transform: translateY(-1px);
-    }
-
-    .kibangou-quality-btn.active,
-    .kibangou-quality-btn:focus-visible {
-      background: rgba(0, 200, 83, 0.22);
-      border-color: #00C853;
-      color: #00C853;
-      outline: none;
-    }
-
-    .kibangou-quality-label {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    .kibangou-quality-menu {
-      position: absolute;
-      bottom: calc(76px + var(--player-foot, 0px));
-      right: 20px;
-      width: 250px;
-      background: rgba(21, 28, 36, 0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      padding: 8px 0;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
-      z-index: 999999 !important;
-      display: flex;
-      flex-direction: column;
-      animation: kibangouMenuFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes kibangouMenuFade {
-      from {
-        opacity: 0;
-        transform: translateY(8px) scale(0.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .kibangou-menu-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 6px 14px 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      margin-bottom: 4px;
-    }
-
-    .kibangou-menu-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: #8E99A4;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .kibangou-abr-indicator {
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(0, 200, 83, 0.15);
-      color: #00C853;
-      border: 1px solid rgba(0, 200, 83, 0.3);
-      text-transform: uppercase;
-    }
-
-    .kibangou-menu-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 9px 14px;
-      cursor: pointer;
-      color: #E2E8F0;
-      font-size: 13px;
-      font-weight: 500;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .kibangou-menu-item:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #FFFFFF;
-    }
-
-    .kibangou-menu-item.active {
-      color: #00C853;
-      font-weight: 700;
-      background: rgba(0, 200, 83, 0.12);
-    }
-
-    .kibangou-item-content {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .kibangou-item-label {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .kibangou-menu-item .res-sub {
-      font-size: 10.5px;
-      color: #8E99A4;
-      font-weight: 400;
-    }
-
-    .kibangou-menu-item.active .res-sub {
-      color: rgba(0, 200, 83, 0.85);
-    }
-
-    .kibangou-menu-item .check-icon {
-      width: 16px;
-      height: 16px;
-      opacity: 0;
-      stroke: #00C853;
-      flex-shrink: 0;
-    }
-
-    .kibangou-menu-item.active .check-icon {
-      opacity: 1;
-    }
-
-    @media (max-width: 768px) {
-      .kibangou-quality-menu {
-        bottom: calc(110px + var(--player-foot, 0px));
-        right: 12px;
-        width: 248px;
-      }
-    }
-
-    .kibangou-abr-toast {
-      position: absolute;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-6px);
-      background: rgba(14, 19, 24, 0.92);
-      border: 1px solid rgba(0, 200, 83, 0.45);
-      color: #FFFFFF;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 999998;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
-      white-space: nowrap;
-      max-width: 92vw;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .kibangou-abr-toast.visible {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .kibangou-abr-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #00C853;
-      flex-shrink: 0;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .kibangou-abr-toast,
-      .kibangou-quality-menu,
-      .kibangou-quality-btn {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
   </style>
 
   <!-- Polyfill mHub API & bypass de cache corrompu -->
   <script>
-    // Nettoyer tout cache d'addon corrompu
     try {
       localStorage.removeItem("vuma_addons_disabled");
       localStorage.removeItem("vuma_addons");
-    } catch(e) {}
+      localStorage.removeItem("kibangoutv_preferred_quality");
+    } catch {}
 
     const nativeFetch = window.fetch;
-
-    // Contrôleur du loader global KibangouTV
-    let pendingRequestsCount = 0;
-    let loaderTimer = null;
-
-    function showGlobalLoader() {
-      pendingRequestsCount++;
-      if (pendingRequestsCount === 1) {
-        clearTimeout(loaderTimer);
-        loaderTimer = setTimeout(() => {
-          if (pendingRequestsCount > 0) {
-            const el = document.getElementById("kibangou-global-loader");
-            if (el) el.classList.add("is-visible");
-          }
-        }, 160);
-      }
-    }
-
-    function hideGlobalLoader() {
-      pendingRequestsCount = Math.max(0, pendingRequestsCount - 1);
-      if (pendingRequestsCount === 0) {
-        clearTimeout(loaderTimer);
-        const el = document.getElementById("kibangou-global-loader");
-        if (el) el.classList.remove("is-visible");
-      }
-    }
+    window.__kibangouSourceList = [];
+    window.__kibangouSourcesByItemId = new Map();
+    window.__kibangouSourceMap = new Map();
+    window.__kibangouResolvedCache = new Map();
+    window.__kibangouCurrentStream = null;
+    window.__kibangouAdultManifest = null;
 
     function getProxiedUrl(rawUrl) {
       if (!rawUrl || typeof rawUrl !== "string") return rawUrl;
@@ -871,8 +796,8 @@
       for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
       return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
     }
+    window.__kibangouToBase64Url = toBase64Url;
 
-    // Repli Mixed-Content strict uniquement pour les flux HTTP non-routés sur page HTTPS
     const origXhrOpen = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function(method, url, ...rest) {
       if (typeof url === "string" && location.protocol === "https:" && url.startsWith("http://")) {
@@ -896,18 +821,15 @@
           }
         });
       }
-    } catch(e) {}
+    } catch {}
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("/sw.js", { scope: "/" })
           .then(reg => {
             reg.update().catch(() => {});
-            console.log("KibangouTV Service Worker actif [scope:", reg.scope, "]");
           })
-          .catch(err => {
-            console.warn("KibangouTV Service Worker notice:", err);
-          });
+          .catch(() => {});
       });
     }
 
@@ -924,8 +846,65 @@
       return out;
     }
 
+    function recordApiPayload(urlStr, res, reqOptions) {
+      try {
+        const isSourceFeed = urlStr.includes("/source/");
+        const isResolveFeed = urlStr.includes("/resolve") || urlStr.includes("/client-fetch");
+        const isAdultManifest = urlStr.includes("/adult-addon/mhub-addon.json");
+        if (!isSourceFeed && !isResolveFeed && !isAdultManifest) return;
+
+        res.clone().json().then((data) => {
+          if (!data || typeof data !== "object") return;
+          if (isAdultManifest && data.id) {
+            window.__kibangouAdultManifest = data;
+          }
+          if (isSourceFeed && Array.isArray(data.sources)) {
+            const srcMatch = decodeURIComponent(urlStr).match(/\/source\/(?:video|series)\/([^/?#]+)/i);
+            const srcItemKey = srcMatch ? srcMatch[1].replace(/\.json$/i, "") : "";
+            if (srcItemKey && window.__kibangouSourcesByItemId) {
+              window.__kibangouSourcesByItemId.set(srcItemKey, data.sources);
+              const tmdbBase = srcItemKey.split(":").slice(0, 2).join(":");
+              if (tmdbBase) window.__kibangouSourcesByItemId.set(tmdbBase, data.sources);
+            }
+            window.__kibangouSourceList = data.sources;
+            for (const s of data.sources) {
+              if (!s || !s.url) continue;
+              const host = (() => {
+                try { return new URL(s.url).hostname.replace(/^www\./, ""); } catch { return ""; }
+              })();
+              const key = `${(s.name || "").trim()}|${(s.quality || host || "").trim()}`;
+              window.__kibangouSourceMap.set(key, s);
+              window.__kibangouSourceMap.set(s.url, s);
+            }
+          }
+          if (isResolveFeed && typeof data.url === "string" && data.url) {
+            let origSourceUrl = "";
+            try {
+              const uObj = new URL(urlStr, location.href);
+              origSourceUrl = uObj.searchParams.get("url") || "";
+            } catch {}
+            if (!origSourceUrl && reqOptions && typeof reqOptions.body === "string") {
+              try {
+                const parsedBody = JSON.parse(reqOptions.body);
+                origSourceUrl = parsedBody.sourceUrl || parsedBody.url || "";
+              } catch {}
+            }
+            const entry = {
+              url: data.url,
+              headers: data.headers || null,
+              proxy: Boolean(data.proxy),
+              ts: Date.now()
+            };
+            if (origSourceUrl) {
+              window.__kibangouResolvedCache.set(origSourceUrl, entry);
+            }
+            window.__kibangouResolvedCache.set(data.url, entry);
+          }
+        }).catch(() => {});
+      } catch {}
+    }
+
     function wrapFetch(input, init) {
-      let isDataCall = false;
       let urlStr = "";
       let options = init ? { ...init } : {};
 
@@ -951,23 +930,9 @@
         return nativeFetch(input, init);
       }
 
-      if (
-        urlStr.includes("addon") ||
-        urlStr.includes("catalog") ||
-        urlStr.includes("item") ||
-        urlStr.includes("tmdb") ||
-        urlStr.includes("vod/source") ||
-        urlStr.includes("resolve") ||
-        urlStr.includes("client-fetch")
-      ) {
-        isDataCall = true;
-        showGlobalLoader();
-      }
-
-      if (urlStr.includes("/adult-addon/catalog/") && !urlStr.includes("pin=")) {
-        const pin = localStorage.getItem("kibangou_pro_pin") || "8888";
+      if (urlStr.includes("/adult-addon/catalog/") && !urlStr.includes("pro=1")) {
         const sep = urlStr.includes("?") ? "&" : "?";
-        urlStr += `${sep}pin=${encodeURIComponent(pin)}&pro=1`;
+        urlStr += `${sep}pro=1`;
       }
 
       const proxiedUrl = getProxiedUrl(urlStr);
@@ -985,26 +950,49 @@
         options.headers = safeHeaders;
       }
 
-      const promise = nativeFetch(proxiedUrl, options).then((res) => {
+      return nativeFetch(proxiedUrl, options).then((res) => {
         const realUrl = res.headers.get("X-Final-Url");
         if (realUrl && isProxied) {
           try {
             Object.defineProperty(res, "url", { value: realUrl, configurable: true });
           } catch {}
         }
+        recordApiPayload(urlStr, res, options);
         return res;
       });
-
-      if (isDataCall) {
-        return promise.finally(() => {
-          hideGlobalLoader();
-        });
-      }
-      return promise;
     }
 
     window.fetch = wrapFetch;
     globalThis.fetch = wrapFetch;
+
+    function isEmbedHostUrl(rawUrl) {
+      const lower = String(rawUrl || "").toLowerCase();
+      if (!lower) return true;
+      if (
+        lower.includes("/live/play/") ||
+        lower.includes("/vod/play/") ||
+        lower.includes("dood.") ||
+        lower.includes("d000d.") ||
+        lower.includes("ds2video.") ||
+        lower.includes("dooodster.") ||
+        lower.includes("doply.") ||
+        lower.includes("vide0.") ||
+        lower.includes("vidply") ||
+        lower.includes("myvidplay") ||
+        lower.includes("voe.sx") ||
+        lower.includes("filemoon.") ||
+        lower.includes("mixdrop.") ||
+        lower.includes("mxdrop.") ||
+        lower.includes("m1xdrop.") ||
+        lower.includes("miixdrop.") ||
+        lower.includes("playmogo.") ||
+        lower.includes("supervideo.")
+      ) {
+        return !/\.(mp4|m4v|mkv|webm|mov|m3u8|ts)(\?|$)/i.test(lower);
+      }
+      return false;
+    }
+    window.__kibangouIsEmbedHostUrl = isEmbedHostUrl;
 
     window.mhub = {
       ready: Promise.resolve(true),
@@ -1021,6 +1009,15 @@
         const hdrObj = normalizeHeadersObj(headers);
         if (Object.keys(hdrObj).length > 0) {
           base = `/api/stream/h_${toBase64Url(JSON.stringify(hdrObj))}`;
+        }
+        if (url && !isEmbedHostUrl(url)) {
+          window.__kibangouCurrentStream = {
+            url,
+            headers: Object.keys(hdrObj).length > 0 ? hdrObj : null,
+            ts: Date.now()
+          };
+        } else {
+          window.__kibangouCurrentStream = null;
         }
         return Promise.resolve({
           base,
@@ -1113,13 +1110,20 @@
   </div>
 
   <!-- ========================================================
-       EN-TÊTE MOBILE KIBANGOUTV (LOGO, RECHERCHE, PARAMÈTRES, DÉCONNEXION)
+       EN-TÊTE MOBILE & PWA KIBANGOUTV (RETOUR, LOGO, RECHERCHE, PROFIL)
        ======================================================== -->
   <header id="mobile-top-header">
-    <a href="#/" class="m-brand-link" aria-label="Accueil KibangouTV">
-      <img src="./logo.svg" alt="KibangouTV" class="m-brand-logo">
-      <span class="m-brand-name">Kibangou<span class="m-brand-accent">TV</span></span>
-    </a>
+    <div class="m-header-left">
+      <button type="button" class="m-header-icon-btn m-btn-back" id="m-btn-back" title="Retour" aria-label="Retour">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <a href="#/" class="m-brand-link" aria-label="Accueil KibangouTV">
+        <img src="./logo.svg" alt="KibangouTV" class="m-brand-logo">
+        <span class="m-brand-name">Kibangou<span class="m-brand-accent">TV</span></span>
+      </a>
+    </div>
     <div class="m-header-actions">
       <button type="button" class="m-header-icon-btn" id="m-btn-pwa-install" title="Installer KibangouTV" aria-label="Installer l'application" style="display:none; color: #00C853; border-color: rgba(0,200,83,0.4);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1134,35 +1138,16 @@
           <line x1="21" y1="21" x2="16.2" y2="16.2"></line>
         </svg>
       </a>
-      <a href="#/settings" class="m-header-icon-btn" id="m-btn-settings" title="Paramètres" aria-label="Paramètres">
+      <a href="#/settings" class="m-header-icon-btn" id="m-btn-settings" title="Profil" aria-label="Profil">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </a>
-      <button type="button" class="m-header-icon-btn m-btn-logout" id="m-btn-logout" title="Déconnexion" aria-label="Se déconnecter" onclick="performLogout()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-          <polyline points="16 17 21 12 16 7"></polyline>
-          <line x1="21" y1="12" x2="9" y2="12"></line>
-        </svg>
-      </button>
     </div>
   </header>
 
-  <!-- ========================================================
-       LOADER UNIVERSEL AVEC LOGO KIBANGOUTV
-       ======================================================== -->
-  <div id="kibangou-global-loader" aria-hidden="true">
-    <div class="kibangou-loader-box">
-      <div class="kibangou-loader-logo-wrap">
-        <img src="./logo.svg" alt="KibangouTV" class="kibangou-loader-img">
-      </div>
-      <div class="kibangou-loader-title">Kibangou<span style="color:#00C853">TV</span></div>
-      <div class="kibangou-loader-spin"></div>
-      <div class="kibangou-loader-subtitle">Chargement des données...</div>
-    </div>
-  </div>
+  <div id="kibangou-global-loader" aria-hidden="true" style="display:none"></div>
 
   <div id="app">
     <!-- Écran de démarrage KibangouTV -->
@@ -1315,31 +1300,29 @@
   <script type="module">
     import { mount } from "https://vuma.mx/v/1.5.111/app.js";
 
-    // Bouquets locaux Kibangou TV, French Cinema VF & Espace Adulte Pro
     const bouquetKibangou = new URL("./kibangou-addon/mhub-addon.json", location.href).href;
     const frenchAddon = new URL("./french-addon/mhub-addon.json", location.href).href;
     const adultAddon = new URL("./adult-addon/mhub-addon.json", location.href).href;
 
     const addonsList = [
-      "https://vavoo.top/live/mhub-addon.json",     // Moteur Live VAVOO (Place 'Live TV' directement après Favoris)
-      bouquetKibangou,                              // Bouquet Kibangou (Canal+ Congo, Chaînes Locales, beIN, Films, Séries)
-      frenchAddon,                                  // Addon 100% Films & Séries VF, Box-Office Francophone
-      adultAddon,                                   // Espace Adulte +18 (Accès direct sans code PIN)
-      "https://www.mhub.mx/tmdb",                   // Moteur TMDB officiel (Requis par vavoo-vod)
-      "https://vavoo.top/vod/mhub-addon.json",      // Moteur VAVOO VOD (Résolution des sources de streaming)
-      "https://vavoo.top/subtitle/mhub-addon.json"  // Sous-titres
+      "https://vavoo.top/live/mhub-addon.json",
+      bouquetKibangou,
+      frenchAddon,
+      adultAddon,
+      "https://www.mhub.mx/tmdb",
+      "https://vavoo.top/vod/mhub-addon.json",
+      "https://vavoo.top/subtitle/mhub-addon.json"
     ];
 
     try {
       localStorage.setItem("kibangou_pro_adult_unlocked", "true");
-    } catch (e) {}
+    } catch {}
 
     mount({
       addons: addonsList,
-
       addonManager: "hidden",
+      social: false,
       locale: "fr",
-
       links: [
         {
           id: "vavoo",
@@ -1352,24 +1335,34 @@
           ]
         }
       ],
-
       brand: {
         name: "KibangouTV",
         logo: "./logo.svg",
         icon: "./logo.svg",
-        colors: { 
-          accent: "#00C853", 
-          bg: "#0E1318", 
-          text: "#FFFFFF" 
+        colors: {
+          accent: "#00C853",
+          bg: "#0E1318",
+          text: "#FFFFFF"
         }
       }
     });
 
-    /* ========================================================
-       INJECTION DES BOUTONS 'FILMS' ET 'SÉRIES' DANS LA NAVBAR
-       ======================================================== */
     const SVG_FILM = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>`;
     const SVG_SERIES = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>`;
+    const SVG_USER_PROFILE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
+    const SVG_DOWNLOAD = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
+
+    function syncStandaloneMode() {
+      const isStandalone = Boolean(
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true
+      );
+      document.documentElement.classList.toggle("pwa-standalone", isStandalone);
+    }
+    syncStandaloneMode();
+    try {
+      window.matchMedia("(display-mode: standalone)").addEventListener("change", syncStandaloneMode);
+    } catch {}
 
     window.performLogout = function() {
       try {
@@ -1378,7 +1371,7 @@
         localStorage.removeItem("kibangou_auth_email");
         localStorage.removeItem("kibangou_auth_time");
         sessionStorage.clear();
-      } catch (e) {}
+      } catch {}
 
       const authGate = document.getElementById("auth-gate");
       if (authGate) {
@@ -1388,7 +1381,23 @@
       location.href = location.origin + location.pathname;
     };
 
-    // Gestion de l'installation PWA
+    const mBackBtn = document.getElementById("m-btn-back");
+    if (mBackBtn) {
+      mBackBtn.addEventListener("click", () => {
+        const beforeHash = location.hash;
+        if (window.history.length > 1) {
+          window.history.back();
+          setTimeout(() => {
+            if (location.hash === beforeHash) {
+              location.hash = "#/";
+            }
+          }, 180);
+        } else {
+          location.hash = "#/";
+        }
+      });
+    }
+
     let deferredPrompt = null;
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
@@ -1412,26 +1421,629 @@
       deferredPrompt = null;
       const btn = document.getElementById("m-btn-pwa-install");
       if (btn) btn.style.display = "none";
+      syncStandaloneMode();
     });
 
-    function injectCustomNavItems() {
-      // 0. Suppression impitoyable du widget Social / Watch Party et du bouton Inviter
-      document.querySelectorAll('.sc-track, .sc-slot, .sc-pill, .sc-front, .sc-back, .btn-party, .modal-party, .sv-fab, .feature-dock, .feature-dock-bar, .feature-bar, [class*="sv-fab"], .player-action-invite, [class*="player-action-invite"], button[title*="Inviter"], button[aria-label*="Inviter"], a[href="#/social"]').forEach(el => el.remove());
+    let toastTimer = null;
+    function showToast(message) {
+      const host = document.querySelector(".player-root") || document.body;
+      let toast = document.getElementById("kibangou-abr-toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "kibangou-abr-toast";
+        toast.className = "kibangou-abr-toast";
+        toast.innerHTML = `<span class="kibangou-abr-dot"></span><span class="kibangou-abr-toast-text"></span>`;
+      }
+      if (toast.parentElement !== host) {
+        host.appendChild(toast);
+      }
+      const txtEl = toast.querySelector(".kibangou-abr-toast-text");
+      if (txtEl) txtEl.textContent = message;
+      toast.classList.add("visible");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 3400);
+    }
 
-      // 0b. Liaison du bouton déconnexion mobile
-      const mLogout = document.getElementById("m-btn-logout");
-      if (mLogout && !mLogout.dataset.bound) {
-        mLogout.dataset.bound = "1";
-        mLogout.addEventListener("click", performLogout);
+    window.addEventListener("kibangou-auto-downgrade", (e) => {
+      if (!e.detail) return;
+      const h = e.detail.height || 360;
+      const snap = e.detail.snapshot;
+      const netDesc = snap ? `${snap.tier} • ${snap.measuredKbps} kbps` : "connexion faible";
+      showToast(`Connexion faible (${netDesc}) — Passage automatique en ${h}p`);
+    });
+
+    let adultManifestRequested = false;
+    function getAdultRoutes() {
+      const m = window.__kibangouAdultManifest;
+      if (!m && !adultManifestRequested) {
+        adultManifestRequested = true;
+        fetch(adultAddon).then(r => r.ok ? r.json() : null).then((data) => {
+          if (data && data.id) {
+            window.__kibangouAdultManifest = data;
+            const existing = document.getElementById("settings-pro-adult-card");
+            if (existing) existing.remove();
+            injectCustomNavItems();
+          }
+        }).catch(() => {});
       }
 
-      // 1. Redirection automatique du lien Chaînes vers Live TV par défaut
-      const channelsItems = document.querySelectorAll('a[href="#/channels"], a[href^="#/channels?"]');
-      channelsItems.forEach(item => {
-        item.href = "#/channels?src=vavoo-live%2Fchannels";
+      const addonId = (m && m.id) || "kibangou-adult-pro";
+      const catalogs = (m && Array.isArray(m.catalogs)) ? m.catalogs : [];
+      const liveCat = catalogs.find(c => c.type === "live");
+      const videoCat = catalogs.find(c => c.type === "video");
+      const seriesCat = catalogs.find(c => c.type === "series");
+
+      return {
+        liveHref: liveCat
+          ? `#/channels?src=${encodeURIComponent(`${addonId}/${liveCat.id}`)}`
+          : null,
+        videoHref: `#/catalog/${encodeURIComponent(addonId)}/video/${encodeURIComponent((videoCat && videoCat.id) || "adult-vod")}?name=${encodeURIComponent("Films +18")}`,
+        seriesHref: seriesCat
+          ? `#/catalog/${encodeURIComponent(addonId)}/series/${encodeURIComponent(seriesCat.id)}?name=${encodeURIComponent("Séries +18")}`
+          : null
+      };
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = String(text || "");
+      return div.innerHTML;
+    }
+
+    function isHlsUrl(url) {
+      return String(url || "").split("?")[0].toLowerCase().endsWith(".m3u8");
+    }
+
+    function sanitizeFilename(title, streamUrl) {
+      const base = String(title || "kibangoutv-video")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9._-]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .slice(0, 64) || "kibangoutv-video";
+      const lower = String(streamUrl || "").split("?")[0].toLowerCase();
+      const ext = lower.endsWith(".m3u8") ? "m3u8" : lower.endsWith(".mkv") ? "mkv" : lower.endsWith(".webm") ? "webm" : "mp4";
+      return `${base}.${ext}`;
+    }
+
+    function buildStreamDownloadUrl(streamUrl, headers, filename) {
+      const hdrs = headers && typeof headers === "object" && Object.keys(headers).length > 0 ? headers : null;
+      const base = hdrs && typeof window.__kibangouToBase64Url === "function"
+        ? `/api/stream/h_${window.__kibangouToBase64Url(JSON.stringify(hdrs))}`
+        : "/api/stream";
+      return `${base}?u=${encodeURIComponent(streamUrl)}&download=1&filename=${encodeURIComponent(filename)}`;
+    }
+
+    function triggerDownloadUrl(dlUrl, filename) {
+      const a = document.createElement("a");
+      a.href = dlUrl;
+      a.setAttribute("download", filename || "video.mp4");
+      a.rel = "noopener";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => a.remove(), 500);
+      showToast(`Téléchargement lancé : ${filename}`);
+    }
+
+    async function resolveSourceToPlayable(sourceUrl) {
+      if (!sourceUrl) return null;
+      const directPath = sourceUrl.split("?")[0].toLowerCase();
+      if (/\.(mp4|m4v|mkv|webm|mov|m3u8|ts)$/i.test(directPath) && !isEmbedHostUrl(sourceUrl)) {
+        return { url: sourceUrl, headers: null };
+      }
+
+      const cached = window.__kibangouResolvedCache && window.__kibangouResolvedCache.get(sourceUrl);
+      if (cached && cached.url && !isEmbedHostUrl(cached.url) && Date.now() - cached.ts < 120000) {
+        return cached;
+      }
+
+      const res = await fetch(`/resolve?url=${encodeURIComponent(sourceUrl)}`);
+      if (!res.ok) return null;
+      let data = await res.json();
+
+      let hops = 0;
+      while (data && data.clientFetch && hops < 5) {
+        hops++;
+        const cf = data.clientFetch;
+        const cfRes = await fetch(cf.url, {
+          method: cf.method || "GET",
+          headers: cf.headers || undefined,
+          body: cf.body || undefined,
+          redirect: cf.redirect || undefined
+        });
+        const ct = cfRes.headers.get("content-type") || "";
+        const isText = ct.includes("text/") || ct.includes("json") || ct.includes("xml") || ct.includes("javascript");
+        let bodyStr = "";
+        let encoding = "utf-8";
+        if (isText) {
+          bodyStr = await cfRes.text();
+        } else {
+          const bytes = new Uint8Array(await cfRes.arrayBuffer());
+          let bin = "";
+          for (let i = 0; i < bytes.length; i += 8192) {
+            bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+          }
+          bodyStr = btoa(bin);
+          encoding = "base64";
+        }
+        const hdrObj = {};
+        cfRes.headers.forEach((v, k) => { hdrObj[k] = v; });
+
+        const postRes = await fetch("/client-fetch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: cf.id,
+            status: cfRes.status,
+            url: cfRes.url || cf.url,
+            headers: hdrObj,
+            body: bodyStr,
+            encoding
+          })
+        });
+        if (!postRes.ok) return null;
+        data = await postRes.json();
+      }
+
+      if (data && typeof data.url === "string" && data.url && !isEmbedHostUrl(data.url)) {
+        const entry = { url: data.url, headers: data.headers || null, ts: Date.now() };
+        if (window.__kibangouResolvedCache) {
+          window.__kibangouResolvedCache.set(sourceUrl, entry);
+          window.__kibangouResolvedCache.set(data.url, entry);
+        }
+        return entry;
+      }
+      return null;
+    }
+
+    function parseSourceLanguage(el, meta) {
+      const rawLang = (el.dataset.lang || "").toLowerCase();
+      const nameText = (el.querySelector(".source-name")?.textContent || "").toLowerCase();
+      const detailText = (el.querySelector(".source-detail")?.textContent || "").toLowerCase();
+      const existingLang = (el.querySelector(".source-langs")?.textContent || "").toLowerCase();
+      const metaLangs = Array.isArray(meta?.languages) ? meta.languages.map(x => String(x).toLowerCase()) : [];
+
+      const combined = `${rawLang} ${nameText} ${detailText} ${existingLang} ${metaLangs.join(" ")}`;
+
+      if (combined.includes("vostfr")) {
+        return { label: "🇫🇷 VOSTFR", cls: "lang-vostfr", priority: 1 };
+      }
+      if (rawLang === "fr" || metaLangs.includes("fr") || combined.includes("français") || combined.includes("french") || /\bvf\b/.test(combined)) {
+        return { label: "🇫🇷 Français VF", cls: "lang-vf", priority: 0 };
+      }
+      if (rawLang === "en" || metaLangs.includes("en") || /\bvo\b/.test(combined) || combined.includes("anglais") || combined.includes("english")) {
+        return { label: "🇬🇧 Anglais VO", cls: "lang-en", priority: 2 };
+      }
+      if (rawLang === "de" || metaLangs.includes("de")) {
+        return { label: "🇩🇪 Allemand DE", cls: "lang-other", priority: 3 };
+      }
+      if (rawLang === "es" || metaLangs.includes("es")) {
+        return { label: "🇪🇸 Espagnol ES", cls: "lang-other", priority: 3 };
+      }
+      if (rawLang === "it" || metaLangs.includes("it")) {
+        return { label: "🇮🇹 Italien IT", cls: "lang-other", priority: 3 };
+      }
+      const code = (rawLang || metaLangs[0] || existingLang || "").trim();
+      return {
+        label: code ? `🌐 ${code.toUpperCase()}` : "🌐 Multi / VO",
+        cls: "lang-other",
+        priority: 3
+      };
+    }
+
+    function findSourceMetaForElement(el, idx) {
+      const name = (el.querySelector(".source-name")?.textContent || "").trim();
+      const detail = (el.querySelector(".source-detail")?.textContent || "").trim();
+      if (window.__kibangouSourceMap) {
+        const direct = window.__kibangouSourceMap.get(`${name}|${detail}`);
+        if (direct) return direct;
+      }
+      const list = Array.isArray(window.__kibangouSourceList) ? window.__kibangouSourceList : [];
+      const exactMatch = list.find(s => (s.name || "").trim() === name && (!detail || (s.quality || "").trim() === detail || (s.url || "").includes(detail)));
+      if (exactMatch) return exactMatch;
+      return list[idx] || null;
+    }
+
+    function getSourceKey(el, idx) {
+      const meta = findSourceMetaForElement(el, idx);
+      if (meta && meta.url) return meta.url;
+      const name = (el.querySelector(".source-name")?.textContent || "").trim();
+      const detail = (el.querySelector(".source-detail")?.textContent || "").trim();
+      return `${idx}|${name}|${detail}`;
+    }
+
+    function isLiveContext() {
+      if (location.hash.startsWith("#/channels") || location.hash.includes("/live/")) return true;
+      if (document.querySelector(".player-root .player-zap-btn, .player-root .iptv-bar-controls, .player-root .ch-overlay")) return true;
+      return false;
+    }
+
+    function getActiveItemTitle() {
+      const modalTitle = document.querySelector(".modal-sources .modal-title")?.textContent?.trim();
+      const heroEl = document.querySelector(".cached-view.view-active .item-view .hero-title");
+      const heroTitle = heroEl?.textContent?.trim() || heroEl?.querySelector("img[alt]")?.getAttribute("alt")?.trim();
+      const playerTitle = document.querySelector(".player-root .player-top-title")?.textContent?.trim();
+      return playerTitle || heroTitle || modalTitle || "KibangouTV";
+    }
+
+    async function downloadFromSourceItem(el, idx, btnEl) {
+      const meta = findSourceMetaForElement(el, idx);
+      const title = getActiveItemTitle();
+      if (!meta || !meta.url) {
+        showToast("URL de source introuvable pour le téléchargement.");
+        return;
+      }
+      const origHtml = btnEl.innerHTML;
+      btnEl.disabled = true;
+      btnEl.textContent = "Préparation...";
+      try {
+        const resolved = await resolveSourceToPlayable(meta.url);
+        if (!resolved || !resolved.url) {
+          showToast("Impossible de résoudre cette source pour le téléchargement.");
+          return;
+        }
+        const filename = sanitizeFilename(title, resolved.url);
+        triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+      } catch {
+        showToast("Erreur lors de la préparation du téléchargement.");
+      } finally {
+        btnEl.disabled = false;
+        btnEl.innerHTML = origHtml;
+      }
+    }
+
+    async function downloadCurrentItemFromDetails(btnEl) {
+      const origHtml = btnEl.innerHTML;
+      btnEl.disabled = true;
+      const wordEl = btnEl.querySelector(".kibangou-dl-word");
+      if (wordEl) wordEl.textContent = "Préparation...";
+
+      try {
+        const startHash = location.hash;
+        const title = getActiveItemTitle();
+        const match = startHash.match(/^#\/item\/([^/]+)\/([^/]+)\/([^?]+)/);
+        const itemId = match ? decodeURIComponent(match[3]) : "";
+        let candidates = (itemId && window.__kibangouSourcesByItemId && window.__kibangouSourcesByItemId.get(itemId))
+          ? [...window.__kibangouSourcesByItemId.get(itemId)]
+          : (Array.isArray(window.__kibangouSourceList) && !match ? [...window.__kibangouSourceList] : []);
+
+        if (!candidates.length && match) {
+          const addonId = decodeURIComponent(match[1]);
+          const type = decodeURIComponent(match[2]);
+          const prefix = addonId === "kibangou-french-vod" ? "/french-addon" : addonId === "kibangou-adult-pro" ? "/adult-addon" : "/kibangou-addon";
+          const srcUrl = type === "series"
+            ? `${prefix}/source/series/${encodeURIComponent(itemId)}:1:1.json`
+            : `${prefix}/source/${encodeURIComponent(type)}/${encodeURIComponent(itemId)}.json`;
+          try {
+            const r = await fetch(srcUrl);
+            if (r.ok) {
+              const j = await r.json();
+              if (Array.isArray(j.sources)) candidates = j.sources;
+            }
+          } catch {}
+          if (!candidates.length) {
+            const fallbackUrl = type === "series"
+              ? `https://vavoo.top/vod/source/series/${encodeURIComponent(itemId)}:1:1.json?region=FR&language=fr`
+              : `https://vavoo.top/vod/source/video/${encodeURIComponent(itemId)}.json?region=FR&language=fr`;
+            try {
+              const r = await fetch(fallbackUrl);
+              if (r.ok) {
+                const j = await r.json();
+                if (Array.isArray(j.sources)) candidates = j.sources;
+              }
+            } catch {}
+          }
+        }
+
+        const prioritized = [...candidates].sort((a, b) => {
+          const aLang = Array.isArray(a.languages) ? a.languages.map(x => String(x).toLowerCase()) : [];
+          const bLang = Array.isArray(b.languages) ? b.languages.map(x => String(x).toLowerCase()) : [];
+          const aFr = aLang.includes("fr") ? 0 : 1;
+          const bFr = bLang.includes("fr") ? 0 : 1;
+          if (aFr !== bFr) return aFr - bFr;
+          const hostRank = (u) => {
+            const l = String(u || "").toLowerCase();
+            if (/dood\.to|mixdrop|mxdrop|m1xdrop|miixdrop/.test(l)) return 0;
+            if (/dood\.yt/.test(l)) return 1;
+            if (/filemoon/.test(l)) return 2;
+            return 3;
+          };
+          return hostRank(a.url) - hostRank(b.url);
+        });
+
+        for (const src of prioritized) {
+          if (!src || !src.url) continue;
+          if (location.hash !== startHash) return;
+          try {
+            const resolved = await resolveSourceToPlayable(src.url);
+            if (location.hash !== startHash) return;
+            if (resolved && resolved.url && !isEmbedHostUrl(resolved.url)) {
+              const filename = sanitizeFilename(title, resolved.url);
+              triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+              return;
+            }
+          } catch {}
+        }
+
+        if (location.hash === startHash) {
+          showToast("Aucune source téléchargeable disponible pour ce titre.");
+        }
+      } finally {
+        btnEl.disabled = false;
+        btnEl.innerHTML = origHtml;
+      }
+    }
+
+    const vodAutoState = {
+      wantAutoPlay: false,
+      activeChain: false,
+      triedKeys: new Set(),
+      attemptStartedAt: 0,
+      lastFallbackClickAt: 0
+    };
+
+    document.addEventListener("click", (e) => {
+      const target = e.target instanceof Element ? e.target : null;
+      if (!target) return;
+
+      if (target.closest(".item-view .btn-hero-play:not(.is-empty):not(.is-busy), .item-view .ep-tile, .item-view .ep-card")) {
+        if (!isLiveContext()) {
+          vodAutoState.wantAutoPlay = true;
+          vodAutoState.activeChain = true;
+          vodAutoState.triedKeys.clear();
+          vodAutoState.attemptStartedAt = Date.now();
+        }
+        return;
+      }
+
+      const srcItem = target.closest(".modal-sources .source-item:not(.source-item-failed):not(.source-kept):not(.source-keep-season)");
+      if (srcItem && !target.closest(".kibangou-src-dl-btn") && !isLiveContext()) {
+        const allItems = Array.from(document.querySelectorAll(".modal-sources .source-item:not(.source-item-failed):not(.source-kept):not(.source-keep-season)"));
+        const idx = allItems.indexOf(srcItem);
+        if (idx >= 0) {
+          vodAutoState.triedKeys.add(getSourceKey(srcItem, idx));
+        }
+        vodAutoState.activeChain = true;
+        vodAutoState.wantAutoPlay = false;
+        vodAutoState.attemptStartedAt = Date.now();
+        return;
+      }
+
+      if (target.closest(".modal-sources .modal-close")) {
+        if (e.isTrusted) {
+          vodAutoState.wantAutoPlay = false;
+          vodAutoState.activeChain = false;
+        }
+        return;
+      }
+
+      if (target.closest('.player-bar-right .player-ctrl-btn[data-key="S"]')) {
+        if (e.isTrusted) {
+          vodAutoState.wantAutoPlay = false;
+        }
+      }
+    }, true);
+
+    function triggerPlayerSourceFallback() {
+      const now = Date.now();
+      if (now - vodAutoState.lastFallbackClickAt < 1800) return;
+      if (document.querySelector(".modal-sources")) return;
+
+      const srcBtn = document.querySelector('.player-bar-right .player-ctrl-btn[data-key="S"]');
+      if (!srcBtn) return;
+
+      vodAutoState.lastFallbackClickAt = now;
+      vodAutoState.wantAutoPlay = true;
+      srcBtn.click();
+    }
+
+    function enhanceSourcesModal() {
+      const modal = document.querySelector(".modal.modal-sources");
+      if (!modal) return;
+      const live = isLiveContext();
+      const body = modal.querySelector(".modal-body");
+      if (!body || body.querySelector(".source-skel")) return;
+
+      const items = Array.from(body.querySelectorAll(".source-item:not(.source-item-failed):not(.source-kept):not(.source-keep-season)"));
+      const hasFailureNotice = Boolean(modal.querySelector(".source-failure"));
+
+      items.forEach((item, idx) => {
+        const meta = findSourceMetaForElement(item, idx);
+        const langInfo = parseSourceLanguage(item, meta);
+
+        let langsWrap = item.querySelector(".source-langs");
+        if (!langsWrap) {
+          langsWrap = document.createElement("div");
+          langsWrap.className = "source-langs";
+          item.appendChild(langsWrap);
+        }
+
+        if (!langsWrap.querySelector(".kibangou-lang-badge")) {
+          langsWrap.textContent = "";
+          const badge = document.createElement("span");
+          badge.className = `kibangou-lang-badge ${langInfo.cls}`;
+          badge.textContent = langInfo.label;
+          langsWrap.appendChild(badge);
+        }
+
+        if (!live && !item.classList.contains("source-item-error") && !item.querySelector(".kibangou-src-dl-btn")) {
+          const dlBtn = document.createElement("button");
+          dlBtn.type = "button";
+          dlBtn.className = "kibangou-src-dl-btn";
+          dlBtn.title = "Télécharger cette source";
+          dlBtn.setAttribute("aria-label", "Télécharger cette source");
+          dlBtn.innerHTML = `${SVG_DOWNLOAD}<span>Télécharger</span>`;
+          dlBtn.addEventListener("click", (ev) => {
+            ev.stopPropagation();
+            ev.preventDefault();
+            downloadFromSourceItem(item, idx, dlBtn);
+          });
+          item.appendChild(dlBtn);
+        }
       });
 
-      // 2. Sidebar (Desktop & Tablette) - Route garantie vers kibangou-direct + bouton déconnexion
+      if (live) return;
+
+      if (vodAutoState.wantAutoPlay || (vodAutoState.activeChain && hasFailureNotice)) {
+        items.forEach((item, idx) => {
+          if (item.classList.contains("source-item-error") || (hasFailureNotice && item.classList.contains("active"))) {
+            vodAutoState.triedKeys.add(getSourceKey(item, idx));
+          }
+        });
+
+        const candidates = items
+          .map((item, idx) => {
+            const meta = findSourceMetaForElement(item, idx);
+            const langInfo = parseSourceLanguage(item, meta);
+            const key = getSourceKey(item, idx);
+            return { item, idx, key, priority: langInfo.priority, label: langInfo.label };
+          })
+          .filter(c =>
+            !c.item.classList.contains("source-item-error") &&
+            !c.item.classList.contains("source-item-busy") &&
+            !vodAutoState.triedKeys.has(c.key)
+          )
+          .sort((a, b) => a.priority - b.priority || a.idx - b.idx);
+
+        if (candidates.length > 0) {
+          const next = candidates[0];
+          vodAutoState.triedKeys.add(next.key);
+          vodAutoState.wantAutoPlay = false;
+          vodAutoState.attemptStartedAt = Date.now();
+          showToast(
+            hasFailureNotice
+              ? `Source indisponible — bascule auto (${next.label})...`
+              : `Lecture automatique (${next.label})...`
+          );
+          requestAnimationFrame(() => next.item.click());
+        } else if (hasFailureNotice) {
+          vodAutoState.activeChain = false;
+          vodAutoState.wantAutoPlay = false;
+          showToast("Aucune autre source fonctionnelle disponible.");
+        }
+      }
+    }
+
+    function enhanceVodItemDetails() {
+      if (isLiveContext()) return;
+      const activeItemView = document.querySelector(".cached-view.view-active .item-view");
+      if (!activeItemView) return;
+      const heroActions = activeItemView.querySelector(".hero-actions");
+      if (!heroActions) return;
+      const playBtn = heroActions.querySelector(".btn-hero-play");
+      if (!playBtn || playBtn.classList.contains("is-empty") || playBtn.classList.contains("is-busy")) return;
+      if (heroActions.querySelector("#kibangou-item-download-btn")) return;
+
+      const dlBtn = document.createElement("button");
+      dlBtn.type = "button";
+      dlBtn.id = "kibangou-item-download-btn";
+      dlBtn.className = "btn-hero-glass kibangou-download-btn";
+      dlBtn.title = "Télécharger la vidéo";
+      dlBtn.setAttribute("aria-label", "Télécharger");
+      dlBtn.innerHTML = `${SVG_DOWNLOAD}<span class="kibangou-dl-word">Télécharger</span>`;
+      dlBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        vodAutoState.wantAutoPlay = false;
+        downloadCurrentItemFromDetails(dlBtn);
+      });
+
+      const playWrap = heroActions.querySelector(".item-play-wrap") || playBtn;
+      playWrap.after(dlBtn);
+    }
+
+    function enhanceVodPlayer() {
+      const playerRoot = document.querySelector(".player-root");
+      if (!playerRoot) return;
+      const live = isLiveContext();
+
+      if (!live) {
+        const barRight = playerRoot.querySelector(".player-bar-right");
+        if (barRight && !barRight.querySelector("#kibangou-player-download-btn")) {
+          const dlBtn = document.createElement("button");
+          dlBtn.type = "button";
+          dlBtn.id = "kibangou-player-download-btn";
+          dlBtn.className = "player-ctrl-btn kibangou-player-dl-btn";
+          dlBtn.title = "Télécharger cette vidéo";
+          dlBtn.setAttribute("aria-label", "Télécharger");
+          dlBtn.innerHTML = `${SVG_DOWNLOAD}<span>Télécharger</span>`;
+          dlBtn.addEventListener("click", async (e) => {
+            e.stopPropagation();
+            const streamInfo = window.__kibangouCurrentStream;
+            if (streamInfo && streamInfo.url && !isEmbedHostUrl(streamInfo.url)) {
+              const filename = sanitizeFilename(getActiveItemTitle(), streamInfo.url);
+              triggerDownloadUrl(buildStreamDownloadUrl(streamInfo.url, streamInfo.headers, filename), filename);
+              return;
+            }
+            if (Array.isArray(window.__kibangouSourceList) && window.__kibangouSourceList.length > 0) {
+              dlBtn.disabled = true;
+              try {
+                for (const src of window.__kibangouSourceList.slice(0, 3)) {
+                  if (!src || !src.url) continue;
+                  const resolved = await resolveSourceToPlayable(src.url).catch(() => null);
+                  if (resolved && resolved.url && !isEmbedHostUrl(resolved.url)) {
+                    const filename = sanitizeFilename(getActiveItemTitle(), resolved.url);
+                    triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+                    return;
+                  }
+                }
+              } finally {
+                dlBtn.disabled = false;
+              }
+            }
+            showToast("Aucun flux vidéo téléchargeable disponible pour ce lecteur.");
+          });
+          barRight.prepend(dlBtn);
+        }
+
+        const video = playerRoot.querySelector("video.player-video");
+        if (video && !video.dataset.vodWatchdogBound) {
+          video.dataset.vodWatchdogBound = "1";
+          video.addEventListener("playing", () => {
+            vodAutoState.attemptStartedAt = Date.now();
+          });
+          video.addEventListener("error", () => {
+            if (vodAutoState.activeChain && !isLiveContext()) {
+              triggerPlayerSourceFallback();
+            }
+          });
+        }
+
+        const errBox = playerRoot.querySelector(".player-error");
+        if (errBox && vodAutoState.activeChain) {
+          triggerPlayerSourceFallback();
+        } else if (
+          video &&
+          vodAutoState.activeChain &&
+          vodAutoState.attemptStartedAt > 0 &&
+          !document.querySelector(".modal-sources") &&
+          !video.paused &&
+          !video.ended &&
+          video.currentTime === 0 &&
+          video.readyState < 3 &&
+          Date.now() - vodAutoState.attemptStartedAt > 12000
+        ) {
+          triggerPlayerSourceFallback();
+        }
+      }
+    }
+
+    function injectCustomNavItems() {
+      document.querySelectorAll('.sc-track, .sc-slot, .sc-pill, .sc-front, .sc-back, .sc-covers, .sc-plus, .sc-badge, .btn-party, .modal-party, .sv-fab, [class*="sv-fab"], .player-action-invite, [class*="player-action-invite"], button[data-key="i"], button[data-key="I"], button[title*="Inviter"], button[aria-label*="Inviter"], button[aria-label*="invit"], a[href="#/social"]').forEach(el => el.remove());
+
+      const oldNavLogout = document.getElementById("nav-logout");
+      if (oldNavLogout) oldNavLogout.remove();
+
+      const channelsItems = document.querySelectorAll('a[href="#/channels"], a[href^="#/channels?"]');
+      channelsItems.forEach(item => {
+        if (!item.closest(".kibangou-adult-links")) {
+          item.href = "#/channels?src=vavoo-live%2Fchannels";
+        }
+      });
+
       const sidebarNav = document.querySelector(".sidebar-nav");
       if (sidebarNav && !sidebarNav.querySelector("#nav-films")) {
         const channelsItem = sidebarNav.querySelector('a[href^="#/channels"]');
@@ -1441,7 +2053,7 @@
           filmsItem.className = "nav-item";
           filmsItem.href = "#/catalog/kibangou-direct/video/movie?name=Films";
           filmsItem.innerHTML = `${SVG_FILM}<span>Films</span>`;
-          
+
           const seriesItem = document.createElement("a");
           seriesItem.id = "nav-series";
           seriesItem.className = "nav-item";
@@ -1453,22 +2065,17 @@
         }
       }
 
-      // Bouton Déconnexion dans la sidebar desktop
-      const sidebarBottom = document.querySelector(".sidebar-bottom");
-      if (sidebarBottom && !sidebarBottom.querySelector("#nav-logout")) {
-        const logoutItem = document.createElement("a");
-        logoutItem.id = "nav-logout";
-        logoutItem.className = "nav-item nav-item-logout";
-        logoutItem.title = "Se déconnecter";
-        logoutItem.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg><span>Déconnexion</span>`;
-        logoutItem.addEventListener("click", performLogout);
-        sidebarBottom.appendChild(logoutItem);
-      }
+      document.querySelectorAll('.sidebar a[href="#/settings"], .sidebar-bottom a[href="#/settings"]').forEach(link => {
+        if (link.dataset.profileReady !== "1") {
+          link.dataset.profileReady = "1";
+          link.title = "Profil";
+          link.setAttribute("aria-label", "Profil");
+          link.innerHTML = `${SVG_USER_PROFILE}<span>Profil</span>`;
+        }
+      });
 
-      // 3. Bottom Nav (Mobile)
       const bnav = document.querySelector(".bnav");
       if (bnav) {
-        // Suppression définitive de Recherche et Paramètres dans la bottom nav sur mobile
         const bnavSearch = bnav.querySelector('a[href="#/search"], a[href*="search"]');
         if (bnavSearch) bnavSearch.remove();
         const bnavSettings = bnav.querySelector('a[href="#/settings"], a[href*="settings"]');
@@ -1495,73 +2102,98 @@
         }
       }
 
-      // 4. Positionnement garanti de l'onglet 'Live TV' juste après 'Favoris'
-      const allTabs = Array.from(document.querySelectorAll("button, a")).filter(el => {
+      const allTabs = Array.from(document.querySelectorAll(".channels-view .ep-pill")).filter(el => {
         const text = (el.textContent || "").trim();
         return text === "Favoris" || text === "Live TV";
       });
       const favTab = allTabs.find(el => el.textContent.trim() === "Favoris");
       const liveTab = allTabs.find(el => el.textContent.trim() === "Live TV");
-      if (favTab && liveTab && favTab.parentNode === liveTab.parentNode) {
-        if (favTab.nextElementSibling !== liveTab) {
-          favTab.after(liveTab);
-        }
+      if (favTab && liveTab && favTab.parentNode === liveTab.parentNode && favTab.nextElementSibling !== liveTab) {
+        favTab.after(liveTab);
       }
 
-      // 5. Suppression impitoyable des éléments Social, bouton flottant et bouton Inviter du player
-      document.querySelectorAll('a[href="#/social"], .player-action-invite, [class*="player-action-invite"], button[data-key="i"], button[data-key="I"], button[aria-label*="Inviter"], button[aria-label*="invit"], .sc-track, .sc-slot, .sc-pill, .sc-covers, .sc-plus, .sc-badge').forEach(el => el.remove());
-
-      // 6. Nettoyage de la page Réglages (#/settings) et injection de la carte Déconnexion
       if (location.hash.startsWith("#/settings")) {
-        document.querySelectorAll(".s-group").forEach(group => {
-          const text = group.textContent || "";
-          if (text.includes("Social") || text.includes("Watch Parties") || text.includes("Utiliser Social")) {
-            group.remove();
+        const activeSettingsView = document.querySelector(".cached-view.view-active .settings-view");
+        if (activeSettingsView) {
+          const headTitle = activeSettingsView.querySelector(".settings-head h1");
+          if (headTitle && headTitle.textContent.trim() !== "Profil") {
+            headTitle.textContent = "Profil";
           }
-          if (text.includes("Supprimer les données de ce site") || text.includes("Delete this site")) {
-            group.remove();
-          }
-        });
 
-        const sContainer = document.querySelector(".settings-view") || document.querySelector(".s-panel") || document.querySelector(".main-inner");
-        if (sContainer && !sContainer.querySelector("#settings-pro-adult-card")) {
-          const adultCard = document.createElement("div");
-          adultCard.id = "settings-pro-adult-card";
-          adultCard.style.cssText = "margin: 20px var(--pad, 16px); padding: 18px 20px; border-radius: 16px; background: rgba(0, 200, 83, 0.06); border: 1px solid rgba(0, 200, 83, 0.25); display: flex; flex-direction: column; gap: 12px;";
-          adultCard.innerHTML = `
-            <div style="display:flex; align-items:center; justify-content:space-between;">
-              <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem; display:flex; align-items:center; gap:8px;">
-                <span>🔞 Espace Adulte +18</span>
+          activeSettingsView.querySelectorAll(".s-group").forEach(group => {
+            const text = group.textContent || "";
+            if (text.includes("Social") || text.includes("Watch Parties") || text.includes("Utiliser Social")) {
+              group.remove();
+            }
+            if (text.includes("Supprimer les données de ce site") || text.includes("Delete this site")) {
+              group.remove();
+            }
+          });
+
+          const targetContainer = activeSettingsView.querySelector(".settings-groups") || activeSettingsView;
+
+          document.querySelectorAll("#settings-pro-adult-card").forEach((el, idx) => {
+            if (!targetContainer.contains(el) || idx > 0) el.remove();
+          });
+          document.querySelectorAll("#settings-logout-card").forEach((el, idx) => {
+            if (!targetContainer.contains(el) || idx > 0) el.remove();
+          });
+
+          if (!targetContainer.querySelector("#settings-pro-adult-card")) {
+            const routes = getAdultRoutes();
+            const adultCard = document.createElement("div");
+            adultCard.id = "settings-pro-adult-card";
+            adultCard.className = "s-group kibangou-settings-card";
+            adultCard.setAttribute("data-zone", "v");
+            adultCard.style.background = "rgba(0, 200, 83, 0.06)";
+            adultCard.style.borderColor = "rgba(0, 200, 83, 0.28)";
+            adultCard.innerHTML = `
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem; display:flex; align-items:center; gap:8px;">
+                  <span>🔞 Espace Adulte +18</span>
+                </div>
+                <span style="font-size:0.72rem; background:#00C853; color:#0E1318; padding:3px 10px; border-radius:12px; font-weight:800; text-transform:uppercase;">Actif</span>
               </div>
-              <span style="font-size:0.75rem; background:#00C853; color:#0E1318; padding:3px 10px; border-radius:12px; font-weight:800; text-transform:uppercase;">Actif</span>
-            </div>
-            <div style="font-size:0.85rem; color:#8E99A4;">Le catalogue Cinéma & Séries Adulte +18 est déverrouillé et accessible directement dans vos films et séries.</div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
-              <a href="#/catalog/kibangou-adult-pro/video/adult-vod?name=Films%20%2B18" style="height:38px; padding:0 16px; border-radius:8px; background:#00C853; color:#0E1318; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:0.85rem;">
-                Explorer les films +18 →
-              </a>
-            </div>
-          `;
-          sContainer.appendChild(adultCard);
-        }
+              <div style="font-size:0.84rem; color:#8E99A4;">${routes.liveHref ? "Accès direct sans code PIN aux chaînes et films adultes +18." : "Accès direct sans code PIN aux films et séries adultes +18."}</div>
+              <div class="kibangou-adult-links">
+                ${routes.liveHref ? `<a href="${escapeHtml(routes.liveHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Chaînes Adultes +18 →</a>` : ""}
+                <a href="${escapeHtml(routes.videoHref)}" class="kibangou-adult-link kibangou-adult-link-primary">
+                  Films Adultes +18 →
+                </a>
+                ${routes.seriesHref ? `<a href="${escapeHtml(routes.seriesHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Séries Adultes +18 →</a>` : ""}
+              </div>
+            `;
+            targetContainer.appendChild(adultCard);
+          }
 
-        if (sContainer && !sContainer.querySelector("#settings-logout-card")) {
-          const card = document.createElement("div");
-          card.id = "settings-logout-card";
-          card.style.cssText = "margin: 20px var(--pad, 16px); padding: 18px 20px; border-radius: 16px; background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.25); display: flex; flex-direction: column; gap: 10px;";
-          card.innerHTML = `
-            <div style="font-weight:700; color:#FFFFFF; font-size:1.05rem;">Compte & Session KibangouTV</div>
-            <div style="font-size:0.85rem; color:#8E99A4;">Vous êtes connecté à KibangouTV. Pour verrouiller l'application et exiger à nouveau le code secret, déconnectez-vous.</div>
-            <button type="button" id="btn-settings-logout-action" style="margin-top:4px; height:42px; width:fit-content; padding:0 20px; border-radius:10px; border:none; background:#E5484D; color:#FFFFFF; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-              Se déconnecter
-            </button>
-          `;
-          card.querySelector("#btn-settings-logout-action").addEventListener("click", performLogout);
-          sContainer.appendChild(card);
+          if (!targetContainer.querySelector("#settings-logout-card")) {
+            const card = document.createElement("div");
+            card.id = "settings-logout-card";
+            card.className = "s-group kibangou-settings-card";
+            card.setAttribute("data-zone", "v");
+            card.style.background = "rgba(248, 113, 113, 0.08)";
+            card.style.borderColor = "rgba(248, 113, 113, 0.25)";
+            card.innerHTML = `
+              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Compte & Session KibangouTV</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">Vous êtes connecté à KibangouTV. Déconnectez-vous pour verrouiller l'application.</div>
+              <button type="button" id="btn-settings-logout-action" style="margin-top:4px; height:42px; width:fit-content; padding:0 20px; border-radius:10px; border:none; background:#E5484D; color:#FFFFFF; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Se déconnecter
+              </button>
+            `;
+            card.querySelector("#btn-settings-logout-action").addEventListener("click", performLogout);
+            targetContainer.appendChild(card);
+          }
         }
+      } else {
+        document.querySelectorAll("#settings-pro-adult-card, #settings-logout-card").forEach(el => {
+          if (!el.closest(".settings-view")) el.remove();
+        });
       }
 
+      enhanceVodItemDetails();
+      enhanceSourcesModal();
+      enhanceVodPlayer();
       updateActiveNav();
     }
 
@@ -1569,6 +2201,9 @@
       const hash = location.hash || "#/";
       const isHome = hash === "#/" || hash === "" || hash.startsWith("#/?");
       document.body.classList.toggle("is-home", isHome);
+
+      const mBack = document.getElementById("m-btn-back");
+      if (mBack) mBack.setAttribute("aria-hidden", isHome ? "true" : "false");
 
       const isSearch = hash.startsWith("#/search");
       const isSettings = hash.startsWith("#/settings");
@@ -1596,7 +2231,6 @@
         document.querySelectorAll('.bnav .bnav-item:not(#bnav-films):not(#bnav-series)').forEach(el => el.classList.remove("active"));
       }
 
-      // Ajuster le pill indicateur de la bottom nav
       const bnav = document.querySelector(".bnav");
       if (bnav) {
         const visibleItems = Array.from(bnav.querySelectorAll(".bnav-item")).filter(el => {
@@ -1612,262 +2246,8 @@
       }
     }
 
-    /* ========================================================
-       SÉLECTEUR & CONVERTISSEUR DE QUALITÉ ADAPTATIF (ABR)
-       ======================================================== */
-    const QUALITY_OPTIONS = [
-      { id: "auto", label: "Auto (Recommandé)", badge: "ABR", desc: "Baisse automatiquement si 2G/3G faible" },
-      { id: "1080p", label: "Original (HD/4K)", badge: "SRC", desc: "Flux source sans compression (Fibre/4G)" },
-      { id: "720p", label: "720p HD", badge: "HD", desc: "Haute définition compressée (~1.1 Mbps)" },
-      { id: "480p", label: "480p Standard", badge: "3G", desc: "Fluide sur réseau 3G (~500 kbps)" },
-      { id: "360p", label: "360p Éco", badge: "2G/3G", desc: "Faible consommation (~250 kbps)" },
-      { id: "240p", label: "240p Ultra-Éco", badge: "2G", desc: "Connexion très faible / Edge (~120 kbps)" }
-    ];
-
-    let currentSelectedQuality = localStorage.getItem("kibangoutv_preferred_quality") || "auto";
-    let isQualityMenuOpen = false;
-    let lastNetworkStats = null;
-    let abrToastTimer = null;
-
-    function formatNetLabel(stats) {
-      if (!stats) return "ABR 2G/3G";
-      const kbps = stats.measuredKbps ? `${stats.measuredKbps} kbps` : "";
-      return [stats.tier || "Réseau", kbps].filter(Boolean).join(" • ");
-    }
-
-    function showAbrToast(message) {
-      const root = document.querySelector(".player-root") || document.querySelector(".player-controls")?.parentElement;
-      if (!root) return;
-      let toast = root.querySelector("#kibangou-abr-toast");
-      if (!toast) {
-        toast = document.createElement("div");
-        toast.id = "kibangou-abr-toast";
-        toast.className = "kibangou-abr-toast";
-        toast.innerHTML = `<span class="kibangou-abr-dot"></span><span class="kibangou-abr-toast-text"></span>`;
-        root.appendChild(toast);
-      }
-      const txtEl = toast.querySelector(".kibangou-abr-toast-text");
-      if (txtEl) txtEl.textContent = message;
-      toast.classList.add("visible");
-      clearTimeout(abrToastTimer);
-      abrToastTimer = setTimeout(() => {
-        toast.classList.remove("visible");
-      }, 3400);
-    }
-
-    window.setKibangouQuality = function(qualityId, save = true) {
-      currentSelectedQuality = qualityId;
-      if (save) {
-        try {
-          localStorage.setItem("kibangoutv_preferred_quality", qualityId);
-        } catch(e) {}
-      }
-
-      const hls = window.__kibangouHls;
-      if (hls) {
-        if (typeof hls.setQualityLevel === "function") {
-          hls.setQualityLevel(qualityId);
-        } else if (hls.levels) {
-          if (qualityId === "auto") {
-            hls.currentLevel = -1;
-            hls.loadLevel = -1;
-            hls.nextLevel = -1;
-          } else {
-            const targetH = parseInt(qualityId, 10);
-            if (!isNaN(targetH) && hls.levels.length > 0) {
-              let bestIdx = 0;
-              let minDiff = Infinity;
-              hls.levels.forEach((lvl, idx) => {
-                const diff = Math.abs((lvl.height || 0) - targetH);
-                if (diff < minDiff) {
-                  minDiff = diff;
-                  bestIdx = idx;
-                }
-              });
-              hls.currentLevel = bestIdx;
-              hls.loadLevel = bestIdx;
-              hls.nextLevel = bestIdx;
-            }
-          }
-        }
-      }
-
-      const labelEl = document.getElementById("kibangou-quality-current-label");
-      if (labelEl) {
-        if (qualityId === "auto" && lastNetworkStats && lastNetworkStats.activeHeight) {
-          labelEl.textContent = `Auto • ${lastNetworkStats.activeHeight}p`;
-        } else {
-          labelEl.textContent = qualityId === "auto" ? "Auto" : (qualityId === "1080p" ? "Orig" : qualityId);
-        }
-      }
-
-      document.querySelectorAll(".kibangou-quality-menu .kibangou-menu-item").forEach(item => {
-        item.classList.toggle("active", item.dataset.quality === qualityId);
-      });
-    };
-
-    function closeQualityMenu() {
-      const menu = document.getElementById("kibangou-quality-menu");
-      if (menu) menu.remove();
-      const btn = document.getElementById("kibangou-quality-btn");
-      if (btn) btn.classList.remove("active");
-      isQualityMenuOpen = false;
-    }
-
-    function toggleQualityMenu() {
-      const existing = document.getElementById("kibangou-quality-menu");
-      if (existing) {
-        closeQualityMenu();
-        return;
-      }
-
-      const playerControls = document.querySelector(".player-controls") || document.querySelector(".player-root");
-      if (!playerControls) return;
-
-      const netText = formatNetLabel(lastNetworkStats);
-      const menu = document.createElement("div");
-      menu.id = "kibangou-quality-menu";
-      menu.className = "player-menu player-menu-quality kibangou-quality-menu";
-      menu.setAttribute("role", "menu");
-
-      menu.innerHTML = `
-        <div class="kibangou-menu-header">
-          <div class="kibangou-menu-title">Convertisseur</div>
-          <span class="kibangou-abr-indicator" id="kibangou-net-badge" title="Débit mesuré en temps réel">${netText}</span>
-        </div>
-        <div class="kibangou-menu-items">
-          ${QUALITY_OPTIONS.map(opt => `
-            <div class="kibangou-menu-item ${opt.id === currentSelectedQuality ? "active" : ""}" data-quality="${opt.id}" role="menuitem" tabindex="0">
-              <div class="kibangou-item-content">
-                <span class="kibangou-item-label">${opt.label}</span>
-                <span class="res-sub">${opt.desc}</span>
-              </div>
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-          `).join("")}
-        </div>
-      `;
-
-      menu.querySelectorAll(".kibangou-menu-item").forEach(item => {
-        item.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const q = item.dataset.quality;
-          window.setKibangouQuality(q);
-          closeQualityMenu();
-        });
-      });
-
-      playerControls.appendChild(menu);
-      const btn = document.getElementById("kibangou-quality-btn");
-      if (btn) btn.classList.add("active");
-      isQualityMenuOpen = true;
-    }
-
-    function injectQualitySelector() {
-      const barRight = document.querySelector(".player-bar-right");
-      if (!barRight) {
-        if (isQualityMenuOpen) closeQualityMenu();
-        return;
-      }
-
-      // Masquer l'éventuel sélecteur natif Vuma pour éviter le doublon
-      const nativeQualityBtn = barRight.querySelector('.player-ctrl-btn[aria-label="Quality"], .player-ctrl-btn[aria-label="Qualité"]');
-      if (nativeQualityBtn && !nativeQualityBtn.classList.contains("kibangou-quality-btn")) {
-        nativeQualityBtn.style.display = "none";
-      }
-
-      if (barRight.querySelector("#kibangou-quality-btn")) return;
-
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.id = "kibangou-quality-btn";
-      btn.className = "player-ctrl-btn kibangou-quality-btn";
-      btn.setAttribute("aria-label", "Qualité vidéo");
-      btn.setAttribute("title", "Convertisseur de qualité 2G/3G/4G (Auto, Original, 720p, 480p, 360p, 240p)");
-      btn.innerHTML = `
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="3"></rect>
-          <path d="M7 15h2l2-6h-2z"></path>
-          <path d="M14 9h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-3z"></path>
-        </svg>
-        <span class="kibangou-quality-label" id="kibangou-quality-current-label">
-          ${currentSelectedQuality === "auto" ? "Auto" : (currentSelectedQuality === "1080p" ? "Orig" : currentSelectedQuality)}
-        </span>
-      `;
-
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleQualityMenu();
-      });
-
-      const speedBtn = barRight.querySelector(".player-speed-btn");
-      if (speedBtn) {
-        speedBtn.after(btn);
-      } else {
-        barRight.prepend(btn);
-      }
-    }
-
-    window.addEventListener("click", (e) => {
-      if (isQualityMenuOpen) {
-        const menu = document.getElementById("kibangou-quality-menu");
-        const btn = document.getElementById("kibangou-quality-btn");
-        if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
-          closeQualityMenu();
-        }
-      }
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && isQualityMenuOpen) {
-        closeQualityMenu();
-      }
-    });
-
-    window.addEventListener("kibangou-quality-switched", (e) => {
-      if (currentSelectedQuality === "auto") {
-        const lvl = e.detail && e.detail.level;
-        const hls = e.detail && e.detail.hls;
-        if (hls && hls.levels && hls.levels[lvl]) {
-          const height = typeof hls._inferHeight === "function"
-            ? hls._inferHeight(hls.levels[lvl])
-            : (hls.levels[lvl].height || 0);
-          const labelEl = document.getElementById("kibangou-quality-current-label");
-          if (labelEl && height > 0) {
-            labelEl.textContent = `Auto • ${height}p`;
-          }
-        }
-      }
-    });
-
-    window.addEventListener("kibangou-network-stats", (e) => {
-      if (!e.detail) return;
-      lastNetworkStats = e.detail;
-      const badgeEl = document.getElementById("kibangou-net-badge");
-      if (badgeEl) {
-        badgeEl.textContent = formatNetLabel(lastNetworkStats);
-      }
-      if (currentSelectedQuality === "auto" && lastNetworkStats.activeHeight) {
-        const labelEl = document.getElementById("kibangou-quality-current-label");
-        if (labelEl) {
-          labelEl.textContent = `Auto • ${lastNetworkStats.activeHeight}p`;
-        }
-      }
-    });
-
-    window.addEventListener("kibangou-auto-downgrade", (e) => {
-      if (!e.detail) return;
-      const h = e.detail.height || 360;
-      const snap = e.detail.snapshot;
-      const netDesc = snap ? `${snap.tier} • ${snap.measuredKbps} kbps` : "connexion faible";
-      showAbrToast(`Connexion faible (${netDesc}) — Passage en ${h}p`);
-    });
-
     const navObserver = new MutationObserver(() => {
       injectCustomNavItems();
-      injectQualitySelector();
     });
     navObserver.observe(document.body, { childList: true, subtree: true });
 
@@ -1878,26 +2258,32 @@
     }
     checkChannelsHash();
 
+    window.addEventListener("player-closed", () => {
+      vodAutoState.wantAutoPlay = false;
+      vodAutoState.activeChain = false;
+      vodAutoState.attemptStartedAt = 0;
+      window.__kibangouCurrentStream = null;
+    });
+
     window.addEventListener("hashchange", () => {
+      vodAutoState.wantAutoPlay = false;
+      vodAutoState.activeChain = false;
+      vodAutoState.attemptStartedAt = 0;
+      window.__kibangouCurrentStream = null;
+      window.__kibangouSourceList = [];
       checkChannelsHash();
       injectCustomNavItems();
-      injectQualitySelector();
       updateActiveNav();
     });
 
     setInterval(() => {
       injectCustomNavItems();
-      injectQualitySelector();
-    }, 300);
+    }, 350);
 
-    /* ========================================================
-       DÉFILEMENT AUTOMATIQUE DU CARROUSEL HERO (TOUTES LES 6S)
-       ======================================================== */
     setInterval(() => {
       const hero = document.querySelector(".hero");
       if (!hero || hero.matches(":hover")) return;
 
-      // Chercher prioritairement les vignettes (hero-strip), sinon les points (hero-dots)
       let targets = Array.from(document.querySelectorAll(".hero-strip .hero-thumb"));
       if (!targets.length) {
         targets = Array.from(document.querySelectorAll(".hero-dots .hero-dot"));

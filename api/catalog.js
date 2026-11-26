@@ -12,9 +12,12 @@ export default async function handler(req, res) {
 
   try {
     const q = req.query || {};
-    let addon = q.addon || "kibangou-addon";
-    let type = q.type || "live";
-    let id = q.id || "canal_congo";
+    const parsedUrl = new URL(req.url || "/", "https://kibangoutv.vercel.app");
+    const sp = parsedUrl.searchParams;
+
+    const addon = q.addon || sp.get("addon") || "kibangou-addon";
+    let type = q.type || sp.get("type") || "live";
+    let id = q.id || sp.get("id") || "canal_congo";
 
     if (q.match) {
       const matchParts = String(q.match).replace(/\.json$/i, "").split("/").filter(Boolean);
@@ -35,30 +38,51 @@ export default async function handler(req, res) {
 
     const fileContent = fs.readFileSync(filePath, "utf8");
     const catalogData = JSON.parse(fileContent);
-    let items = Array.isArray(catalogData.items) ? catalogData.items : (Array.isArray(catalogData) ? catalogData : []);
+    let items = Array.isArray(catalogData.items)
+      ? catalogData.items
+      : Array.isArray(catalogData)
+        ? catalogData
+        : [];
 
-    // Filter by category or group
-    const catFilter = q["filter.category"] || q["filter[category]"] || q.category;
+    const catFilter =
+      q["filter.category"] ||
+      q["filter[category]"] ||
+      q.category ||
+      sp.get("filter[category]") ||
+      sp.get("filter.category") ||
+      sp.get("category");
+
     if (catFilter && catFilter !== "all" && catFilter !== "Tous") {
-      const cfLower = String(catFilter).toLowerCase();
-      items = items.filter(it => {
+      const cfLower = String(catFilter).toLowerCase().trim();
+      items = items.filter((it) => {
         const cat = (it.category || it.group || "").toLowerCase();
-        const genres = Array.isArray(it.genres) ? it.genres.map(g => String(g).toLowerCase()) : [];
-        const tags = Array.isArray(it.tags) ? it.tags.map(t => String(t).toLowerCase()) : [];
-        return cat.includes(cfLower) || genres.some(g => g.includes(cfLower)) || tags.some(t => t.includes(cfLower));
+        const name = (it.name || "").toLowerCase();
+        const genres = Array.isArray(it.genres) ? it.genres.map((g) => String(g).toLowerCase()) : [];
+        const tags = Array.isArray(it.tags) ? it.tags.map((t) => String(t).toLowerCase()) : [];
+        return (
+          cat.includes(cfLower) ||
+          genres.some((g) => g.includes(cfLower)) ||
+          tags.some((t) => t.includes(cfLower)) ||
+          name.includes(cfLower)
+        );
       });
     }
 
-    // Search query filter
-    const query = q.search || q.q || q.query;
+    const query = q.search || q.q || q.query || sp.get("search") || sp.get("q") || sp.get("query");
     if (query) {
       const qLower = String(query).toLowerCase().trim();
-      items = items.filter(it => {
+      items = items.filter((it) => {
         const name = (it.name || "").toLowerCase();
         const desc = (it.description || "").toLowerCase();
+        const cat = (it.category || it.group || "").toLowerCase();
         const tags = Array.isArray(it.tags) ? it.tags.join(" ").toLowerCase() : "";
-        return name.includes(qLower) || desc.includes(qLower) || tags.includes(qLower);
+        return name.includes(qLower) || desc.includes(qLower) || cat.includes(qLower) || tags.includes(qLower);
       });
+    }
+
+    const sortBy = (q.sort || sp.get("sort") || "").toLowerCase();
+    if (sortBy === "name" || sortBy === "a-z") {
+      items = [...items].sort((a, b) => String(a.name || "").localeCompare(String(b.name || ""), "fr"));
     }
 
     res.setHeader("Content-Type", "application/json; charset=utf-8");

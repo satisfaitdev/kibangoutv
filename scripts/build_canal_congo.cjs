@@ -49,12 +49,14 @@ const congoPath = path.join(liveDir, 'congo.json');
 if (fs.existsSync(congoPath)) {
   const cData = JSON.parse(fs.readFileSync(congoPath, 'utf8'));
   localItems = (cData.items || []).map(it => {
+    const baseTags = Array.isArray(it.tags) ? it.tags : [];
+    const primaryCat = baseTags.includes('Congo') ? 'Congo' : (baseTags.includes('Info') ? 'Info' : (baseTags.includes('Francophonie') ? 'Francophonie' : 'Chaînes Locales'));
     const enriched = {
       ...it,
-      category: 'Chaînes Locales',
+      category: primaryCat,
       group: 'Chaînes Locales',
-      genres: ['Chaînes Locales', 'Congo'],
-      tags: Array.from(new Set([...(it.tags || []), 'Chaînes Locales', 'Congo']))
+      genres: [primaryCat],
+      tags: Array.from(new Set([...baseTags, 'Chaînes Locales']))
     };
     const itemFile = path.join(itemDir, it.id + '.json');
     fs.writeFileSync(itemFile, JSON.stringify(enriched, null, 2), 'utf8');
