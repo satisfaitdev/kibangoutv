@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KibangouTV — Performances & Web Vitals</title>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0E1318;
+      --surface: #151C24;
+      --surface-2: #1B242F;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --accent: #00C853;
+      --accent-soft: rgba(0, 200, 83, 0.14);
+      --warn: #F59E0B;
+      --danger: #EF4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(14, 19, 24, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+    .brand img { width: 32px; height: 32px; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .btn:hover { border-color: rgba(255,255,255,0.22); background: var(--surface-2); }
+    .btn-primary {
+      background: var(--accent);
+      color: #07120B;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: #12DF68; border-color: #12DF68; }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+    }
+    .sub { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .metric-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .metric-value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin: 8px 0 4px;
+      color: var(--text);
+    }
+    .metric-meta { font-size: 0.82rem; color: var(--muted); }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .table-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { padding: 12px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; }
+    tr:last-child td { border-bottom: none; }
+    .empty { padding: 28px; text-align: center; color: var(--muted); }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="/">
+        <img src="./logo.svg" alt="KibangouTV">
+        Kibangou<span>TV</span>
+      </a>
+      <div class="nav-links">
+        <a class="btn" href="/download">Applications</a>
+        <a class="btn btn-primary" href="/">Ouvrir l'app</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="head">
+      <div>
+        <h1>Suivi des performances (100 % gratuit)</h1>
+        <p class="sub">Web Vitals réels (LCP, FCP, CLS, INP, TTFB) + télémétrie lecteur vidéo &amp; Vercel Speed Insights.</p>
+      </div>
+      <button type="button" class="btn" id="refresh-btn">Actualiser</button>
+    </div>
+
+    <section class="grid" id="summary-grid">
+      <div class="card"><div class="metric-label">Chargement...</div><div class="metric-value">—</div></div>
+    </section>
+
+    <section class="table-card">
+      <div class="table-head">
+        <strong>Événements récents</strong>
+        <span class="pill" id="event-count">0 mesure</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Métrique</th>
+              <th>Valeur</th>
+              <th>Réseau</th>
+              <th>Page</th>
+              <th>Appareil</th>
+              <th>Heure</th>
+            </tr>
+          </thead>
+          <tbody id="events-body">
+            <tr><td colspan="6" class="empty">Chargement des mesures...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const LABELS = {
+      LCP: { name: "LCP (Affichage principal)", unit: "ms" },
+      FCP: { name: "FCP (Premier rendu)", unit: "ms" },
+      TTFB: { name: "TTFB (Réponse serveur)", unit: "ms" },
+      INP: { name: "INP (Réactivité)", unit: "ms" },
+      CLS: { name: "CLS (Stabilité visuelle)", unit: "" },
+      STREAM_START_MS: { name: "Démarrage vidéo", unit: "ms" },
+      BUFFER_STALL: { name: "Coupures / Buffering", unit: "" },
+      STREAM_ERROR: { name: "Erreurs flux", unit: "" }
+    };
+
+    function formatVal(metric, val) {
+      if (val === null || val === undefined) return "—";
+      const u = LABELS[metric]?.unit || "";
+      return u ? `${val} ${u}` : `${val}`;
+    }
+
+    async function loadStats() {
+      try {
+        const res = await fetch("/api/telemetry", { cache: "no-store" });
+        const data = await res.json();
+        const grid = document.getElementById("summary-grid");
+        const tbody = document.getElementById("events-body");
+        document.getElementById("event-count").textContent = `${data.totalEvents || 0} mesures`;
+
+        const cards = Object.entries(LABELS).map(([key, meta]) => {
+          const s = data.summary?.[key] || { count: 0, avg: null, p75: null };
+          return `
+            <div class="card">
+              <div class="metric-label">${meta.name}</div>
+              <div class="metric-value">${formatVal(key, s.p75 ?? s.avg)}</div>
+              <div class="metric-meta">Moyenne : ${formatVal(key, s.avg)} · ${s.count} relevé(s)</div>
+            </div>
+          `;
+        });
+        grid.innerHTML = cards.join("");
+
+        const recent = Array.isArray(data.recent) ? data.recent : [];
+        if (!recent.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="empty">Aucune mesure enregistrée pour le moment. Ouvrez l\'application pour générer les premiers relevés Web Vitals.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = recent.map((ev) => {
+          const d = new Date(ev.ts || Date.now()).toLocaleTimeString("fr-FR");
+          return `
+            <tr>
+              <td><strong>${ev.metric}</strong></td>
+              <td>${formatVal(ev.metric, ev.value)}</td>
+              <td>${ev.connection || "—"}</td>
+              <td>${ev.path || "/"}</td>
+              <td>${ev.device || "web"}</td>
+              <td>${d}</td>
+            </tr>
+          `;
+        }).join("");
+      } catch {
+        document.getElementById("events-body").innerHTML = '<tr><td colspan="6" class="empty">Impossible de charger les statistiques.</td></tr>';
+      }
+    }
+
+    document.getElementById("refresh-btn").addEventListener("click", loadStats);
+    loadStats();
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

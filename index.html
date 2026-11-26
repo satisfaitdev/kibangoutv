@@ -682,8 +682,50 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .google-auth-btn {
+      width: 100%;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #FFFFFF;
+      color: #0F172A;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.14s ease, background-color 0.16s ease;
+      margin-bottom: 14px;
+    }
+
+    .google-auth-btn:hover {
+      background: #F1F5F9;
+      transform: translateY(-1px);
+    }
+
+    .auth-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 11.5px;
+      margin-bottom: 14px;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
     }
 
     .email-input-wrapper {
@@ -1110,10 +1152,22 @@
         </button>
       </div>
 
-      <!-- Vue Connexion E-mail -->
+      <!-- Vue Connexion E-mail & Google -->
       <div id="view-email" style="width:100%; display:none; flex-direction:column; align-items:center;">
         <div class="auth-title">Connexion Web</div>
-        <div class="auth-subtitle">Accédez à votre espace streaming avec votre adresse e-mail</div>
+        <div class="auth-subtitle">Connectez-vous avec Google ou avec votre adresse e-mail</div>
+
+        <a href="/api/auth/google" class="google-auth-btn" id="btn-google-login">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24Z"/>
+            <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14Z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96Z"/>
+          </svg>
+          <span>Continuer avec Google</span>
+        </a>
+
+        <div class="auth-divider">ou par e-mail</div>
 
         <form class="email-form" id="email-form">
           <div class="email-input-wrapper">
@@ -1123,8 +1177,15 @@
             </svg>
             <input type="email" class="email-input" id="auth-email-input" placeholder="nom@exemple.com" required autocomplete="email">
           </div>
+          <div class="email-input-wrapper">
+            <svg class="email-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" class="email-input" id="auth-password-input" placeholder="Mot de passe (6+ caractères)" required minlength="6" autocomplete="current-password">
+          </div>
           <div class="auth-error" id="email-error"></div>
-          <button type="submit" class="auth-btn">
+          <button type="submit" class="auth-btn" id="auth-email-submit">
             <span>Accéder à KibangouTV</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1207,7 +1268,9 @@
       const pinError = document.getElementById("pin-error");
       const emailForm = document.getElementById("email-form");
       const emailInput = document.getElementById("auth-email-input");
+      const passwordInput = document.getElementById("auth-password-input");
       const emailError = document.getElementById("email-error");
+      const emailSubmitBtn = document.getElementById("auth-email-submit");
 
       const MASTER_PIN = localStorage.getItem("kibangoutv_custom_pin") || "123456";
       let enteredPin = "";
@@ -1217,6 +1280,34 @@
         authGate.classList.add("unlocked");
         authGate.style.display = "none";
       }
+
+      (async function syncServerSession() {
+        const sp = new URLSearchParams(location.search);
+        const authErr = sp.get("auth_error");
+        if (authErr) {
+          showMode("email");
+          authGate.classList.remove("unlocked");
+          authGate.style.display = "flex";
+          emailError.textContent = authErr === "google_not_configured"
+            ? "Connexion Google prête : ajoutez GOOGLE_CLIENT_ID et GOOGLE_CLIENT_SECRET dans Vercel."
+            : "Connexion Google interrompue (" + authErr + ").";
+          history.replaceState({}, "", location.pathname + location.hash);
+          return;
+        }
+        try {
+          const r = await fetch("/api/auth?action=me", { credentials: "same-origin" });
+          if (r.ok) {
+            const j = await r.json();
+            if (j.authenticated && j.user) {
+              localStorage.setItem("kibangoutv_user", JSON.stringify(j.user));
+              unlockApp(j.user.email);
+              if (sp.has("auth_success")) {
+                history.replaceState({}, "", location.pathname + location.hash);
+              }
+            }
+          }
+        } catch {}
+      })();
 
       const isMobileOrStandalone = (
         window.__TAURI__ ||
@@ -1314,13 +1405,38 @@
         }
       });
 
-      emailForm.addEventListener("submit", (e) => {
+      emailForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const email = emailInput.value.trim();
-        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          unlockApp(email);
-        } else {
+        const password = passwordInput ? passwordInput.value : "";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
           emailError.textContent = "Veuillez entrer une adresse e-mail valide.";
+          return;
+        }
+        if (password.length < 6) {
+          emailError.textContent = "Le mot de passe doit contenir au moins 6 caractères.";
+          return;
+        }
+        emailError.textContent = "";
+        if (emailSubmitBtn) emailSubmitBtn.disabled = true;
+        try {
+          const res = await fetch("/api/auth?action=login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({ email, password })
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok) {
+            emailError.textContent = data.error || "Échec de connexion. Vérifiez vos identifiants.";
+            return;
+          }
+          if (data.user) localStorage.setItem("kibangoutv_user", JSON.stringify(data.user));
+          unlockApp(email);
+        } catch {
+          emailError.textContent = "Erreur réseau lors de la connexion.";
+        } finally {
+          if (emailSubmitBtn) emailSubmitBtn.disabled = false;
         }
       });
     })();
@@ -1398,7 +1514,9 @@
 
     window.performLogout = function() {
       try {
+        fetch("/api/auth?action=logout", { method: "POST", credentials: "same-origin" }).catch(() => {});
         localStorage.removeItem("kibangoutv_auth");
+        localStorage.removeItem("kibangoutv_user");
         localStorage.removeItem("kibangou_auth");
         localStorage.removeItem("kibangou_auth_email");
         localStorage.removeItem("kibangou_auth_time");
@@ -1644,10 +1762,108 @@
       const ext = isFmp4 ? "mp4" : "ts";
       const outName = `${base}.${ext}`;
       const blob = new Blob(chunks, { type: isFmp4 ? "video/mp4" : "video/mp2t" });
+      try { await saveOfflineVideo({ id: base, title, mime: blob.type, blob, size: blob.size, ts: Date.now() }); } catch {}
       const blobUrl = URL.createObjectURL(blob);
       triggerDownloadUrl(blobUrl, outName);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
       return true;
+    }
+
+    function openOfflineDb() {
+      return new Promise((resolve, reject) => {
+        if (!window.indexedDB) return reject(new Error("IndexedDB unavailable"));
+        const req = indexedDB.open("kibangou_offline_db", 1);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains("videos")) {
+            db.createObjectStore("videos", { keyPath: "id" });
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function saveOfflineVideo(entry) {
+      const db = await openOfflineDb();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction("videos", "readwrite");
+        tx.objectStore("videos").put(entry);
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    async function listOfflineVideos() {
+      const db = await openOfflineDb();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction("videos", "readonly");
+        const req = tx.objectStore("videos").getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function deleteOfflineVideo(id) {
+      const db = await openOfflineDb();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction("videos", "readwrite");
+        tx.objectStore("videos").delete(id);
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    async function openOfflineModal() {
+      const existing = document.getElementById("kibangou-offline-modal");
+      if (existing) existing.remove();
+      const items = await listOfflineVideos().catch(() => []);
+      const modal = document.createElement("div");
+      modal.id = "kibangou-offline-modal";
+      modal.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(10,13,18,0.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;";
+      const rows = items.length
+        ? items.map((v) => `
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
+            <div>
+              <div style="font-weight:600;color:#fff;font-size:0.92rem;">${escapeHtml(v.title || v.id)}</div>
+              <div style="font-size:0.76rem;color:#94A3B8;">${((v.size || 0) / (1024 * 1024)).toFixed(1)} Mo · Hors-ligne PWA</div>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button type="button" data-play-offline="${escapeHtml(v.id)}" style="padding:6px 12px;border-radius:8px;border:none;background:#00C853;color:#08140C;font-weight:700;cursor:pointer;">Lire</button>
+              <button type="button" data-del-offline="${escapeHtml(v.id)}" style="padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.16);background:transparent;color:#F87171;cursor:pointer;">Suppr.</button>
+            </div>
+          </div>`).join("")
+        : '<div style="color:#94A3B8;font-size:0.9rem;padding:16px 0;">Aucune vidéo enregistrée hors-ligne pour le moment. Téléchargez un film ou une série pour le retrouver ici sans connexion.</div>';
+
+      modal.innerHTML = `
+        <div style="width:100%;max-width:480px;background:#151C24;border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:80vh;overflow-y:auto;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong style="color:#fff;font-size:1.05rem;">Mes vidéos hors-ligne (PWA)</strong>
+            <button type="button" id="kibangou-offline-close" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;">✕</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">${rows}</div>
+        </div>`;
+      document.body.appendChild(modal);
+      modal.querySelector("#kibangou-offline-close").addEventListener("click", () => modal.remove());
+      modal.addEventListener("click", (ev) => { if (ev.target === modal) modal.remove(); });
+      modal.querySelectorAll("[data-play-offline]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const entry = items.find((x) => x.id === btn.getAttribute("data-play-offline"));
+          if (!entry || !entry.blob) return;
+          const u = URL.createObjectURL(entry.blob);
+          const wrap = document.createElement("div");
+          wrap.style.cssText = "position:fixed;inset:0;z-index:100000;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;";
+          wrap.innerHTML = `<button type="button" style="position:absolute;top:16px;right:16px;padding:8px 14px;border-radius:8px;border:none;background:#1E293B;color:#fff;font-weight:700;cursor:pointer;z-index:2;">Fermer</button><video controls autoplay playsinline style="width:100%;max-height:92vh;" src="${u}"></video>`;
+          wrap.querySelector("button").addEventListener("click", () => { URL.revokeObjectURL(u); wrap.remove(); });
+          document.body.appendChild(wrap);
+        });
+      });
+      modal.querySelectorAll("[data-del-offline]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          await deleteOfflineVideo(btn.getAttribute("data-del-offline"));
+          openOfflineModal();
+        });
+      });
     }
 
     async function downloadResolvedVideo(resolved, title) {
@@ -2160,6 +2376,33 @@
         }
       }
 
+      const barRightForCast = playerRoot.querySelector(".player-bar-right");
+      if (barRightForCast && !barRightForCast.querySelector("#kibangou-player-cast-btn")) {
+        const castBtn = document.createElement("button");
+        castBtn.type = "button";
+        castBtn.id = "kibangou-player-cast-btn";
+        castBtn.className = "player-ctrl-btn";
+        castBtn.title = "Diffuser sur TV (Chromecast / AirPlay)";
+        castBtn.setAttribute("aria-label", "Diffuser sur TV");
+        castBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>`;
+        castBtn.addEventListener("click", async (ev) => {
+          ev.stopPropagation();
+          const v = playerRoot.querySelector("video.player-video");
+          if (v && typeof v.webkitShowPlaybackTargetPicker === "function") {
+            v.webkitShowPlaybackTargetPicker();
+            return;
+          }
+          if (v && v.remote && typeof v.remote.prompt === "function") {
+            try {
+              await v.remote.prompt();
+              return;
+            } catch {}
+          }
+          showToast("Aucun écran Chromecast/AirPlay détecté sur ce réseau Wi-Fi.");
+        });
+        barRightForCast.prepend(castBtn);
+      }
+
       const video = playerRoot.querySelector("video.player-video");
       if (video && !video.dataset.kibangouPlayFixBound) {
         video.dataset.kibangouPlayFixBound = "1";
@@ -2358,7 +2601,32 @@
             targetContainer.appendChild(adultCard);
           }
 
+          if (!targetContainer.querySelector("#settings-apps-offline-card")) {
+            const appsCard = document.createElement("div");
+            appsCard.id = "settings-apps-offline-card";
+            appsCard.className = "s-group kibangou-settings-card";
+            appsCard.setAttribute("data-zone", "v");
+            appsCard.innerHTML = `
+              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Hors-ligne, Applications &amp; Performances</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos enregistrées sans connexion, téléchargez les apps Mobile/PC/TV ou consultez les Web Vitals.</div>
+              <div class="kibangou-adult-links">
+                <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Vidéos hors-ligne (PWA)</button>
+                <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC (.exe) &amp; TV →</a>
+                <a href="/analytics" class="kibangou-adult-link kibangou-adult-link-secondary">Performances du site →</a>
+              </div>
+            `;
+            appsCard.querySelector("#btn-open-offline-videos").addEventListener("click", openOfflineModal);
+            targetContainer.appendChild(appsCard);
+          }
+
           if (!targetContainer.querySelector("#settings-logout-card")) {
+            let userLabel = "Vous êtes connecté à KibangouTV.";
+            try {
+              const u = JSON.parse(localStorage.getItem("kibangoutv_user") || "null");
+              if (u && u.email) {
+                userLabel = `Connecté en tant que ${u.name || u.email} (${u.email}${u.provider === "google" ? " · Google" : ""}).`;
+              }
+            } catch {}
             const card = document.createElement("div");
             card.id = "settings-logout-card";
             card.className = "s-group kibangou-settings-card";
@@ -2367,7 +2635,7 @@
             card.style.borderColor = "rgba(248, 113, 113, 0.25)";
             card.innerHTML = `
               <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Compte & Session KibangouTV</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Vous êtes connecté à KibangouTV. Déconnectez-vous pour verrouiller l'application.</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">${escapeHtml(userLabel)}</div>
               <button type="button" id="btn-settings-logout-action" style="margin-top:4px; height:42px; width:fit-content; padding:0 20px; border-radius:10px; border:none; background:#E5484D; color:#FFFFFF; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 Se déconnecter
@@ -2488,6 +2756,58 @@
         targets[nextIdx].click();
       }
     }, 6000);
+    (function initFreeWebVitals() {
+      const queue = [];
+      let timer = null;
+      const device = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? "mobile" : "desktop";
+      const conn = navigator.connection?.effectiveType || "unknown";
+      function flush() {
+        timer = null;
+        if (!queue.length) return;
+        const payload = JSON.stringify({ events: queue.splice(0, queue.length) });
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon("/api/telemetry", new Blob([payload], { type: "application/json" }));
+        } else {
+          fetch("/api/telemetry", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true }).catch(() => {});
+        }
+      }
+      function pushMetric(metric, value) {
+        queue.push({ metric, value: Math.round(value * 100) / 100, path: location.hash || "/", connection: conn, device });
+        if (!timer) timer = setTimeout(flush, 3000);
+      }
+      try {
+        const nav = performance.getEntriesByType("navigation")[0];
+        if (nav && nav.responseStart > 0) pushMetric("TTFB", nav.responseStart);
+      } catch {}
+      if (typeof PerformanceObserver === "function") {
+        try {
+          new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const last = entries[entries.length - 1];
+            if (last) pushMetric("LCP", last.startTime);
+          }).observe({ type: "largest-contentful-paint", buffered: true });
+        } catch {}
+        try {
+          new PerformanceObserver((list) => {
+            for (const e of list.getEntries()) {
+              if (e.name === "first-contentful-paint") pushMetric("FCP", e.startTime);
+            }
+          }).observe({ type: "paint", buffered: true });
+        } catch {}
+        try {
+          let clsTotal = 0;
+          new PerformanceObserver((list) => {
+            for (const e of list.getEntries()) {
+              if (!e.hadRecentInput) clsTotal += e.value;
+            }
+            pushMetric("CLS", clsTotal);
+          }).observe({ type: "layout-shift", buffered: true });
+        } catch {}
+      }
+      window.addEventListener("kibangou-auto-downgrade", () => pushMetric("BUFFER_STALL", 1));
+    })();
   </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>

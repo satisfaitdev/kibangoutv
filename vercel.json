@@ -45,6 +45,30 @@
       "handle": "filesystem"
     },
     {
+      "src": "^/download/?$",
+      "dest": "/download.html"
+    },
+    {
+      "src": "^/analytics/?$",
+      "dest": "/analytics.html"
+    },
+    {
+      "src": "^/api/telemetry/?$",
+      "dest": "/api/telemetry.js"
+    },
+    {
+      "src": "^/api/auth/google/callback$",
+      "dest": "/api/auth.js?action=google_callback"
+    },
+    {
+      "src": "^/api/auth/google$",
+      "dest": "/api/auth.js?action=google"
+    },
+    {
+      "src": "^/api/auth/?$",
+      "dest": "/api/auth.js"
+    },
+    {
       "src": "^/api/proxy$",
       "dest": "/api/proxy.js"
     },
