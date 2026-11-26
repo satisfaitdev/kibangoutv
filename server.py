@@ -571,6 +571,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         if "Range" in self.headers:
             headers["Range"] = self.headers["Range"]
 
+        want_abr = urllib.parse.parse_qs(parsed.query).get("abr", [""])[0] == "1"
         header_cache_key = f"{target_url}|{custom_hdrs.get('referer') or custom_hdrs.get('Referer') or ''}"
         if method == "GET" and not is_download and req_quality:
             with CACHE_LOCK:
@@ -654,7 +655,7 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                         proto = (self.headers.get("X-Forwarded-Proto") or "http").split(",")[0].strip()
                         host_hdr = self.headers.get("Host", f"localhost:{PORT}")
                         full_stream_base = f"{proto}://{host_hdr}{stream_base}"
-                        out_text = build_adaptive_m3u8(text, final_url, full_stream_base, req_quality, bool(FFMPEG_BIN))
+                        out_text = build_adaptive_m3u8(text, final_url, full_stream_base, req_quality, bool(FFMPEG_BIN and (want_abr or (req_quality and req_quality != "orig"))))
                         out = out_text.encode("utf-8")
                         self.send_response(resp.status)
                         self.send_header("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8")

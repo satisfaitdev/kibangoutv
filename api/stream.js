@@ -123,13 +123,14 @@ async function handleStreamRequest(request, method) {
     }
 
     const q = normalizeQualityId(parsed.searchParams.get("q"));
+    const wantAbr = parsed.searchParams.get("abr") === "1";
     const headerCacheKey = `${targetUrl}|${customHeaders.referer || customHeaders.Referer || ""}`;
 
     // Hit rapide du cache M3U8 sur le passage Master -> Variante ABR
     if (method === "GET" && !isDownload && q) {
       const cachedM3u8 = m3u8Cache.get(headerCacheKey);
       if (cachedM3u8 && Date.now() - cachedM3u8.ts < M3U8_BURST_TTL_MS) {
-        const ffmpegBin = q !== "orig" ? await resolveFfmpegPath() : null;
+        const ffmpegBin = wantAbr && q !== "orig" ? await resolveFfmpegPath() : null;
         const fullStreamBase = buildStreamBaseUrl(request, parsed);
         const rewritten = buildAdaptiveM3u8(cachedM3u8.text, cachedM3u8.finalUrl, fullStreamBase, q, Boolean(ffmpegBin));
         return new Response(rewritten, {
@@ -199,7 +200,7 @@ async function handleStreamRequest(request, method) {
           });
         }
 
-        const needFfmpeg = !q || (q !== "orig" && Boolean(TRANSCODE_PROFILES[q]));
+        const needFfmpeg = wantAbr || (q && q !== "orig" && Boolean(TRANSCODE_PROFILES[q]));
         const ffmpegBin = needFfmpeg ? await resolveFfmpegPath() : null;
         const fullStreamBase = buildStreamBaseUrl(request, parsed);
         const rewritten = buildAdaptiveM3u8(text, finalUrl, fullStreamBase, q, Boolean(ffmpegBin));

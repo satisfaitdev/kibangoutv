@@ -116,9 +116,12 @@ export class KibangouHls extends OriginalHls {
     ) {
       const streamPrefix = `${location.origin}/api/stream`;
       if (!target.startsWith(streamPrefix) && !target.startsWith("/api/stream")) {
-        target = `${streamPrefix}?u=${encodeURIComponent(target)}`;
+        const snap = this.getNetworkSnapshot();
+        const abrParam = (snap.tier === "2G" || snap.tier === "3G") ? "&abr=1" : "";
+        target = `${streamPrefix}?u=${encodeURIComponent(target)}${abrParam}`;
       }
     }
+    this._rawSourceUrl = url;
     return super.loadSource(target);
   }
 
@@ -293,7 +296,27 @@ export class KibangouHls extends OriginalHls {
     if (!this.levels || !this.levels.length) return;
 
     const sorted = this._getSortedLevelIndices();
-    if (sorted.length <= 1) return;
+    if (sorted.length <= 1) {
+      // Si le flux est en passthrough (1 seul niveau) et que la connexion chute vraiment en 2G/3G, activer &abr=1
+      if (
+        !this._abrFallbackTriggered &&
+        this._hasRealSample &&
+        this._measuredKbps > 0 &&
+        this._measuredKbps < 550 &&
+        typeof this._rawSourceUrl === "string" &&
+        this._rawSourceUrl &&
+        !this._rawSourceUrl.includes("abr=1")
+      ) {
+        this._abrFallbackTriggered = true;
+        const streamPrefix = `${location.origin}/api/stream`;
+        const nextUrl = this._rawSourceUrl.startsWith("/api/stream") || this._rawSourceUrl.startsWith(streamPrefix)
+          ? `${this._rawSourceUrl}${this._rawSourceUrl.includes("?") ? "&" : "?"}abr=1`
+          : `${streamPrefix}?u=${encodeURIComponent(this._rawSourceUrl)}&abr=1`;
+        this._emitAutoDowngrade(360, this.getNetworkSnapshot(), reason);
+        super.loadSource(nextUrl);
+      }
+      return;
+    }
 
     const curIdx = this.currentLevel >= 0 ? this.currentLevel : this.loadLevel;
     const pos = sorted.findIndex((e) => e.idx === curIdx);
