@@ -32,6 +32,10 @@ public class MainActivity extends Activity {
         ws.setDatabaseEnabled(true);
         ws.setMediaPlaybackRequiresUserGesture(false);
         ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        String ua = ws.getUserAgentString();
+        if (ua != null) {
+            ws.setUserAgentString(ua.replace("; wv", "").replace("Version/4.0 ", ""));
+        }
 
         webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());

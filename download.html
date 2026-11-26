@@ -243,10 +243,10 @@
           </div>
         </div>
         <div class="hero-panel">
-          <div class="stat-row"><span>Chaînes Canal+ &amp; Thématiques</span><strong>125+</strong></div>
-          <div class="stat-row"><span>Chaînes Locales Africaines</span><strong>65+</strong></div>
-          <div class="stat-row"><span>Mode Hors-ligne (PWA)</span><strong>Inclus</strong></div>
-          <div class="stat-row"><span>Connexion Google &amp; E-mail</span><strong>Sécurisée</strong></div>
+          <div class="stat-row"><span>Chaînes TV en direct</span><strong id="stat-live">306</strong></div>
+          <div class="stat-row"><span>Films (FR, International &amp; +18)</span><strong id="stat-movies">189</strong></div>
+          <div class="stat-row"><span>Séries &amp; Saisons</span><strong id="stat-series">132</strong></div>
+          <div class="stat-row"><span>Total contenus KibangouTV</span><strong id="stat-total">627</strong></div>
         </div>
       </div>
     </section>
@@ -374,6 +374,16 @@
     });
 
     async function checkBinaries() {
+      try {
+        const sr = await fetch("/api/catalog?stats=1");
+        if (sr.ok) {
+          const st = await sr.json();
+          if (st.live) document.getElementById("stat-live").textContent = st.live;
+          if (st.movies) document.getElementById("stat-movies").textContent = st.movies;
+          if (st.series) document.getElementById("stat-series").textContent = st.series;
+          if (st.total) document.getElementById("stat-total").textContent = st.total;
+        }
+      } catch {}
       const checks = [
         { url: "/downloads/KibangouTV-Mobile.apk", el: "status-mobile" },
         { url: "/downloads/KibangouTV-Windows.exe", el: "status-exe" },

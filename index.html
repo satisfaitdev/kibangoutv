@@ -1671,6 +1671,11 @@
     }
 
     function triggerDownloadUrl(dlUrl, filename) {
+      if (window.KibangouAndroid && typeof window.KibangouAndroid.downloadUrl === "function" && !dlUrl.startsWith("blob:")) {
+        window.KibangouAndroid.downloadUrl(dlUrl, filename || "video.mp4");
+        showToast(`Téléchargement sur l'appareil : ${filename}`);
+        return;
+      }
       const a = document.createElement("a");
       a.href = dlUrl;
       a.setAttribute("download", filename || "video.mp4");
@@ -1679,7 +1684,7 @@
       document.body.appendChild(a);
       a.click();
       setTimeout(() => a.remove(), 500);
-      showToast(`Téléchargement lancé : ${filename}`);
+      showToast(`Téléchargement sur l'appareil : ${filename}`);
     }
 
     async function downloadHlsAsVideo(m3u8Url, headers, title) {
@@ -1763,6 +1768,18 @@
       const outName = `${base}.${ext}`;
       const blob = new Blob(chunks, { type: isFmp4 ? "video/mp4" : "video/mp2t" });
       try { await saveOfflineVideo({ id: base, title, mime: blob.type, blob, size: blob.size, ts: Date.now() }); } catch {}
+      if (window.KibangouAndroid && typeof window.KibangouAndroid.saveBase64 === "function") {
+        try {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const b64 = String(reader.result || "").split(",")[1] || "";
+            if (b64) window.KibangouAndroid.saveBase64(outName, b64);
+          };
+          reader.readAsDataURL(blob);
+          showToast(`Vidéo enregistrée dans Téléchargements : ${outName}`);
+          return true;
+        } catch {}
+      }
       const blobUrl = URL.createObjectURL(blob);
       triggerDownloadUrl(blobUrl, outName);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);

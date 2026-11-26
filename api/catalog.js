@@ -15,6 +15,36 @@ export default async function handler(req, res) {
     const parsedUrl = new URL(req.url || "/", "https://kibangoutv.vercel.app");
     const sp = parsedUrl.searchParams;
 
+    if (q.stats === "1" || sp.get("stats") === "1") {
+      const readCount = (rel) => {
+        try {
+          const p = path.join(process.cwd(), rel);
+          if (!fs.existsSync(p)) return 0;
+          const d = JSON.parse(fs.readFileSync(p, "utf8"));
+          return Array.isArray(d.items) ? d.items.length : 0;
+        } catch {
+          return 0;
+        }
+      };
+      const live =
+        readCount("kibangou-addon/catalog/live/canal_congo.json") +
+        readCount("kibangou-addon/catalog/live/local_channels.json") +
+        readCount("kibangou-addon/catalog/live/bein.json") +
+        readCount("kibangou-addon/catalog/live/tnt.json") +
+        readCount("adult-addon/catalog/live/adult-channels.json");
+      const movies =
+        readCount("kibangou-addon/catalog/video/movie.json") +
+        readCount("french-addon/catalog/video/films-vf.json") +
+        readCount("french-addon/catalog/video/boxoffice-fr.json") +
+        readCount("french-addon/catalog/video/comedies-fr.json") +
+        readCount("adult-addon/catalog/video/adult-vod.json");
+      const series =
+        readCount("kibangou-addon/catalog/series/series.json") +
+        readCount("french-addon/catalog/series/series-vf.json") +
+        readCount("adult-addon/catalog/series/adult-series.json");
+      return res.status(200).json({ live, movies, series, total: live + movies + series });
+    }
+
     const addon = q.addon || sp.get("addon") || "kibangou-addon";
     let type = q.type || sp.get("type") || "live";
     let id = q.id || sp.get("id") || "canal_congo";
