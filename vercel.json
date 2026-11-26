@@ -4,194 +4,113 @@
     "api/stream.js": {
       "includeFiles": "node_modules/ffmpeg-static/**",
       "maxDuration": 300
+    },
+    "api/catalog.js": {
+      "includeFiles": "{kibangou-addon,french-addon,adult-addon}/catalog/**"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/sw.js",
-      "destination": "/sw.js"
+      "src": "^/sw\\.js$",
+      "headers": {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Service-Worker-Allowed": "/",
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Access-Control-Allow-Origin": "*"
+      },
+      "continue": true
     },
     {
-      "source": "/manifest.webmanifest",
-      "destination": "/manifest.webmanifest"
+      "src": "^/manifest\\.webmanifest$",
+      "headers": {
+        "Content-Type": "application/manifest+json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*"
+      },
+      "continue": true
     },
     {
-      "source": "/manifest.json",
-      "destination": "/manifest.json"
+      "src": "^/(.*)$",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
+        "Access-Control-Allow-Headers": "*"
+      },
+      "continue": true
     },
     {
-      "source": "/api/proxy",
-      "destination": "/api/proxy.js"
+      "src": "^/(kibangou-addon|french-addon|adult-addon)/catalog/([^/]+)/([^/?]+)$",
+      "dest": "/api/catalog.js?addon=$1&type=$2&id=$3"
     },
     {
-      "source": "/api/stream/h_:hdr",
-      "destination": "/api/stream.js?h=:hdr"
+      "handle": "filesystem"
     },
     {
-      "source": "/api/stream",
-      "destination": "/api/stream.js"
+      "src": "^/api/proxy$",
+      "dest": "/api/proxy.js"
     },
     {
-      "source": "/get",
-      "destination": "/api/get.js"
+      "src": "^/api/stream/h_([^/?]+)$",
+      "dest": "/api/stream.js?h=$1"
     },
     {
-      "source": "/kibangou-addon/resolve",
-      "destination": "/api/resolve.js"
+      "src": "^/api/stream$",
+      "dest": "/api/stream.js"
     },
     {
-      "source": "/french-addon/resolve",
-      "destination": "/api/resolve.js"
+      "src": "^/get$",
+      "dest": "/api/get.js"
     },
     {
-      "source": "/adult-addon/resolve",
-      "destination": "/api/resolve.js"
+      "src": "^/(?:kibangou-addon|french-addon|adult-addon)/resolve$",
+      "dest": "/api/resolve.js"
     },
     {
-      "source": "/resolve",
-      "destination": "/api/resolve.js"
+      "src": "^/(?:api/)?resolve$",
+      "dest": "/api/resolve.js"
     },
     {
-      "source": "/api/resolve",
-      "destination": "/api/resolve.js"
+      "src": "^/(?:kibangou-addon|french-addon|adult-addon)/client-fetch$",
+      "dest": "/api/client-fetch.js"
     },
     {
-      "source": "/kibangou-addon/client-fetch",
-      "destination": "/api/client-fetch.js"
+      "src": "^/(?:api/)?client-fetch$",
+      "dest": "/api/client-fetch.js"
     },
     {
-      "source": "/french-addon/client-fetch",
-      "destination": "/api/client-fetch.js"
+      "src": "^/kibangou-addon/?$",
+      "dest": "/kibangou-addon/mhub-addon.json"
     },
     {
-      "source": "/adult-addon/client-fetch",
-      "destination": "/api/client-fetch.js"
+      "src": "^/french-addon/?$",
+      "dest": "/french-addon/mhub-addon.json"
     },
     {
-      "source": "/client-fetch",
-      "destination": "/api/client-fetch.js"
+      "src": "^/adult-addon/?$",
+      "dest": "/adult-addon/mhub-addon.json"
     },
     {
-      "source": "/api/client-fetch",
-      "destination": "/api/client-fetch.js"
+      "src": "^/live2?/logo/(.*)$",
+      "dest": "/api/proxy.js?url=https://vavoo.top/live2/logo/$1"
     },
     {
-      "source": "/kibangou-addon",
-      "destination": "/kibangou-addon/mhub-addon.json"
+      "src": "^/(?:kibangou-addon|french-addon|adult-addon)/item/(.*)$",
+      "dest": "/api/item.js"
     },
     {
-      "source": "/kibangou-addon/",
-      "destination": "/kibangou-addon/mhub-addon.json"
+      "src": "^/item/(.*)$",
+      "dest": "/api/item.js"
     },
     {
-      "source": "/french-addon",
-      "destination": "/french-addon/mhub-addon.json"
+      "src": "^/(?:tmdb|imdb):(.*)$",
+      "dest": "/api/item.js"
     },
     {
-      "source": "/french-addon/",
-      "destination": "/french-addon/mhub-addon.json"
+      "src": "^/(?:kibangou-addon|french-addon|adult-addon)/source/(.*)$",
+      "dest": "/api/source.js"
     },
     {
-      "source": "/adult-addon",
-      "destination": "/adult-addon/mhub-addon.json"
-    },
-    {
-      "source": "/adult-addon/",
-      "destination": "/adult-addon/mhub-addon.json"
-    },
-    {
-      "source": "/kibangou-addon/catalog/:type/:id",
-      "destination": "/api/catalog.js?addon=kibangou-addon&type=:type&id=:id"
-    },
-    {
-      "source": "/french-addon/catalog/:type/:id",
-      "destination": "/api/catalog.js?addon=french-addon&type=:type&id=:id"
-    },
-    {
-      "source": "/adult-addon/catalog/:type/:id",
-      "destination": "/api/catalog.js?addon=adult-addon&type=:type&id=:id"
-    },
-    {
-      "source": "/live2/logo/:match*",
-      "destination": "/api/proxy.js?url=https://vavoo.top/live2/logo/:match*"
-    },
-    {
-      "source": "/live/logo/:match*",
-      "destination": "/api/proxy.js?url=https://vavoo.top/live2/logo/:match*"
-    },
-    {
-      "source": "/kibangou-addon/item/:match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/french-addon/item/:match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/adult-addon/item/:match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/item/:match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/tmdb\\::match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/tmdb:match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/imdb\\::match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/imdb:match*",
-      "destination": "/api/item.js"
-    },
-    {
-      "source": "/kibangou-addon/source/:match*",
-      "destination": "/api/source.js"
-    },
-    {
-      "source": "/french-addon/source/:match*",
-      "destination": "/api/source.js"
-    },
-    {
-      "source": "/adult-addon/source/:match*",
-      "destination": "/api/source.js"
-    },
-    {
-      "source": "/source/:match*",
-      "destination": "/api/source.js"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/sw.js",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "Service-Worker-Allowed", "value": "/" },
-        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
-      ]
-    },
-    {
-      "source": "/manifest.webmanifest",
-      "headers": [
-        { "key": "Content-Type", "value": "application/manifest+json; charset=utf-8" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS, HEAD" },
-        { "key": "Access-Control-Allow-Headers", "value": "*" }
-      ]
+      "src": "^/source/(.*)$",
+      "dest": "/api/source.js"
     }
   ]
 }
