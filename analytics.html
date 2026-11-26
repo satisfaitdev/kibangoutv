@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KibangouTV — Performances & Web Vitals</title>
+  <title>KibangouTV — Analytics Administrateur</title>
   <link rel="icon" type="image/png" href="./favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,6 @@
       --muted: #94A3B8;
       --accent: #00C853;
       --accent-soft: rgba(0, 200, 83, 0.14);
-      --warn: #F59E0B;
       --danger: #EF4444;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -76,88 +75,72 @@
       transition: border-color 0.2s ease, background-color 0.2s ease;
     }
     .btn:hover { border-color: rgba(255,255,255,0.22); background: var(--surface-2); }
-    .btn-primary {
-      background: var(--accent);
-      color: #07120B;
-      border-color: var(--accent);
-    }
+    .btn-primary { background: var(--accent); color: #07120B; border-color: var(--accent); }
     .btn-primary:hover { background: #12DF68; border-color: #12DF68; }
-    main {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 32px 20px 64px;
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 20px 64px; }
+    .gate {
+      max-width: 420px;
+      margin: 60px auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
+    .gate h1 { font-family: "Space Grotesk", sans-serif; font-size: 1.4rem; }
+    .gate p { color: var(--muted); font-size: 0.9rem; }
+    .gate input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .err { color: #F87171; font-size: 0.85rem; min-height: 18px; }
     .head {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
-    h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-    }
+    h1 { font-family: "Space Grotesk", sans-serif; font-size: clamp(1.6rem, 3vw, 2.1rem); }
     .sub { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
     }
-    .metric-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .metric-value {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin: 8px 0 4px;
-      color: var(--text);
-    }
-    .metric-meta { font-size: 0.82rem; color: var(--muted); }
-    .pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-    .table-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .table-head {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    th, td { padding: 12px 18px; text-align: left; border-bottom: 1px solid var(--border); }
-    th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; }
+    .metric-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .metric-value { font-family: "Space Grotesk", sans-serif; font-size: 1.85rem; font-weight: 700; margin: 6px 0 4px; }
+    .metric-meta { font-size: 0.8rem; color: var(--muted); }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; background: var(--accent-soft); color: var(--accent); }
+    .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .table-head { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; font-size: 0.76rem; text-transform: uppercase; }
     tr:last-child td { border-bottom: none; }
-    .empty { padding: 28px; text-align: center; color: var(--muted); }
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; }
-    }
+    .empty { padding: 24px; text-align: center; color: var(--muted); }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   </style>
 </head>
 <body>
@@ -175,103 +158,170 @@
   </header>
 
   <main>
-    <div class="head">
-      <div>
-        <h1>Suivi des performances (100 % gratuit)</h1>
-        <p class="sub">Web Vitals réels (LCP, FCP, CLS, INP, TTFB) + télémétrie lecteur vidéo &amp; Vercel Speed Insights.</p>
-      </div>
-      <button type="button" class="btn" id="refresh-btn">Actualiser</button>
-    </div>
-
-    <section class="grid" id="summary-grid">
-      <div class="card"><div class="metric-label">Chargement...</div><div class="metric-value">—</div></div>
+    <section id="admin-gate" class="gate" style="display:none;">
+      <h1>Accès Administrateur Privé</h1>
+      <p>Cette page est réservée au propriétaire de KibangouTV pour consulter les clics, mouvements et performances.</p>
+      <form id="admin-unlock-form" style="display:flex;flex-direction:column;gap:12px;">
+        <input type="password" id="admin-key-input" placeholder="Clé administrateur" required>
+        <div class="err" id="admin-err"></div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;">Déverrouiller Analytics</button>
+      </form>
     </section>
 
-    <section class="table-card">
-      <div class="table-head">
-        <strong>Événements récents</strong>
-        <span class="pill" id="event-count">0 mesure</span>
+    <section id="analytics-dashboard" style="display:none;">
+      <div class="head">
+        <div>
+          <h1>Analytics Privé — Clics, Mouvements &amp; Web Vitals</h1>
+          <p class="sub">Suivi en temps réel des clics utilisateurs, pages visitées, lectures vidéo et performances.</p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="btn" id="refresh-btn">Actualiser</button>
+          <button type="button" class="btn" id="lock-btn">Verrouiller</button>
+        </div>
       </div>
-      <div style="overflow-x:auto;">
-        <table>
-          <thead>
-            <tr>
-              <th>Métrique</th>
-              <th>Valeur</th>
-              <th>Réseau</th>
-              <th>Page</th>
-              <th>Appareil</th>
-              <th>Heure</th>
-            </tr>
-          </thead>
-          <tbody id="events-body">
-            <tr><td colspan="6" class="empty">Chargement des mesures...</td></tr>
-          </tbody>
-        </table>
-      </div>
+
+      <section class="grid" id="activity-grid"></section>
+      <section class="grid" id="summary-grid"></section>
+
+      <section class="split">
+        <div class="table-card">
+          <div class="table-head"><strong>Top éléments cliqués</strong></div>
+          <table>
+            <thead><tr><th>Élément / Bouton</th><th>Clics</th></tr></thead>
+            <tbody id="top-clicks-body"></tbody>
+          </table>
+        </div>
+        <div class="table-card">
+          <div class="table-head"><strong>Pages &amp; Mouvements les plus visités</strong></div>
+          <table>
+            <thead><tr><th>Route / Page</th><th>Visites</th></tr></thead>
+            <tbody id="top-routes-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <div class="table-head">
+          <strong>Journal complet (Clics, Mouvements &amp; Performances)</strong>
+          <span class="pill" id="event-count">0 mesure</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Détail / Élément</th>
+                <th>Page</th>
+                <th>Appareil</th>
+                <th>Réseau</th>
+                <th>Heure</th>
+              </tr>
+            </thead>
+            <tbody id="events-body"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 
   <script>
-    const LABELS = {
-      LCP: { name: "LCP (Affichage principal)", unit: "ms" },
-      FCP: { name: "FCP (Premier rendu)", unit: "ms" },
-      TTFB: { name: "TTFB (Réponse serveur)", unit: "ms" },
-      INP: { name: "INP (Réactivité)", unit: "ms" },
-      CLS: { name: "CLS (Stabilité visuelle)", unit: "" },
-      STREAM_START_MS: { name: "Démarrage vidéo", unit: "ms" },
-      BUFFER_STALL: { name: "Coupures / Buffering", unit: "" },
-      STREAM_ERROR: { name: "Erreurs flux", unit: "" }
+    const VITALS = {
+      LCP: { name: "LCP (Affichage)", unit: "ms" },
+      FCP: { name: "FCP (1er rendu)", unit: "ms" },
+      TTFB: { name: "TTFB (Serveur)", unit: "ms" },
+      CLS: { name: "CLS (Stabilité)", unit: "" },
+      BUFFER_STALL: { name: "Coupures / Buffering", unit: "" }
     };
 
-    function formatVal(metric, val) {
-      if (val === null || val === undefined) return "—";
-      const u = LABELS[metric]?.unit || "";
-      return u ? `${val} ${u}` : `${val}`;
+    function esc(s) {
+      return String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     }
 
     async function loadStats() {
-      try {
-        const res = await fetch("/api/telemetry", { cache: "no-store" });
-        const data = await res.json();
-        const grid = document.getElementById("summary-grid");
-        const tbody = document.getElementById("events-body");
-        document.getElementById("event-count").textContent = `${data.totalEvents || 0} mesures`;
-
-        const cards = Object.entries(LABELS).map(([key, meta]) => {
-          const s = data.summary?.[key] || { count: 0, avg: null, p75: null };
-          return `
-            <div class="card">
-              <div class="metric-label">${meta.name}</div>
-              <div class="metric-value">${formatVal(key, s.p75 ?? s.avg)}</div>
-              <div class="metric-meta">Moyenne : ${formatVal(key, s.avg)} · ${s.count} relevé(s)</div>
-            </div>
-          `;
-        });
-        grid.innerHTML = cards.join("");
-
-        const recent = Array.isArray(data.recent) ? data.recent : [];
-        if (!recent.length) {
-          tbody.innerHTML = '<tr><td colspan="6" class="empty">Aucune mesure enregistrée pour le moment. Ouvrez l\'application pour générer les premiers relevés Web Vitals.</td></tr>';
-          return;
-        }
-        tbody.innerHTML = recent.map((ev) => {
-          const d = new Date(ev.ts || Date.now()).toLocaleTimeString("fr-FR");
-          return `
-            <tr>
-              <td><strong>${ev.metric}</strong></td>
-              <td>${formatVal(ev.metric, ev.value)}</td>
-              <td>${ev.connection || "—"}</td>
-              <td>${ev.path || "/"}</td>
-              <td>${ev.device || "web"}</td>
-              <td>${d}</td>
-            </tr>
-          `;
-        }).join("");
-      } catch {
-        document.getElementById("events-body").innerHTML = '<tr><td colspan="6" class="empty">Impossible de charger les statistiques.</td></tr>';
+      const res = await fetch("/api/telemetry", { credentials: "same-origin", cache: "no-store" });
+      if (res.status === 401) {
+        document.getElementById("analytics-dashboard").style.display = "none";
+        document.getElementById("admin-gate").style.display = "flex";
+        return;
       }
+      const data = await res.json();
+      document.getElementById("admin-gate").style.display = "none";
+      document.getElementById("analytics-dashboard").style.display = "block";
+      document.getElementById("event-count").textContent = `${data.totalEvents || 0} événements`;
+
+      const act = data.activity || {};
+      document.getElementById("activity-grid").innerHTML = [
+        { label: "Total Clics", val: act.totalClicks || 0 },
+        { label: "Mouvements / Pages", val: act.totalMoves || 0 },
+        { label: "Lectures Vidéo", val: act.totalPlays || 0 },
+        { label: "Téléchargements", val: act.totalDownloads || 0 }
+      ].map((c) => `
+        <div class="card">
+          <div class="metric-label">${c.label}</div>
+          <div class="metric-value" style="color:var(--accent)">${c.val}</div>
+        </div>
+      `).join("");
+
+      document.getElementById("summary-grid").innerHTML = Object.entries(VITALS).map(([k, m]) => {
+        const s = data.summary?.[k] || { count: 0, avg: null, p75: null };
+        const v = (s.p75 ?? s.avg);
+        return `
+          <div class="card">
+            <div class="metric-label">${m.name}</div>
+            <div class="metric-value">${v !== null && v !== undefined ? `${v}${m.unit ? " " + m.unit : ""}` : "—"}</div>
+            <div class="metric-meta">Moyenne : ${s.avg ?? "—"} · ${s.count} relevé(s)</div>
+          </div>
+        `;
+      }).join("");
+
+      const topClicks = data.topClicks || [];
+      document.getElementById("top-clicks-body").innerHTML = topClicks.length
+        ? topClicks.map((r) => `<tr><td>${esc(r.name)}</td><td><strong>${r.count}</strong></td></tr>`).join("")
+        : '<tr><td colspan="2" class="empty">Aucun clic enregistré</td></tr>';
+
+      const topRoutes = data.topRoutes || [];
+      document.getElementById("top-routes-body").innerHTML = topRoutes.length
+        ? topRoutes.map((r) => `<tr><td>${esc(r.name)}</td><td><strong>${r.count}</strong></td></tr>`).join("")
+        : '<tr><td colspan="2" class="empty">Aucun mouvement enregistré</td></tr>';
+
+      const recent = data.recent || [];
+      document.getElementById("events-body").innerHTML = recent.length
+        ? recent.map((ev) => `
+          <tr>
+            <td><strong>${esc(ev.metric)}</strong></td>
+            <td>${esc(ev.label || (ev.value ? String(ev.value) : "—"))}</td>
+            <td>${esc(ev.path)}</td>
+            <td>${esc(ev.device)}</td>
+            <td>${esc(ev.connection)}</td>
+            <td>${new Date(ev.ts || Date.now()).toLocaleTimeString("fr-FR")}</td>
+          </tr>
+        `).join("")
+        : '<tr><td colspan="6" class="empty">Aucun événement enregistré</td></tr>';
     }
+
+    document.getElementById("admin-unlock-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const key = document.getElementById("admin-key-input").value;
+      const errEl = document.getElementById("admin-err");
+      errEl.textContent = "";
+      const res = await fetch("/api/telemetry?action=unlock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ key })
+      });
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        errEl.textContent = j.error || "Clé incorrecte.";
+        return;
+      }
+      loadStats();
+    });
+
+    document.getElementById("lock-btn").addEventListener("click", async () => {
+      await fetch("/api/telemetry?action=lock", { method: "POST", credentials: "same-origin" });
+      loadStats();
+    });
 
     document.getElementById("refresh-btn").addEventListener("click", loadStats);
     loadStats();
