@@ -4,6 +4,7 @@ import path from "node:path";
 
 const USERS_FILE = path.join("/tmp", "kibangou_users.json");
 const ADS_FILE = path.join("/tmp", "kibangou_ads.json");
+const LEDGER_FILE = path.join("/tmp", "kibangou_ledger.json");
 const ADMIN_COOKIE = "kibangou_admin";
 
 const CORS_HEADERS = {
@@ -93,11 +94,53 @@ export async function GET(request) {
       name: u.name || u.email,
       provider: u.provider || "email",
       banned: Boolean(u.banned),
+      referralCode: u.referralCode || "",
+      referralCount: u.referralCount || 0,
+      referredBy: u.referredBy || null,
+      adFreeUntil: u.adFreeUntil || 0,
+      adultVipUntil: u.adultVipUntil || 0,
+      noAdsVipUntil: u.noAdsVipUntil || 0,
       createdAt: u.createdAt || null,
       lastSeen: u.lastSeen || u.createdAt || null
     }));
     users.sort((a, b) => (b.lastSeen || 0) - (a.lastSeen || 0));
     return Response.json({ users }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+  }
+
+  if (action === "monetization") {
+    const usersObj = readJson(USERS_FILE, {});
+    const usersList = Object.values(usersObj);
+    const ads = readJson(ADS_FILE, []);
+    const ledger = readJson(LEDGER_FILE, []);
+    const now = Date.now();
+
+    const adFcfa = ledger.filter((l) => l.type === "ad_revenue").reduce((s, l) => s + (Number(l.amountFcfa) || 0), 0);
+    const noAdsFcfa = ledger.filter((l) => l.type === "no_ads_vip").reduce((s, l) => s + (Number(l.amountFcfa) || 0), 0);
+    const adultFcfa = ledger.filter((l) => l.type === "adult_vip").reduce((s, l) => s + (Number(l.amountFcfa) || 0), 0);
+
+    const activeAdultSubs = usersList.filter((u) => (u.adultVipUntil || 0) > now).length;
+    const activeNoAdsSubs = usersList.filter((u) => (u.noAdsVipUntil || 0) > now).length;
+    const totalReferrals = usersList.reduce((s, u) => s + (u.referralCount || 0), 0);
+    const adImpressions = (Array.isArray(ads) ? ads : []).reduce((s, a) => s + (a.impressions || 0), 0);
+    const adClicks = (Array.isArray(ads) ? ads : []).reduce((s, a) => s + (a.clicks || 0), 0);
+
+    return Response.json(
+      {
+        totals: {
+          totalFcfa: adFcfa + noAdsFcfa + adultFcfa,
+          adFcfa,
+          noAdsFcfa,
+          adultFcfa,
+          activeAdultSubs,
+          activeNoAdsSubs,
+          totalReferrals,
+          adImpressions,
+          adClicks
+        },
+        ledger: (Array.isArray(ledger) ? ledger : []).slice(0, 50)
+      },
+      { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } }
+    );
   }
 
   if (action === "ads") {
@@ -109,15 +152,73 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  if (!isAdminAuthorized(request)) {
-    return Response.json({ error: "Accès administrateur requis." }, { status: 401, headers: CORS_HEADERS });
-  }
-
   const url = new URL(request.url, "https://kibangoutv.vercel.app");
   const action = url.searchParams.get("action") || "";
   const body = await request.json().catch(() => null);
   if (!body || typeof body !== "object") {
     return Response.json({ error: "Invalid payload" }, { status: 400, headers: CORS_HEADERS });
+  }
+
+  if (action === "ad_event") {
+    const ads = readJson(ADS_FILE, []);
+    const list = Array.isArray(ads) ? ads : [];
+    const ad = list.find((a) => a.id === String(body.id || ""));
+    if (ad) {
+      if (body.event === "click") ad.clicks = (ad.clicks || 0) + 1;
+      else ad.impressions = (ad.impressions || 0) + 1;
+      writeJson(ADS_FILE, list);
+    }
+    return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
+  }
+
+  if (!isAdminAuthorized(request)) {
+    return Response.json({ error: "Accès administrateur requis." }, { status: 401, headers: CORS_HEADERS });
+  }
+
+  if (action === "grant_sub") {
+    const email = String(body.email || "").trim().toLowerCase();
+    const plan = body.plan === "no_ads_vip" ? "no_ads_vip" : "adult_vip";
+    const days = Math.max(1, Number(body.days) || 30);
+    const amountFcfa = Math.max(0, Number(body.amountFcfa) || 0);
+    const users = readJson(USERS_FILE, {});
+    if (!users[email]) {
+      users[email] = { email, name: email.split("@")[0], provider: "manual", createdAt: Date.now(), lastSeen: Date.now() };
+    }
+    const until = Math.max(Date.now(), users[email][plan === "adult_vip" ? "adultVipUntil" : "noAdsVipUntil"] || 0) + days * 86400000;
+    if (plan === "adult_vip") users[email].adultVipUntil = until;
+    else users[email].noAdsVipUntil = until;
+    writeJson(USERS_FILE, users);
+
+    const ledger = readJson(LEDGER_FILE, []);
+    const list = Array.isArray(ledger) ? ledger : [];
+    list.unshift({
+      id: `tx_${Date.now()}`,
+      type: plan,
+      email,
+      days,
+      amountFcfa,
+      note: plan === "adult_vip" ? `Abonnement Adulte +18 (${days}j)` : `Abonnement Sans Pubs (${days}j)`,
+      ts: Date.now()
+    });
+    writeJson(LEDGER_FILE, list.slice(0, 200));
+    return Response.json({ ok: true, until }, { status: 200, headers: CORS_HEADERS });
+  }
+
+  if (action === "add_ad_revenue") {
+    const amountFcfa = Math.max(0, Number(body.amountFcfa) || 0);
+    const note = String(body.note || "Revenus publicitaires").slice(0, 120);
+    const ledger = readJson(LEDGER_FILE, []);
+    const list = Array.isArray(ledger) ? ledger : [];
+    list.unshift({
+      id: `tx_${Date.now()}`,
+      type: "ad_revenue",
+      email: "ads-network",
+      amountFcfa,
+      note,
+      ts: Date.now()
+    });
+    writeJson(LEDGER_FILE, list.slice(0, 200));
+    return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "user_toggle_ban") {
