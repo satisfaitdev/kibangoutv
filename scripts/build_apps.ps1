@@ -7,9 +7,17 @@ $csc = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 $downloads = "$root\downloads"
 New-Item -ItemType Directory -Force -Path $downloads | Out-Null
 
-# 1. Build Windows .exe
+# 1. Build Windows .exe (Embedded WebView2 Standalone)
 Write-Host "Building KibangouTV-Windows.exe..."
-& $csc /nologo /target:winexe /out:"$downloads\KibangouTV-Windows.exe" "$root\apps\windows\KibangouTV.cs"
+$wv2Core = "$root\apps\windows\wv2\lib\net462\Microsoft.Web.WebView2.Core.dll"
+$wv2Win = "$root\apps\windows\wv2\lib\net462\Microsoft.Web.WebView2.WinForms.dll"
+$wv2Loader = "$root\apps\windows\wv2\runtimes\win-x64\native\WebView2Loader.dll"
+& $csc /nologo /platform:x64 /target:winexe `
+  /reference:$wv2Core /reference:$wv2Win `
+  /resource:"$wv2Core,Microsoft.Web.WebView2.Core.dll" `
+  /resource:"$wv2Win,Microsoft.Web.WebView2.WinForms.dll" `
+  /resource:"$wv2Loader,WebView2Loader.dll" `
+  /out:"$downloads\KibangouTV-Windows.exe" "$root\apps\windows\KibangouTV.cs"
 if ($LASTEXITCODE -ne 0) { throw "Windows build failed" }
 
 # 2. Ensure debug keystore

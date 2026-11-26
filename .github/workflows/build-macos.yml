@@ -1,0 +1,22 @@
+name: Build macOS App (.dmg)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'apps/macos/**'
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile KibangouTV.app and package .dmg
+        run: |
+          mkdir -p KibangouTV.app/Contents/MacOS KibangouTV.app/Contents/Resources
+          cp apps/macos/Info.plist KibangouTV.app/Contents/Info.plist
+          swiftc -O apps/macos/KibangouTV.swift -o KibangouTV.app/Contents/MacOS/KibangouTV
+          hdiutil create -volname "KibangouTV" -srcfolder KibangouTV.app -ov -format UDZO KibangouTV-Mac.dmg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: KibangouTV-Mac-DMG
+          path: KibangouTV-Mac.dmg

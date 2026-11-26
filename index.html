@@ -2692,28 +2692,19 @@
           }
 
           if (!targetContainer.querySelector("#settings-apps-offline-card")) {
-            const tvActive = document.documentElement.classList.contains("tv-mode");
             const appsCard = document.createElement("div");
             appsCard.id = "settings-apps-offline-card";
             appsCard.className = "s-group kibangou-settings-card";
             appsCard.setAttribute("data-zone", "v");
             appsCard.innerHTML = `
-              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Hors-ligne, Mode TV &amp; Applications</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos hors-ligne, activez l'interface Télécommande TV ou téléchargez les apps Mobile/PC/TV.</div>
+              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Hors-ligne &amp; Applications</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos enregistrées sans connexion ou téléchargez les apps Mobile, PC (.exe), Mac &amp; TV.</div>
               <div class="kibangou-adult-links">
                 <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Vidéos hors-ligne (PWA)</button>
-                <button type="button" id="btn-toggle-tv-mode" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:none;cursor:pointer;">${tvActive ? "Désactiver Mode TV" : "Activer Mode TV (Télécommande)"}</button>
-                <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC (.exe) &amp; TV →</a>
+                <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC, Mac &amp; TV →</a>
               </div>
             `;
             appsCard.querySelector("#btn-open-offline-videos").addEventListener("click", openOfflineModal);
-            appsCard.querySelector("#btn-toggle-tv-mode").addEventListener("click", () => {
-              const next = !document.documentElement.classList.contains("tv-mode");
-              try { localStorage.setItem("kibangoutv_tv_mode", next ? "1" : "0"); } catch {}
-              document.documentElement.classList.toggle("tv-mode", next);
-              appsCard.querySelector("#btn-toggle-tv-mode").textContent = next ? "Désactiver Mode TV" : "Activer Mode TV (Télécommande)";
-              showToast(next ? "Mode TV (Télécommande) activé" : "Mode TV désactivé");
-            });
             targetContainer.appendChild(appsCard);
           }
 

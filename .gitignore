@@ -8,3 +8,5 @@ build_bouquet.py
 
 .vercel
 node_modules/
+
+apps/windows/wv2/
