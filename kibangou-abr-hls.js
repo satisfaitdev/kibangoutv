@@ -434,10 +434,14 @@ export class KibangouHls extends OriginalHls {
           if (this._consecutiveFastSegments >= 2) {
             this._consecutiveFastSegments = 0;
             const sorted = this._getSortedLevelIndices();
-            const pos = sorted.findIndex((e) => e.idx === this.autoLevelCapping);
-            if (pos >= 0 && pos + 1 < sorted.length) {
-              this.autoLevelCapping = sorted[pos + 1].idx;
-              this.nextLevel = -1;
+            const curPos = sorted.findIndex((e) => e.idx === (this.currentLevel >= 0 ? this.currentLevel : this.loadLevel));
+            if (curPos >= 0 && curPos + 1 < sorted.length) {
+              const nextEntry = sorted[curPos + 1];
+              const capPos = sorted.findIndex((e) => e.idx === this.autoLevelCapping);
+              if (this.autoLevelCapping >= 0 && capPos < curPos + 1) {
+                this.autoLevelCapping = (curPos + 1 === sorted.length - 1) ? -1 : nextEntry.idx;
+              }
+              this.nextLevel = nextEntry.idx;
             } else if (this.autoLevelCapping >= 0) {
               this.autoLevelCapping = -1;
               this.nextLevel = -1;
