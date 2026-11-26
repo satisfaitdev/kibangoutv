@@ -1,0 +1,21 @@
+{
+  "id": "af_rd_congo_lollywood_hd_tv",
+  "name": "Lollywood HD TV (RD Congo)",
+  "type": "live",
+  "url": "https://stream.berosat.live/hls/lollywood-hd/lollywood-hd.m3u8",
+  "country": "RD Congo",
+  "category": "RD Congo",
+  "group": "Chaînes Locales",
+  "genres": [
+    "RD Congo"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/fQhrsdr.png",
+    "poster": "https://i.imgur.com/fQhrsdr.png"
+  },
+  "tags": [
+    "RD Congo",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

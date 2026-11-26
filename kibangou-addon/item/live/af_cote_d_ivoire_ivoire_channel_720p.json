@@ -1,0 +1,21 @@
+{
+  "id": "af_cote_d_ivoire_ivoire_channel_720p",
+  "name": "Ivoire Channel (720p) (Côte d'Ivoire)",
+  "type": "live",
+  "url": "https://video1.getstreamhosting.com:1936/8244/8244/playlist.m3u8",
+  "country": "Côte d'Ivoire",
+  "category": "Côte d'Ivoire",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Côte d'Ivoire"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/gKbNqQv.png",
+    "poster": "https://i.imgur.com/gKbNqQv.png"
+  },
+  "tags": [
+    "Côte d'Ivoire",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

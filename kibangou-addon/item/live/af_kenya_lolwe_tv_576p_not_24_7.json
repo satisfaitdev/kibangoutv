@@ -1,0 +1,21 @@
+{
+  "id": "af_kenya_lolwe_tv_576p_not_24_7",
+  "name": "Lolwe TV (576p) [Not 24/7] (Kenya)",
+  "type": "live",
+  "url": "https://goliveafrica.media:9998/live/62580e144eb43/index.m3u8",
+  "country": "Kenya",
+  "category": "Kenya",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Kenya"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/tjZ1cOP.png",
+    "poster": "https://i.imgur.com/tjZ1cOP.png"
+  },
+  "tags": [
+    "Kenya",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "af_algerie_cna_algeria_360p_not_24_7",
+  "name": "CNA (Algeria) (360p) [Not 24/7] (Algérie)",
+  "type": "live",
+  "url": "https://live.creacast.com/cna/stream/playlist.m3u8",
+  "country": "Algérie",
+  "category": "Algérie",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Algérie"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/Ki3ySUE.png",
+    "poster": "https://i.imgur.com/Ki3ySUE.png"
+  },
+  "tags": [
+    "Algérie",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

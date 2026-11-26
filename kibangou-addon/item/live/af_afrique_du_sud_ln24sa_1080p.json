@@ -1,0 +1,21 @@
+{
+  "id": "af_afrique_du_sud_ln24sa_1080p",
+  "name": "LN24SA (1080p) (Afrique du Sud)",
+  "type": "live",
+  "url": "https://cdnstack.internetmultimediaonline.org/ln24/ln24.stream/playlist.m3u8",
+  "country": "Afrique du Sud",
+  "category": "Afrique du Sud",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Afrique du Sud"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/Hg5YTwu.png",
+    "poster": "https://i.imgur.com/Hg5YTwu.png"
+  },
+  "tags": [
+    "Afrique du Sud",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

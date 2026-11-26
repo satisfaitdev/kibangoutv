@@ -1,0 +1,21 @@
+{
+  "id": "af_nigeria_superscreen_tv_412p",
+  "name": "Superscreen TV (412p) (Nigeria)",
+  "type": "live",
+  "url": "https://video1.getstreamhosting.com:1936/8398/8398/playlist.m3u8",
+  "country": "Nigeria",
+  "category": "Nigeria",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Nigeria"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/uTNmSWE.png",
+    "poster": "https://i.imgur.com/uTNmSWE.png"
+  },
+  "tags": [
+    "Nigeria",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

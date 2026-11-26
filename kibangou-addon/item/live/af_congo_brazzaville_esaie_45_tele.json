@@ -1,0 +1,21 @@
+{
+  "id": "af_congo_brazzaville_esaie_45_tele",
+  "name": "Esaie 45 Tele (Congo-Brazzaville)",
+  "type": "live",
+  "url": "https://stream.berosat.live/hls/esaie45-tv/esaie45-tv.m3u8",
+  "country": "Congo-Brazzaville",
+  "category": "Congo-Brazzaville",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Congo-Brazzaville"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/nc9QBnD.png",
+    "poster": "https://i.imgur.com/nc9QBnD.png"
+  },
+  "tags": [
+    "Congo-Brazzaville",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

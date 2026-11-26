@@ -1,0 +1,21 @@
+{
+  "id": "af_cameroun_cam_10_tv_720p",
+  "name": "CAM 10 TV (720p) (Cameroun)",
+  "type": "live",
+  "url": "https://stream.it-innov.com/cam10tv/index.m3u8",
+  "country": "Cameroun",
+  "category": "Cameroun",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Cameroun"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/xspb9uY.png",
+    "poster": "https://i.imgur.com/xspb9uY.png"
+  },
+  "tags": [
+    "Cameroun",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

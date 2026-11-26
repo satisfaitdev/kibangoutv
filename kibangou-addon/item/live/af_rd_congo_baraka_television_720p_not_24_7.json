@@ -1,0 +1,21 @@
+{
+  "id": "af_rd_congo_baraka_television_720p_not_24_7",
+  "name": "Baraka Television (720p) [Not 24/7] (RD Congo)",
+  "type": "live",
+  "url": "https://stream.berosat.live:19360/baraka-hd/baraka-hd.m3u8",
+  "country": "RD Congo",
+  "category": "RD Congo",
+  "group": "Chaînes Locales",
+  "genres": [
+    "RD Congo"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/IKXddHN.png",
+    "poster": "https://i.imgur.com/IKXddHN.png"
+  },
+  "tags": [
+    "RD Congo",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

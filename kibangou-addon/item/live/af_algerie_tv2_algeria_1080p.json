@@ -1,0 +1,21 @@
+{
+  "id": "af_algerie_tv2_algeria_1080p",
+  "name": "TV2 (Algeria) (1080p) (Algérie)",
+  "type": "live",
+  "url": "http://185.9.2.18/chid_347/index.m3u8",
+  "country": "Algérie",
+  "category": "Algérie",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Algérie"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/VEb631f.png",
+    "poster": "https://i.imgur.com/VEb631f.png"
+  },
+  "tags": [
+    "Algérie",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

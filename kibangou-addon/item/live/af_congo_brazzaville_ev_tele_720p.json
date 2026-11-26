@@ -1,0 +1,21 @@
+{
+  "id": "af_congo_brazzaville_ev_tele_720p",
+  "name": "Ev-tele (720p) (Congo-Brazzaville)",
+  "type": "live",
+  "url": "https://playtv4k.live/live/EVTELE/index.m3u8",
+  "country": "Congo-Brazzaville",
+  "category": "Congo-Brazzaville",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Congo-Brazzaville"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/iBlXl2T.png",
+    "poster": "https://i.imgur.com/iBlXl2T.png"
+  },
+  "tags": [
+    "Congo-Brazzaville",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

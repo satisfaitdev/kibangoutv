@@ -1,0 +1,21 @@
+{
+  "id": "af_rd_congo_evi_tv_720p",
+  "name": "EVI TV (720p) (RD Congo)",
+  "type": "live",
+  "url": "https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8",
+  "country": "RD Congo",
+  "category": "RD Congo",
+  "group": "Chaînes Locales",
+  "genres": [
+    "RD Congo"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/fBc9JSM.png",
+    "poster": "https://i.imgur.com/fBc9JSM.png"
+  },
+  "tags": [
+    "RD Congo",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

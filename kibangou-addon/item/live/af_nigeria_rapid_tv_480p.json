@@ -1,0 +1,21 @@
+{
+  "id": "af_nigeria_rapid_tv_480p",
+  "name": "Rapid TV (480p) (Nigeria)",
+  "type": "live",
+  "url": "https://stream-hls.castr-cdn.com/6a05a899db0ebd344a759542/live_9655bc604f8211f19e748901a3f596d0/index.m3u8",
+  "country": "Nigeria",
+  "category": "Nigeria",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Nigeria"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/FkMNcj1.jpeg",
+    "poster": "https://i.imgur.com/FkMNcj1.jpeg"
+  },
+  "tags": [
+    "Nigeria",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

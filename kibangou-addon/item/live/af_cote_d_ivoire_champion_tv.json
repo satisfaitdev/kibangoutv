@@ -1,0 +1,21 @@
+{
+  "id": "af_cote_d_ivoire_champion_tv",
+  "name": "Champion TV (Côte d'Ivoire)",
+  "type": "live",
+  "url": "https://stream.berosat.live/hls/champion-tv/champion-tv.m3u8",
+  "country": "Côte d'Ivoire",
+  "category": "Côte d'Ivoire",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Côte d'Ivoire"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/WjHSrHN.png",
+    "poster": "https://i.imgur.com/WjHSrHN.png"
+  },
+  "tags": [
+    "Côte d'Ivoire",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

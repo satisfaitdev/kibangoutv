@@ -1,0 +1,21 @@
+{
+  "id": "af_maroc_al_maghribia_1080p",
+  "name": "Al Maghribia (1080p) (Maroc)",
+  "type": "live",
+  "url": "http://185.9.2.18/chid_205/index.m3u8",
+  "country": "Maroc",
+  "category": "Maroc",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Maroc"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/7GaahYh.png",
+    "poster": "https://i.imgur.com/7GaahYh.png"
+  },
+  "tags": [
+    "Maroc",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

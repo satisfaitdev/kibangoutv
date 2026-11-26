@@ -1,0 +1,21 @@
+{
+  "id": "af_maroc_2m_576p",
+  "name": "2M (576p) (Maroc)",
+  "type": "live",
+  "url": "http://185.9.2.18/chid_218/index.m3u8",
+  "country": "Maroc",
+  "category": "Maroc",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Maroc"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/PJYTfHi.png",
+    "poster": "https://i.imgur.com/PJYTfHi.png"
+  },
+  "tags": [
+    "Maroc",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

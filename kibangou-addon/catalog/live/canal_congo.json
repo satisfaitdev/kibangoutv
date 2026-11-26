@@ -360,6 +360,51 @@
       ]
     },
     {
+      "id": "canal_novelas",
+      "name": "NOVELAS+ HD",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/215687074",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "Telenovelas",
+        "HD",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
+      "id": "canal_zee_magic",
+      "name": "ZEE MAGIC (Séries & Bollywood en Français)",
+      "type": "live",
+      "url": "https://7689426c.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1mcl9aZWVNYWdpY19ITFM/playlist.m3u8",
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Canal+",
+        "Cinéma & Séries",
+        "Bollywood",
+        "Français",
+        "A. Chaînes CANAL+",
+        "Canal+ Congo"
+      ],
+      "category": "A. Chaînes CANAL+",
+      "group": "A. Chaînes CANAL+",
+      "genres": [
+        "A. Chaînes CANAL+"
+      ]
+    },
+    {
       "id": "1765873640",
       "name": "A+ (Afrique Séries)",
       "type": "live",

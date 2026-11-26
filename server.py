@@ -965,6 +965,20 @@ class ProxyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                                 or any(cf_lower in str(t).lower() for t in it.get("tags", []))
                             ]
 
+                        country_filter = (
+                            qs.get("filter.country", [""])[0]
+                            or qs.get("filter[country]", [""])[0]
+                            or qs.get("country", [""])[0]
+                        )
+                        if country_filter and country_filter.lower() not in ["all", "tous"]:
+                            co_lower = country_filter.lower().strip()
+                            items = [
+                                it for it in items
+                                if co_lower in (it.get("country") or "").lower()
+                                or co_lower == (it.get("category") or "").lower()
+                                or any(co_lower == str(t).lower() for t in it.get("tags", []))
+                            ]
+
                         search_q = qs.get("search", [""])[0] or qs.get("q", [""])[0] or qs.get("query", [""])[0]
                         if search_q:
                             sq_lower = search_q.lower().strip()

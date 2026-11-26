@@ -1,0 +1,22 @@
+{
+  "id": "canal_novelas",
+  "name": "NOVELAS+ HD",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/215687074",
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Canal+",
+    "Telenovelas",
+    "HD",
+    "A. Chaînes CANAL+",
+    "Canal+ Congo"
+  ],
+  "category": "A. Chaînes CANAL+",
+  "group": "A. Chaînes CANAL+",
+  "genres": [
+    "A. Chaînes CANAL+"
+  ]
+}

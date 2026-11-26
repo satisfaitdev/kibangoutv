@@ -1,0 +1,21 @@
+{
+  "id": "af_maroc_arryadia_720p",
+  "name": "Arryadia (720p) (Maroc)",
+  "type": "live",
+  "url": "http://149.100.11.252:8000/play/a065/index.m3u8",
+  "country": "Maroc",
+  "category": "Maroc",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Maroc"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/XjzK3gZ.png",
+    "poster": "https://i.imgur.com/XjzK3gZ.png"
+  },
+  "tags": [
+    "Maroc",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

@@ -68,6 +68,29 @@ export default async function handler(req, res) {
       });
     }
 
+    const countryFilter =
+      q["filter.country"] ||
+      q["filter[country]"] ||
+      q.country ||
+      sp.get("filter[country]") ||
+      sp.get("filter.country") ||
+      sp.get("country");
+
+    if (countryFilter && countryFilter !== "all" && countryFilter !== "Tous") {
+      const coLower = String(countryFilter).toLowerCase().trim();
+      items = items.filter((it) => {
+        const country = (it.country || "").toLowerCase();
+        const cat = (it.category || it.group || "").toLowerCase();
+        const tags = Array.isArray(it.tags) ? it.tags.map((t) => String(t).toLowerCase()) : [];
+        return (
+          country === coLower ||
+          country.includes(coLower) ||
+          cat === coLower ||
+          tags.some((t) => t === coLower)
+        );
+      });
+    }
+
     const query = q.search || q.q || q.query || sp.get("search") || sp.get("q") || sp.get("query");
     if (query) {
       const qLower = String(query).toLowerCase().trim();

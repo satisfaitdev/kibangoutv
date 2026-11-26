@@ -1,0 +1,21 @@
+{
+  "id": "af_afrique_du_sud_cape_town_tv_576p",
+  "name": "Cape Town TV (576p) (Afrique du Sud)",
+  "type": "live",
+  "url": "https://cdn.freevisiontv.co.za/sttv/smil:ctv.stream.smil/playlist.m3u8",
+  "country": "Afrique du Sud",
+  "category": "Afrique du Sud",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Afrique du Sud"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/Y8FK1Kk.png",
+    "poster": "https://i.imgur.com/Y8FK1Kk.png"
+  },
+  "tags": [
+    "Afrique du Sud",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

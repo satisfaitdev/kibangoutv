@@ -1,44 +1,1306 @@
 {
   "items": [
     {
-      "id": "esaie45_congo",
-      "name": "Ésaïe 45 TV (Congo)",
+      "id": "af_congo_brazzaville_drtv_international",
+      "name": "DRTV International (Congo-Brazzaville)",
+      "type": "live",
+      "url": "https://vps122407.serveur-vps.net/hls/drtv.m3u8",
+      "country": "Congo-Brazzaville",
+      "category": "Congo-Brazzaville",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Congo-Brazzaville"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/rGbTvtZ.png",
+        "poster": "https://i.imgur.com/rGbTvtZ.png"
+      },
+      "tags": [
+        "Congo-Brazzaville",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_congo_brazzaville_esaie_45_tele",
+      "name": "Esaie 45 Tele (Congo-Brazzaville)",
       "type": "live",
       "url": "https://stream.berosat.live/hls/esaie45-tv/esaie45-tv.m3u8",
+      "country": "Congo-Brazzaville",
+      "category": "Congo-Brazzaville",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Congo-Brazzaville"
+      ],
       "images": {
         "logo": "https://i.imgur.com/nc9QBnD.png",
         "poster": "https://i.imgur.com/nc9QBnD.png"
       },
       "tags": [
-        "Congo",
-        "Brazzaville",
-        "Direct",
+        "Congo-Brazzaville",
+        "Afrique",
         "Chaînes Locales"
-      ],
-      "category": "Congo",
-      "group": "Chaînes Locales",
-      "genres": [
-        "Congo"
       ]
     },
     {
-      "id": "baraka_congo",
-      "name": "Baraka TV HD (Congo)",
+      "id": "af_congo_brazzaville_ev_tele_720p",
+      "name": "Ev-tele (720p) (Congo-Brazzaville)",
+      "type": "live",
+      "url": "https://playtv4k.live/live/EVTELE/index.m3u8",
+      "country": "Congo-Brazzaville",
+      "category": "Congo-Brazzaville",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Congo-Brazzaville"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/iBlXl2T.png",
+        "poster": "https://i.imgur.com/iBlXl2T.png"
+      },
+      "tags": [
+        "Congo-Brazzaville",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_rd_congo_baraka_television_720p_not_24_7",
+      "name": "Baraka Television (720p) [Not 24/7] (RD Congo)",
       "type": "live",
       "url": "https://stream.berosat.live:19360/baraka-hd/baraka-hd.m3u8",
+      "country": "RD Congo",
+      "category": "RD Congo",
+      "group": "Chaînes Locales",
+      "genres": [
+        "RD Congo"
+      ],
       "images": {
         "logo": "https://i.imgur.com/IKXddHN.png",
         "poster": "https://i.imgur.com/IKXddHN.png"
       },
       "tags": [
-        "Congo",
-        "Direct",
+        "RD Congo",
+        "Afrique",
         "Chaînes Locales"
-      ],
-      "category": "Congo",
+      ]
+    },
+    {
+      "id": "af_rd_congo_espoir_tv_720p",
+      "name": "Espoir TV (720p) (RD Congo)",
+      "type": "live",
+      "url": "https://stream.berosat.live/hls/espoir-tv-stream/espoir-tv-stream.m3u8",
+      "country": "RD Congo",
+      "category": "RD Congo",
       "group": "Chaînes Locales",
       "genres": [
-        "Congo"
+        "RD Congo"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/sBsAHqb.jpeg",
+        "poster": "https://i.imgur.com/sBsAHqb.jpeg"
+      },
+      "tags": [
+        "RD Congo",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_rd_congo_evi_tv_720p",
+      "name": "EVI TV (720p) (RD Congo)",
+      "type": "live",
+      "url": "https://mistserver.evi-tv.com/hls/evi_tv_live/index.m3u8",
+      "country": "RD Congo",
+      "category": "RD Congo",
+      "group": "Chaînes Locales",
+      "genres": [
+        "RD Congo"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/fBc9JSM.png",
+        "poster": "https://i.imgur.com/fBc9JSM.png"
+      },
+      "tags": [
+        "RD Congo",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_rd_congo_lollywood_hd_tv",
+      "name": "Lollywood HD TV (RD Congo)",
+      "type": "live",
+      "url": "https://stream.berosat.live/hls/lollywood-hd/lollywood-hd.m3u8",
+      "country": "RD Congo",
+      "category": "RD Congo",
+      "group": "Chaînes Locales",
+      "genres": [
+        "RD Congo"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/fQhrsdr.png",
+        "poster": "https://i.imgur.com/fQhrsdr.png"
+      },
+      "tags": [
+        "RD Congo",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_7_info",
+      "name": "7 Info (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8042/8042/playlist.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/jcl1nNR.png",
+        "poster": "https://i.imgur.com/jcl1nNR.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_afroculture_tv",
+      "name": "Afroculture TV (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://streamtv.cmediahosthosting.net:3836/live/myafroculturelive.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/bjaZ3kO.png",
+        "poster": "https://i.imgur.com/bjaZ3kO.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_champion_tv",
+      "name": "Champion TV (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://stream.berosat.live/hls/champion-tv/champion-tv.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/WjHSrHN.png",
+        "poster": "https://i.imgur.com/WjHSrHN.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_ivoire_channel_720p",
+      "name": "Ivoire Channel (720p) (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8244/8244/playlist.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/gKbNqQv.png",
+        "poster": "https://i.imgur.com/gKbNqQv.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_miracle_tv_720p",
+      "name": "Miracle TV+ (720p) (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://strhlslb01.streamakaci.tv/str_mtv_mtv/str_mtv_multi/playlist.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/AQ60OYO.png",
+        "poster": "https://i.imgur.com/AQ60OYO.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_ntv_ivory_coast_1080p_not_24_7",
+      "name": "NTV (Ivory Coast) (1080p) [Not 24/7] (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://strhlslb01.streamakaci.tv/str_ntv_ntv/str_ntv_ntv_multi/playlist.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/qqLXdHz.png",
+        "poster": "https://i.imgur.com/qqLXdHz.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_reflet_tv_1080p",
+      "name": "Reflet TV (1080p) (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://edge-a3.evrideo.tv/8f37c9f0-fe22-44f4-b64a-76ad11730daf_1000026630_HLS/manifest.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/EauXR22.png",
+        "poster": "https://i.imgur.com/EauXR22.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_rtvc_720p",
+      "name": "RTVC (720p) (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://cdn140m.panaccess.com/HLS/RTVC/index.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/oXuSkHz.png",
+        "poster": "https://i.imgur.com/oXuSkHz.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cote_d_ivoire_serie_max_720p",
+      "name": "Serie Max (720p) (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8330/8330/playlist.m3u8",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/GaRQXHT.png",
+        "poster": "https://i.imgur.com/GaRQXHT.png"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_allo_cine_1080p",
+      "name": "Allo Cine (1080p) (Cameroun)",
+      "type": "live",
+      "url": "https://d1yl6bf4hrzbr0.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-5km3zs4zs9sp0/allo.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://raw.githubusercontent.com/songwenhui239/Songwenhui239/refs/heads/main/Allo%20Cine.jpeg",
+        "poster": "https://raw.githubusercontent.com/songwenhui239/Songwenhui239/refs/heads/main/Allo%20Cine.jpeg"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_cam_10_tv_720p",
+      "name": "CAM 10 TV (720p) (Cameroun)",
+      "type": "live",
+      "url": "https://stream.it-innov.com/cam10tv/index.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/xspb9uY.png",
+        "poster": "https://i.imgur.com/xspb9uY.png"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_crtv_cameroon_1080p",
+      "name": "CRTV (Cameroon) (1080p) (Cameroun)",
+      "type": "live",
+      "url": "https://10gb1.acangroup.org:1929/crtv/crtv_all/playlist.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/cQWNh3L.png",
+        "poster": "https://i.imgur.com/cQWNh3L.png"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_crtv_news_1080p",
+      "name": "CRTV News (1080p) (Cameroun)",
+      "type": "live",
+      "url": "https://live1.acangroup.org:1929/publiclive/crtv_news/playlist.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/5CshVf9.png",
+        "poster": "https://i.imgur.com/5CshVf9.png"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_for_you_tv",
+      "name": "For You TV (Cameroun)",
+      "type": "live",
+      "url": "https://stream.az-multimedia.com:3325/live/foryoutvlive.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/1oMboXL.png",
+        "poster": "https://i.imgur.com/1oMboXL.png"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_laura_dave_media_tv_720p",
+      "name": "Laura Dave Media TV (720p) (Cameroun)",
+      "type": "live",
+      "url": "https://streaming.lauradavemedia.com/ldm/index.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/zzG1S2n.png",
+        "poster": "https://i.imgur.com/zzG1S2n.png"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_my_tv_channel_720p_not_24_7",
+      "name": "My TV Channel (720p) [Not 24/7] (Cameroun)",
+      "type": "live",
+      "url": "http://connectiktv.ddns.net:5000/mytvchannel/@mytvchannel/playlist.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/vh2373L.png",
+        "poster": "https://i.imgur.com/vh2373L.png"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_play_tv_cameroon_720p_not_24_7",
+      "name": "Play TV (Cameroon) (720p) [Not 24/7] (Cameroun)",
+      "type": "live",
+      "url": "http://connectiktv.ddns.net:5000/playtv/@playtv/playlist.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/1dmBqpf.png",
+        "poster": "https://i.imgur.com/1dmBqpf.png"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_cameroun_plex_tv_720p",
+      "name": "PLEX TV (720p) (Cameroun)",
+      "type": "live",
+      "url": "http://connectiktv.ddns.net:5000/plextv/@plextv/playlist.m3u8",
+      "country": "Cameroun",
+      "category": "Cameroun",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Cameroun"
+      ],
+      "images": {
+        "logo": "https://i.ibb.co/H4VktvG/Plex-TV-237.jpg",
+        "poster": "https://i.ibb.co/H4VktvG/Plex-TV-237.jpg"
+      },
+      "tags": [
+        "Cameroun",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_senegal_a2i_music_720p_not_24_7",
+      "name": "A2i Music (720p) [Not 24/7] (Sénégal)",
+      "type": "live",
+      "url": "https://stream.sen-gt.com/A2iMusic/myStream/playlist.m3u8",
+      "country": "Sénégal",
+      "category": "Sénégal",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Sénégal"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/Fykhzxh.jpg",
+        "poster": "https://i.imgur.com/Fykhzxh.jpg"
+      },
+      "tags": [
+        "Sénégal",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_senegal_a2i_religion_720p_not_24_7",
+      "name": "A2i Religion (720p) [Not 24/7] (Sénégal)",
+      "type": "live",
+      "url": "https://stream.sen-gt.com/A2iReligion/myStream/playlist.m3u8",
+      "country": "Sénégal",
+      "category": "Sénégal",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Sénégal"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/54WrwyN.jpg",
+        "poster": "https://i.imgur.com/54WrwyN.jpg"
+      },
+      "tags": [
+        "Sénégal",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_senegal_a2i_tv_1080p",
+      "name": "A2i TV (1080p) (Sénégal)",
+      "type": "live",
+      "url": "https://stream.sen-gt.com/A2itv/myStream/playlist.m3u8",
+      "country": "Sénégal",
+      "category": "Sénégal",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Sénégal"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/YlDFir7.jpg",
+        "poster": "https://i.imgur.com/YlDFir7.jpg"
+      },
+      "tags": [
+        "Sénégal",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_benin_ado_tv_720p",
+      "name": "ADO TV (720p) (Bénin)",
+      "type": "live",
+      "url": "https://strhls.streamakaci.tv/ortb/ortb2-multi/playlist.m3u8",
+      "country": "Bénin",
+      "category": "Bénin",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Bénin"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/pxFamLr.png",
+        "poster": "https://i.imgur.com/pxFamLr.png"
+      },
+      "tags": [
+        "Bénin",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_benin_benin_tv_junior_720p",
+      "name": "Benin TV Junior (720p) (Bénin)",
+      "type": "live",
+      "url": "https://srtblive.streamakaci.tv/ortb/ortb2-multi/playlist_dvr.m3u8",
+      "country": "Bénin",
+      "category": "Bénin",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Bénin"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/bWxjtuJ.png",
+        "poster": "https://i.imgur.com/bWxjtuJ.png"
+      },
+      "tags": [
+        "Bénin",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_maroc_2m_576p",
+      "name": "2M (576p) (Maroc)",
+      "type": "live",
+      "url": "http://185.9.2.18/chid_218/index.m3u8",
+      "country": "Maroc",
+      "category": "Maroc",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Maroc"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/PJYTfHi.png",
+        "poster": "https://i.imgur.com/PJYTfHi.png"
+      },
+      "tags": [
+        "Maroc",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_maroc_al_maghribia_1080p",
+      "name": "Al Maghribia (1080p) (Maroc)",
+      "type": "live",
+      "url": "http://185.9.2.18/chid_205/index.m3u8",
+      "country": "Maroc",
+      "category": "Maroc",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Maroc"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/7GaahYh.png",
+        "poster": "https://i.imgur.com/7GaahYh.png"
+      },
+      "tags": [
+        "Maroc",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_maroc_arryadia_720p",
+      "name": "Arryadia (720p) (Maroc)",
+      "type": "live",
+      "url": "http://149.100.11.252:8000/play/a065/index.m3u8",
+      "country": "Maroc",
+      "category": "Maroc",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Maroc"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/XjzK3gZ.png",
+        "poster": "https://i.imgur.com/XjzK3gZ.png"
+      },
+      "tags": [
+        "Maroc",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_maroc_medi1tv_arabic_1080p",
+      "name": "Medi1TV Arabic (1080p) (Maroc)",
+      "type": "live",
+      "url": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-arabic_g90v4ec/playlist.m3u8",
+      "country": "Maroc",
+      "category": "Maroc",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Maroc"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/3YsZPY6.jpeg",
+        "poster": "https://i.imgur.com/3YsZPY6.jpeg"
+      },
+      "tags": [
+        "Maroc",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_maroc_medi1tv_maghreb_1080p",
+      "name": "Medi1TV Maghreb (1080p) (Maroc)",
+      "type": "live",
+      "url": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-maghreb_jnbspmg/playlist.m3u8",
+      "country": "Maroc",
+      "category": "Maroc",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Maroc"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/F5OFQsp.jpeg",
+        "poster": "https://i.imgur.com/F5OFQsp.jpeg"
+      },
+      "tags": [
+        "Maroc",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_maroc_storychannel_tv_720p",
+      "name": "StoryChannel TV (720p) (Maroc)",
+      "type": "live",
+      "url": "https://136044159.r.cdnsun.net/storychannel.m3u8",
+      "country": "Maroc",
+      "category": "Maroc",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Maroc"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/ZBV6xph.png",
+        "poster": "https://i.imgur.com/ZBV6xph.png"
+      },
+      "tags": [
+        "Maroc",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_algerie_amou_yazid_tv_576p",
+      "name": "Amou Yazid TV (576p) (Algérie)",
+      "type": "live",
+      "url": "http://mkstream.servehttp.com:1940/AmouYazid/ay1/playlist.m3u8",
+      "country": "Algérie",
+      "category": "Algérie",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Algérie"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/L8UPGPC.png",
+        "poster": "https://i.imgur.com/L8UPGPC.png"
+      },
+      "tags": [
+        "Algérie",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_algerie_cna_algeria_360p_not_24_7",
+      "name": "CNA (Algeria) (360p) [Not 24/7] (Algérie)",
+      "type": "live",
+      "url": "https://live.creacast.com/cna/stream/playlist.m3u8",
+      "country": "Algérie",
+      "category": "Algérie",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Algérie"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/Ki3ySUE.png",
+        "poster": "https://i.imgur.com/Ki3ySUE.png"
+      },
+      "tags": [
+        "Algérie",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_algerie_tv2_algeria_1080p",
+      "name": "TV2 (Algeria) (1080p) (Algérie)",
+      "type": "live",
+      "url": "http://185.9.2.18/chid_347/index.m3u8",
+      "country": "Algérie",
+      "category": "Algérie",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Algérie"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/VEb631f.png",
+        "poster": "https://i.imgur.com/VEb631f.png"
+      },
+      "tags": [
+        "Algérie",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_nigeria_fortis_tv",
+      "name": "Fortis TV (Nigeria)",
+      "type": "live",
+      "url": "https://stream.fortistv.com/hls/fortis-news/index.m3u8",
+      "country": "Nigeria",
+      "category": "Nigeria",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Nigeria"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/HoO9Urd.jpg",
+        "poster": "https://i.imgur.com/HoO9Urd.jpg"
+      },
+      "tags": [
+        "Nigeria",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_nigeria_rapid_tv_480p",
+      "name": "Rapid TV (480p) (Nigeria)",
+      "type": "live",
+      "url": "https://stream-hls.castr-cdn.com/6a05a899db0ebd344a759542/live_9655bc604f8211f19e748901a3f596d0/index.m3u8",
+      "country": "Nigeria",
+      "category": "Nigeria",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Nigeria"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/FkMNcj1.jpeg",
+        "poster": "https://i.imgur.com/FkMNcj1.jpeg"
+      },
+      "tags": [
+        "Nigeria",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_nigeria_superscreen_tv_412p",
+      "name": "Superscreen TV (412p) (Nigeria)",
+      "type": "live",
+      "url": "https://video1.getstreamhosting.com:1936/8398/8398/playlist.m3u8",
+      "country": "Nigeria",
+      "category": "Nigeria",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Nigeria"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/uTNmSWE.png",
+        "poster": "https://i.imgur.com/uTNmSWE.png"
+      },
+      "tags": [
+        "Nigeria",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_ghana_pent_tv_720p",
+      "name": "Pent TV (720p) (Ghana)",
+      "type": "live",
+      "url": "https://playlist.dacast.com/live/a72117af-d78e-7ffe-7c12-1af6cd4a8483-live-42172a86-494b-a866-498f-dbaff4b5e3c0/master.m3u8",
+      "country": "Ghana",
+      "category": "Ghana",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Ghana"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/Jw6d3dR.png",
+        "poster": "https://i.imgur.com/Jw6d3dR.png"
+      },
+      "tags": [
+        "Ghana",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_ghana_resurrection_tv_720p",
+      "name": "Resurrection TV (720p) (Ghana)",
+      "type": "live",
+      "url": "https://1681360479.rsc.cdn77.org/1681360479/index.m3u8",
+      "country": "Ghana",
+      "category": "Ghana",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Ghana"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/IncyJW8.png",
+        "poster": "https://i.imgur.com/IncyJW8.png"
+      },
+      "tags": [
+        "Ghana",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_kenya_akili_kids_720p",
+      "name": "Akili Kids! (720p) (Kenya)",
+      "type": "live",
+      "url": "https://m6.livecdn.io/akilikids.co.ke/akilikids.smil/playlist.m3u8",
+      "country": "Kenya",
+      "category": "Kenya",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Kenya"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/xFm2co6.png",
+        "poster": "https://i.imgur.com/xFm2co6.png"
+      },
+      "tags": [
+        "Kenya",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_kenya_capuchin_tv",
+      "name": "Capuchin TV (Kenya)",
+      "type": "live",
+      "url": "https://goliveafrica.media:9998/live/64227f58b8413/index.m3u8",
+      "country": "Kenya",
+      "category": "Kenya",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Kenya"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/VCDSjX7.png",
+        "poster": "https://i.imgur.com/VCDSjX7.png"
+      },
+      "tags": [
+        "Kenya",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_kenya_lolwe_tv_576p_not_24_7",
+      "name": "Lolwe TV (576p) [Not 24/7] (Kenya)",
+      "type": "live",
+      "url": "https://goliveafrica.media:9998/live/62580e144eb43/index.m3u8",
+      "country": "Kenya",
+      "category": "Kenya",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Kenya"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/tjZ1cOP.png",
+        "poster": "https://i.imgur.com/tjZ1cOP.png"
+      },
+      "tags": [
+        "Kenya",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_kenya_meru_tv_720p_not_24_7",
+      "name": "MERU TV (720p) [Not 24/7] (Kenya)",
+      "type": "live",
+      "url": "https://goliveafrica.media:9998/live/628e5c1991061/index.m3u8",
+      "country": "Kenya",
+      "category": "Kenya",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Kenya"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/EPmWNfz.jpg",
+        "poster": "https://i.imgur.com/EPmWNfz.jpg"
+      },
+      "tags": [
+        "Kenya",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_kenya_morning_cloud_tv_720p",
+      "name": "Morning Cloud TV (720p) (Kenya)",
+      "type": "live",
+      "url": "https://livecdn.live247stream.com/mc/tv/playlist.m3u8",
+      "country": "Kenya",
+      "category": "Kenya",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Kenya"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/Lxfd2ip.png",
+        "poster": "https://i.imgur.com/Lxfd2ip.png"
+      },
+      "tags": [
+        "Kenya",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_kenya_younib_media_tv_720p_not_24_7",
+      "name": "YOUNIB Media TV (720p) [Not 24/7] (Kenya)",
+      "type": "live",
+      "url": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
+      "country": "Kenya",
+      "category": "Kenya",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Kenya"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/LtiPOYG.jpg",
+        "poster": "https://i.imgur.com/LtiPOYG.jpg"
+      },
+      "tags": [
+        "Kenya",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_1kzn_tv_576p",
+      "name": "1KZN TV (576p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://cdn.freevisiontv.co.za/sttv/smil:1kzn.stream.smil/playlist.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://admango.cdn.mangomolo.com/analytics/uploads/188/6544bebaae.jpg",
+        "poster": "https://admango.cdn.mangomolo.com/analytics/uploads/188/6544bebaae.jpg"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_boktv_720p_not_24_7",
+      "name": "BOKTV (720p) [Not 24/7] (Afrique du Sud)",
+      "type": "live",
+      "url": "https://livestream2.bokradio.co.za/hls/Bok5c.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/mcNjuuO.png",
+        "poster": "https://i.imgur.com/mcNjuuO.png"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_btl_tv_netherlands_1080p",
+      "name": "BTL TV (Netherlands) (1080p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://cdn.liveplustv.com/v1/live/btl-tv/master.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://yt3.googleusercontent.com/ytc/APkrFKZYgQTsDhkbaqmPRCPZIf0UgZqF1wa6aG2eo8ti=s176-c-k-c0x00ffffff-no-rj-mo",
+        "poster": "https://yt3.googleusercontent.com/ytc/APkrFKZYgQTsDhkbaqmPRCPZIf0UgZqF1wa6aG2eo8ti=s176-c-k-c0x00ffffff-no-rj-mo"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_cape_town_tv_576p",
+      "name": "Cape Town TV (576p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://cdn.freevisiontv.co.za/sttv/smil:ctv.stream.smil/playlist.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/Y8FK1Kk.png",
+        "poster": "https://i.imgur.com/Y8FK1Kk.png"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_homebase_tv_480p",
+      "name": "Homebase TV (480p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_022/Stream/playlist.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/MaLNfJG.png",
+        "poster": "https://i.imgur.com/MaLNfJG.png"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_ln24sa_1080p",
+      "name": "LN24SA (1080p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://cdnstack.internetmultimediaonline.org/ln24/ln24.stream/playlist.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/Hg5YTwu.png",
+        "poster": "https://i.imgur.com/Hg5YTwu.png"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_loveworldsat_1080p",
+      "name": "LoveworldSAT (1080p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://cdnstack.internetmultimediaonline.org/lwsat/lwsat.stream/index.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/Fg65XCS.png",
+        "poster": "https://i.imgur.com/Fg65XCS.png"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_nuview_tv_360p",
+      "name": "NuView TV (360p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_002/Stream/playlist.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://i.imgur.com/dYRJ7F0.png",
+        "poster": "https://i.imgur.com/dYRJ7F0.png"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_soweto_tv_576p",
+      "name": "Soweto TV (576p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://cdn.freevisiontv.co.za/sttv/smil:soweto.stream.smil/playlist.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://admango.cdn.mangomolo.com/analytics/uploads/188/654228e5b5.jpg",
+        "poster": "https://admango.cdn.mangomolo.com/analytics/uploads/188/654228e5b5.jpg"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_afrique_du_sud_tshwane_tv_576p",
+      "name": "Tshwane TV (576p) (Afrique du Sud)",
+      "type": "live",
+      "url": "https://cdn.freevisiontv.co.za/sttv/smil:tshwane.stream.smil/playlist.m3u8",
+      "country": "Afrique du Sud",
+      "category": "Afrique du Sud",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Afrique du Sud"
+      ],
+      "images": {
+        "logo": "https://admango.cdn.mangomolo.com/analytics/uploads/188/654a3ec660.png",
+        "poster": "https://admango.cdn.mangomolo.com/analytics/uploads/188/654a3ec660.png"
+      },
+      "tags": [
+        "Afrique du Sud",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_ci_aplus_ivoire",
+      "name": "A+ IVOIRE (Côte d'Ivoire)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/3193136015",
+      "country": "Côte d'Ivoire",
+      "category": "Côte d'Ivoire",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Côte d'Ivoire"
+      ],
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Côte d'Ivoire",
+        "Afrique",
+        "Chaînes Locales"
+      ]
+    },
+    {
+      "id": "af_pan_africa24",
+      "name": "AFRICA 24 (Panafricain)",
+      "type": "live",
+      "url": "https://www.vavoo.to/live/play/2290952272",
+      "country": "Panafricain & Monde",
+      "category": "Panafricain & Monde",
+      "group": "Chaînes Locales",
+      "genres": [
+        "Panafricain & Monde"
+      ],
+      "images": {
+        "logo": "/logo.svg",
+        "poster": "/logo.svg"
+      },
+      "tags": [
+        "Panafricain & Monde",
+        "Afrique",
+        "Info",
+        "Chaînes Locales"
       ]
     },
     {
@@ -53,12 +1315,14 @@
       "tags": [
         "Francophonie",
         "Direct",
+        "Panafricain & Monde",
         "Chaînes Locales"
       ],
-      "category": "Francophonie",
+      "country": "Panafricain & Monde",
+      "category": "Panafricain & Monde",
       "group": "Chaînes Locales",
       "genres": [
-        "Francophonie"
+        "Panafricain & Monde"
       ]
     },
     {
@@ -73,12 +1337,14 @@
       "tags": [
         "Info",
         "Direct",
+        "Panafricain & Monde",
         "Chaînes Locales"
       ],
-      "category": "Info",
+      "country": "Panafricain & Monde",
+      "category": "Panafricain & Monde",
       "group": "Chaînes Locales",
       "genres": [
-        "Info"
+        "Panafricain & Monde"
       ]
     },
     {
@@ -93,12 +1359,14 @@
       "tags": [
         "Info",
         "Direct",
+        "Panafricain & Monde",
         "Chaînes Locales"
       ],
-      "category": "Info",
+      "country": "Panafricain & Monde",
+      "category": "Panafricain & Monde",
       "group": "Chaînes Locales",
       "genres": [
-        "Info"
+        "Panafricain & Monde"
       ]
     }
   ]

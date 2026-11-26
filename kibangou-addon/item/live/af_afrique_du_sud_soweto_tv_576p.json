@@ -1,0 +1,21 @@
+{
+  "id": "af_afrique_du_sud_soweto_tv_576p",
+  "name": "Soweto TV (576p) (Afrique du Sud)",
+  "type": "live",
+  "url": "https://cdn.freevisiontv.co.za/sttv/smil:soweto.stream.smil/playlist.m3u8",
+  "country": "Afrique du Sud",
+  "category": "Afrique du Sud",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Afrique du Sud"
+  ],
+  "images": {
+    "logo": "https://admango.cdn.mangomolo.com/analytics/uploads/188/654228e5b5.jpg",
+    "poster": "https://admango.cdn.mangomolo.com/analytics/uploads/188/654228e5b5.jpg"
+  },
+  "tags": [
+    "Afrique du Sud",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

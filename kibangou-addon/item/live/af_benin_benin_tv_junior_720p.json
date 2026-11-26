@@ -1,0 +1,21 @@
+{
+  "id": "af_benin_benin_tv_junior_720p",
+  "name": "Benin TV Junior (720p) (Bénin)",
+  "type": "live",
+  "url": "https://srtblive.streamakaci.tv/ortb/ortb2-multi/playlist_dvr.m3u8",
+  "country": "Bénin",
+  "category": "Bénin",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Bénin"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/bWxjtuJ.png",
+    "poster": "https://i.imgur.com/bWxjtuJ.png"
+  },
+  "tags": [
+    "Bénin",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

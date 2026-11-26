@@ -1,0 +1,21 @@
+{
+  "id": "af_cote_d_ivoire_rtvc_720p",
+  "name": "RTVC (720p) (Côte d'Ivoire)",
+  "type": "live",
+  "url": "https://cdn140m.panaccess.com/HLS/RTVC/index.m3u8",
+  "country": "Côte d'Ivoire",
+  "category": "Côte d'Ivoire",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Côte d'Ivoire"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/oXuSkHz.png",
+    "poster": "https://i.imgur.com/oXuSkHz.png"
+  },
+  "tags": [
+    "Côte d'Ivoire",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

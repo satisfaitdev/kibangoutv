@@ -66,12 +66,22 @@
         "search": true,
         "filter": [
           {
-            "id": "category",
-            "name": "Catégorie",
+            "id": "country",
+            "name": "Pays",
             "values": [
-              { "id": "Congo", "name": "Congo" },
-              { "id": "Info", "name": "Informations" },
-              { "id": "Francophonie", "name": "Francophonie" }
+              { "id": "Congo-Brazzaville", "name": "Congo-Brazzaville" },
+              { "id": "RD Congo", "name": "RD Congo" },
+              { "id": "Côte d'Ivoire", "name": "Côte d'Ivoire" },
+              { "id": "Cameroun", "name": "Cameroun" },
+              { "id": "Sénégal", "name": "Sénégal" },
+              { "id": "Bénin", "name": "Bénin" },
+              { "id": "Maroc", "name": "Maroc" },
+              { "id": "Algérie", "name": "Algérie" },
+              { "id": "Nigeria", "name": "Nigeria" },
+              { "id": "Ghana", "name": "Ghana" },
+              { "id": "Kenya", "name": "Kenya" },
+              { "id": "Afrique du Sud", "name": "Afrique du Sud" },
+              { "id": "Panafricain & Monde", "name": "Panafricain & Monde" }
             ]
           }
         ]

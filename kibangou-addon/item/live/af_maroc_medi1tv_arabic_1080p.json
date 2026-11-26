@@ -1,0 +1,21 @@
+{
+  "id": "af_maroc_medi1tv_arabic_1080p",
+  "name": "Medi1TV Arabic (1080p) (Maroc)",
+  "type": "live",
+  "url": "https://cdn.live.easybroadcast.io/abr_corp/83_medi1tv-arabic_g90v4ec/playlist.m3u8",
+  "country": "Maroc",
+  "category": "Maroc",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Maroc"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/3YsZPY6.jpeg",
+    "poster": "https://i.imgur.com/3YsZPY6.jpeg"
+  },
+  "tags": [
+    "Maroc",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

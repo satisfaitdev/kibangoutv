@@ -1,0 +1,21 @@
+{
+  "id": "af_afrique_du_sud_btl_tv_netherlands_1080p",
+  "name": "BTL TV (Netherlands) (1080p) (Afrique du Sud)",
+  "type": "live",
+  "url": "https://cdn.liveplustv.com/v1/live/btl-tv/master.m3u8",
+  "country": "Afrique du Sud",
+  "category": "Afrique du Sud",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Afrique du Sud"
+  ],
+  "images": {
+    "logo": "https://yt3.googleusercontent.com/ytc/APkrFKZYgQTsDhkbaqmPRCPZIf0UgZqF1wa6aG2eo8ti=s176-c-k-c0x00ffffff-no-rj-mo",
+    "poster": "https://yt3.googleusercontent.com/ytc/APkrFKZYgQTsDhkbaqmPRCPZIf0UgZqF1wa6aG2eo8ti=s176-c-k-c0x00ffffff-no-rj-mo"
+  },
+  "tags": [
+    "Afrique du Sud",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

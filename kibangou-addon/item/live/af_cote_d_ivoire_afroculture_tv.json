@@ -1,0 +1,21 @@
+{
+  "id": "af_cote_d_ivoire_afroculture_tv",
+  "name": "Afroculture TV (Côte d'Ivoire)",
+  "type": "live",
+  "url": "https://streamtv.cmediahosthosting.net:3836/live/myafroculturelive.m3u8",
+  "country": "Côte d'Ivoire",
+  "category": "Côte d'Ivoire",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Côte d'Ivoire"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/bjaZ3kO.png",
+    "poster": "https://i.imgur.com/bjaZ3kO.png"
+  },
+  "tags": [
+    "Côte d'Ivoire",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

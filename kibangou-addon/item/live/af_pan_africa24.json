@@ -1,0 +1,22 @@
+{
+  "id": "af_pan_africa24",
+  "name": "AFRICA 24 (Panafricain)",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/2290952272",
+  "country": "Panafricain & Monde",
+  "category": "Panafricain & Monde",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Panafricain & Monde"
+  ],
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Panafricain & Monde",
+    "Afrique",
+    "Info",
+    "Chaînes Locales"
+  ]
+}

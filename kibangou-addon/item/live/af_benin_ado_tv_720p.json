@@ -1,0 +1,21 @@
+{
+  "id": "af_benin_ado_tv_720p",
+  "name": "ADO TV (720p) (Bénin)",
+  "type": "live",
+  "url": "https://strhls.streamakaci.tv/ortb/ortb2-multi/playlist.m3u8",
+  "country": "Bénin",
+  "category": "Bénin",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Bénin"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/pxFamLr.png",
+    "poster": "https://i.imgur.com/pxFamLr.png"
+  },
+  "tags": [
+    "Bénin",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

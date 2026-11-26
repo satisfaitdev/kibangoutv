@@ -1,0 +1,21 @@
+{
+  "id": "af_cameroun_allo_cine_1080p",
+  "name": "Allo Cine (1080p) (Cameroun)",
+  "type": "live",
+  "url": "https://d1yl6bf4hrzbr0.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-5km3zs4zs9sp0/allo.m3u8",
+  "country": "Cameroun",
+  "category": "Cameroun",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Cameroun"
+  ],
+  "images": {
+    "logo": "https://raw.githubusercontent.com/songwenhui239/Songwenhui239/refs/heads/main/Allo%20Cine.jpeg",
+    "poster": "https://raw.githubusercontent.com/songwenhui239/Songwenhui239/refs/heads/main/Allo%20Cine.jpeg"
+  },
+  "tags": [
+    "Cameroun",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

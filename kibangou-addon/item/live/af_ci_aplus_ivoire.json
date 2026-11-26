@@ -1,0 +1,21 @@
+{
+  "id": "af_ci_aplus_ivoire",
+  "name": "A+ IVOIRE (Côte d'Ivoire)",
+  "type": "live",
+  "url": "https://www.vavoo.to/live/play/3193136015",
+  "country": "Côte d'Ivoire",
+  "category": "Côte d'Ivoire",
+  "group": "Chaînes Locales",
+  "genres": [
+    "Côte d'Ivoire"
+  ],
+  "images": {
+    "logo": "/logo.svg",
+    "poster": "/logo.svg"
+  },
+  "tags": [
+    "Côte d'Ivoire",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}

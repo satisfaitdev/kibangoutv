@@ -1,0 +1,21 @@
+{
+  "id": "af_rd_congo_espoir_tv_720p",
+  "name": "Espoir TV (720p) (RD Congo)",
+  "type": "live",
+  "url": "https://stream.berosat.live/hls/espoir-tv-stream/espoir-tv-stream.m3u8",
+  "country": "RD Congo",
+  "category": "RD Congo",
+  "group": "Chaînes Locales",
+  "genres": [
+    "RD Congo"
+  ],
+  "images": {
+    "logo": "https://i.imgur.com/sBsAHqb.jpeg",
+    "poster": "https://i.imgur.com/sBsAHqb.jpeg"
+  },
+  "tags": [
+    "RD Congo",
+    "Afrique",
+    "Chaînes Locales"
+  ]
+}
