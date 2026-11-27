@@ -51,6 +51,15 @@ export default async function handler(req, res) {
       };
       const r = await fetch("https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard");
       const raw = r.ok ? await r.json() : { events: [] };
+      const translateStatus = (s) => {
+        const raw = String(s || "").trim();
+        if (/^scheduled$/i.test(raw)) return "À venir";
+        if (/^ft$/i.test(raw) || /^final$/i.test(raw)) return "Terminé";
+        if (/^ht$/i.test(raw)) return "Mi-temps";
+        if (/^postponed$/i.test(raw)) return "Reporté";
+        if (/^canceled$/i.test(raw) || /^cancelled$/i.test(raw)) return "Annulé";
+        return raw;
+      };
       const matches = (raw.events || []).slice(0, 40).map((ev) => {
         const comp = ev.competitions?.[0] || {};
         const comps = comp.competitors || [];
@@ -67,7 +76,7 @@ export default async function handler(req, res) {
           awayScore: away.score ?? "0",
           league: slug.replace(/^\d{4}-\d{2}-/, "").replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) || "Football",
           state: ev.status?.type?.state || "pre",
-          status: ev.status?.type?.shortDetail || ev.status?.type?.description || "",
+          status: translateStatus(ev.status?.type?.shortDetail || ev.status?.type?.description || ""),
           channels: matchCh(slug)
         };
       }).sort((a, b) => (a.state === "in" ? 0 : a.state === "pre" ? 1 : 2) - (b.state === "in" ? 0 : b.state === "pre" ? 1 : 2));
