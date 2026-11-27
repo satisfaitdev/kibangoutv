@@ -138,24 +138,22 @@ async function handleStreamRequest(request, method) {
       fetchHeaders["Range"] = "bytes=0-50331647";
     }
 
-    const q = normalizeQualityId(parsed.searchParams.get("q"));
-    const wantAbr = parsed.searchParams.get("abr") === "1";
+    const q = "";
     const headerCacheKey = `${targetUrl}|${customHeaders.referer || customHeaders.Referer || ""}`;
 
-    // Hit rapide du cache M3U8 sur le passage Master -> Variante ABR
-    if (method === "GET" && !isDownload && q) {
+    // Hit rapide du cache M3U8 sur le passage Master -> Variante
+    if (method === "GET" && !isDownload && parsed.searchParams.get("q")) {
       const cachedM3u8 = m3u8Cache.get(headerCacheKey);
       if (cachedM3u8 && Date.now() - cachedM3u8.ts < M3U8_BURST_TTL_MS) {
-        const ffmpegBin = wantAbr && q !== "orig" ? await resolveFfmpegPath() : null;
         const fullStreamBase = buildStreamBaseUrl(request, parsed);
-        const rewritten = buildAdaptiveM3u8(cachedM3u8.text, cachedM3u8.finalUrl, fullStreamBase, q, Boolean(ffmpegBin));
+        const rewritten = buildAdaptiveM3u8(cachedM3u8.text, cachedM3u8.finalUrl, fullStreamBase, "", false);
         return new Response(rewritten, {
           status: cachedM3u8.status,
           headers: {
             ...CORS_HEADERS,
             "Content-Type": "application/vnd.apple.mpegurl; charset=utf-8",
             "Cache-Control": "no-store",
-            "X-Kibangou-ABR": ffmpegBin ? "adaptive-ffmpeg" : "passthrough",
+            "X-Kibangou-ABR": "passthrough",
             "X-Kibangou-M3U8-Cache": "HIT"
           }
         });
@@ -216,10 +214,8 @@ async function handleStreamRequest(request, method) {
           });
         }
 
-        const needFfmpeg = wantAbr || (q && q !== "orig" && Boolean(TRANSCODE_PROFILES[q]));
-        const ffmpegBin = needFfmpeg ? await resolveFfmpegPath() : null;
         const fullStreamBase = buildStreamBaseUrl(request, parsed);
-        const rewritten = buildAdaptiveM3u8(text, finalUrl, fullStreamBase, q, Boolean(ffmpegBin));
+        const rewritten = buildAdaptiveM3u8(text, finalUrl, fullStreamBase, "", false);
         return new Response(rewritten, {
           status: upstreamRes.status,
           headers: {
@@ -227,7 +223,7 @@ async function handleStreamRequest(request, method) {
             "Content-Type": "application/vnd.apple.mpegurl; charset=utf-8",
             "Cache-Control": "no-store",
             "X-Accel-Buffering": "no",
-            "X-Kibangou-ABR": ffmpegBin ? "adaptive-ffmpeg" : "passthrough"
+            "X-Kibangou-ABR": "passthrough"
           }
         });
       }
@@ -238,27 +234,7 @@ async function handleStreamRequest(request, method) {
       });
     }
 
-    // Transcodage adaptatif à la volée des segments MPEG-TS quand un profil bas débit est demandé
-    if (!isDownload && q && q !== "orig" && TRANSCODE_PROFILES[q] && upstreamRes.ok && upstreamRes.body) {
-      const ffmpegBin = await resolveFfmpegPath();
-      if (ffmpegBin) {
-        const profile = TRANSCODE_PROFILES[q];
-        const transcodedStream = createTranscodedStream(ffmpegBin, upstreamRes.body, profile, request.signal);
-        return new Response(transcodedStream, {
-          status: 200,
-          headers: {
-            ...CORS_HEADERS,
-            "Content-Type": "video/mp2t",
-            "Cache-Control": "no-store",
-            "X-Accel-Buffering": "no",
-            "X-Kibangou-Quality": q,
-            "X-Kibangou-Transcoded": "ffmpeg-pipe"
-          }
-        });
-      }
-    }
-
-    // Streaming direct zéro-bufferisation pour passthrough 1080p/4K, VOD et téléchargements
+    // Streaming direct zéro-bufferisation pour segments HLS, MP4/MKV et téléchargements (sans transcodage FFmpeg par segment)
     const outHeaders = new Headers(CORS_HEADERS);
     outHeaders.set("Content-Type", contentType);
     outHeaders.set("Cache-Control", "no-store");

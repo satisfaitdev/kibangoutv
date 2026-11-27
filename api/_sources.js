@@ -173,16 +173,19 @@ export function sortAndLabelSources(rawList) {
 }
 
 /**
- * Active systématiquement le proxy si le flux est live, en HTTP clair,
+ * Direct-first : n'active le proxy que si le flux est en HTTP clair (Mixed Content)
  * ou nécessite des en-têtes personnalisés (ex: Referer/UA sur mixdrop ou dood.to).
+ * Les flux HTTPS sans en-têtes personnalisés sont lus directement par le navigateur.
  */
 export function normalizeResolvedPlayback(data, isLive = false) {
   if (!data || typeof data !== "object") return data;
   if (typeof data.url === "string" && data.url) {
     const hasCustomHeaders =
       data.headers && typeof data.headers === "object" && Object.keys(data.headers).length > 0;
-    if (isLive || data.live || data.url.startsWith("http://") || hasCustomHeaders) {
+    if (data.url.startsWith("http://") || hasCustomHeaders) {
       data.proxy = true;
+    } else if (data.url.startsWith("https://")) {
+      data.proxy = false;
     }
   }
   return data;

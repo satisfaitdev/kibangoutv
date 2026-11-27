@@ -2677,6 +2677,22 @@
             video.dataset.userPaused = "1";
           }
         });
+        video.addEventListener("error", () => {
+          const curSrc = video.currentSrc || video.getAttribute("src") || "";
+          if (
+            curSrc.startsWith("https://") &&
+            !curSrc.includes("/api/stream") &&
+            !curSrc.includes("/api/proxy") &&
+            video.dataset.kibangouDirectFallback !== curSrc
+          ) {
+            video.dataset.kibangouDirectFallback = curSrc;
+            const cached = window.__kibangouResolvedCache?.get(curSrc);
+            const fallbackUrl = buildStreamProxyUrl(curSrc, cached?.headers || null);
+            video.src = fallbackUrl;
+            video.load();
+            video.play().catch(() => {});
+          }
+        });
         const updateBufferedBar = () => {
           const bufEl = playerRoot.querySelector(".player-seek .player-seek-buf");
           const dur = video.duration;

@@ -115,13 +115,15 @@ export class KibangouHls extends OriginalHls {
       !target.startsWith("data:")
     ) {
       const streamPrefix = `${location.origin}/api/stream`;
-      if (!target.startsWith(streamPrefix) && !target.startsWith("/api/stream")) {
-        const snap = this.getNetworkSnapshot();
-        const abrParam = (snap.tier === "2G" || snap.tier === "3G") ? "&abr=1" : "";
-        target = `${streamPrefix}?u=${encodeURIComponent(target)}${abrParam}`;
+      const isAlreadyProxied = target.startsWith(streamPrefix) || target.startsWith("/api/stream");
+      const isMixedHttp = location.protocol === "https:" && target.startsWith("http://");
+      // Direct-first : on ne passe par /api/stream que pour Mixed Content HTTP ou après échec direct contrôlé.
+      if (!isAlreadyProxied && (isMixedHttp || this._directFallbackActive)) {
+        target = `${streamPrefix}?u=${encodeURIComponent(target)}`;
       }
     }
     this._rawSourceUrl = url;
+    this._directFallbackActive = false;
     return super.loadSource(target);
   }
 
@@ -311,24 +313,7 @@ export class KibangouHls extends OriginalHls {
 
     const sorted = this._getSortedLevelIndices();
     if (sorted.length <= 1) {
-      // Si le flux est en passthrough (1 seul niveau) et que la connexion chute vraiment en 2G/3G, activer &abr=1
-      if (
-        !this._abrFallbackTriggered &&
-        this._hasRealSample &&
-        this._measuredKbps > 0 &&
-        this._measuredKbps < 550 &&
-        typeof this._rawSourceUrl === "string" &&
-        this._rawSourceUrl &&
-        !this._rawSourceUrl.includes("abr=1")
-      ) {
-        this._abrFallbackTriggered = true;
-        const streamPrefix = `${location.origin}/api/stream`;
-        const nextUrl = this._rawSourceUrl.startsWith("/api/stream") || this._rawSourceUrl.startsWith(streamPrefix)
-          ? `${this._rawSourceUrl}${this._rawSourceUrl.includes("?") ? "&" : "?"}abr=1`
-          : `${streamPrefix}?u=${encodeURIComponent(this._rawSourceUrl)}&abr=1`;
-        this._emitAutoDowngrade(360, this.getNetworkSnapshot(), reason);
-        super.loadSource(nextUrl);
-      }
+      // Flux à variante unique : pas de transcodage FFmpeg artificiel ni de rechargement destructif.
       return;
     }
 
@@ -489,6 +474,18 @@ export class KibangouHls extends OriginalHls {
 
       if (data.fatal) {
         if (data.type === OriginalHls.ErrorTypes.NETWORK_ERROR) {
+          // Fallback contrôlé vers /api/stream si la lecture directe HTTPS a échoué (ex: CORS ou blocage amont)
+          if (
+            !this._directFallbackUsed &&
+            typeof this._rawSourceUrl === "string" &&
+            this._rawSourceUrl.startsWith("https://") &&
+            !this._rawSourceUrl.includes("/api/stream")
+          ) {
+            this._directFallbackUsed = true;
+            this._directFallbackActive = true;
+            this.loadSource(this._rawSourceUrl);
+            return;
+          }
           this._handleBandwidthDrop("network_error");
           this.startLoad();
         } else if (data.type === OriginalHls.ErrorTypes.MEDIA_ERROR) {
