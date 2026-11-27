@@ -2799,18 +2799,20 @@
             const routes = getAdultRoutes();
             const adultCard = document.createElement("div");
             adultCard.id = "settings-pro-adult-card";
-            adultCard.className = "s-group kibangou-settings-card";
+            adultCard.className = "s-group";
             adultCard.setAttribute("data-zone", "v");
             adultCard.innerHTML = `
-              <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-                <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Espace Adulte +18</div>
-                <span style="font-size:0.74rem; color:#8E99A4;">+18</span>
+              <div class="s-group-head">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span class="s-group-title">Espace Adulte +18</span>
               </div>
-              <div style="font-size:0.84rem; color:#8E99A4;">${routes.liveHref ? "Accès direct aux chaînes et films adultes +18." : "Accès direct aux films et séries adultes +18."}</div>
-              <div class="kibangou-adult-links">
-                ${routes.liveHref ? `<a href="${escapeHtml(routes.liveHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Chaînes +18 →</a>` : ""}
-                <a href="${escapeHtml(routes.videoHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Films +18 →</a>
-                ${routes.seriesHref ? `<a href="${escapeHtml(routes.seriesHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Séries +18 →</a>` : ""}
+              <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
+                <div class="s-label">Accès +18<span class="s-sub">${routes.liveHref ? "Chaînes et films adultes +18." : "Films et séries adultes +18."}</span></div>
+                <div class="kibangou-adult-links">
+                  ${routes.liveHref ? `<a href="${escapeHtml(routes.liveHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Chaînes +18 →</a>` : ""}
+                  <a href="${escapeHtml(routes.videoHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Films +18 →</a>
+                  ${routes.seriesHref ? `<a href="${escapeHtml(routes.seriesHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Séries +18 →</a>` : ""}
+                </div>
               </div>
             `;
             targetContainer.appendChild(adultCard);
@@ -2827,17 +2829,19 @@
               : "Invitez 1 ami avec votre lien pour obtenir 24h sans publicité.";
             const refCard = document.createElement("div");
             refCard.id = "settings-referral-card";
-            refCard.className = "s-group kibangou-settings-card";
+            refCard.className = "s-group";
             refCard.setAttribute("data-zone", "v");
             refCard.innerHTML = `
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                <div style="font-weight:600;color:#FFFFFF;font-size:0.98rem;">Parrainage &amp; Mode Sans-Pubs</div>
-                <span style="font-size:0.78rem;color:#8E99A4;">${adFree ? "Sans Pubs Actif" : `${uObj?.referralCount || 0} invité(s)`}</span>
+              <div class="s-group-head">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                <span class="s-group-title">Parrainage &amp; Sans-Pubs</span>
               </div>
-              <div style="font-size:0.84rem;color:#8E99A4;">${escapeHtml(adFreeTxt)}</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-                <code style="padding:7px 10px;border-radius:8px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.84rem;">${escapeHtml(refCode)}</code>
-                ${refUrl ? `<button type="button" id="btn-copy-ref-link" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Copier mon lien d'invitation</button>` : ""}
+              <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
+                <div class="s-label">${adFree ? "Sans Pubs Actif" : `${uObj?.referralCount || 0} parrainage(s)`}<span class="s-sub">${escapeHtml(adFreeTxt)}</span></div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                  <code style="padding:7px 10px;border-radius:8px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.84rem;">${escapeHtml(refCode)}</code>
+                  ${refUrl ? `<button type="button" id="btn-copy-ref-link" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Copier mon lien d'invitation</button>` : ""}
+                </div>
               </div>
             `;
             if (refUrl) {
@@ -2851,17 +2855,22 @@
           if (!targetContainer.querySelector("#settings-vip-saspay-card")) {
             const vipCard = document.createElement("div");
             vipCard.id = "settings-vip-saspay-card";
-            vipCard.className = "s-group kibangou-settings-card";
+            vipCard.className = "s-group";
             vipCard.setAttribute("data-zone", "v");
             vipCard.innerHTML = `
-              <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Abonnements VIP &amp; Lier une TV</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Choisissez une formule Sans Publicités (dès 50 FCFA) ou Adulte +18, ou liez votre Smart TV.</div>
-              <div class="kibangou-adult-links">
-                <button type="button" id="btn-open-plans-modal" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Voir les offres VIP →</button>
+              <div class="s-group-head">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span class="s-group-title">Abonnements VIP &amp; TV</span>
               </div>
-              <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;">
-                <input type="text" id="input-link-tv-code" maxlength="8" placeholder="Code affiché sur la TV (ex: A1B2C3)" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-size:0.86rem;flex:1;min-width:160px;">
-                <button type="button" id="btn-link-tv-submit" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Lier la TV</button>
+              <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
+                <div class="s-label">Offres VIP<span class="s-sub">Sans Publicités dès 50 FCFA ou Adulte +18, et liaison Smart TV.</span></div>
+                <div class="kibangou-adult-links">
+                  <button type="button" id="btn-open-plans-modal" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Voir les offres VIP →</button>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;">
+                  <input type="text" id="input-link-tv-code" maxlength="8" placeholder="Code TV (ex: A1B2C3)" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-size:0.86rem;flex:1;min-width:160px;">
+                  <button type="button" id="btn-link-tv-submit" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Lier la TV</button>
+                </div>
               </div>
             `;
             vipCard.querySelector("#btn-open-plans-modal").addEventListener("click", openPlansModal);
@@ -2883,14 +2892,19 @@
           if (!targetContainer.querySelector("#settings-apps-offline-card")) {
             const appsCard = document.createElement("div");
             appsCard.id = "settings-apps-offline-card";
-            appsCard.className = "s-group kibangou-settings-card";
+            appsCard.className = "s-group";
             appsCard.setAttribute("data-zone", "v");
             appsCard.innerHTML = `
-              <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Hors-ligne &amp; Applications</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos enregistrées sans connexion ou téléchargez les apps Mobile, PC, Mac &amp; TV.</div>
-              <div class="kibangou-adult-links">
-                <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Vidéos hors-ligne (PWA)</button>
-                <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC, Mac &amp; TV →</a>
+              <div class="s-group-head">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span class="s-group-title">Hors-ligne &amp; Applications</span>
+              </div>
+              <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
+                <div class="s-label">Stockage &amp; Apps<span class="s-sub">Vidéos hors-ligne (PWA) et applications Mobile, PC, Mac &amp; TV.</span></div>
+                <div class="kibangou-adult-links">
+                  <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Vidéos hors-ligne (PWA)</button>
+                  <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC, Mac &amp; TV →</a>
+                </div>
               </div>
             `;
             appsCard.querySelector("#btn-open-offline-videos").addEventListener("click", openOfflineModal);
@@ -2907,15 +2921,20 @@
             } catch {}
             const card = document.createElement("div");
             card.id = "settings-logout-card";
-            card.className = "s-group kibangou-settings-card";
+            card.className = "s-group";
             card.setAttribute("data-zone", "v");
             card.innerHTML = `
-              <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Compte &amp; Session</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">${escapeHtml(userLabel)}</div>
-              <button type="button" id="btn-settings-logout-action" class="kibangou-adult-link kibangou-adult-link-secondary" style="margin-top:4px; width:fit-content; border:1px solid rgba(255,255,255,0.12); cursor:pointer;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                Se déconnecter
-              </button>
+              <div class="s-group-head">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span class="s-group-title">Compte &amp; Session</span>
+              </div>
+              <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
+                <div class="s-label">Session active<span class="s-sub">${escapeHtml(userLabel)}</span></div>
+                <button type="button" id="btn-settings-logout-action" class="kibangou-adult-link kibangou-adult-link-secondary" style="width:fit-content; border:1px solid rgba(255,255,255,0.12); cursor:pointer;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                  Se déconnecter
+                </button>
+              </div>
             `;
             card.querySelector("#btn-settings-logout-action").addEventListener("click", performLogout);
             targetContainer.appendChild(card);
