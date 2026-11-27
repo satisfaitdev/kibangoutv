@@ -3238,19 +3238,34 @@
         { id: "adult_1m", title: "Adulte +18 (1 Mois)", priceNum: 1000, price: "1 000 FCFA", desc: "Chaînes & Films Adultes +18", isAdult: true }
       ];
 
-      const COUNTRY_FLAGS = {
-        CG: "🇨🇬", CD: "🇨🇩", CI: "🇨🇮", CM: "🇨🇲", SN: "🇸🇳", GA: "🇬🇦",
-        BJ: "🇧🇯", ML: "🇲🇱", BF: "🇧🇫", TG: "🇹🇬", NE: "🇳🇪", GN: "🇬🇳",
-        KE: "🇰🇪", UG: "🇺🇬", TZ: "🇹🇿", RW: "🇷🇼", GH: "🇬🇭", NG: "🇳🇬"
+      const COUNTRY_META = {
+        CG: { flag: "🇨🇬", name: "Congo-Brazzaville", dial: "+242" },
+        CD: { flag: "🇨🇩", name: "RD Congo", dial: "+243" },
+        CI: { flag: "🇨🇮", name: "Côte d'Ivoire", dial: "+225" },
+        CM: { flag: "🇨🇲", name: "Cameroun", dial: "+237" },
+        SN: { flag: "🇸🇳", name: "Sénégal", dial: "+221" },
+        GA: { flag: "🇬🇦", name: "Gabon", dial: "+241" },
+        BJ: { flag: "🇧🇯", name: "Bénin", dial: "+229" },
+        ML: { flag: "🇲🇱", name: "Mali", dial: "+223" },
+        BF: { flag: "🇧🇫", name: "Burkina Faso", dial: "+226" },
+        TG: { flag: "🇹🇬", name: "Togo", dial: "+228" },
+        NE: { flag: "🇳🇪", name: "Niger", dial: "+227" },
+        GN: { flag: "🇬🇳", name: "Guinée", dial: "+224" },
+        KE: { flag: "🇰🇪", name: "Kenya", dial: "+254" },
+        UG: { flag: "🇺🇬", name: "Ouganda", dial: "+256" },
+        TZ: { flag: "🇹🇿", name: "Tanzanie", dial: "+255" },
+        RW: { flag: "🇷🇼", name: "Rwanda", dial: "+250" },
+        GH: { flag: "🇬🇭", name: "Ghana", dial: "+233" },
+        NG: { flag: "🇳🇬", name: "Nigeria", dial: "+234" }
       };
       const OPERATOR_META = (code = "", label = "") => {
         const s = `${code} ${label}`.toLowerCase();
-        if (s.includes("mtn")) return { bg: "#FFCC00", fg: "#000", tag: "MTN", name: "MTN Mobile Money" };
-        if (s.includes("airtel")) return { bg: "#E60000", fg: "#FFF", tag: "airtel", name: "Airtel Money" };
-        if (s.includes("orange")) return { bg: "#FF7900", fg: "#000", tag: "Orange", name: "Orange Money" };
-        if (s.includes("moov")) return { bg: "#0066CC", fg: "#FFF", tag: "Moov", name: "Moov Money" };
-        if (s.includes("wave")) return { bg: "#1DC4FF", fg: "#07120B", tag: "Wave", name: "Wave" };
-        return { bg: "#00C853", fg: "#07120B", tag: "MoMo", name: label || code };
+        if (s.includes("mtn")) return { bg: "#FFCC00", fg: "#000", tag: "MTN", logo: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#FFCC00"/><ellipse cx="12" cy="12" rx="9" ry="5.5" fill="none" stroke="#000" stroke-width="1.4"/><text x="12" y="14.2" text-anchor="middle" font-size="6.2" font-weight="900" fill="#000" font-family="sans-serif">MTN</text></svg>` };
+        if (s.includes("airtel")) return { bg: "#E60000", fg: "#FFF", tag: "airtel", logo: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#E60000"/><text x="12" y="14.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#FFF" font-family="sans-serif">airtel</text></svg>` };
+        if (s.includes("orange")) return { bg: "#FF7900", fg: "#000", tag: "Orange", logo: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#FF7900"/><rect x="5" y="13" width="14" height="5" fill="#000"/><text x="12" y="10.5" text-anchor="middle" font-size="5.5" font-weight="800" fill="#000" font-family="sans-serif">Orange</text></svg>` };
+        if (s.includes("moov")) return { bg: "#0066CC", fg: "#FFF", tag: "Moov", logo: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0066CC"/><text x="12" y="14.5" text-anchor="middle" font-size="6.4" font-weight="800" fill="#FFF" font-family="sans-serif">Moov</text></svg>` };
+        if (s.includes("wave")) return { bg: "#1DC4FF", fg: "#07120B", tag: "Wave", logo: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#1DC4FF"/><path d="M5 13c2-3 4 3 6 0s4 3 8-1" fill="none" stroke="#07120B" stroke-width="2.2" stroke-linecap="round"/></svg>` };
+        return { bg: "#334155", fg: "#FFF", tag: "MoMo", logo: `<svg width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#334155"/><circle cx="12" cy="12" r="5" fill="#fff"/></svg>` };
       };
 
       let paymentMethods = [
@@ -3268,6 +3283,7 @@
         { country: "BJ", countryName: "Bénin", currency: "XOF", network: "mtn_bj", networkName: "MTN Mobile Money" },
         { country: "BJ", countryName: "Bénin", currency: "XOF", network: "moov_bj", networkName: "Moov Money" }
       ];
+      let selectedCountry = "CG";
       let selectedMethod = paymentMethods[0];
       let selectedPlan = null;
 
@@ -3276,17 +3292,15 @@
       page.className = "kibangou-fullpage";
       page.innerHTML = `
         <div style="max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-            <button type="button" id="plans-page-back" class="kibangou-page-back-btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#E2E8F0;padding:8px 14px;border-radius:10px;font-weight:600;font-size:0.86rem;cursor:pointer;">← Retour</button>
+          <div style="display:flex;align-items:center;justify-content:center;">
             <h1 style="margin:0;color:#fff;font-size:1.12rem;font-weight:700;">Formules VIP KibangouTV</h1>
-            <span class="kibangou-page-back-btn" style="width:74px;"></span>
           </div>
 
           <div id="plans-step-list" style="display:flex;flex-direction:column;gap:14px;">
             <div class="s-group" style="margin:0;">
               <div class="s-group-head">
                 <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-                <span class="s-group-title">Options &amp; Formules</span>
+                <span class="s-group-title" style="color:#E2E8F0;">Options &amp; Formules</span>
               </div>
               <div class="kibangou-s-row">
                 <label style="display:flex;align-items:center;gap:10px;font-size:0.88rem;color:#E2E8F0;cursor:pointer;">
@@ -3299,13 +3313,13 @@
               ${plans.map((p) => `
                 <div class="s-group" style="margin:0;display:flex;flex-direction:column;justify-content:space-between;">
                   <div class="s-group-head" style="justify-content:space-between;">
-                    <span class="s-group-title">${p.title}</span>
-                    ${p.badge ? `<span style="font-size:0.66rem;padding:2px 8px;border-radius:99px;background:rgba(0,200,83,0.18);color:#00C853;font-weight:700;">${p.badge}</span>` : ""}
+                    <span class="s-group-title" style="color:#CBD5E1;">${p.title}</span>
+                    ${p.badge ? `<span style="font-size:0.66rem;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,0.1);color:#fff;font-weight:700;">${p.badge}</span>` : ""}
                   </div>
                   <div class="kibangou-s-row">
                     <div class="plan-price-label" data-base-price="${p.priceNum}" data-is-adult="${p.isAdult ? "1" : "0"}" style="font-size:1.2rem;font-weight:800;color:#fff;">${p.price}</div>
                     <div class="s-sub" style="color:#94A3B8;font-size:0.8rem;">${p.desc}</div>
-                    <button type="button" data-choose-plan="${p.id}" style="width:100%;padding:9px 12px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:700;cursor:pointer;">Choisir</button>
+                    <button type="button" data-choose-plan="${p.id}" style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.08);color:#fff;font-weight:700;cursor:pointer;">Choisir</button>
                   </div>
                 </div>
               `).join("")}
@@ -3317,7 +3331,7 @@
             <div class="s-group" style="margin:0;">
               <div class="s-group-head">
                 <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
-                <span class="s-group-title">Résumé de la commande</span>
+                <span class="s-group-title" style="color:#CBD5E1;">Résumé de la commande</span>
               </div>
               <div class="kibangou-s-row">
                 <div id="plans-pay-summary" style="color:#fff;font-weight:700;font-size:0.98rem;"></div>
@@ -3327,22 +3341,25 @@
             <div class="s-group" style="margin:0;">
               <div class="s-group-head">
                 <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-                <span class="s-group-title">Pays &amp; Moyen de paiement</span>
+                <span class="s-group-title" style="color:#CBD5E1;">Pays &amp; Moyen de paiement</span>
               </div>
-              <div class="kibangou-s-row">
-                <input type="search" id="plans-country-search" placeholder="Rechercher un pays ou opérateur (ex: Congo, MTN, Airtel, Orange, Wave...)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.88rem;outline:none;">
-                <div id="plans-methods-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;max-height:220px;overflow-y:auto;"></div>
+              <div class="kibangou-s-row" style="gap:12px;">
+                <button type="button" id="plans-country-trigger" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;font-weight:600;cursor:pointer;">
+                  <span id="plans-country-label">🇨🇬 Congo-Brazzaville</span>
+                  <span style="color:#94A3B8;font-size:0.8rem;">Changer ▾</span>
+                </button>
+                <div id="plans-methods-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;"></div>
               </div>
             </div>
 
             <div class="s-group" style="margin:0;">
               <div class="s-group-head">
                 <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-                <span class="s-group-title">Coordonnées Mobile Money</span>
+                <span class="s-group-title" style="color:#CBD5E1;">Coordonnées Mobile Money</span>
               </div>
-              <div class="kibangou-s-row">
+              <div class="kibangou-s-row" style="gap:10px;">
                 <input type="text" id="plans-name-input" placeholder="Nom complet" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
-                <input type="tel" id="plans-phone-input" placeholder="Numéro Mobile Money (ex: +24206...)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
+                <input type="tel" id="plans-phone-input" placeholder="Numéro sans indicatif (ex: 06 123 45 67)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
                 <div id="plans-pay-status" style="font-size:0.84rem;color:#94A3B8;min-height:18px;"></div>
                 <button type="button" id="plans-confirm-softpay" style="width:100%;padding:12px 16px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:800;font-size:0.95rem;cursor:pointer;">Payer directement depuis l'app</button>
               </div>
@@ -3350,47 +3367,96 @@
           </div>
         </div>`;
       document.body.appendChild(page);
-      page.querySelector("#plans-page-back").addEventListener("click", () => {
-        page.remove();
-        if (location.hash === "#/plans") history.back();
-      });
 
-      const renderMethods = (qStr = "") => {
-        const q = qStr.trim().toLowerCase();
-        const grid = page.querySelector("#plans-methods-grid");
-        const list = !q ? paymentMethods : paymentMethods.filter((m) =>
-          `${m.country} ${m.countryName} ${m.networkName} ${m.network}`.toLowerCase().includes(q)
-        );
-        if (!list.length) {
-          grid.innerHTML = '<div style="font-size:0.82rem;color:#94A3B8;padding:8px;">Aucun pays ou opérateur trouvé.</div>';
-          return;
+      const getCountriesList = () => {
+        const map = new Map();
+        for (const m of paymentMethods) {
+          if (!map.has(m.country)) {
+            const meta = COUNTRY_META[m.country] || {};
+            map.set(m.country, {
+              code: m.country,
+              name: m.countryName || meta.name || m.country,
+              flag: meta.flag || "🌍",
+              dial: meta.dial || ""
+            });
+          }
         }
+        return Array.from(map.values());
+      };
+
+      const renderSelectedCountryAndMethods = () => {
+        const countries = getCountriesList();
+        const cur = countries.find((c) => c.code === selectedCountry) || countries[0];
+        if (!cur) return;
+        selectedCountry = cur.code;
+        page.querySelector("#plans-country-label").textContent = `${cur.flag} ${cur.name}`;
+        const list = paymentMethods.filter((m) => m.country === selectedCountry);
+        if (!selectedMethod || selectedMethod.country !== selectedCountry) {
+          selectedMethod = list[0] || paymentMethods[0];
+        }
+        const grid = page.querySelector("#plans-methods-grid");
         grid.innerHTML = list.map((m) => {
           const op = OPERATOR_META(m.network, m.networkName);
-          const flag = COUNTRY_FLAGS[m.country] || "🌍";
-          const active = selectedMethod && selectedMethod.network === m.network && selectedMethod.country === m.country;
+          const active = selectedMethod && selectedMethod.network === m.network;
           return `
-            <button type="button" class="plans-method-btn" data-country="${escapeHtml(m.country)}" data-network="${escapeHtml(m.network)}" style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;border:1px solid ${active ? "#00C853" : "rgba(255,255,255,0.12)"};background:${active ? "rgba(0,200,83,0.12)" : "rgba(255,255,255,0.04)"};color:#fff;cursor:pointer;text-align:left;">
-              <span style="font-size:1.25rem;line-height:1;">${flag}</span>
-              <span style="flex:1;min-width:0;">
-                <span style="display:block;font-size:0.8rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(m.countryName)}</span>
-                <span style="display:inline-block;margin-top:2px;font-size:0.68rem;font-weight:800;padding:1px 6px;border-radius:5px;background:${op.bg};color:${op.fg};">${escapeHtml(op.tag)}</span>
-                <span style="font-size:0.72rem;color:#CBD5E1;margin-left:4px;">${escapeHtml(m.networkName)}</span>
-              </span>
+            <button type="button" class="plans-method-btn" data-network="${escapeHtml(m.network)}" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid ${active ? "#00C853" : "rgba(255,255,255,0.12)"};background:${active ? "rgba(0,200,83,0.1)" : "rgba(255,255,255,0.04)"};color:#fff;cursor:pointer;text-align:left;">
+              ${op.logo}
+              <span style="font-size:0.84rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(m.networkName)}</span>
             </button>`;
         }).join("");
         grid.querySelectorAll(".plans-method-btn").forEach((b) => {
           b.addEventListener("click", () => {
-            const c = b.getAttribute("data-country");
             const n = b.getAttribute("data-network");
-            selectedMethod = paymentMethods.find((x) => x.country === c && x.network === n) || selectedMethod;
-            renderMethods(page.querySelector("#plans-country-search").value);
+            selectedMethod = list.find((x) => x.network === n) || selectedMethod;
+            renderSelectedCountryAndMethods();
           });
         });
       };
 
-      renderMethods("");
-      page.querySelector("#plans-country-search").addEventListener("input", (e) => renderMethods(e.target.value));
+      const openCountryPickerModal = () => {
+        document.getElementById("plans-country-modal")?.remove();
+        const cm = document.createElement("div");
+        cm.id = "plans-country-modal";
+        cm.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(10,13,18,0.84);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;";
+        cm.innerHTML = `
+          <div class="s-group" style="width:100%;max-width:420px;margin:0;max-height:80vh;display:flex;flex-direction:column;">
+            <div class="s-group-head" style="justify-content:space-between;">
+              <span class="s-group-title" style="color:#fff;">Choisir votre pays</span>
+              <button type="button" id="cm-close" style="background:none;border:none;color:#94A3B8;font-size:18px;cursor:pointer;">✕</button>
+            </div>
+            <div class="kibangou-s-row">
+              <input type="search" id="cm-search" placeholder="Rechercher un pays..." style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.9rem;outline:none;">
+            </div>
+            <div id="cm-list" style="overflow-y:auto;max-height:52vh;padding:4px 12px 12px;display:flex;flex-direction:column;gap:6px;"></div>
+          </div>`;
+        document.body.appendChild(cm);
+        cm.querySelector("#cm-close").addEventListener("click", () => cm.remove());
+        cm.addEventListener("click", (e) => { if (e.target === cm) cm.remove(); });
+        const renderList = (qStr = "") => {
+          const q = qStr.trim().toLowerCase();
+          const items = getCountriesList().filter((c) => !q || `${c.name} ${c.code}`.toLowerCase().includes(q));
+          const box = cm.querySelector("#cm-list");
+          box.innerHTML = items.length ? items.map((c) => `
+            <button type="button" data-pick-country="${escapeHtml(c.code)}" style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;border:1px solid ${c.code === selectedCountry ? "#00C853" : "rgba(255,255,255,0.08)"};background:${c.code === selectedCountry ? "rgba(0,200,83,0.1)" : "rgba(255,255,255,0.03)"};color:#fff;cursor:pointer;font-size:0.9rem;">
+              <span>${c.flag} <strong style="margin-left:6px;">${escapeHtml(c.name)}</strong></span>
+              <span style="color:#94A3B8;font-size:0.78rem;">${escapeHtml(c.dial)}</span>
+            </button>`).join("") : '<div style="padding:12px;color:#94A3B8;font-size:0.84rem;">Aucun pays trouvé.</div>';
+          box.querySelectorAll("[data-pick-country]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              selectedCountry = btn.getAttribute("data-pick-country");
+              selectedMethod = null;
+              renderSelectedCountryAndMethods();
+              cm.remove();
+            });
+          });
+        };
+        renderList("");
+        cm.querySelector("#cm-search").addEventListener("input", (e) => renderList(e.target.value));
+        cm.querySelector("#cm-search").focus();
+      };
+
+      renderSelectedCountryAndMethods();
+      page.querySelector("#plans-country-trigger").addEventListener("click", openCountryPickerModal);
 
       const adultChk = page.querySelector("#plans-include-adult");
       adultChk.addEventListener("change", () => {
@@ -3416,8 +3482,9 @@
             }));
           if (mapped.length) {
             paymentMethods = mapped;
-            selectedMethod = mapped[0];
-            renderMethods(page.querySelector("#plans-country-search").value);
+            selectedMethod = mapped.find((m) => m.country === selectedCountry) || mapped[0];
+            selectedCountry = selectedMethod.country;
+            renderSelectedCountryAndMethods();
           }
         }
       }).catch(() => {});
@@ -3462,7 +3529,7 @@
         try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
         const email = uObj?.email || "";
         const fullName = (page.querySelector("#plans-name-input")?.value || "").trim();
-        const phone = (page.querySelector("#plans-phone-input")?.value || "").trim();
+        let phone = (page.querySelector("#plans-phone-input")?.value || "").replace(/\s+/g, "").trim();
         const statusEl = page.querySelector("#plans-pay-status");
         const payBtn = page.querySelector("#plans-confirm-softpay");
         if (fullName.length < 2) {
@@ -3470,12 +3537,16 @@
           statusEl.textContent = "Veuillez entrer votre nom complet.";
           return;
         }
-        if (phone.length < 8) {
+        if (phone.length < 6) {
           statusEl.style.color = "#EF4444";
-          statusEl.textContent = "Entrez votre numéro Mobile Money complet (avec indicatif, ex: +242...).";
+          statusEl.textContent = "Entrez votre numéro Mobile Money.";
           return;
         }
-        const country = selectedMethod?.country || "CG";
+        const country = selectedMethod?.country || selectedCountry || "CG";
+        const dialPrefix = COUNTRY_META[country]?.dial || "";
+        if (!phone.startsWith("+") && dialPrefix) {
+          phone = `${dialPrefix}${phone.replace(/^0+(?=\d{8,})/, "")}`;
+        }
         const currency = selectedMethod?.currency || "XAF";
         const network = selectedMethod?.network || "mtn_cg";
 
