@@ -1519,18 +1519,31 @@
     const frenchAddon = new URL("./french-addon/mhub-addon.json", location.href).href;
     const adultAddon = new URL("./adult-addon/mhub-addon.json", location.href).href;
 
+    function hasActiveAdultVip() {
+      try {
+        const u = JSON.parse(localStorage.getItem("kibangoutv_user") || "null");
+        return Boolean(u && Number(u.adultVipUntil || 0) > Date.now());
+      } catch {
+        return false;
+      }
+    }
+
     const addonsList = [
       "https://vavoo.top/live/mhub-addon.json",
       bouquetKibangou,
       frenchAddon,
-      adultAddon,
+      ...(hasActiveAdultVip() ? [adultAddon] : []),
       "https://www.mhub.mx/tmdb",
       "https://vavoo.top/vod/mhub-addon.json",
       "https://vavoo.top/subtitle/mhub-addon.json"
     ];
 
     try {
-      localStorage.setItem("kibangou_pro_adult_unlocked", "true");
+      if (hasActiveAdultVip()) {
+        localStorage.setItem("kibangou_pro_adult_unlocked", "true");
+      } else {
+        localStorage.removeItem("kibangou_pro_adult_unlocked");
+      }
     } catch {}
 
     mount({
@@ -2840,6 +2853,11 @@
           };
 
           if (!targetContainer.querySelector("#settings-pro-adult-card")) {
+            let adultUnlocked = false;
+            try {
+              const uAd = JSON.parse(localStorage.getItem("kibangoutv_user") || "null");
+              adultUnlocked = Boolean(uAd && Number(uAd.adultVipUntil || 0) > Date.now());
+            } catch {}
             const routes = getAdultRoutes();
             const adultCard = document.createElement("div");
             adultCard.id = "settings-pro-adult-card";
@@ -2851,14 +2869,20 @@
                 <span class="s-group-title">Espace Adulte +18</span>
               </div>
               <div class="kibangou-s-row">
-                <div class="s-label">Accès +18<span class="s-sub">${routes.liveHref ? "Chaînes et films adultes +18." : "Films et séries adultes +18."}</span></div>
-                <div class="kibangou-adult-links">
-                  ${routes.liveHref ? `<a href="${escapeHtml(routes.liveHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Chaînes +18 →</a>` : ""}
-                  <a href="${escapeHtml(routes.videoHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Films +18 →</a>
-                  ${routes.seriesHref ? `<a href="${escapeHtml(routes.seriesHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Séries +18 →</a>` : ""}
-                </div>
+                <div class="s-label">${adultUnlocked ? "Accès +18 Actif" : "Accès +18 Verrouillé"}<span class="s-sub">${adultUnlocked ? (routes.liveHref ? "Chaînes et films adultes +18 débloqués." : "Films et séries adultes +18 débloqués.") : "Abonnement Adulte +18 requis (1 000 FCFA / mois)."}</span></div>
+                ${adultUnlocked
+                  ? `<div class="kibangou-adult-links">
+                      ${routes.liveHref ? `<a href="${escapeHtml(routes.liveHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Chaînes +18 →</a>` : ""}
+                      <a href="${escapeHtml(routes.videoHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Films +18 →</a>
+                      ${routes.seriesHref ? `<a href="${escapeHtml(routes.seriesHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Séries +18 →</a>` : ""}
+                    </div>`
+                  : `<div class="kibangou-adult-links">
+                      <button type="button" id="btn-unlock-adult-vip" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Débloquer l'Espace +18 →</button>
+                    </div>`}
               </div>
             `;
+            const unlockBtn = adultCard.querySelector("#btn-unlock-adult-vip");
+            if (unlockBtn) unlockBtn.addEventListener("click", () => { location.hash = "#/plans"; });
             targetContainer.appendChild(adultCard);
           }
 
