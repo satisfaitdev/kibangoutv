@@ -1181,51 +1181,16 @@
   <!-- ========================================================
        PORTAIL D'AUTHENTIFICATION (LOCK SCREEN)
        ======================================================== -->
-  <div id="auth-gate">
-    <div class="auth-card" id="auth-card">
+  <div id="auth-gate" class="unlocked" style="display:none;">
+    <div class="auth-card" id="auth-card" style="position:relative;">
+      <button type="button" id="auth-close-btn" aria-label="Fermer" style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.08);border:none;color:#94A3B8;width:32px;height:32px;border-radius:99px;font-size:16px;cursor:pointer;">✕</button>
       <img src="./logo.svg" alt="KibangouTV" class="auth-logo">
       <div class="auth-brand">Kibangou<span>TV</span></div>
       
-      <!-- Vue Code PIN -->
-      <div id="view-pin" style="width:100%; display:flex; flex-direction:column; align-items:center;">
-        <div class="auth-title">Code secret d'accès</div>
-        <div class="auth-subtitle">Entrez votre code à 6 chiffres pour déverrouiller l'application</div>
-        
-        <div class="pin-display" id="pin-display">
-          <div class="pin-dot"></div>
-          <div class="pin-dot"></div>
-          <div class="pin-dot"></div>
-          <div class="pin-dot"></div>
-          <div class="pin-dot"></div>
-          <div class="pin-dot"></div>
-        </div>
-
-        <div class="auth-error" id="pin-error"></div>
-
-        <div class="pin-keypad">
-          <button type="button" class="pin-key" data-digit="1">1</button>
-          <button type="button" class="pin-key" data-digit="2">2</button>
-          <button type="button" class="pin-key" data-digit="3">3</button>
-          <button type="button" class="pin-key" data-digit="4">4</button>
-          <button type="button" class="pin-key" data-digit="5">5</button>
-          <button type="button" class="pin-key" data-digit="6">6</button>
-          <button type="button" class="pin-key" data-digit="7">7</button>
-          <button type="button" class="pin-key" data-digit="8">8</button>
-          <button type="button" class="pin-key" data-digit="9">9</button>
-          <button type="button" class="pin-key key-action" id="pin-clear">Effacer</button>
-          <button type="button" class="pin-key" data-digit="0">0</button>
-          <button type="button" class="pin-key key-action" id="pin-del">⌫</button>
-        </div>
-
-        <button type="button" class="mode-switch-btn" id="btn-switch-to-email">
-          Connexion par e-mail (Web) →
-        </button>
-      </div>
-
       <!-- Vue Connexion E-mail & Google -->
-      <div id="view-email" style="width:100%; display:none; flex-direction:column; align-items:center;">
-        <div class="auth-title">Connexion Web</div>
-        <div class="auth-subtitle">Connectez-vous avec Google ou avec votre adresse e-mail</div>
+      <div id="view-email" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+        <div class="auth-title">Connexion</div>
+        <div class="auth-subtitle" id="auth-subtitle-text">Connectez-vous avec Google ou votre adresse e-mail pour activer un abonnement</div>
 
         <a href="/api/auth/google" class="google-auth-btn" id="btn-google-login">
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
@@ -1256,20 +1221,13 @@
           </div>
           <div class="auth-error" id="email-error"></div>
           <button type="submit" class="auth-btn" id="auth-email-submit">
-            <span>Accéder à KibangouTV</span>
+            <span>Continuer</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </button>
         </form>
-
-        <button type="button" class="mode-switch-btn" id="btn-switch-to-pin">
-          ← Déverrouillage par code PIN (6 chiffres)
-        </button>
-        <button type="button" class="mode-switch-btn" id="btn-toggle-auth-mode" style="margin-top:6px;color:#00C853;">
-          Pas de compte ? Créer un compte →
-        </button>
       </div>
 
       <!-- Vue Connexion TV par QR Code -->
@@ -1341,30 +1299,43 @@
        ======================================================== */
     (function initAuth() {
       const authGate = document.getElementById("auth-gate");
-      const authCard = document.getElementById("auth-card");
-      const viewPin = document.getElementById("view-pin");
+      const authCloseBtn = document.getElementById("auth-close-btn");
+      const authSubtitleText = document.getElementById("auth-subtitle-text");
       const viewEmail = document.getElementById("view-email");
       const viewTvPair = document.getElementById("view-tv-pair");
-      const btnSwitchToEmail = document.getElementById("btn-switch-to-email");
-      const btnSwitchToPin = document.getElementById("btn-switch-to-pin");
-      const btnToggleAuthMode = document.getElementById("btn-toggle-auth-mode");
-      let emailAuthAction = "login";
-      const pinDots = document.querySelectorAll("#pin-display .pin-dot");
-      const pinError = document.getElementById("pin-error");
       const emailForm = document.getElementById("email-form");
       const emailInput = document.getElementById("auth-email-input");
       const passwordInput = document.getElementById("auth-password-input");
       const emailError = document.getElementById("email-error");
       const emailSubmitBtn = document.getElementById("auth-email-submit");
+      let pendingAuthCallback = null;
 
-      const MASTER_PIN = localStorage.getItem("kibangoutv_custom_pin") || "123456";
-      let enteredPin = "";
+      // L'accès à l'application est libre sans compte ; le compte devient obligatoire uniquement pour s'abonner.
+      authGate.classList.add("unlocked");
+      authGate.style.display = "none";
 
-      const existingAuth = localStorage.getItem("kibangoutv_auth");
-      if (existingAuth) {
+      function closeAuthModal() {
         authGate.classList.add("unlocked");
-        authGate.style.display = "none";
+        setTimeout(() => {
+          authGate.style.display = "none";
+        }, 250);
       }
+
+      if (authCloseBtn) {
+        authCloseBtn.addEventListener("click", closeAuthModal);
+      }
+      authGate.addEventListener("click", (ev) => {
+        if (ev.target === authGate) closeAuthModal();
+      });
+
+      window.__kibangouOpenAuthModal = function(subtitle, onSuccess) {
+        pendingAuthCallback = typeof onSuccess === "function" ? onSuccess : null;
+        if (authSubtitleText && subtitle) authSubtitleText.textContent = subtitle;
+        emailError.textContent = "";
+        showMode(isTvDevice ? "tv" : "email");
+        authGate.classList.remove("unlocked");
+        authGate.style.display = "flex";
+      };
 
       async function confirmPendingTvPair() {
         const pendingCode = localStorage.getItem("kibangoutv_pending_tv_pair");
@@ -1465,108 +1436,24 @@
       function showMode(mode) {
         if (viewTvPair) viewTvPair.style.display = "none";
         if (mode === "tv") {
-          viewPin.style.display = "none";
           viewEmail.style.display = "none";
           if (viewTvPair) viewTvPair.style.display = "flex";
-          if (!existingAuth) startTvPairing();
-        } else if (mode === "email") {
-          viewPin.style.display = "none";
-          viewEmail.style.display = "flex";
-          emailInput.focus();
+          startTvPairing();
         } else {
-          viewEmail.style.display = "none";
-          viewPin.style.display = "flex";
-          enteredPin = "";
-          updatePinDots();
+          viewEmail.style.display = "flex";
+          if (emailInput) emailInput.focus();
         }
-      }
-
-      showMode(isTvDevice ? "tv" : (isMobileOrStandalone ? "pin" : "email"));
-
-      if (btnToggleAuthMode) {
-        btnToggleAuthMode.addEventListener("click", () => {
-          emailAuthAction = emailAuthAction === "login" ? "register" : "login";
-          btnToggleAuthMode.textContent = emailAuthAction === "register"
-            ? "Déjà un compte ? Se connecter →"
-            : "Pas de compte ? Créer un compte →";
-          const span = emailSubmitBtn?.querySelector("span");
-          if (span) span.textContent = emailAuthAction === "register" ? "Créer mon compte" : "Accéder à KibangouTV";
-          emailError.textContent = "";
-        });
-      }
-
-      btnSwitchToEmail.addEventListener("click", () => showMode("email"));
-      btnSwitchToPin.addEventListener("click", () => showMode("pin"));
-
-      function updatePinDots() {
-        pinDots.forEach((dot, index) => {
-          if (index < enteredPin.length) {
-            dot.classList.add("filled");
-          } else {
-            dot.classList.remove("filled");
-          }
-        });
       }
 
       function unlockApp(authType) {
         localStorage.setItem("kibangoutv_auth", authType);
-        authGate.classList.add("unlocked");
-        setTimeout(() => {
-          authGate.style.display = "none";
-        }, 300);
-      }
-
-      function handlePinInput(digit) {
-        if (enteredPin.length >= 6) return;
-        enteredPin += digit;
-        updatePinDots();
-        pinError.textContent = "";
-
-        if (enteredPin.length === 6) {
-          if (enteredPin === MASTER_PIN) {
-            pinDots.forEach(d => d.style.borderColor = "#00C853");
-            setTimeout(() => unlockApp("pin"), 150);
-          } else {
-            authCard.classList.add("shake");
-            pinError.textContent = "Code PIN incorrect (Défaut : 123456)";
-            setTimeout(() => {
-              authCard.classList.remove("shake");
-              enteredPin = "";
-              updatePinDots();
-            }, 600);
-          }
+        closeAuthModal();
+        if (typeof pendingAuthCallback === "function") {
+          const cb = pendingAuthCallback;
+          pendingAuthCallback = null;
+          cb();
         }
       }
-
-      document.querySelectorAll(".pin-key[data-digit]").forEach(btn => {
-        btn.addEventListener("click", () => handlePinInput(btn.getAttribute("data-digit")));
-      });
-
-      document.getElementById("pin-del").addEventListener("click", () => {
-        if (enteredPin.length > 0) {
-          enteredPin = enteredPin.slice(0, -1);
-          updatePinDots();
-          pinError.textContent = "";
-        }
-      });
-
-      document.getElementById("pin-clear").addEventListener("click", () => {
-        enteredPin = "";
-        updatePinDots();
-        pinError.textContent = "";
-      });
-
-      window.addEventListener("keydown", (e) => {
-        if (authGate.style.display === "none" || authGate.classList.contains("unlocked") || viewPin.style.display === "none") return;
-        if (/^[0-9]$/.test(e.key)) {
-          handlePinInput(e.key);
-        } else if (e.key === "Backspace") {
-          if (enteredPin.length > 0) {
-            enteredPin = enteredPin.slice(0, -1);
-            updatePinDots();
-          }
-        }
-      });
 
       emailForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -1583,7 +1470,7 @@
         emailError.textContent = "";
         if (emailSubmitBtn) emailSubmitBtn.disabled = true;
         try {
-          const res = await fetch(`/api/auth?action=${emailAuthAction}`, {
+          const res = await fetch("/api/auth?action=login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "same-origin",
@@ -3163,7 +3050,9 @@
               <option value="CM|XAF|orange_cm">Cameroun · Orange Money</option>
               <option value="BJ|XOF|mtn_bj">Bénin · MTN Mobile Money</option>
             </select>
+            <input type="text" id="plans-name-input" placeholder="Nom complet" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
             <input type="tel" id="plans-phone-input" placeholder="Numéro Mobile Money (ex: +24206...)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
+            <input type="tel" id="plans-phone-confirm-input" placeholder="Confirmer le numéro Mobile Money" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
             <div id="plans-pay-status" style="font-size:0.84rem;color:#94A3B8;min-height:18px;"></div>
             <button type="button" id="plans-confirm-softpay" style="width:100%;padding:11px 16px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:800;font-size:0.95rem;cursor:pointer;">Payer directement depuis l'app</button>
           </div>
@@ -3203,16 +3092,30 @@
 
       modal.querySelectorAll("[data-choose-plan]").forEach((btn) => {
         btn.addEventListener("click", () => {
+          const proceedToPlan = () => {
+            let uNow = null;
+            try { uNow = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
+            selectedPlan = plans.find((p) => p.id === btn.getAttribute("data-choose-plan"));
+            if (!selectedPlan) return;
+            const incAdult = !selectedPlan.isAdult && adultChk.checked;
+            const total = selectedPlan.priceNum + (incAdult ? 1000 : 0);
+            modal.querySelector("#plans-pay-summary").textContent = `${selectedPlan.title}${incAdult ? " + Adulte +18 (30j)" : ""} — Total : ${total.toLocaleString("fr-FR")} FCFA`;
+            const nameEl = modal.querySelector("#plans-name-input");
+            if (nameEl && !nameEl.value && uNow?.name) nameEl.value = uNow.name;
+            modal.querySelector("#plans-step-list").style.display = "none";
+            modal.querySelector("#plans-step-pay").style.display = "flex";
+          };
           let uObj = null;
           try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
-          if (!uObj?.email) { showToast("Connectez-vous par e-mail ou Google pour activer un abonnement."); return; }
-          selectedPlan = plans.find((p) => p.id === btn.getAttribute("data-choose-plan"));
-          if (!selectedPlan) return;
-          const incAdult = !selectedPlan.isAdult && adultChk.checked;
-          const total = selectedPlan.priceNum + (incAdult ? 1000 : 0);
-          modal.querySelector("#plans-pay-summary").textContent = `${selectedPlan.title}${incAdult ? " + Adulte +18 (30j)" : ""} — Total : ${total.toLocaleString("fr-FR")} FCFA`;
-          modal.querySelector("#plans-step-list").style.display = "none";
-          modal.querySelector("#plans-step-pay").style.display = "flex";
+          if (!uObj?.email) {
+            if (typeof window.__kibangouOpenAuthModal === "function") {
+              window.__kibangouOpenAuthModal("Un compte est requis pour activer votre abonnement", proceedToPlan);
+            } else {
+              showToast("Connectez-vous pour activer un abonnement.");
+            }
+            return;
+          }
+          proceedToPlan();
         });
       });
 
@@ -3221,10 +3124,17 @@
         let uObj = null;
         try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
         const email = uObj?.email || "";
+        const fullName = (modal.querySelector("#plans-name-input")?.value || "").trim();
         const phone = (modal.querySelector("#plans-phone-input").value || "").trim();
+        const phoneConfirm = (modal.querySelector("#plans-phone-confirm-input")?.value || "").trim();
         const statusEl = modal.querySelector("#plans-pay-status");
         const payBtn = modal.querySelector("#plans-confirm-softpay");
+        if (fullName.length < 2) { statusEl.textContent = "Veuillez entrer votre nom complet."; return; }
         if (phone.length < 8) { statusEl.textContent = "Entrez votre numéro Mobile Money complet (avec indicatif, ex: +242...)."; return; }
+        if (phone.replace(/\s+/g, "") !== phoneConfirm.replace(/\s+/g, "")) {
+          statusEl.textContent = "Les deux numéros Mobile Money ne correspondent pas.";
+          return;
+        }
         const [country, currency, network] = (modal.querySelector("#plans-network-select").value || "CG|XAF|mtn_cg").split("|");
 
         payBtn.disabled = true;
@@ -3235,7 +3145,7 @@
             body: JSON.stringify({
               plan: selectedPlan.id,
               includeAdult: !selectedPlan.isAdult && adultChk.checked,
-              email, name: uObj?.name || email,
+              email, name: fullName,
               phone, country, currency, network,
               idempotencyKey: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()))
             })
