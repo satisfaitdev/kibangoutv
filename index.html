@@ -2933,19 +2933,20 @@
       updateActiveNav();
     }
 
-    function openPlansModal() {
+    async function openPlansModal() {
       const existing = document.getElementById("kibangou-plans-modal");
       if (existing) existing.remove();
       const plans = [
-        { id: "no_ads_1d", title: "1 Jour Sans Pubs", price: "50 FCFA", desc: "24 heures sans publicité" },
-        { id: "no_ads_3d", title: "3 Jours Sans Pubs", price: "125 FCFA", desc: "Week-end sans coupures" },
-        { id: "no_ads_7d", title: "1 Semaine Sans Pubs", price: "300 FCFA", desc: "7 jours complets sans pubs" },
-        { id: "no_ads_1m", title: "1 Mois Sans Pubs", price: "1 200 FCFA", desc: "Formule mensuelle standard", badge: "Populaire" },
-        { id: "no_ads_3m", title: "3 Mois Sans Pubs", price: "3 500 FCFA", desc: "Trimestre économique" },
-        { id: "no_ads_6m", title: "6 Mois Sans Pubs", price: "6 500 FCFA", desc: "Semestre avantageux" },
-        { id: "no_ads_1y", title: "1 An Sans Pubs", price: "10 000 FCFA", desc: "Économie maximale annuelle", badge: "Meilleure offre" },
-        { id: "adult_1m", title: "Adulte +18 (1 Mois)", price: "1 000 FCFA", desc: "Chaînes & Films Adultes +18", isAdult: true }
+        { id: "no_ads_1d", title: "1 Jour Sans Pubs", priceNum: 50, price: "50 FCFA", desc: "24 heures sans publicité" },
+        { id: "no_ads_3d", title: "3 Jours Sans Pubs", priceNum: 125, price: "125 FCFA", desc: "Week-end sans coupures" },
+        { id: "no_ads_7d", title: "1 Semaine Sans Pubs", priceNum: 300, price: "300 FCFA", desc: "7 jours complets sans pubs" },
+        { id: "no_ads_1m", title: "1 Mois Sans Pubs", priceNum: 1200, price: "1 200 FCFA", desc: "Formule mensuelle standard", badge: "Populaire" },
+        { id: "no_ads_3m", title: "3 Mois Sans Pubs", priceNum: 3500, price: "3 500 FCFA", desc: "Trimestre économique" },
+        { id: "no_ads_6m", title: "6 Mois Sans Pubs", priceNum: 6500, price: "6 500 FCFA", desc: "Semestre avantageux" },
+        { id: "no_ads_1y", title: "1 An Sans Pubs", priceNum: 10000, price: "10 000 FCFA", desc: "Économie maximale annuelle", badge: "Meilleure offre" },
+        { id: "adult_1m", title: "Adulte +18 (1 Mois)", priceNum: 1000, price: "1 000 FCFA", desc: "Chaînes & Films Adultes +18", isAdult: true }
       ];
+      let selectedPlan = null;
       const modal = document.createElement("div");
       modal.id = "kibangou-plans-modal";
       modal.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(10,13,18,0.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;";
@@ -2955,51 +2956,152 @@
             <strong style="color:#fff;font-size:1.08rem;">Formules VIP KibangouTV</strong>
             <button type="button" id="plans-modal-close" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;">✕</button>
           </div>
-          <label style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.86rem;color:#E2E8F0;cursor:pointer;">
-            <input type="checkbox" id="plans-include-adult" style="width:16px;height:16px;accent-color:#00C853;">
-            <span>Ajouter l'accès Adulte +18 (+1 000 FCFA / 30 jours) à mon abonnement Sans Pubs</span>
-          </label>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
-            ${plans.map((p) => `
-              <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
-                <div>
-                  <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
-                    <strong style="color:#fff;font-size:0.94rem;">${p.title}</strong>
-                    ${p.badge ? `<span style="font-size:0.68rem;padding:2px 7px;border-radius:99px;background:rgba(0,200,83,0.18);color:#4ADE80;font-weight:700;">${p.badge}</span>` : ""}
+          <div id="plans-step-list">
+            <label style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.86rem;color:#E2E8F0;cursor:pointer;margin-bottom:12px;">
+              <input type="checkbox" id="plans-include-adult" style="width:16px;height:16px;accent-color:#00C853;">
+              <span>Ajouter l'accès Adulte +18 (+1 000 FCFA / 30 jours) à mon abonnement Sans Pubs</span>
+            </label>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
+              ${plans.map((p) => `
+                <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+                      <strong style="color:#fff;font-size:0.94rem;">${p.title}</strong>
+                      ${p.badge ? `<span style="font-size:0.68rem;padding:2px 7px;border-radius:99px;background:rgba(0,200,83,0.18);color:#4ADE80;font-weight:700;">${p.badge}</span>` : ""}
+                    </div>
+                    <div class="plan-price-label" data-base-price="${p.priceNum}" data-is-adult="${p.isAdult ? "1" : "0"}" style="font-size:1.15rem;font-weight:800;color:#00C853;margin:4px 0;">${p.price}</div>
+                    <div style="font-size:0.78rem;color:#94A3B8;">${p.desc}</div>
                   </div>
-                  <div style="font-size:1.15rem;font-weight:800;color:#00C853;margin:4px 0;">${p.price}</div>
-                  <div style="font-size:0.78rem;color:#94A3B8;">${p.desc}</div>
+                  <button type="button" data-choose-plan="${p.id}" style="width:100%;padding:8px 12px;border-radius:8px;border:none;background:#00C853;color:#07120B;font-weight:700;cursor:pointer;">Choisir</button>
                 </div>
-                <button type="button" data-choose-plan="${p.id}" style="width:100%;padding:8px 12px;border-radius:8px;border:none;background:#00C853;color:#07120B;font-weight:700;cursor:pointer;">Choisir</button>
-              </div>
-            `).join("")}
+              `).join("")}
+            </div>
+          </div>
+          <div id="plans-step-pay" style="display:none;flex-direction:column;gap:12px;">
+            <button type="button" id="plans-back-btn" style="align-self:flex-start;background:none;border:none;color:#94A3B8;font-size:0.86rem;cursor:pointer;">← Changer de formule</button>
+            <div id="plans-pay-summary" style="padding:12px;border-radius:10px;background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.25);color:#fff;font-weight:600;font-size:0.95rem;"></div>
+            <select id="plans-network-select" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.9rem;">
+              <option value="CG|XAF|mtn_cg">Congo-Brazzaville · MTN Mobile Money</option>
+              <option value="CG|XAF|airtel_cg">Congo-Brazzaville · Airtel Money</option>
+              <option value="CD|CDF|airtel_cd">RD Congo · Airtel Money</option>
+              <option value="CI|XOF|mtn_ci">Côte d'Ivoire · MTN Money</option>
+              <option value="CI|XOF|orange_ci">Côte d'Ivoire · Orange Money</option>
+              <option value="CM|XAF|mtn_cm">Cameroun · MTN Mobile Money</option>
+              <option value="CM|XAF|orange_cm">Cameroun · Orange Money</option>
+              <option value="BJ|XOF|mtn_bj">Bénin · MTN Mobile Money</option>
+            </select>
+            <input type="tel" id="plans-phone-input" placeholder="Numéro Mobile Money (ex: +24206...)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
+            <div id="plans-pay-status" style="font-size:0.84rem;color:#94A3B8;min-height:18px;"></div>
+            <button type="button" id="plans-confirm-softpay" style="width:100%;padding:11px 16px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:800;font-size:0.95rem;cursor:pointer;">Payer directement depuis l'app</button>
           </div>
         </div>`;
       document.body.appendChild(modal);
       modal.querySelector("#plans-modal-close").addEventListener("click", () => modal.remove());
       modal.addEventListener("click", (ev) => { if (ev.target === modal) modal.remove(); });
+
+      const adultChk = modal.querySelector("#plans-include-adult");
+      adultChk.addEventListener("change", () => {
+        modal.querySelectorAll(".plan-price-label").forEach((el) => {
+          const base = Number(el.getAttribute("data-base-price") || 0);
+          const isAd = el.getAttribute("data-is-adult") === "1";
+          const total = (!isAd && adultChk.checked) ? base + 1000 : base;
+          el.textContent = `${total.toLocaleString("fr-FR")} FCFA`;
+        });
+      });
+
+      fetch("/api/saspay?action=rates").then((r) => r.json()).then((res) => {
+        const rates = Array.isArray(res?.data) ? res.data : (Array.isArray(res?.rates) ? res.rates : []);
+        if (rates.length) {
+          const sel = modal.querySelector("#plans-network-select");
+          const opts = rates.filter((rt) => rt.network && rt.country).map((rt) =>
+            `<option value="${escapeHtml(rt.country)}|${escapeHtml(rt.currency || "XAF")}|${escapeHtml(rt.network)}">${escapeHtml(rt.country)} · ${escapeHtml(rt.network_name || rt.network)}</option>`
+          );
+          if (opts.length) sel.innerHTML = opts.join("");
+        }
+      }).catch(() => {});
+
+      modal.querySelector("#plans-back-btn").addEventListener("click", () => {
+        modal.querySelector("#plans-step-pay").style.display = "none";
+        modal.querySelector("#plans-step-list").style.display = "block";
+      });
+
       modal.querySelectorAll("[data-choose-plan]").forEach((btn) => {
-        btn.addEventListener("click", async () => {
+        btn.addEventListener("click", () => {
           let uObj = null;
           try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
-          const email = uObj?.email || "";
-          if (!email) { showToast("Connectez-vous par e-mail ou Google pour activer un abonnement."); return; }
-          btn.disabled = true;
-          try {
-            const res = await fetch("/api/saspay?action=checkout", {
-              method: "POST", headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                plan: btn.getAttribute("data-choose-plan"),
-                includeAdult: modal.querySelector("#plans-include-adult").checked,
-                email, name: uObj?.name || email
-              })
-            });
-            const data = await res.json().catch(() => ({}));
-            const d = data.data || data;
-            if (d.checkout_url) location.href = d.checkout_url;
-            else showToast(data.error?.message || data.error || "Paiement indisponible.");
-          } finally { btn.disabled = false; }
+          if (!uObj?.email) { showToast("Connectez-vous par e-mail ou Google pour activer un abonnement."); return; }
+          selectedPlan = plans.find((p) => p.id === btn.getAttribute("data-choose-plan"));
+          if (!selectedPlan) return;
+          const incAdult = !selectedPlan.isAdult && adultChk.checked;
+          const total = selectedPlan.priceNum + (incAdult ? 1000 : 0);
+          modal.querySelector("#plans-pay-summary").textContent = `${selectedPlan.title}${incAdult ? " + Adulte +18 (30j)" : ""} — Total : ${total.toLocaleString("fr-FR")} FCFA`;
+          modal.querySelector("#plans-step-list").style.display = "none";
+          modal.querySelector("#plans-step-pay").style.display = "flex";
         });
+      });
+
+      modal.querySelector("#plans-confirm-softpay").addEventListener("click", async () => {
+        if (!selectedPlan) return;
+        let uObj = null;
+        try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
+        const email = uObj?.email || "";
+        const phone = (modal.querySelector("#plans-phone-input").value || "").trim();
+        const statusEl = modal.querySelector("#plans-pay-status");
+        const payBtn = modal.querySelector("#plans-confirm-softpay");
+        if (phone.length < 8) { statusEl.textContent = "Entrez votre numéro Mobile Money complet (avec indicatif, ex: +242...)."; return; }
+        const [country, currency, network] = (modal.querySelector("#plans-network-select").value || "CG|XAF|mtn_cg").split("|");
+
+        payBtn.disabled = true;
+        statusEl.textContent = "Envoi de la demande sur votre téléphone...";
+        try {
+          const res = await fetch("/api/saspay?action=softpay", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              plan: selectedPlan.id,
+              includeAdult: !selectedPlan.isAdult && adultChk.checked,
+              email, name: uObj?.name || email,
+              phone, country, currency, network,
+              idempotencyKey: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()))
+            })
+          });
+          const data = await res.json().catch(() => ({}));
+          const d = data.data || data;
+          if (!res.ok) {
+            statusEl.textContent = data.error?.message || data.error || "Impossible d'initier le paiement.";
+            return;
+          }
+          if (d.checkout_url) {
+            location.href = d.checkout_url;
+            return;
+          }
+          const pid = d.id || d.payment_id;
+          statusEl.textContent = "Validez le paiement sur votre téléphone (code PIN Mobile Money)...";
+          if (pid) {
+            let tries = 0;
+            const poll = setInterval(async () => {
+              tries++;
+              if (tries > 40) { clearInterval(poll); statusEl.textContent = "Délai expiré. Vérifiez votre téléphone ou réessayez."; return; }
+              const vr = await fetch(`/api/saspay?action=verify&payment_id=${encodeURIComponent(pid)}`).catch(() => null);
+              if (!vr || !vr.ok) return;
+              const vj = await vr.json().catch(() => ({}));
+              if (vj.status === "SUCCESS") {
+                clearInterval(poll);
+                statusEl.style.color = "#4ADE80";
+                statusEl.textContent = "Paiement confirmé ! Abonnement activé.";
+                try {
+                  const me = await (await fetch("/api/auth?action=me", { credentials: "same-origin" })).json();
+                  if (me.authenticated && me.user) localStorage.setItem("kibangoutv_user", JSON.stringify(me.user));
+                } catch {}
+                setTimeout(() => location.reload(), 1200);
+              } else if (vj.status === "FAILED") {
+                clearInterval(poll);
+                statusEl.textContent = "Paiement refusé ou annulé.";
+              }
+            }, 3000);
+          }
+        } finally {
+          payBtn.disabled = false;
+        }
       });
     }
 

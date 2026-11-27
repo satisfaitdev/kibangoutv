@@ -130,6 +130,11 @@ export async function GET(request) {
     return Response.json(data, { status: res ? res.status : 502, headers: CORS_HEADERS });
   }
 
+  if (action === "rates") {
+    const r = await saspayFetch("/pricing/my-rates/");
+    return Response.json(r.data, { status: r.status, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+  }
+
   if (action === "verify") {
     const paymentId = (url.searchParams.get("payment_id") || "").trim();
     if (!paymentId) {
