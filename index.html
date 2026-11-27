@@ -122,6 +122,13 @@
     .kibangou-s-row:first-of-type {
       border-top: none;
     }
+    /* Empêcher les overlays publicitaires plein écran invisibles de bloquer la navigation ou les commandes du lecteur */
+    body > a[id][style*="position: fixed"][style*="z-index"],
+    body > a[id][style*="position:fixed"][style*="z-index"],
+    body:has(.player-root) > a[style*="position: fixed"],
+    body:has(.player-root) > a[style*="position:fixed"] {
+      pointer-events: none !important;
+    }
 
     /* Suppression stricte des widgets Social / Watch Party (sans jamais masquer .feature-bar/.feature-dock) */
     .sv-fab,
@@ -2678,6 +2685,8 @@
           }
         });
         video.addEventListener("error", () => {
+          // Ne jamais déclencher le fallback proxy sur une erreur de décodage (code 3 = MEDIA_ERR_DECODE).
+          if (video.error && video.error.code === 3) return;
           const curSrc = video.currentSrc || video.getAttribute("src") || "";
           if (
             curSrc.startsWith("https://") &&
@@ -4144,7 +4153,5 @@
       });
     })();
   </script>
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
