@@ -55,11 +55,11 @@ function isAdminAuthorized(request) {
   return false;
 }
 
-async function (key, fallback) {
+async function readJson(key, fallback) {
   return await storeGet(key, fallback);
 }
 
-async function (key, data) {
+async function writeJson(key, data) {
   await storeSet(key, data);
 }
 
