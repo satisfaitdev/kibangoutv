@@ -61,6 +61,10 @@
       "dest": "/api/saspay.js"
     },
     {
+      "src": "^/api/football/?$",
+      "dest": "/api/football.js"
+    },
+    {
       "src": "^/api/telemetry/?$",
       "dest": "/api/telemetry.js"
     },

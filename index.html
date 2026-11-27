@@ -490,7 +490,8 @@
       .modal-overlay,
       .modal-backdrop,
       #kibangou-offline-modal,
-      #kibangou-plans-modal {
+      #kibangou-plans-modal,
+      #kibangou-football-modal {
         align-items: flex-end !important;
         justify-content: center !important;
         padding: 0 !important;
@@ -501,7 +502,8 @@
       .modal-sources,
       .modal-dialog,
       #kibangou-offline-modal > div,
-      #kibangou-plans-modal > div {
+      #kibangou-plans-modal > div,
+      #kibangou-football-modal > div {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
@@ -2788,6 +2790,23 @@
         favTab.after(liveTab);
       }
 
+      const tabStrip = document.querySelector(".channels-view .ep-pills, .channels-view .ep-pill")?.parentElement;
+      if (tabStrip && !tabStrip.querySelector("#kibangou-football-tab")) {
+        const fbTab = document.createElement("button");
+        fbTab.type = "button";
+        fbTab.id = "kibangou-football-tab";
+        fbTab.className = "ep-pill";
+        fbTab.textContent = "⚽ Matchs en direct";
+        fbTab.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          openFootballModal();
+        });
+        tabStrip.appendChild(fbTab);
+      }
+
+      enhanceChannelReordering();
+
       if (location.hash.startsWith("#/settings")) {
         const activeSettingsView = document.querySelector(".cached-view.view-active .settings-view");
         if (activeSettingsView) {
@@ -2984,6 +3003,107 @@
       enhanceSourcesModal();
       enhanceVodPlayer();
       updateActiveNav();
+    }
+
+    function enhanceChannelReordering() {
+      const list = document.querySelector(".channels-view .ch-list");
+      if (!list) return;
+      let order = [];
+      try { order = JSON.parse(localStorage.getItem("kibangoutv_ch_order") || "[]"); } catch {}
+      const rows = Array.from(list.querySelectorAll(".ch-row"));
+      if (!rows.length) return;
+
+      rows.forEach((row) => {
+        const title = (row.querySelector(".ch-name, .ch-title, strong")?.textContent || row.textContent || "").trim().slice(0, 60);
+        if (!row.dataset.chKey) row.dataset.chKey = title;
+        if (!row.querySelector(".kibangou-ch-move")) {
+          const ctrl = document.createElement("div");
+          ctrl.className = "kibangou-ch-move";
+          ctrl.style.cssText = "display:inline-flex;gap:4px;margin-left:8px;flex-shrink:0;";
+          ctrl.innerHTML = `
+            <button type="button" title="Monter" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#CBD5E1;cursor:pointer;font-size:11px;">↑</button>
+            <button type="button" title="Descendre" style="width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#CBD5E1;cursor:pointer;font-size:11px;">↓</button>
+          `;
+          const [upBtn, dnBtn] = ctrl.querySelectorAll("button");
+          const saveOrder = () => {
+            const keys = Array.from(list.querySelectorAll(".ch-row")).map((r) => r.dataset.chKey).filter(Boolean);
+            try { localStorage.setItem("kibangoutv_ch_order", JSON.stringify(keys)); } catch {}
+          };
+          upBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); e.preventDefault();
+            if (row.previousElementSibling) { list.insertBefore(row, row.previousElementSibling); saveOrder(); }
+          });
+          dnBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); e.preventDefault();
+            if (row.nextElementSibling) { list.insertBefore(row.nextElementSibling, row); saveOrder(); }
+          });
+          row.appendChild(ctrl);
+        }
+      });
+
+      if (order.length && !list.dataset.orderApplied) {
+        list.dataset.orderApplied = "1";
+        const byKey = new Map(rows.map((r) => [r.dataset.chKey, r]));
+        order.forEach((k) => { const r = byKey.get(k); if (r) list.appendChild(r); });
+      }
+    }
+
+    async function openFootballModal() {
+      const existing = document.getElementById("kibangou-football-modal");
+      if (existing) existing.remove();
+      const modal = document.createElement("div");
+      modal.id = "kibangou-football-modal";
+      modal.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(10,13,18,0.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;";
+      modal.innerHTML = `
+        <div style="width:100%;max-width:580px;background:#151C24;border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:86vh;overflow-y:auto;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong style="color:#fff;font-size:1.08rem;">⚽ Matchs de Football en direct</strong>
+            <button type="button" id="fb-modal-close" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;">✕</button>
+          </div>
+          <div id="fb-matches-body" style="display:flex;flex-direction:column;gap:10px;color:#94A3B8;">Chargement des matchs...</div>
+        </div>`;
+      document.body.appendChild(modal);
+      modal.querySelector("#fb-modal-close").addEventListener("click", () => modal.remove());
+      modal.addEventListener("click", (ev) => { if (ev.target === modal) modal.remove(); });
+
+      try {
+        const res = await fetch("/api/football", { cache: "no-store" });
+        const { matches = [] } = await res.json();
+        const body = modal.querySelector("#fb-matches-body");
+        if (!matches.length) {
+          body.innerHTML = '<div style="padding:16px 0;">Aucun match disponible pour le moment.</div>';
+          return;
+        }
+        body.innerHTML = matches.map((m) => `
+          <div class="fb-match-card" style="padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;margin-bottom:6px;">
+              <span style="color:#94A3B8;">${escapeHtml(m.league)}</span>
+              <span style="padding:2px 8px;border-radius:99px;font-weight:700;background:${m.state === "in" ? "rgba(0,200,83,0.2)" : "rgba(255,255,255,0.08)"};color:${m.state === "in" ? "#4ADE80" : "#CBD5E1"};">${m.state === "in" ? "EN DIRECT · " : ""}${escapeHtml(m.status)}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:0.95rem;">
+              <span>${escapeHtml(m.home)}</span>
+              <span style="color:#00C853;font-size:1.05rem;">${m.state === "pre" ? "vs" : `${escapeHtml(m.homeScore)} - ${escapeHtml(m.awayScore)}`}</span>
+              <span>${escapeHtml(m.away)}</span>
+            </div>
+            <div style="font-size:0.78rem;color:#00C853;margin-top:6px;">📺 ${m.channels.length} chaîne(s) de diffusion — Cliquez pour regarder</div>
+            <div class="fb-match-channels" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;gap:8px;">
+              ${m.channels.map((ch) => `
+                <a href="#/channels?src=kibangou-direct%2F${encodeURIComponent(ch.src)}" onclick="document.getElementById('kibangou-football-modal')?.remove()" style="padding:6px 12px;border-radius:8px;background:#00C853;color:#07120B;font-weight:700;font-size:0.8rem;text-decoration:none;">▶ ${escapeHtml(ch.name)}</a>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+
+        body.querySelectorAll(".fb-match-card").forEach((card) => {
+          card.addEventListener("click", (e) => {
+            if (e.target.closest("a")) return;
+            const chBox = card.querySelector(".fb-match-channels");
+            if (chBox) chBox.style.display = chBox.style.display === "flex" ? "none" : "flex";
+          });
+        });
+      } catch {
+        modal.querySelector("#fb-matches-body").textContent = "Impossible de charger les scores pour le moment.";
+      }
     }
 
     async function openPlansModal() {
