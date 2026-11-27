@@ -49,15 +49,15 @@ export class KibangouHls extends OriginalHls {
       liveMaxLatencyDurationCount: 5,
       initialLiveManifestSize: 1,
 
-      fragLoadingTimeOut: 25000,
+      fragLoadingTimeOut: 8000,
       fragLoadingMaxRetry: 4,
-      fragLoadingRetryDelay: 300,
-      manifestLoadingTimeOut: 15000,
+      fragLoadingRetryDelay: 250,
+      manifestLoadingTimeOut: 7000,
       manifestLoadingMaxRetry: 2,
-      manifestLoadingRetryDelay: 250,
-      levelLoadingTimeOut: 15000,
+      manifestLoadingRetryDelay: 200,
+      levelLoadingTimeOut: 7000,
       levelLoadingMaxRetry: 2,
-      levelLoadingRetryDelay: 250,
+      levelLoadingRetryDelay: 200,
 
       ...userConfig
     };

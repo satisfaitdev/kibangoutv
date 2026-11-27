@@ -314,8 +314,12 @@
     }
 
     /* Barre de pré-chargement blanche (style YouTube / myCANAL) */
+    .player-seek:before {
+      background: rgba(255, 255, 255, 0.16) !important;
+    }
+
     .player-seek .player-seek-buf {
-      background: rgba(255, 255, 255, 0.38) !important;
+      background: rgba(255, 255, 255, 0.85) !important;
       z-index: 1 !important;
       pointer-events: none;
       transition: width 0.2s linear;
@@ -2586,7 +2590,23 @@
       const video = playerRoot.querySelector("video.player-video");
       if (video && !video.dataset.kibangouPlayFixBound) {
         video.dataset.kibangouPlayFixBound = "1";
-        try { video.preload = "auto"; } catch {}
+        try { video.preload = "auto"; video.autoplay = true; } catch {}
+        const ensureInitialVodPlay = () => {
+          if (!live && video.paused && !video.ended && !video.dataset.kibangouInitialPlayDone && !video.dataset.userPaused) {
+            video.play().catch(() => {});
+          }
+        };
+        ["loadedmetadata", "canplay", "canplaythrough"].forEach((evName) => {
+          video.addEventListener(evName, ensureInitialVodPlay);
+        });
+        video.addEventListener("playing", () => {
+          video.dataset.kibangouInitialPlayDone = "1";
+        });
+        video.addEventListener("pause", () => {
+          if (video.dataset.kibangouInitialPlayDone === "1") {
+            video.dataset.userPaused = "1";
+          }
+        });
         const updateBufferedBar = () => {
           const bufEl = playerRoot.querySelector(".player-seek .player-seek-buf");
           const dur = video.duration;
@@ -2795,6 +2815,20 @@
             if (!targetContainer.contains(el) || idx > 0) el.remove();
           });
 
+          const nativeHead = activeSettingsView.querySelector(".s-group:not(#settings-pro-adult-card):not(#settings-referral-card):not(#settings-vip-saspay-card):not(#settings-apps-offline-card):not(#settings-logout-card) .s-group-head");
+          const nativeIconHtml = (svgPath) => {
+            if (nativeHead && nativeHead.firstElementChild) {
+              const clone = nativeHead.firstElementChild.cloneNode(true);
+              const innerSvg = clone.tagName === "svg" ? clone : clone.querySelector("svg");
+              if (innerSvg) {
+                innerSvg.innerHTML = svgPath;
+                innerSvg.setAttribute("viewBox", "0 0 24 24");
+                return clone.outerHTML;
+              }
+            }
+            return `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2">${svgPath}</svg>`;
+          };
+
           if (!targetContainer.querySelector("#settings-pro-adult-card")) {
             const routes = getAdultRoutes();
             const adultCard = document.createElement("div");
@@ -2803,7 +2837,7 @@
             adultCard.setAttribute("data-zone", "v");
             adultCard.innerHTML = `
               <div class="s-group-head">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                ${nativeIconHtml('<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>')}
                 <span class="s-group-title">Espace Adulte +18</span>
               </div>
               <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
@@ -2833,7 +2867,7 @@
             refCard.setAttribute("data-zone", "v");
             refCard.innerHTML = `
               <div class="s-group-head">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                ${nativeIconHtml('<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>')}
                 <span class="s-group-title">Parrainage &amp; Sans-Pubs</span>
               </div>
               <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
@@ -2859,7 +2893,7 @@
             vipCard.setAttribute("data-zone", "v");
             vipCard.innerHTML = `
               <div class="s-group-head">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ${nativeIconHtml('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>')}
                 <span class="s-group-title">Abonnements VIP &amp; TV</span>
               </div>
               <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
@@ -2896,7 +2930,7 @@
             appsCard.setAttribute("data-zone", "v");
             appsCard.innerHTML = `
               <div class="s-group-head">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                ${nativeIconHtml('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>')}
                 <span class="s-group-title">Hors-ligne &amp; Applications</span>
               </div>
               <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
@@ -2925,7 +2959,7 @@
             card.setAttribute("data-zone", "v");
             card.innerHTML = `
               <div class="s-group-head">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #00C853)" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                ${nativeIconHtml('<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>')}
                 <span class="s-group-title">Compte &amp; Session</span>
               </div>
               <div style="padding:4px 20px 14px;display:flex;flex-direction:column;gap:10px;">
