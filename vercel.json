@@ -29,11 +29,23 @@
       "continue": true
     },
     {
-      "src": "^/(.*)$",
+      "src": "^/(kibangou-addon|french-addon|adult-addon)(/.*)?$",
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
-        "Access-Control-Allow-Headers": "*"
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/(.*)$",
+      "headers": {
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(self)",
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://accounts.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https: http:; media-src 'self' blob: data: https: http:; connect-src 'self' https: http: wss: ws:; frame-src 'self' https://accounts.google.com https://saspay.me; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self' https://accounts.google.com https://saspay.me"
       },
       "continue": true
     },

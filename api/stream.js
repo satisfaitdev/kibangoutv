@@ -8,11 +8,13 @@ import {
   resolveFfmpegPath,
   validatePublicStreamUrl
 } from "./_streamUtils.js";
+import { buildCorsHeaders, checkRateLimit, isTrustedAppRequest } from "./_security.js";
 
 const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://kibangoutv.vercel.app",
+  "Vary": "Origin",
   "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
-  "Access-Control-Allow-Headers": "*",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Proxy-Headers, X-Requested-With",
   "Access-Control-Expose-Headers": "*"
 };
 
@@ -52,8 +54,8 @@ function decodeHeaderToken(parsed) {
   }
 }
 
-export async function OPTIONS() {
-  return new Response(null, { status: 204, headers: CORS_HEADERS });
+export async function OPTIONS(request) {
+  return new Response(null, { status: 204, headers: buildCorsHeaders(request, "GET, HEAD, OPTIONS") });
 }
 
 export async function HEAD(request) {
@@ -65,6 +67,20 @@ export async function GET(request) {
 }
 
 async function handleStreamRequest(request, method) {
+  const corsHeaders = buildCorsHeaders(request, "GET, HEAD, OPTIONS");
+  if (!isTrustedAppRequest(request)) {
+    return Response.json(
+      { error: "Accès refusé (hotlinking interdit)." },
+      { status: 403, headers: corsHeaders }
+    );
+  }
+  const rl = checkRateLimit(request, "stream", 240, 60_000);
+  if (!rl.ok) {
+    return Response.json(
+      { error: "Trop de requêtes vidéo." },
+      { status: 429, headers: { ...corsHeaders, "Retry-After": String(rl.retryAfterSec) } }
+    );
+  }
   try {
     const parsed = new URL(request.url, "https://kibangoutv.vercel.app");
     const rawTarget = parsed.searchParams.get("u") || parsed.searchParams.get("url") || "";

@@ -1,17 +1,27 @@
 import { normalizeResolvedPlayback, resolveVavooWithCache, sortAndLabelSources } from "./_sources.js";
-import { mergeHeadersCaseInsensitive } from "./_streamUtils.js";
+import { mergeHeadersCaseInsensitive, validatePublicStreamUrl } from "./_streamUtils.js";
+import { buildCorsHeaders, checkRateLimit, isTrustedAppRequest } from "./_security.js";
 
 const CHROME_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD");
-  res.setHeader("Access-Control-Allow-Headers", "*");
+  const cors = buildCorsHeaders(req, "GET, POST, OPTIONS, HEAD");
+  for (const [k, v] of Object.entries(cors)) res.setHeader(k, v);
   res.setHeader("Access-Control-Expose-Headers", "*");
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
+  }
+
+  if (!isTrustedAppRequest(req)) {
+    return res.status(403).json({ error: "Accès refusé (hotlinking interdit)." });
+  }
+
+  const rl = checkRateLimit(req, "proxy", 150, 60_000);
+  if (!rl.ok) {
+    res.setHeader("Retry-After", String(rl.retryAfterSec));
+    return res.status(429).json({ error: "Trop de requêtes. Réessayez dans un instant." });
   }
 
   let targetUrl = req.query.url;
@@ -47,6 +57,12 @@ export default async function handler(req, res) {
   if (!targetUrl.includes("?") && targetUrl.includes("&")) {
     targetUrl = targetUrl.replace("&", "?");
   }
+
+  const safeTargetUrl = validatePublicStreamUrl(targetUrl);
+  if (!safeTargetUrl) {
+    return res.status(400).json({ error: "URL cible invalide ou non autorisée (protection SSRF)." });
+  }
+  targetUrl = safeTargetUrl;
 
   try {
     // Cache TTL court (45s) sur GET /live/resolve et /vod/resolve pour ouverture rapide des chaînes

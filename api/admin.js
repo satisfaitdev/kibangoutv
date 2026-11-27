@@ -1,5 +1,5 @@
-import crypto from "node:crypto";
 import { storeGet, storeSet } from "./_store.js";
+import { buildCorsHeaders, checkRateLimit, verifyHmacToken } from "./_security.js";
 
 const USERS_FILE = "kibangou_users";
 const ADS_FILE = "kibangou_ads";
@@ -7,29 +7,14 @@ const LEDGER_FILE = "kibangou_ledger";
 const ADMIN_COOKIE = "kibangou_admin";
 
 const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://kibangoutv.vercel.app",
+  "Vary": "Origin",
   "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type"
 };
 
-function getSecret() {
-  return process.env.AUTH_SECRET || process.env.VERCEL_PROJECT_ID || "kibangoutv-hmac-fallback-2026";
-}
-
 function verifyToken(token) {
-  if (!token || typeof token !== "string" || !token.includes(".")) return null;
-  const [payload, sig] = token.split(".", 2);
-  const expected = crypto.createHmac("sha256", getSecret()).update(payload).digest("base64url");
-  const a = Buffer.from(sig);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
-  try {
-    const parsed = JSON.parse(Buffer.from(payload, "base64url").toString("utf-8"));
-    if (parsed.exp && Date.now() > parsed.exp * 1000) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
+  return verifyHmacToken(token);
 }
 
 function parseCookies(header) {

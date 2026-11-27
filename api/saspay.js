@@ -1,10 +1,12 @@
 import crypto from "node:crypto";
 import { storeGet, storeSet } from "./_store.js";
+import { buildCorsHeaders, checkRateLimit } from "./_security.js";
 
 const SASPAY_BASE = "https://api.saspay.me/api/v1";
 
 const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://kibangoutv.vercel.app",
+  "Vary": "Origin",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type"
 };
@@ -89,7 +91,7 @@ async function deliverPlanOnce(paymentId, metadata, amountStr, currency) {
   });
   await storeSet("kibangou_ledger", list.slice(0, 200));
 
-  deliveredMap[paymentId] = { ts: Date.now(), email, plan };
+  deliveredMap[paymentId] = { ts: Date.now(), email, plan: planId };
   await storeSet("kibangou_delivered_payments", deliveredMap);
   return { delivered: true, alreadyDelivered: false };
 }

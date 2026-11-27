@@ -1,43 +1,25 @@
 import crypto from "node:crypto";
 import { storeGet, storeSet } from "./_store.js";
+import { checkRateLimit, signHmacToken, verifyHmacToken } from "./_security.js";
 
 const COOKIE_NAME = "kibangou_session";
 const SESSION_TTL_SEC = 60 * 60 * 24 * 30; // 30 jours
-
-function getAuthSecret() {
-  return process.env.AUTH_SECRET || process.env.VERCEL_PROJECT_ID || "kibangoutv-hmac-fallback-2026";
-}
-
-function b64urlEncode(input) {
-  return Buffer.from(input).toString("base64url");
-}
-
-function b64urlDecode(input) {
-  return Buffer.from(String(input), "base64url").toString("utf-8");
-}
+const MAX_ACTIVE_SESSIONS = 3;
 
 function signToken(payloadObj) {
-  const payload = b64urlEncode(JSON.stringify(payloadObj));
-  const sig = crypto.createHmac("sha256", getAuthSecret()).update(payload).digest("base64url");
-  return `${payload}.${sig}`;
+  return signHmacToken(payloadObj);
 }
 
 function verifyToken(token) {
-  if (!token || typeof token !== "string" || !token.includes(".")) return null;
-  const [payload, sig] = token.split(".", 2);
-  const expected = crypto.createHmac("sha256", getAuthSecret()).update(payload).digest("base64url");
-  const sigBuf = Buffer.from(sig);
-  const expBuf = Buffer.from(expected);
-  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
-    return null;
-  }
-  try {
-    const parsed = JSON.parse(b64urlDecode(payload));
-    if (parsed.exp && Date.now() > parsed.exp * 1000) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
+  return verifyHmacToken(token);
+}
+
+function registerUserSession(uRec, sid) {
+  const list = Array.isArray(uRec.activeSessions) ? uRec.activeSessions.filter(Boolean) : [];
+  const next = list.filter((id) => id !== sid);
+  next.push(sid);
+  uRec.activeSessions = next.slice(-MAX_ACTIVE_SESSIONS);
+  return uRec.activeSessions;
 }
 
 function parseCookies(cookieHeader) {
@@ -145,9 +127,17 @@ export async function GET(request) {
     if (uRec.banned) {
       return Response.json({ authenticated: false, banned: true }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
+    if (session.sid && Array.isArray(uRec.activeSessions) && !uRec.activeSessions.includes(session.sid)) {
+      return Response.json(
+        { authenticated: false, evicted: true },
+        { status: 200, headers: { "Set-Cookie": buildClearCookie(isHttps), "Cache-Control": "no-store" } }
+      );
+    }
     return Response.json(
       {
         authenticated: true,
+        activeDevices: Array.isArray(uRec.activeSessions) ? uRec.activeSessions.length : 1,
+        maxDevices: MAX_ACTIVE_SESSIONS,
         user: {
           email: session.email,
           name: session.name || session.email.split("@")[0],
@@ -165,6 +155,10 @@ export async function GET(request) {
   }
 
   if (action === "tv_pair_init") {
+    const rl = checkRateLimit(request, "tv_pair_init", 20, 60_000);
+    if (!rl.ok) {
+      return Response.json({ error: "Trop de requêtes." }, { status: 429, headers: { "Retry-After": String(rl.retryAfterSec) } });
+    }
     const code = crypto.randomBytes(3).toString("hex").toUpperCase();
     const pairKey = `tv_pair_${code}`;
     await storeSet(pairKey, { status: "pending", createdAt: Date.now() }, 600);
@@ -253,14 +247,7 @@ export async function GET(request) {
         return Response.redirect(`${origin}/?auth_error=google_profile_failed`, 302);
       }
 
-      const sessionToken = signToken({
-        email: profile.email,
-        name: profile.name || profile.email.split("@")[0],
-        picture: profile.picture || "",
-        provider: "google",
-        exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SEC
-      });
-
+      const sid = crypto.randomBytes(8).toString("hex");
       const users = await loadUsers();
       const gEmail = String(profile.email).toLowerCase();
       if (users[gEmail]?.banned) {
@@ -278,7 +265,17 @@ export async function GET(request) {
         createdAt: users[gEmail]?.createdAt || Date.now(),
         lastSeen: Date.now()
       };
+      registerUserSession(users[gEmail], sid);
       await saveUsers(users);
+
+      const sessionToken = signToken({
+        email: profile.email,
+        name: profile.name || profile.email.split("@")[0],
+        picture: profile.picture || "",
+        provider: "google",
+        sid,
+        exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SEC
+      });
 
       return new Response(null, {
         status: 302,
@@ -302,6 +299,16 @@ export async function POST(request) {
   const isHttps = origin.startsWith("https://");
 
   if (action === "logout") {
+    const cookies = parseCookies(request.headers.get("cookie") || "");
+    const session = verifyToken(cookies[COOKIE_NAME]);
+    if (session?.email && session?.sid) {
+      const users = await loadUsers();
+      const rec = users[String(session.email).toLowerCase()];
+      if (rec && Array.isArray(rec.activeSessions)) {
+        rec.activeSessions = rec.activeSessions.filter((id) => id !== session.sid);
+        await saveUsers(users);
+      }
+    }
     return Response.json(
       { ok: true },
       { status: 200, headers: { "Set-Cookie": buildClearCookie(isHttps) } }
@@ -336,6 +343,14 @@ export async function POST(request) {
     };
     await storeSet(`tv_pair_${code}`, { status: "linked", user: linkedUser, ts: Date.now() }, 600);
     return Response.json({ ok: true }, { status: 200 });
+  }
+
+  const rlAuth = checkRateLimit(request, `auth_${action}`, 15, 60_000);
+  if (!rlAuth.ok) {
+    return Response.json(
+      { error: "Trop de tentatives. Réessayez dans une minute." },
+      { status: 429, headers: { "Retry-After": String(rlAuth.retryAfterSec) } }
+    );
   }
 
   const body = await request.json().catch(() => null);
@@ -399,7 +414,12 @@ export async function POST(request) {
     return Response.json({ error: "Action invalide." }, { status: 400 });
   }
 
+  const sid = crypto.randomBytes(8).toString("hex");
   const uRec = users[email] || {};
+  registerUserSession(uRec, sid);
+  users[email] = uRec;
+  await saveUsers(users);
+
   const userObj = {
     email,
     name: uRec.name || email.split("@")[0],
@@ -414,6 +434,7 @@ export async function POST(request) {
 
   const sessionToken = signToken({
     ...userObj,
+    sid,
     exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SEC
   });
 
