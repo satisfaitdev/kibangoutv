@@ -57,7 +57,7 @@
       "handle": "filesystem"
     },
     {
-      "src": "^/download/?$",
+      "src": "^/downloads?/?$",
       "dest": "/download.html"
     },
     {

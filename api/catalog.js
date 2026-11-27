@@ -34,18 +34,23 @@ export default async function handler(req, res) {
       }
       const matchCh = (slug) => {
         const s = String(slug || "").toLowerCase();
-        let rxList = [/canal\+ sport 1/i, /bein sports 1/i, /dazn 1/i, /canal\+ premi/i];
-        if (s.includes("premier-league") || s.includes("eng.")) rxList = [/canal\+ sport 1/i, /canal\+ sport 2/i, /canal\+ premi/i, /dazn 1/i];
-        else if (s.includes("laliga") || s.includes("esp.")) rxList = [/bein sports 1/i, /bein sports 2/i, /dazn 1/i, /canal\+ sport 3/i];
-        else if (s.includes("ligue-1") || s.includes("fra.")) rxList = [/dazn 1/i, /dazn 2/i, /bein sports 1/i, /canal\+ sport 1/i];
-        else if (s.includes("serie-a") || s.includes("ita.")) rxList = [/dazn 1/i, /bein sports 2/i, /canal\+ sport 4/i];
-        else if (s.includes("bundesliga") || s.includes("ger.")) rxList = [/bein sports 1/i, /bein sports 3/i, /canal\+ sport 5/i];
-        else if (s.includes("caf") || s.includes("africa")) rxList = [/africa sport/i, /canal\+ sport 1/i, /bein sports 1/i, /canal\+ premi/i];
+        let rxList = [/canal\+ sport/i, /bein sports/i, /dazn/i, /canal\+ premi/i, /eurosport/i, /africa sport/i, /rmc sport/i];
+        if (s.includes("premier-league") || s.includes("eng.")) rxList = [/canal\+ sport/i, /canal\+ premi/i, /canal\+ foot/i, /dazn/i, /bein sports/i];
+        else if (s.includes("laliga") || s.includes("esp.")) rxList = [/bein sports/i, /dazn/i, /canal\+ sport/i];
+        else if (s.includes("ligue-1") || s.includes("fra.")) rxList = [/dazn/i, /bein sports/i, /canal\+ sport/i, /canal\+ foot/i];
+        else if (s.includes("serie-a") || s.includes("ita.")) rxList = [/dazn/i, /bein sports/i, /canal\+ sport/i];
+        else if (s.includes("bundesliga") || s.includes("ger.")) rxList = [/bein sports/i, /dazn/i, /canal\+ sport/i];
+        else if (s.includes("caf") || s.includes("africa")) rxList = [/africa sport/i, /canal\+ sport/i, /bein sports/i, /canal\+ premi/i];
         const out = [];
         const seen = new Set();
         for (const rx of rxList) {
-          const f = sportChannels.find((c) => rx.test(c.name) && !seen.has(c.id));
-          if (f) { seen.add(f.id); out.push(f); }
+          for (const f of sportChannels) {
+            if (rx.test(f.name) && !seen.has(f.id)) {
+              seen.add(f.id);
+              out.push(f);
+              if (out.length >= 10) return out;
+            }
+          }
         }
         return out;
       };
@@ -76,6 +81,7 @@ export default async function handler(req, res) {
           awayScore: away.score ?? "0",
           league: slug.replace(/^\d{4}-\d{2}-/, "").replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) || "Football",
           state: ev.status?.type?.state || "pre",
+          date: ev.date || "",
           status: translateStatus(ev.status?.type?.shortDetail || ev.status?.type?.description || ""),
           channels: matchCh(slug)
         };

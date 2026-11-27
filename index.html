@@ -84,6 +84,16 @@
       padding: 20px 16px 96px !important;
       box-sizing: border-box !important;
     }
+    @media (min-width: 769px) {
+      .sidebar {
+        z-index: 99995 !important;
+      }
+      .kibangou-fullpage {
+        left: 82px !important;
+        width: calc(100vw - 82px) !important;
+        padding: 28px 32px 64px !important;
+      }
+    }
     @media (max-width: 768px) {
       .kibangou-fullpage {
         padding-top: 76px !important;
@@ -3004,7 +3014,7 @@
               <div class="kibangou-s-row">
                 <div class="s-label">Applications officielles<span class="s-sub">Télécharger KibangouTV sur Mobile, PC, Mac &amp; Smart TV.</span></div>
                 <div class="kibangou-adult-links">
-                  <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC, Mac &amp; TV →</a>
+                  <a href="/downloads" onclick="event.preventDefault(); location.assign('/downloads');" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC, Mac &amp; TV →</a>
                 </div>
               </div>
             `;
@@ -3053,6 +3063,10 @@
             });
             targetContainer.appendChild(card);
           }
+          const logoutCardEl = targetContainer.querySelector("#settings-logout-card");
+          if (logoutCardEl && targetContainer.lastElementChild !== logoutCardEl) {
+            targetContainer.appendChild(logoutCardEl);
+          }
         }
       } else {
         document.querySelectorAll("#settings-pro-adult-card, #settings-logout-card").forEach(el => {
@@ -3077,14 +3091,15 @@
       });
 
       if (window.__kibangouPendingChannelName) {
-        const target = window.__kibangouPendingChannelName.toLowerCase();
+        const norm = (s) => String(s || "").toLowerCase().replace(/\(\d+\)/g, "").replace(/\b(hd|fhd|uhd|4k|sd)\b/g, "").replace(/\s+/g, " ").trim();
+        const target = norm(window.__kibangouPendingChannelName);
         const matchRow = rows.find((r) => {
-          const t = (r.querySelector(".ch-name, .ch-title, strong")?.textContent || r.textContent || "").toLowerCase();
-          return t.includes(target) || target.includes(t.trim());
+          const t = norm(r.querySelector(".ch-name, .ch-title, strong")?.textContent || r.textContent || "");
+          return t && (t === target || t.includes(target) || target.includes(t));
         });
         if (matchRow) {
           window.__kibangouPendingChannelName = null;
-          setTimeout(() => matchRow.click(), 120);
+          setTimeout(() => matchRow.click(), 80);
         }
       }
     }
@@ -3096,37 +3111,36 @@
       page.id = "kibangou-football-page";
       page.className = "kibangou-fullpage";
       page.innerHTML = `
-        <div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-            <button type="button" id="fb-page-back" class="kibangou-page-back-btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#E2E8F0;padding:8px 14px;border-radius:10px;font-weight:600;font-size:0.86rem;cursor:pointer;">← Retour</button>
-            <h1 style="margin:0;color:#fff;font-size:1.12rem;font-weight:700;">⚽ Matchs de Football</h1>
-            <span class="kibangou-page-back-btn" style="width:74px;"></span>
-          </div>
-          <div class="s-group" style="margin:0;">
-            <div class="s-group-head">
-              <span class="s-gicon" style="font-size:15px;">⚽</span>
-              <span class="s-group-title" style="color:#E2E8F0;">Recherche &amp; Filtres</span>
+        <div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
+          <h1 style="margin:0;color:#fff;font-size:1.55rem;font-weight:700;text-align:left;">⚽ Matchs de Football</h1>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div style="position:relative;flex:1;min-width:220px;max-width:340px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="fb-search-input" placeholder="Rechercher des matchs..." style="width:100%;padding:9px 12px 9px 36px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:#151C24;color:#fff;font-size:0.88rem;outline:none;">
             </div>
-            <div class="kibangou-s-row" style="gap:10px;">
-              <input type="search" id="fb-search-input" placeholder="Rechercher une équipe, un championnat..." style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:#0E1318;color:#fff;font-size:0.9rem;outline:none;">
-              <div class="ep-pills" id="fb-filter-pills" style="display:flex;flex-wrap:wrap;gap:8px;">
-                <button type="button" class="ep-pill active" data-fb-filter="all" style="padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,0.12);background:#00C853;color:#07120B;font-weight:700;font-size:0.82rem;cursor:pointer;">Tous</button>
-                <button type="button" class="ep-pill" data-fb-filter="in" style="padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#CBD5E1;font-weight:600;font-size:0.82rem;cursor:pointer;">En direct</button>
-                <button type="button" class="ep-pill" data-fb-filter="pre" style="padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#CBD5E1;font-weight:600;font-size:0.82rem;cursor:pointer;">À venir</button>
-                <button type="button" class="ep-pill" data-fb-filter="post" style="padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#CBD5E1;font-weight:600;font-size:0.82rem;cursor:pointer;">Terminés</button>
-              </div>
-            </div>
+            <select id="fb-filter-select" style="padding:9px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:#151C24;color:#E2E8F0;font-size:0.86rem;font-weight:600;cursor:pointer;outline:none;">
+              <option value="all">Tous les matchs</option>
+              <option value="in">En direct</option>
+              <option value="pre">À venir</option>
+              <option value="post">Terminés</option>
+            </select>
           </div>
           <div id="fb-matches-body" style="display:flex;flex-direction:column;gap:12px;color:#94A3B8;">Chargement des matchs...</div>
         </div>`;
       document.body.appendChild(page);
-      page.querySelector("#fb-page-back").addEventListener("click", () => {
-        page.remove();
-        if (location.hash === "#/football") history.back();
-      });
 
-      const frStatus = (s) => {
-        const raw = String(s || "").trim();
+      const frStatus = (m) => {
+        const raw = String(m?.status || "").trim();
+        if (m?.state === "pre" && m?.date) {
+          try {
+            const d = new Date(m.date);
+            if (!Number.isNaN(d.getTime())) {
+              const dt = d.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" });
+              const tm = d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+              return `À venir · ${dt} à ${tm}`;
+            }
+          } catch {}
+        }
         if (/^scheduled$/i.test(raw)) return "À venir";
         if (/^ft$/i.test(raw) || /^final$/i.test(raw)) return "Terminé";
         if (/^ht$/i.test(raw)) return "Mi-temps";
@@ -3140,6 +3154,7 @@
         const { matches = [] } = await res.json();
         const body = page.querySelector("#fb-matches-body");
         const searchInput = page.querySelector("#fb-search-input");
+        const filterSelect = page.querySelector("#fb-filter-select");
         let activeFilter = "all";
 
         const renderMatches = (qStr = "") => {
@@ -3147,7 +3162,7 @@
           const filtered = matches.filter((m) => {
             if (activeFilter !== "all" && m.state !== activeFilter) return false;
             if (!q) return true;
-            return `${m.home} ${m.away} ${m.league} ${frStatus(m.status)}`.toLowerCase().includes(q);
+            return `${m.home} ${m.away} ${m.league} ${frStatus(m)}`.toLowerCase().includes(q);
           });
           if (!filtered.length) {
             body.innerHTML = '<div class="s-group" style="padding:20px;text-align:center;color:#94A3B8;">Aucun match trouvé.</div>';
@@ -3157,7 +3172,7 @@
             <div class="s-group fb-match-card" style="margin:0;cursor:pointer;">
               <div class="s-group-head" style="justify-content:space-between;">
                 <span class="s-group-title" style="color:#CBD5E1;">${escapeHtml(m.league)}</span>
-                <span style="font-size:0.72rem;padding:3px 9px;border-radius:99px;font-weight:700;background:${m.state === "in" ? "rgba(0,200,83,0.16)" : "rgba(255,255,255,0.08)"};color:${m.state === "in" ? "#00C853" : "#CBD5E1"};">${m.state === "in" ? "EN DIRECT · " : ""}${escapeHtml(frStatus(m.status))}</span>
+                <span style="font-size:0.72rem;padding:3px 9px;border-radius:99px;font-weight:700;background:${m.state === "in" ? "rgba(0,200,83,0.16)" : "rgba(255,255,255,0.08)"};color:${m.state === "in" ? "#00C853" : "#CBD5E1"};">${m.state === "in" ? "EN DIRECT · " : ""}${escapeHtml(frStatus(m))}</span>
               </div>
               <div class="kibangou-s-row">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
@@ -3195,7 +3210,7 @@
                 const chSrc = chBtn.getAttribute("data-ch-src") || "canal_congo";
                 window.__kibangouPendingChannelName = chName;
                 page.remove();
-                location.hash = `#/channels?src=${encodeURIComponent(`kibangou-addon/${chSrc}`)}`;
+                location.hash = `#/channels?src=${encodeURIComponent(`kibangou-direct/${chSrc}`)}`;
                 return;
               }
               const chBox = card.querySelector(".fb-match-channels");
@@ -3204,17 +3219,9 @@
           });
         };
 
-        page.querySelectorAll("[data-fb-filter]").forEach((pill) => {
-          pill.addEventListener("click", () => {
-            activeFilter = pill.getAttribute("data-fb-filter") || "all";
-            page.querySelectorAll("[data-fb-filter]").forEach((p) => {
-              const on = p === pill;
-              p.style.background = on ? "#00C853" : "rgba(255,255,255,0.05)";
-              p.style.color = on ? "#07120B" : "#CBD5E1";
-              p.style.fontWeight = on ? "700" : "600";
-            });
-            renderMatches(searchInput.value);
-          });
+        filterSelect.addEventListener("change", () => {
+          activeFilter = filterSelect.value || "all";
+          renderMatches(searchInput.value);
         });
 
         renderMatches("");
@@ -3291,10 +3298,8 @@
       page.id = "kibangou-plans-page";
       page.className = "kibangou-fullpage";
       page.innerHTML = `
-        <div style="max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;align-items:center;justify-content:center;">
-            <h1 style="margin:0;color:#fff;font-size:1.12rem;font-weight:700;">Formules VIP KibangouTV</h1>
-          </div>
+        <div style="max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
+          <h1 style="margin:0;color:#fff;font-size:1.55rem;font-weight:700;text-align:left;">Formules VIP KibangouTV</h1>
 
           <div id="plans-step-list" style="display:flex;flex-direction:column;gap:14px;">
             <div class="s-group" style="margin:0;">
