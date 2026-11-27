@@ -2822,43 +2822,65 @@
             vipCard.setAttribute("data-zone", "v");
             vipCard.innerHTML = `
               <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Abonnements VIP (Mobile Money SasPay) &amp; Lier une TV</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Activez l'accès Adulte +18 ou Sans Publicités par Mobile Money, ou liez votre Smart TV avec son code à 6 caractères.</div>
-              <div class="kibangou-adult-links">
-                <button type="button" data-saspay-plan="adult_vip" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">VIP Adulte +18 (2 500 FCFA)</button>
-                <button type="button" data-saspay-plan="no_ads_vip" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:none;cursor:pointer;">Sans Publicités (1 500 FCFA)</button>
+              <div style="font-size:0.84rem; color:#8E99A4;">Supprimez les publicités dès 50 FCFA/jour et ajoutez l'accès Adulte +18 (1 000 FCFA/mois) si souhaité.</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:4px;">
+                <select id="saspay-plan-select" style="flex:1;min-width:210px;padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:#151C24;color:#fff;font-size:0.88rem;">
+                  <option value="no_ads_1d">Sans Pubs · 1 jour (50 FCFA)</option>
+                  <option value="no_ads_3d">Sans Pubs · 3 jours (125 FCFA)</option>
+                  <option value="no_ads_7d">Sans Pubs · 1 semaine (300 FCFA)</option>
+                  <option value="no_ads_1m">Sans Pubs · 1 mois (1 200 FCFA)</option>
+                  <option value="no_ads_3m">Sans Pubs · 3 mois (3 500 FCFA)</option>
+                  <option value="no_ads_6m">Sans Pubs · 6 mois (6 500 FCFA)</option>
+                  <option value="no_ads_1y">Sans Pubs · 1 an (10 000 FCFA)</option>
+                  <option value="adult_1m">Adulte +18 seul · 1 mois (1 000 FCFA)</option>
+                </select>
+                <button type="button" id="btn-saspay-pay" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Payer via SasPay</button>
               </div>
-              <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;">
+              <label id="saspay-adult-combo-wrap" style="display:flex;align-items:center;gap:8px;font-size:0.84rem;color:#CBD5E1;cursor:pointer;margin-top:4px;">
+                <input type="checkbox" id="saspay-include-adult" style="width:16px;height:16px;accent-color:#00C853;">
+                <span>Ajouter l'abonnement Chaînes &amp; Films Adultes +18 (+1 000 FCFA / 30 jours)</span>
+              </label>
+              <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
                 <input type="text" id="input-link-tv-code" maxlength="8" placeholder="Code affiché sur la TV (ex: A1B2C3)" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-size:0.86rem;flex:1;min-width:160px;">
-                <button type="button" id="btn-link-tv-submit" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Lier la TV</button>
+                <button type="button" id="btn-link-tv-submit" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:none;cursor:pointer;">Lier la TV</button>
               </div>
             `;
-            vipCard.querySelectorAll("[data-saspay-plan]").forEach((btn) => {
-              btn.addEventListener("click", async () => {
-                let uObj = null;
-                try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
-                const email = uObj?.email || "";
-                if (!email) {
-                  showToast("Connectez-vous par e-mail ou Google pour activer un abonnement.");
-                  return;
+            const planSelect = vipCard.querySelector("#saspay-plan-select");
+            const comboWrap = vipCard.querySelector("#saspay-adult-combo-wrap");
+            planSelect.addEventListener("change", () => {
+              comboWrap.style.display = planSelect.value === "adult_1m" ? "none" : "flex";
+            });
+            vipCard.querySelector("#btn-saspay-pay").addEventListener("click", async () => {
+              const btn = vipCard.querySelector("#btn-saspay-pay");
+              let uObj = null;
+              try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
+              const email = uObj?.email || "";
+              if (!email) {
+                showToast("Connectez-vous par e-mail ou Google pour activer un abonnement.");
+                return;
+              }
+              btn.disabled = true;
+              try {
+                const res = await fetch("/api/saspay?action=checkout", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    plan: planSelect.value,
+                    includeAdult: vipCard.querySelector("#saspay-include-adult").checked,
+                    email,
+                    name: uObj?.name || email
+                  })
+                });
+                const data = await res.json().catch(() => ({}));
+                const d = data.data || data;
+                if (d.checkout_url) {
+                  location.href = d.checkout_url;
+                } else {
+                  showToast(data.error?.message || data.error || "Clé SasPay non configurée côté serveur.");
                 }
-                btn.disabled = true;
-                try {
-                  const res = await fetch("/api/saspay?action=checkout", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ plan: btn.getAttribute("data-saspay-plan"), email, name: uObj?.name || email })
-                  });
-                  const data = await res.json().catch(() => ({}));
-                  const d = data.data || data;
-                  if (d.checkout_url) {
-                    location.href = d.checkout_url;
-                  } else {
-                    showToast(data.error?.message || data.error || "Clé SasPay non configurée côté serveur.");
-                  }
-                } finally {
-                  btn.disabled = false;
-                }
-              });
+              } finally {
+                btn.disabled = false;
+              }
             });
             vipCard.querySelector("#btn-link-tv-submit").addEventListener("click", async () => {
               const code = (vipCard.querySelector("#input-link-tv-code").value || "").trim().toUpperCase();

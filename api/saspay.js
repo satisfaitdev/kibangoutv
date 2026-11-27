@@ -10,9 +10,21 @@ const CORS_HEADERS = {
 };
 
 const VIP_PLANS = {
-  adult_vip: { id: "adult_vip", name: "Abonnement Adulte +18 (30 jours)", amount: "2500.00", currency: "XAF", days: 30 },
-  no_ads_vip: { id: "no_ads_vip", name: "Abonnement Sans Publicités (30 jours)", amount: "1500.00", currency: "XAF", days: 30 }
+  adult_1m: { id: "adult_1m", type: "adult_vip", name: "Adulte +18 (1 mois)", amount: "1000.00", currency: "XAF", days: 30 },
+  no_ads_1d: { id: "no_ads_1d", type: "no_ads_vip", name: "Sans Pubs (1 jour)", amount: "50.00", currency: "XAF", days: 1 },
+  no_ads_3d: { id: "no_ads_3d", type: "no_ads_vip", name: "Sans Pubs (3 jours)", amount: "125.00", currency: "XAF", days: 3 },
+  no_ads_7d: { id: "no_ads_7d", type: "no_ads_vip", name: "Sans Pubs (1 semaine)", amount: "300.00", currency: "XAF", days: 7 },
+  no_ads_1m: { id: "no_ads_1m", type: "no_ads_vip", name: "Sans Pubs (1 mois)", amount: "1200.00", currency: "XAF", days: 30 },
+  no_ads_3m: { id: "no_ads_3m", type: "no_ads_vip", name: "Sans Pubs (3 mois)", amount: "3500.00", currency: "XAF", days: 90 },
+  no_ads_6m: { id: "no_ads_6m", type: "no_ads_vip", name: "Sans Pubs (6 mois)", amount: "6500.00", currency: "XAF", days: 180 },
+  no_ads_1y: { id: "no_ads_1y", type: "no_ads_vip", name: "Sans Pubs (1 an)", amount: "10000.00", currency: "XAF", days: 365 }
 };
+
+function addDecimalStrings(aStr, bStr) {
+  const aCents = Math.round(Number(aStr || 0) * 100);
+  const bCents = Math.round(Number(bStr || 0) * 100);
+  return ((aCents + bCents) / 100).toFixed(2);
+}
 
 async function saspayFetch(pathStr, { method = "GET", body = null, idempotencyKey = "" } = {}) {
   const apiKey = process.env.SASPAY_API_KEY || "";
@@ -42,16 +54,24 @@ async function deliverPlanOnce(paymentId, metadata, amountStr, currency) {
   }
 
   const email = String(metadata?.email || "").trim().toLowerCase();
-  const plan = metadata?.plan === "no_ads_vip" ? "no_ads_vip" : "adult_vip";
-  const days = Math.max(1, Number(metadata?.days) || 30);
+  const planId = String(metadata?.plan || "adult_1m");
+  const planDef = VIP_PLANS[planId] || VIP_PLANS.adult_1m;
+  const days = Math.max(1, Number(metadata?.days) || planDef.days);
+  const includeAdult = Boolean(metadata?.includeAdult);
 
   if (email) {
     const users = await storeGet("kibangou_users", {});
     if (!users[email]) {
       users[email] = { email, name: email.split("@")[0], provider: "saspay", createdAt: Date.now(), lastSeen: Date.now() };
     }
-    const field = plan === "adult_vip" ? "adultVipUntil" : "noAdsVipUntil";
-    users[email][field] = Math.max(Date.now(), users[email][field] || 0) + days * 86400000;
+    if (planDef.type === "adult_vip") {
+      users[email].adultVipUntil = Math.max(Date.now(), users[email].adultVipUntil || 0) + days * 86400000;
+    } else {
+      users[email].noAdsVipUntil = Math.max(Date.now(), users[email].noAdsVipUntil || 0) + days * 86400000;
+      if (includeAdult) {
+        users[email].adultVipUntil = Math.max(Date.now(), users[email].adultVipUntil || 0) + 30 * 86400000;
+      }
+    }
     await storeSet("kibangou_users", users);
   }
 
@@ -59,12 +79,12 @@ async function deliverPlanOnce(paymentId, metadata, amountStr, currency) {
   const list = Array.isArray(ledger) ? ledger : [];
   list.unshift({
     id: `sas_${paymentId}`,
-    type: plan,
+    type: planDef.type,
     email: email || "client",
     days,
     amountFcfa: Number(amountStr) || 0,
     currency: currency || "XAF",
-    note: `SasPay ${plan === "adult_vip" ? "Adulte +18" : "Sans Pubs"} (${days}j)`,
+    note: `SasPay ${planDef.name}${includeAdult && planDef.type !== "adult_vip" ? " + Adulte +18 (30j)" : ""}`,
     ts: Date.now()
   });
   await storeSet("kibangou_ledger", list.slice(0, 200));
@@ -161,7 +181,10 @@ export async function POST(request) {
     return Response.json({ error: "Payload invalide." }, { status: 400, headers: CORS_HEADERS });
   }
 
-  const plan = VIP_PLANS[body.plan] || VIP_PLANS.adult_vip;
+  const plan = VIP_PLANS[body.plan] || VIP_PLANS.adult_1m;
+  const includeAdult = plan.type !== "adult_vip" && Boolean(body.includeAdult);
+  const finalAmount = includeAdult ? addDecimalStrings(plan.amount, VIP_PLANS.adult_1m.amount) : plan.amount;
+  const finalDesc = includeAdult ? `${plan.name} + Adulte +18 (1 mois)` : plan.name;
   const email = String(body.email || "").trim().toLowerCase();
   const name = String(body.name || email.split("@")[0] || "Client KibangouTV").trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -174,14 +197,14 @@ export async function POST(request) {
     const r = await saspayFetch("/checkout-sessions/", {
       method: "POST",
       body: {
-        amount: plan.amount,
+        amount: finalAmount,
         currency: String(body.currency || plan.currency),
-        description: plan.name,
+        description: finalDesc,
         customer_email: email,
         customer_name: name,
         customer_phone: body.phone ? String(body.phone).trim() : undefined,
         return_url: `${origin}/?saspay_return=1`,
-        metadata: { email, plan: plan.id, days: plan.days }
+        metadata: { email, plan: plan.id, days: plan.days, includeAdult }
       }
     });
     return Response.json(r.data, { status: r.status, headers: CORS_HEADERS });
@@ -193,18 +216,18 @@ export async function POST(request) {
       method: "POST",
       idempotencyKey,
       body: {
-        amount: plan.amount,
+        amount: finalAmount,
         currency: String(body.currency || plan.currency),
         country: String(body.country || "CG").toUpperCase(),
         network: String(body.network || "mtn_cg"),
-        description: plan.name,
+        description: finalDesc,
         customer: {
           email,
           first_name: name.split(" ")[0] || "Client",
           last_name: name.split(" ").slice(1).join(" ") || "KibangouTV",
           phone: String(body.phone || "")
         },
-        metadata: { email, plan: plan.id, days: plan.days }
+        metadata: { email, plan: plan.id, days: plan.days, includeAdult }
       }
     });
     return Response.json(r.data, { status: r.status, headers: CORS_HEADERS });
