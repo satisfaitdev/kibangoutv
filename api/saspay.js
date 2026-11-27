@@ -13,8 +13,8 @@ const CORS_HEADERS = {
 
 const VIP_PLANS = {
   adult_1m: { id: "adult_1m", type: "adult_vip", name: "Adulte +18 (1 mois)", amount: "1000.00", currency: "XAF", days: 30 },
-  no_ads_1d: { id: "no_ads_1d", type: "no_ads_vip", name: "Sans Pubs (1 jour)", amount: "50.00", currency: "XAF", days: 1 },
-  no_ads_3d: { id: "no_ads_3d", type: "no_ads_vip", name: "Sans Pubs (3 jours)", amount: "125.00", currency: "XAF", days: 3 },
+  no_ads_1d: { id: "no_ads_1d", type: "no_ads_vip", name: "Sans Pubs (1 jour)", amount: "200.00", currency: "XAF", days: 1 },
+  no_ads_3d: { id: "no_ads_3d", type: "no_ads_vip", name: "Sans Pubs (3 jours)", amount: "250.00", currency: "XAF", days: 3 },
   no_ads_7d: { id: "no_ads_7d", type: "no_ads_vip", name: "Sans Pubs (1 semaine)", amount: "300.00", currency: "XAF", days: 7 },
   no_ads_1m: { id: "no_ads_1m", type: "no_ads_vip", name: "Sans Pubs (1 mois)", amount: "1200.00", currency: "XAF", days: 30 },
   no_ads_3m: { id: "no_ads_3m", type: "no_ads_vip", name: "Sans Pubs (3 mois)", amount: "3500.00", currency: "XAF", days: 90 },

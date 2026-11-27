@@ -2956,7 +2956,7 @@
                 <span class="s-group-title">Abonnements VIP &amp; TV</span>
               </div>
               <div class="kibangou-s-row">
-                <div class="s-label">Offres VIP<span class="s-sub">Sans Publicités dès 50 FCFA ou Adulte +18.</span></div>
+                <div class="s-label">Offres VIP<span class="s-sub">Sans Publicités dès 200 FCFA ou Adulte +18.</span></div>
                 <div class="kibangou-adult-links">
                   <button type="button" id="btn-open-plans-modal" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Voir les offres VIP →</button>
                 </div>
@@ -3228,8 +3228,8 @@
       const existing = document.getElementById("kibangou-plans-page");
       if (existing) existing.remove();
       const plans = [
-        { id: "no_ads_1d", title: "1 Jour Sans Pubs", priceNum: 50, price: "50 FCFA", desc: "24 heures sans publicité" },
-        { id: "no_ads_3d", title: "3 Jours Sans Pubs", priceNum: 125, price: "125 FCFA", desc: "Week-end sans coupures" },
+        { id: "no_ads_1d", title: "1 Jour Sans Pubs", priceNum: 200, price: "200 FCFA", desc: "24 heures sans publicité" },
+        { id: "no_ads_3d", title: "3 Jours Sans Pubs", priceNum: 250, price: "250 FCFA", desc: "Week-end sans coupures" },
         { id: "no_ads_7d", title: "1 Semaine Sans Pubs", priceNum: 300, price: "300 FCFA", desc: "7 jours complets sans pubs" },
         { id: "no_ads_1m", title: "1 Mois Sans Pubs", priceNum: 1200, price: "1 200 FCFA", desc: "Formule mensuelle standard", badge: "Populaire" },
         { id: "no_ads_3m", title: "3 Mois Sans Pubs", priceNum: 3500, price: "3 500 FCFA", desc: "Trimestre économique" },
@@ -3572,7 +3572,17 @@
           const data = await res.json().catch(() => ({}));
           const d = data.data || data;
           if (!res.ok) {
-            const msg = data.error?.message || data.error || data.message || "Impossible d'initier le paiement.";
+            const formatErr = (e) => {
+              if (!e) return "";
+              if (typeof e === "string") return e;
+              if (Array.isArray(e)) return e.map(formatErr).filter(Boolean).join(" ");
+              if (typeof e === "object") {
+                if (typeof e.message === "string") return e.message;
+                return Object.values(e).map(formatErr).filter(Boolean).join(" ");
+              }
+              return String(e);
+            };
+            const msg = formatErr(data.error) || formatErr(data.message) || "Impossible d'initier le paiement.";
             statusEl.style.color = "#EF4444";
             statusEl.textContent = msg;
             showToast(msg);
