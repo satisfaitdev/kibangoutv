@@ -3871,48 +3871,127 @@
     })();
 
     (async function initKibangouAds() {
-      try {
+      function isAdFreeUser() {
         try {
           const u = JSON.parse(localStorage.getItem("kibangoutv_user") || "null");
-          if (u && (Number(u.adFreeUntil || 0) > Date.now() || Number(u.noAdsVipUntil || 0) > Date.now())) {
-            return;
-          }
-        } catch {}
-        const res = await fetch("/api/admin?action=public_ads", { cache: "no-store" });
-        if (!res.ok) return;
-        const { ads = [] } = await res.json();
-        const banner = ads.find((a) => a && a.active && a.placement === "home_banner");
-        if (!banner) return;
+          return Boolean(u && (Number(u.adFreeUntil || 0) > Date.now() || Number(u.noAdsVipUntil || 0) > Date.now()));
+        } catch {
+          return false;
+        }
+      }
+      if (isAdFreeUser()) return;
+
+      const trackAdEvent = (id, event) => {
+        if (!id || id === "house_vip") return;
         fetch("/api/admin?action=ad_event", {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: banner.id, event: "impression" })
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, event })
         }).catch(() => {});
+      };
+
+      let ads = [];
+      try {
+        const res = await fetch("/api/admin?action=public_ads", { cache: "no-store" });
+        if (res.ok) {
+          const j = await res.json();
+          ads = Array.isArray(j.ads) ? j.ads.filter((a) => a && a.active) : [];
+        }
+      } catch {}
+
+      const banners = ads.filter((a) => a.placement === "home_banner");
+      const prerolls = ads.filter((a) => a.placement === "player_preroll");
+      const banner = banners[Math.floor(Math.random() * banners.length)] || {
+        id: "house_vip",
+        title: "Passez en mode Sans Publicités",
+        text: "Profitez de vos films, séries et matchs sans coupure dès 200 FCFA.",
+        linkUrl: "#/plans",
+        isInternal: true
+      };
+
+      if (banner && !document.getElementById("kibangou-ad-banner")) {
+        trackAdEvent(banner.id, "impression");
         const bar = document.createElement("div");
         bar.id = "kibangou-ad-banner";
-        bar.style.cssText = "position:fixed;bottom:74px;left:50%;transform:translateX(-50%);z-index:9990;max-width:460px;width:calc(100% - 24px);background:#151C24;border:1px solid rgba(0,200,83,0.4);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 12px 32px rgba(0,0,0,0.55);";
+        bar.style.cssText = "position:fixed;bottom:74px;left:50%;transform:translateX(-50%);z-index:9990;max-width:480px;width:calc(100% - 24px);background:#151C24;border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 12px 32px rgba(0,0,0,0.55);";
         bar.innerHTML = `
           ${banner.imageUrl ? `<img src="${escapeHtml(banner.imageUrl)}" alt="" style="width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0;">` : ""}
           <div style="min-width:0;flex:1;">
-            <div style="font-size:0.7rem;color:#00C853;font-weight:700;text-transform:uppercase;">Sponsorisé</div>
-            <div style="font-weight:700;color:#fff;font-size:0.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(banner.title)}</div>
-            ${banner.text ? `<div style="font-size:0.8rem;color:#94A3B8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(banner.text)}</div>` : ""}
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.68rem;font-weight:700;text-transform:uppercase;">
+              <span style="color:#00C853;">Sponsorisé</span>
+              <a href="#/plans" style="color:#94A3B8;text-decoration:underline;text-transform:none;font-weight:500;">Retirer les pubs</a>
+            </div>
+            <div style="font-weight:700;color:#fff;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(banner.title)}</div>
+            ${banner.text ? `<div style="font-size:0.78rem;color:#94A3B8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(banner.text)}</div>` : ""}
           </div>
           <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-            ${banner.linkUrl ? `<a href="${escapeHtml(banner.linkUrl)}" target="_blank" rel="noopener" id="kibangou-ad-cta" style="padding:7px 12px;border-radius:8px;background:#00C853;color:#07120B;font-weight:700;font-size:0.8rem;text-decoration:none;">Voir</a>` : ""}
-            <button type="button" aria-label="Fermer" style="background:none;border:none;color:#94A3B8;font-size:18px;cursor:pointer;padding:4px;">✕</button>
+            ${banner.linkUrl ? `<a href="${escapeHtml(banner.linkUrl)}" ${banner.isInternal ? "" : 'target="_blank" rel="noopener"'} id="kibangou-ad-cta" style="padding:7px 12px;border-radius:8px;background:#00C853;color:#07120B;font-weight:700;font-size:0.8rem;text-decoration:none;">Voir</a>` : ""}
+            <button type="button" id="kibangou-ad-close" aria-label="Fermer" style="background:none;border:none;color:#94A3B8;font-size:18px;cursor:pointer;padding:4px;">✕</button>
           </div>`;
         const cta = bar.querySelector("#kibangou-ad-cta");
-        if (cta) {
-          cta.addEventListener("click", () => {
-            fetch("/api/admin?action=ad_event", {
-              method: "POST", headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ id: banner.id, event: "click" })
-            }).catch(() => {});
-          });
-        }
-        bar.querySelector("button").addEventListener("click", () => bar.remove());
+        if (cta) cta.addEventListener("click", () => trackAdEvent(banner.id, "click"));
+        bar.querySelector("#kibangou-ad-close").addEventListener("click", () => bar.remove());
         document.body.appendChild(bar);
-      } catch {}
+      }
+
+      // Pré-roll lecteur vidéo (max 1 fois toutes les 10 minutes, skippable après 5s)
+      let lastPrerollAt = 0;
+      function maybeShowPreroll() {
+        if (isAdFreeUser()) return;
+        const now = Date.now();
+        if (now - lastPrerollAt < 600_000) return;
+        const playerRoot = document.querySelector(".player-root");
+        const video = playerRoot?.querySelector("video");
+        if (!playerRoot || !video || document.getElementById("kibangou-preroll-overlay")) return;
+        const ad = prerolls[Math.floor(Math.random() * prerolls.length)];
+        if (!ad) return;
+
+        lastPrerollAt = now;
+        try { video.pause(); } catch {}
+        trackAdEvent(ad.id, "impression");
+
+        const ov = document.createElement("div");
+        ov.id = "kibangou-preroll-overlay";
+        ov.style.cssText = "position:absolute;inset:0;z-index:9995;background:rgba(10,13,18,0.94);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;";
+        ov.innerHTML = `
+          <div style="width:100%;max-width:440px;background:#151C24;border:1px solid rgba(255,255,255,0.14);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px;text-align:center;">
+            <span style="font-size:0.7rem;font-weight:700;color:#00C853;text-transform:uppercase;letter-spacing:0.08em;">Publicité Sponsorisée</span>
+            ${ad.imageUrl ? `<img src="${escapeHtml(ad.imageUrl)}" alt="" style="width:100%;max-height:180px;object-fit:cover;border-radius:12px;">` : ""}
+            <strong style="color:#fff;font-size:1.05rem;">${escapeHtml(ad.title)}</strong>
+            ${ad.text ? `<div style="font-size:0.84rem;color:#94A3B8;">${escapeHtml(ad.text)}</div>` : ""}
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+              ${ad.linkUrl ? `<a href="${escapeHtml(ad.linkUrl)}" target="_blank" rel="noopener" id="preroll-cta" style="flex:1;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);color:#fff;font-weight:700;font-size:0.86rem;text-decoration:none;">Découvrir →</a>` : ""}
+              <button type="button" id="preroll-skip-btn" disabled style="flex:1;padding:10px 14px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:800;font-size:0.86rem;cursor:not-allowed;opacity:0.7;">Suite dans 5s...</button>
+            </div>
+            <a href="#/plans" id="preroll-vip-link" style="font-size:0.76rem;color:#94A3B8;text-decoration:underline;">Passer en Sans-Pubs VIP (dès 200 FCFA)</a>
+          </div>`;
+        playerRoot.appendChild(ov);
+        const cta = ov.querySelector("#preroll-cta");
+        if (cta) cta.addEventListener("click", () => trackAdEvent(ad.id, "click"));
+        ov.querySelector("#preroll-vip-link")?.addEventListener("click", () => ov.remove());
+
+        const skipBtn = ov.querySelector("#preroll-skip-btn");
+        let sec = 5;
+        const timer = setInterval(() => {
+          sec--;
+          if (sec <= 0) {
+            clearInterval(timer);
+            skipBtn.disabled = false;
+            skipBtn.style.cursor = "pointer";
+            skipBtn.style.opacity = "1";
+            skipBtn.textContent = "Passer la pub ▶";
+          } else {
+            skipBtn.textContent = `Suite dans ${sec}s...`;
+          }
+        }, 1000);
+        skipBtn.addEventListener("click", () => {
+          clearInterval(timer);
+          ov.remove();
+          try { video.play().catch(() => {}); } catch {}
+        });
+      }
+
+      window.addEventListener("kibangou-hls-attached", () => setTimeout(maybeShowPreroll, 250));
     })();
 
     (function initTvModeAndDpad() {
