@@ -78,7 +78,7 @@
       max-width: none !important;
       height: 100dvh !important;
       margin: 0 !important;
-      z-index: 99990 !important;
+      z-index: 20 !important;
       background: #0E1318 !important;
       overflow-y: auto !important;
       padding: 20px 16px 96px !important;
@@ -3167,7 +3167,8 @@
           </div>
           <div id="fb-matches-body" style="display:flex;flex-direction:column;gap:12px;color:#94A3B8;">Chargement des matchs...</div>
         </div>`;
-      document.body.appendChild(page);
+      const fbHost = document.querySelector(".sidebar")?.parentElement || document.body;
+      fbHost.appendChild(page);
 
       const frStatus = (m) => {
         const raw = String(m?.status || "").trim();
@@ -3411,7 +3412,8 @@
             </div>
           </div>
         </div>`;
-      document.body.appendChild(page);
+      const fbHost = document.querySelector(".sidebar")?.parentElement || document.body;
+      fbHost.appendChild(page);
 
       const getCountriesList = () => {
         const map = new Map();
