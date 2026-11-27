@@ -312,6 +312,18 @@
       display: none !important;
     }
 
+    /* Barre de pré-chargement blanche (style YouTube / myCANAL) */
+    .player-seek .player-seek-buf {
+      background: rgba(255, 255, 255, 0.38) !important;
+      z-index: 1 !important;
+      pointer-events: none;
+      transition: width 0.2s linear;
+    }
+
+    .player-seek .player-seek-fill {
+      z-index: 2 !important;
+    }
+
     /* Chaînes : barre de recherche et filtres par catégorie bien visibles */
     .channels-view .feature-bar {
       display: block !important;
@@ -2464,6 +2476,33 @@
       if (video && !video.dataset.kibangouPlayFixBound) {
         video.dataset.kibangouPlayFixBound = "1";
         try { video.preload = "auto"; } catch {}
+        const updateBufferedBar = () => {
+          const bufEl = playerRoot.querySelector(".player-seek .player-seek-buf");
+          const dur = video.duration;
+          if (!bufEl || !dur || !isFinite(dur) || dur <= 0 || !video.buffered || !video.buffered.length) return;
+          const cur = video.currentTime || 0;
+          let bufEnd = 0;
+          for (let i = 0; i < video.buffered.length; i++) {
+            const s = video.buffered.start(i);
+            const e = video.buffered.end(i);
+            if (cur >= s - 0.5 && cur <= e + 0.5) {
+              bufEnd = Math.max(bufEnd, e);
+            } else if (e > bufEnd && s <= cur + 1) {
+              bufEnd = e;
+            }
+          }
+          if (bufEnd > 0) {
+            const pct = Math.min(100, Math.max(0, (bufEnd / dur) * 100));
+            bufEl.style.width = `${pct.toFixed(2)}%`;
+          }
+        };
+        ["progress", "timeupdate", "loadeddata", "seeked"].forEach((evName) => {
+          video.addEventListener(evName, updateBufferedBar);
+        });
+        video.addEventListener("seeking", () => {
+          vodAutoState.attemptStartedAt = Date.now();
+          if (window.__kibangouHls) window.__kibangouHls._lastResumeAt = Date.now();
+        });
         video.addEventListener("play", () => {
           const hls = window.__kibangouHls;
           if (hls) {

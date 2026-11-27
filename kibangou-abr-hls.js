@@ -167,9 +167,19 @@ export class KibangouHls extends OriginalHls {
       }
     };
 
+    this._seekingListener = () => {
+      this._lastResumeAt = Date.now();
+      if (this._stallTimer) {
+        clearTimeout(this._stallTimer);
+        this._stallTimer = null;
+      }
+    };
+
     media.addEventListener("waiting", this._waitingListener);
     media.addEventListener("play", this._playListener);
     media.addEventListener("playing", this._playingListener);
+    media.addEventListener("seeking", this._seekingListener);
+    media.addEventListener("seeked", this._seekingListener);
   }
 
   destroy() {
@@ -191,6 +201,10 @@ export class KibangouHls extends OriginalHls {
       if (this._waitingListener) this._attachedMedia.removeEventListener("waiting", this._waitingListener);
       if (this._playListener) this._attachedMedia.removeEventListener("play", this._playListener);
       if (this._playingListener) this._attachedMedia.removeEventListener("playing", this._playingListener);
+      if (this._seekingListener) {
+        this._attachedMedia.removeEventListener("seeking", this._seekingListener);
+        this._attachedMedia.removeEventListener("seeked", this._seekingListener);
+      }
       this._attachedMedia = null;
     }
   }
@@ -400,9 +414,9 @@ export class KibangouHls extends OriginalHls {
 
     this.on(OriginalHls.Events.LEVEL_LOADED, (_event, data) => {
       if (data?.details && data.details.live === false) {
-        this.config.maxBufferLength = 60;
-        this.config.maxMaxBufferLength = 120;
-        this.config.maxBufferSize = 60 * 1024 * 1024;
+        this.config.maxBufferLength = 90;
+        this.config.maxMaxBufferLength = 150;
+        this.config.maxBufferSize = 80 * 1024 * 1024;
       }
     });
 
