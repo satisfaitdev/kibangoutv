@@ -164,6 +164,24 @@
 
       <!-- TAB PUBLICITES -->
       <section id="tab-ads" style="display:none;">
+        <div class="table-card" style="margin-bottom:16px;">
+          <div class="table-head"><strong>Régie Pub Automatique (Adsterra / Monetag)</strong><span class="pill" id="adnet-status">Inactif</span></div>
+          <form id="adnet-form" class="ad-form">
+            <select id="adnet-provider">
+              <option value="adsterra">Adsterra</option>
+              <option value="monetag">Monetag</option>
+              <option value="other">Autre régie (HTTPS)</option>
+            </select>
+            <input type="url" id="adnet-script" placeholder="URL du script bannière / social bar (https://...)">
+            <input type="url" id="adnet-smartlink" placeholder="URL Smartlink / Direct Link (https://...)">
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.86rem;color:#E2E8F0;">
+              <input type="checkbox" id="adnet-enabled" style="width:16px;height:16px;accent-color:#00C853;">
+              <span>Activer pour les utilisateurs gratuits (les VIP Sans-Pubs restent exemptés)</span>
+            </label>
+            <button type="submit" class="btn btn-primary" style="justify-content:center;">Enregistrer la régie</button>
+          </form>
+        </div>
+
         <div class="table-card">
           <div class="table-head"><strong>Créer une publicité / bannière</strong></div>
           <form id="ad-form" class="ad-form">
@@ -352,6 +370,7 @@
       if (!r.ok) return;
       const { ads = [] } = await r.json();
       document.getElementById("ads-count").textContent = `${ads.length} pub(s)`;
+      loadAdsNetwork();
       document.getElementById("ads-body").innerHTML = ads.length ? ads.map((a) => `
         <tr>
           <td><strong>${esc(a.title)}</strong><div style="font-size:0.78rem;color:var(--muted)">${esc(a.text)}</div></td>
@@ -364,6 +383,32 @@
           </td>
         </tr>`).join("") : '<tr><td colspan="5" class="empty">Aucune publicité configurée.</td></tr>';
     }
+
+    async function loadAdsNetwork() {
+      const r = await fetch("/api/admin?action=ad_network", { credentials: "same-origin", cache: "no-store" });
+      if (!r.ok) return;
+      const { adNetwork } = await r.json();
+      if (!adNetwork) return;
+      document.getElementById("adnet-provider").value = adNetwork.provider || "adsterra";
+      document.getElementById("adnet-script").value = adNetwork.scriptUrl || "";
+      document.getElementById("adnet-smartlink").value = adNetwork.smartlinkUrl || "";
+      document.getElementById("adnet-enabled").checked = Boolean(adNetwork.enabled);
+      document.getElementById("adnet-status").textContent = adNetwork.enabled ? "Actif" : "Inactif";
+    }
+
+    document.getElementById("adnet-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      await fetch("/api/admin?action=ad_network_save", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({
+          provider: document.getElementById("adnet-provider").value,
+          scriptUrl: document.getElementById("adnet-script").value.trim(),
+          smartlinkUrl: document.getElementById("adnet-smartlink").value.trim(),
+          enabled: document.getElementById("adnet-enabled").checked
+        })
+      });
+      loadAdsNetwork();
+    });
 
     async function toggleAd(id, active) {
       await fetch("/api/admin?action=ad_toggle", {

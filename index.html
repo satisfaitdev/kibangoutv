@@ -3893,23 +3893,42 @@
       };
 
       let ads = [];
+      let adNetwork = null;
       try {
         const res = await fetch("/api/admin?action=public_ads", { cache: "no-store" });
         if (res.ok) {
           const j = await res.json();
           ads = Array.isArray(j.ads) ? j.ads.filter((a) => a && a.active) : [];
+          adNetwork = j.adNetwork || null;
         }
       } catch {}
 
+      if (adNetwork && adNetwork.enabled && adNetwork.scriptUrl && adNetwork.scriptUrl.startsWith("https://")) {
+        const sc = document.createElement("script");
+        sc.async = true;
+        sc.src = adNetwork.scriptUrl;
+        document.body.appendChild(sc);
+      }
+
       const banners = ads.filter((a) => a.placement === "home_banner");
       const prerolls = ads.filter((a) => a.placement === "player_preroll");
-      const banner = banners[Math.floor(Math.random() * banners.length)] || {
-        id: "house_vip",
-        title: "Passez en mode Sans Publicités",
-        text: "Profitez de vos films, séries et matchs sans coupure dès 200 FCFA.",
-        linkUrl: "#/plans",
-        isInternal: true
-      };
+      const banner = banners[Math.floor(Math.random() * banners.length)] || (
+        adNetwork && adNetwork.enabled && adNetwork.smartlinkUrl
+          ? {
+              id: "net_smartlink",
+              title: "Offre Sponsorisée",
+              text: "Découvrez les offres partenaires — ou passez en Sans-Pubs VIP.",
+              linkUrl: adNetwork.smartlinkUrl,
+              isInternal: false
+            }
+          : {
+              id: "house_vip",
+              title: "Passez en mode Sans Publicités",
+              text: "Profitez de vos films, séries et matchs sans coupure dès 200 FCFA.",
+              linkUrl: "#/plans",
+              isInternal: true
+            }
+      );
 
       if (banner && !document.getElementById("kibangou-ad-banner")) {
         trackAdEvent(banner.id, "impression");

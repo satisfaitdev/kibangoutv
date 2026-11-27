@@ -3,6 +3,7 @@ import { buildCorsHeaders, checkRateLimit, verifyHmacToken } from "./_security.j
 
 const USERS_FILE = "kibangou_users";
 const ADS_FILE = "kibangou_ads";
+const AD_NETWORK_FILE = "kibangou_ad_network";
 const LEDGER_FILE = "kibangou_ledger";
 const ADMIN_COOKIE = "kibangou_admin";
 
@@ -59,11 +60,18 @@ export async function GET(request) {
   if (action === "public_ads") {
     const ads = await readJson(ADS_FILE, []);
     const active = Array.isArray(ads) ? ads.filter((a) => a && a.active) : [];
-    return Response.json({ ads: active }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+    const net = await readJson(AD_NETWORK_FILE, { enabled: false, provider: "adsterra", scriptUrl: "", smartlinkUrl: "" });
+    const adNetwork = net && net.enabled ? { enabled: true, provider: net.provider || "adsterra", scriptUrl: net.scriptUrl || "", smartlinkUrl: net.smartlinkUrl || "" } : { enabled: false };
+    return Response.json({ ads: active, adNetwork }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
   }
 
   if (!isAdminAuthorized(request)) {
     return Response.json({ error: "Accès administrateur requis." }, { status: 401, headers: CORS_HEADERS });
+  }
+
+  if (action === "ad_network") {
+    const net = await readJson(AD_NETWORK_FILE, { enabled: false, provider: "adsterra", scriptUrl: "", smartlinkUrl: "" });
+    return Response.json({ adNetwork: net }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
   }
 
   if (action === "store_health") {
@@ -266,6 +274,21 @@ export async function POST(request) {
     const next = (Array.isArray(ads) ? ads : []).filter((a) => a.id !== String(body.id || ""));
     await writeJson(ADS_FILE, next);
     return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
+  }
+
+  if (action === "ad_network_save") {
+    const provider = String(body.provider || "adsterra").slice(0, 32);
+    const scriptUrl = String(body.scriptUrl || "").trim().slice(0, 400);
+    const smartlinkUrl = String(body.smartlinkUrl || "").trim().slice(0, 400);
+    if (scriptUrl && !scriptUrl.startsWith("https://")) {
+      return Response.json({ error: "L'URL du script doit commencer par https://" }, { status: 400, headers: CORS_HEADERS });
+    }
+    if (smartlinkUrl && !smartlinkUrl.startsWith("https://")) {
+      return Response.json({ error: "L'URL Smartlink doit commencer par https://" }, { status: 400, headers: CORS_HEADERS });
+    }
+    const entry = { provider, scriptUrl, smartlinkUrl, enabled: Boolean(body.enabled), updatedAt: Date.now() };
+    await writeJson(AD_NETWORK_FILE, entry);
+    return Response.json({ ok: true, adNetwork: entry }, { status: 200, headers: CORS_HEADERS });
   }
 
   return Response.json({ error: "Unknown action" }, { status: 400, headers: CORS_HEADERS });
