@@ -55,11 +55,11 @@ function isAdminAuthorized(request) {
   return false;
 }
 
-async function readJson(key, fallback) {
+async function (key, fallback) {
   return await storeGet(key, fallback);
 }
 
-async function writeJson(key, data) {
+async function (key, data) {
   await storeSet(key, data);
 }
 
@@ -72,7 +72,7 @@ export async function GET(request) {
   const action = url.searchParams.get("action") || "public_ads";
 
   if (action === "public_ads") {
-    const ads = readJson(ADS_FILE, []);
+    const ads = await readJson(ADS_FILE, []);
     const active = Array.isArray(ads) ? ads.filter((a) => a && a.active) : [];
     return Response.json({ ads: active }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
   }
@@ -88,7 +88,7 @@ export async function GET(request) {
   }
 
   if (action === "users") {
-    const usersObj = readJson(USERS_FILE, {});
+    const usersObj = await readJson(USERS_FILE, {});
     const users = Object.values(usersObj).map((u) => ({
       email: u.email,
       name: u.name || u.email,
@@ -108,10 +108,10 @@ export async function GET(request) {
   }
 
   if (action === "monetization") {
-    const usersObj = readJson(USERS_FILE, {});
+    const usersObj = await readJson(USERS_FILE, {});
     const usersList = Object.values(usersObj);
-    const ads = readJson(ADS_FILE, []);
-    const ledger = readJson(LEDGER_FILE, []);
+    const ads = await readJson(ADS_FILE, []);
+    const ledger = await readJson(LEDGER_FILE, []);
     const now = Date.now();
 
     const adFcfa = ledger.filter((l) => l.type === "ad_revenue").reduce((s, l) => s + (Number(l.amountFcfa) || 0), 0);
@@ -144,7 +144,7 @@ export async function GET(request) {
   }
 
   if (action === "ads") {
-    const ads = readJson(ADS_FILE, []);
+    const ads = await readJson(ADS_FILE, []);
     return Response.json({ ads: Array.isArray(ads) ? ads : [] }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
   }
 
@@ -160,13 +160,13 @@ export async function POST(request) {
   }
 
   if (action === "ad_event") {
-    const ads = readJson(ADS_FILE, []);
+    const ads = await readJson(ADS_FILE, []);
     const list = Array.isArray(ads) ? ads : [];
     const ad = list.find((a) => a.id === String(body.id || ""));
     if (ad) {
       if (body.event === "click") ad.clicks = (ad.clicks || 0) + 1;
       else ad.impressions = (ad.impressions || 0) + 1;
-      writeJson(ADS_FILE, list);
+      await writeJson(ADS_FILE, list);
     }
     return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
   }
@@ -180,16 +180,16 @@ export async function POST(request) {
     const plan = body.plan === "no_ads_vip" ? "no_ads_vip" : "adult_vip";
     const days = Math.max(1, Number(body.days) || 30);
     const amountFcfa = Math.max(0, Number(body.amountFcfa) || 0);
-    const users = readJson(USERS_FILE, {});
+    const users = await readJson(USERS_FILE, {});
     if (!users[email]) {
       users[email] = { email, name: email.split("@")[0], provider: "manual", createdAt: Date.now(), lastSeen: Date.now() };
     }
     const until = Math.max(Date.now(), users[email][plan === "adult_vip" ? "adultVipUntil" : "noAdsVipUntil"] || 0) + days * 86400000;
     if (plan === "adult_vip") users[email].adultVipUntil = until;
     else users[email].noAdsVipUntil = until;
-    writeJson(USERS_FILE, users);
+    await writeJson(USERS_FILE, users);
 
-    const ledger = readJson(LEDGER_FILE, []);
+    const ledger = await readJson(LEDGER_FILE, []);
     const list = Array.isArray(ledger) ? ledger : [];
     list.unshift({
       id: `tx_${Date.now()}`,
@@ -200,14 +200,14 @@ export async function POST(request) {
       note: plan === "adult_vip" ? `Abonnement Adulte +18 (${days}j)` : `Abonnement Sans Pubs (${days}j)`,
       ts: Date.now()
     });
-    writeJson(LEDGER_FILE, list.slice(0, 200));
+    await writeJson(LEDGER_FILE, list.slice(0, 200));
     return Response.json({ ok: true, until }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "add_ad_revenue") {
     const amountFcfa = Math.max(0, Number(body.amountFcfa) || 0);
     const note = String(body.note || "Revenus publicitaires").slice(0, 120);
-    const ledger = readJson(LEDGER_FILE, []);
+    const ledger = await readJson(LEDGER_FILE, []);
     const list = Array.isArray(ledger) ? ledger : [];
     list.unshift({
       id: `tx_${Date.now()}`,
@@ -217,29 +217,29 @@ export async function POST(request) {
       note,
       ts: Date.now()
     });
-    writeJson(LEDGER_FILE, list.slice(0, 200));
+    await writeJson(LEDGER_FILE, list.slice(0, 200));
     return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "user_toggle_ban") {
     const email = String(body.email || "").trim().toLowerCase();
-    const users = readJson(USERS_FILE, {});
+    const users = await readJson(USERS_FILE, {});
     if (!users[email]) return Response.json({ error: "Utilisateur introuvable." }, { status: 404, headers: CORS_HEADERS });
     users[email].banned = Boolean(body.banned);
-    writeJson(USERS_FILE, users);
+    await writeJson(USERS_FILE, users);
     return Response.json({ ok: true, banned: users[email].banned }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "user_delete") {
     const email = String(body.email || "").trim().toLowerCase();
-    const users = readJson(USERS_FILE, {});
+    const users = await readJson(USERS_FILE, {});
     delete users[email];
-    writeJson(USERS_FILE, users);
+    await writeJson(USERS_FILE, users);
     return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "ad_save") {
-    const ads = readJson(ADS_FILE, []);
+    const ads = await readJson(ADS_FILE, []);
     const list = Array.isArray(ads) ? ads : [];
     const title = String(body.title || "").trim().slice(0, 100);
     const text = String(body.text || "").trim().slice(0, 220);
@@ -262,24 +262,24 @@ export async function POST(request) {
     };
     if (existingIdx >= 0) list[existingIdx] = entry;
     else list.unshift(entry);
-    writeJson(ADS_FILE, list);
+    await writeJson(ADS_FILE, list);
     return Response.json({ ok: true, ad: entry }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "ad_toggle") {
-    const ads = readJson(ADS_FILE, []);
+    const ads = await readJson(ADS_FILE, []);
     const list = Array.isArray(ads) ? ads : [];
     const item = list.find((a) => a.id === String(body.id || ""));
     if (!item) return Response.json({ error: "Publicité introuvable." }, { status: 404, headers: CORS_HEADERS });
     item.active = Boolean(body.active);
-    writeJson(ADS_FILE, list);
+    await writeJson(ADS_FILE, list);
     return Response.json({ ok: true, active: item.active }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "ad_delete") {
-    const ads = readJson(ADS_FILE, []);
+    const ads = await readJson(ADS_FILE, []);
     const next = (Array.isArray(ads) ? ads : []).filter((a) => a.id !== String(body.id || ""));
-    writeJson(ADS_FILE, next);
+    await writeJson(ADS_FILE, next);
     return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
   }
 
