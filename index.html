@@ -129,6 +129,14 @@
     body:has(.player-root) > a[style*="position:fixed"] {
       pointer-events: none !important;
     }
+    /* Masquer temporairement les bannières/native ads quand le lecteur vidéo (.player-root) ou le plein écran est actif, puis restaurer à la fermeture */
+    body:has(.player-root) #kibangou-ad-banner,
+    body:has(.player-root) #kibangou-native-ad-wrap,
+    :fullscreen #kibangou-ad-banner,
+    :fullscreen #kibangou-native-ad-wrap {
+      display: none !important;
+      pointer-events: none !important;
+    }
 
     /* Suppression stricte des widgets Social / Watch Party (sans jamais masquer .feature-bar/.feature-dock) */
     .sv-fab,
