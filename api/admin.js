@@ -81,6 +81,12 @@ export async function GET(request) {
     return Response.json({ error: "Accès administrateur requis." }, { status: 401, headers: CORS_HEADERS });
   }
 
+  if (action === "store_health") {
+    const w = await storeSet("kibangou_health_test", { ok: true, ts: Date.now() }, 60);
+    const r = await storeGet("kibangou_health_test", null);
+    return Response.json({ persistent: Boolean(process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL), write: w, readOk: Boolean(r?.ok) }, { status: 200, headers: CORS_HEADERS });
+  }
+
   if (action === "users") {
     const usersObj = readJson(USERS_FILE, {});
     const users = Object.values(usersObj).map((u) => ({

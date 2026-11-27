@@ -18,7 +18,8 @@ export async function storeGet(key, fallback = null) {
   if (creds) {
     try {
       const res = await fetch(`${creds.url}/get/${encodeURIComponent(key)}`, {
-        headers: { Authorization: `Bearer ${creds.token}` }
+        headers: { Authorization: `Bearer ${creds.token}` },
+        cache: "no-store"
       });
       if (res.ok) {
         const data = await res.json();
@@ -42,19 +43,24 @@ export async function storeGet(key, fallback = null) {
 export async function storeSet(key, value, ttlSec = 0) {
   const serialized = JSON.stringify(value);
   const creds = getRedisCreds();
+  let redisOk = false;
+  let redisStatus = 0;
   if (creds) {
     try {
       const cmd = ttlSec > 0
         ? ["SET", key, serialized, "EX", String(ttlSec)]
         : ["SET", key, serialized];
-      await fetch(creds.url, {
+      const res = await fetch(creds.url, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${creds.token}`,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(cmd)
+        body: JSON.stringify(cmd),
+        cache: "no-store"
       });
+      redisStatus = res.status;
+      redisOk = res.ok;
     } catch {}
   }
 
@@ -62,4 +68,5 @@ export async function storeSet(key, value, ttlSec = 0) {
     const file = path.join(TMP_DIR, `${key.replace(/[^a-zA-Z0-9_-]/g, "_")}.json`);
     fs.writeFileSync(file, serialized, "utf-8");
   } catch {}
+  return { redisOk, redisStatus };
 }
