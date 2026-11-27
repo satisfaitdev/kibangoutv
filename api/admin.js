@@ -1,10 +1,9 @@
 import crypto from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
+import { storeGet, storeSet } from "./_store.js";
 
-const USERS_FILE = path.join("/tmp", "kibangou_users.json");
-const ADS_FILE = path.join("/tmp", "kibangou_ads.json");
-const LEDGER_FILE = path.join("/tmp", "kibangou_ledger.json");
+const USERS_FILE = "kibangou_users";
+const ADS_FILE = "kibangou_ads";
+const LEDGER_FILE = "kibangou_ledger";
 const ADMIN_COOKIE = "kibangou_admin";
 
 const CORS_HEADERS = {
@@ -56,17 +55,12 @@ function isAdminAuthorized(request) {
   return false;
 }
 
-function readJson(file, fallback) {
-  try {
-    if (fs.existsSync(file)) return JSON.parse(fs.readFileSync(file, "utf-8"));
-  } catch {}
-  return fallback;
+async function readJson(key, fallback) {
+  return await storeGet(key, fallback);
 }
 
-function writeJson(file, data) {
-  try {
-    fs.writeFileSync(file, JSON.stringify(data), "utf-8");
-  } catch {}
+async function writeJson(key, data) {
+  await storeSet(key, data);
 }
 
 export async function OPTIONS() {

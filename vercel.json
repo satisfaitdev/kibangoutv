@@ -57,6 +57,10 @@
       "dest": "/api/admin.js"
     },
     {
+      "src": "^/api/saspay/?$",
+      "dest": "/api/saspay.js"
+    },
+    {
       "src": "^/api/telemetry/?$",
       "dest": "/api/telemetry.js"
     },

@@ -1,9 +1,7 @@
 import crypto from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
+import { storeGet, storeSet } from "./_store.js";
 
 const COOKIE_NAME = "kibangou_session";
-const USERS_FILE = path.join("/tmp", "kibangou_users.json");
 const SESSION_TTL_SEC = 60 * 60 * 24 * 30; // 30 jours
 
 function getAuthSecret() {
@@ -73,19 +71,12 @@ function buildClearCookie(isHttps) {
   return parts.join("; ");
 }
 
-function loadUsers() {
-  try {
-    if (fs.existsSync(USERS_FILE)) {
-      return JSON.parse(fs.readFileSync(USERS_FILE, "utf-8"));
-    }
-  } catch {}
-  return {};
+async function loadUsers() {
+  return (await storeGet("kibangou_users", {})) || {};
 }
 
-function saveUsers(users) {
-  try {
-    fs.writeFileSync(USERS_FILE, JSON.stringify(users), "utf-8");
-  } catch {}
+async function saveUsers(users) {
+  await storeSet("kibangou_users", users);
 }
 
 function hashPassword(password, salt = crypto.randomBytes(16).toString("hex")) {
@@ -149,7 +140,7 @@ export async function GET(request) {
     if (!session) {
       return Response.json({ authenticated: false }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
-    const users = loadUsers();
+    const users = await loadUsers();
     const uRec = users[String(session.email || "").toLowerCase()] || {};
     if (uRec.banned) {
       return Response.json({ authenticated: false, banned: true }, { status: 200, headers: { "Cache-Control": "no-store" } });
@@ -171,6 +162,37 @@ export async function GET(request) {
       },
       { status: 200, headers: { "Cache-Control": "no-store" } }
     );
+  }
+
+  if (action === "tv_pair_init") {
+    const code = crypto.randomBytes(3).toString("hex").toUpperCase();
+    const pairKey = `tv_pair_${code}`;
+    await storeSet(pairKey, { status: "pending", createdAt: Date.now() }, 600);
+    return Response.json(
+      { code, pairUrl: `${origin}/?tv_pair=${code}` },
+      { status: 200, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
+  if (action === "tv_pair_status") {
+    const code = String(url.searchParams.get("code") || "").trim().toUpperCase();
+    if (!code) return Response.json({ status: "invalid" }, { status: 400 });
+    const rec = await storeGet(`tv_pair_${code}`, null);
+    if (!rec) return Response.json({ status: "expired" }, { status: 200, headers: { "Cache-Control": "no-store" } });
+    if (rec.status === "linked" && rec.user) {
+      const sessionToken = signToken({ ...rec.user, exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SEC });
+      return Response.json(
+        { status: "linked", user: rec.user },
+        {
+          status: 200,
+          headers: {
+            "Set-Cookie": buildSessionCookie(sessionToken, isHttps),
+            "Cache-Control": "no-store"
+          }
+        }
+      );
+    }
+    return Response.json({ status: rec.status || "pending" }, { status: 200, headers: { "Cache-Control": "no-store" } });
   }
 
   if (action === "google") {
@@ -239,7 +261,7 @@ export async function GET(request) {
         exp: Math.floor(Date.now() / 1000) + SESSION_TTL_SEC
       });
 
-      const users = loadUsers();
+      const users = await loadUsers();
       const gEmail = String(profile.email).toLowerCase();
       if (users[gEmail]?.banned) {
         return Response.redirect(`${origin}/?auth_error=account_suspended`, 302);
@@ -256,7 +278,7 @@ export async function GET(request) {
         createdAt: users[gEmail]?.createdAt || Date.now(),
         lastSeen: Date.now()
       };
-      saveUsers(users);
+      await saveUsers(users);
 
       return new Response(null, {
         status: 302,
@@ -286,6 +308,36 @@ export async function POST(request) {
     );
   }
 
+  if (action === "tv_pair_confirm") {
+    const cookies = parseCookies(request.headers.get("cookie") || "");
+    const bearer = (request.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
+    const session = verifyToken(cookies[COOKIE_NAME] || bearer);
+    if (!session || !session.email) {
+      return Response.json({ error: "Connectez-vous d'abord sur votre téléphone pour lier la TV." }, { status: 401 });
+    }
+    const bodyPair = await request.json().catch(() => null);
+    const code = String(bodyPair?.code || "").trim().toUpperCase();
+    const rec = code ? await storeGet(`tv_pair_${code}`, null) : null;
+    if (!rec) {
+      return Response.json({ error: "Code TV invalide ou expiré." }, { status: 404 });
+    }
+    const users = await loadUsers();
+    const uRec = users[String(session.email).toLowerCase()] || {};
+    const linkedUser = {
+      email: session.email,
+      name: session.name || session.email.split("@")[0],
+      picture: session.picture || "",
+      provider: session.provider || "email",
+      referralCode: uRec.referralCode || makeReferralCode(session.email),
+      referralCount: uRec.referralCount || 0,
+      adFreeUntil: uRec.adFreeUntil || 0,
+      adultVipUntil: uRec.adultVipUntil || 0,
+      noAdsVipUntil: uRec.noAdsVipUntil || 0
+    };
+    await storeSet(`tv_pair_${code}`, { status: "linked", user: linkedUser, ts: Date.now() }, 600);
+    return Response.json({ ok: true }, { status: 200 });
+  }
+
   const body = await request.json().catch(() => null);
   const email = String(body?.email || "").trim().toLowerCase();
   const password = String(body?.password || "");
@@ -299,7 +351,7 @@ export async function POST(request) {
     return Response.json({ error: "Le mot de passe doit contenir au moins 6 caractères." }, { status: 400 });
   }
 
-  const users = loadUsers();
+  const users = await loadUsers();
 
   if (action === "register") {
     if (users[email]) {
@@ -316,7 +368,7 @@ export async function POST(request) {
       createdAt: Date.now(),
       lastSeen: Date.now()
     };
-    saveUsers(users);
+    await saveUsers(users);
   } else if (action === "login") {
     const existing = users[email];
     if (existing) {
@@ -328,7 +380,7 @@ export async function POST(request) {
       }
       existing.referralCode = existing.referralCode || makeReferralCode(email);
       existing.lastSeen = Date.now();
-      saveUsers(users);
+      await saveUsers(users);
     } else {
       const referredBy = applyReferralReward(users, email, ref);
       users[email] = {
@@ -341,7 +393,7 @@ export async function POST(request) {
         createdAt: Date.now(),
         lastSeen: Date.now()
       };
-      saveUsers(users);
+      await saveUsers(users);
     }
   } else {
     return Response.json({ error: "Action invalide." }, { status: 400 });

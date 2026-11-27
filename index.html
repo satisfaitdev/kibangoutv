@@ -1235,6 +1235,18 @@
         <button type="button" class="mode-switch-btn" id="btn-switch-to-pin">
           ← Déverrouillage par code PIN (6 chiffres)
         </button>
+        <button type="button" class="mode-switch-btn" id="btn-toggle-auth-mode" style="margin-top:6px;color:#00C853;">
+          Pas de compte ? Créer un compte →
+        </button>
+      </div>
+
+      <!-- Vue Connexion TV par QR Code -->
+      <div id="view-tv-pair" style="width:100%; display:none; flex-direction:column; align-items:center; text-align:center;">
+        <div class="auth-title">Connexion TV rapide</div>
+        <div class="auth-subtitle">Scannez ce QR Code avec votre téléphone connecté ou entrez le code dans Profil → Lier une TV</div>
+        <img id="tv-pair-qr" alt="QR Code TV" style="width:180px;height:180px;border-radius:14px;background:#fff;padding:8px;margin:12px 0;" />
+        <div id="tv-pair-code" style="font-family:monospace;font-size:1.75rem;font-weight:800;letter-spacing:6px;color:#00C853;margin-bottom:8px;">------</div>
+        <div id="tv-pair-status" style="font-size:0.84rem;color:#94A3B8;">En attente de validation depuis votre téléphone...</div>
       </div>
 
     </div>
@@ -1300,8 +1312,11 @@
       const authCard = document.getElementById("auth-card");
       const viewPin = document.getElementById("view-pin");
       const viewEmail = document.getElementById("view-email");
+      const viewTvPair = document.getElementById("view-tv-pair");
       const btnSwitchToEmail = document.getElementById("btn-switch-to-email");
       const btnSwitchToPin = document.getElementById("btn-switch-to-pin");
+      const btnToggleAuthMode = document.getElementById("btn-toggle-auth-mode");
+      let emailAuthAction = "login";
       const pinDots = document.querySelectorAll("#pin-display .pin-dot");
       const pinError = document.getElementById("pin-error");
       const emailForm = document.getElementById("email-form");
@@ -1319,8 +1334,29 @@
         authGate.style.display = "none";
       }
 
+      async function confirmPendingTvPair() {
+        const pendingCode = localStorage.getItem("kibangoutv_pending_tv_pair");
+        if (!pendingCode) return;
+        try {
+          const r = await fetch("/api/auth?action=tv_pair_confirm", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({ code: pendingCode })
+          });
+          if (r.ok) {
+            localStorage.removeItem("kibangoutv_pending_tv_pair");
+            if (typeof showToast === "function") showToast("TV liée à votre compte avec succès !");
+          }
+        } catch {}
+      }
+
       (async function syncServerSession() {
         const sp = new URLSearchParams(location.search);
+        const tvPairParam = (sp.get("tv_pair") || "").trim().toUpperCase();
+        if (tvPairParam) {
+          try { localStorage.setItem("kibangoutv_pending_tv_pair", tvPairParam); } catch {}
+        }
         const refParam = (sp.get("ref") || "").trim().toUpperCase();
         if (refParam) {
           try { localStorage.setItem("kibangoutv_ref", refParam); } catch {}
@@ -1348,13 +1384,20 @@
             if (j.authenticated && j.user) {
               localStorage.setItem("kibangoutv_user", JSON.stringify(j.user));
               unlockApp(j.user.email);
-              if (sp.has("auth_success")) {
+              await confirmPendingTvPair();
+              if (sp.has("auth_success") || sp.has("tv_pair")) {
                 history.replaceState({}, "", location.pathname + location.hash);
               }
             }
           }
         } catch {}
       })();
+
+      const isTvDevice = (
+        location.search.includes("tv=1") ||
+        localStorage.getItem("kibangoutv_tv_mode") === "1" ||
+        /Android TV|SmartTV|SMART-TV|Tizen|Web0S|BRAVIA|AFTB|AFTT|Shield|MiBOX|GoogleTV/i.test(navigator.userAgent)
+      );
 
       const isMobileOrStandalone = (
         window.__TAURI__ ||
@@ -1364,8 +1407,37 @@
         /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
       );
 
+      let tvPollTimer = null;
+      async function startTvPairing() {
+        if (tvPollTimer) clearInterval(tvPollTimer);
+        try {
+          const r = await fetch("/api/auth?action=tv_pair_init", { cache: "no-store" });
+          const { code, pairUrl } = await r.json();
+          if (!code) return;
+          document.getElementById("tv-pair-code").textContent = code;
+          document.getElementById("tv-pair-qr").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(pairUrl)}`;
+          tvPollTimer = setInterval(async () => {
+            try {
+              const sr = await fetch(`/api/auth?action=tv_pair_status&code=${encodeURIComponent(code)}`, { credentials: "same-origin", cache: "no-store" });
+              const sj = await sr.json();
+              if (sj.status === "linked" && sj.user) {
+                clearInterval(tvPollTimer);
+                localStorage.setItem("kibangoutv_user", JSON.stringify(sj.user));
+                unlockApp(sj.user.email);
+              }
+            } catch {}
+          }, 2500);
+        } catch {}
+      }
+
       function showMode(mode) {
-        if (mode === "email") {
+        if (viewTvPair) viewTvPair.style.display = "none";
+        if (mode === "tv") {
+          viewPin.style.display = "none";
+          viewEmail.style.display = "none";
+          if (viewTvPair) viewTvPair.style.display = "flex";
+          if (!existingAuth) startTvPairing();
+        } else if (mode === "email") {
           viewPin.style.display = "none";
           viewEmail.style.display = "flex";
           emailInput.focus();
@@ -1377,7 +1449,19 @@
         }
       }
 
-      showMode(isMobileOrStandalone ? "pin" : "email");
+      showMode(isTvDevice ? "tv" : (isMobileOrStandalone ? "pin" : "email"));
+
+      if (btnToggleAuthMode) {
+        btnToggleAuthMode.addEventListener("click", () => {
+          emailAuthAction = emailAuthAction === "login" ? "register" : "login";
+          btnToggleAuthMode.textContent = emailAuthAction === "register"
+            ? "Déjà un compte ? Se connecter →"
+            : "Pas de compte ? Créer un compte →";
+          const span = emailSubmitBtn?.querySelector("span");
+          if (span) span.textContent = emailAuthAction === "register" ? "Créer mon compte" : "Accéder à KibangouTV";
+          emailError.textContent = "";
+        });
+      }
 
       btnSwitchToEmail.addEventListener("click", () => showMode("email"));
       btnSwitchToPin.addEventListener("click", () => showMode("pin"));
@@ -1467,7 +1551,7 @@
         emailError.textContent = "";
         if (emailSubmitBtn) emailSubmitBtn.disabled = true;
         try {
-          const res = await fetch("/api/auth?action=login", {
+          const res = await fetch(`/api/auth?action=${emailAuthAction}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "same-origin",
@@ -1480,6 +1564,7 @@
           }
           if (data.user) localStorage.setItem("kibangoutv_user", JSON.stringify(data.user));
           unlockApp(email);
+          await confirmPendingTvPair();
         } catch {
           emailError.textContent = "Erreur réseau lors de la connexion.";
         } finally {
@@ -2728,6 +2813,66 @@
               });
             }
             targetContainer.appendChild(refCard);
+          }
+
+          if (!targetContainer.querySelector("#settings-vip-saspay-card")) {
+            const vipCard = document.createElement("div");
+            vipCard.id = "settings-vip-saspay-card";
+            vipCard.className = "s-group kibangou-settings-card";
+            vipCard.setAttribute("data-zone", "v");
+            vipCard.innerHTML = `
+              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Abonnements VIP (Mobile Money SasPay) &amp; Lier une TV</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">Activez l'accès Adulte +18 ou Sans Publicités par Mobile Money, ou liez votre Smart TV avec son code à 6 caractères.</div>
+              <div class="kibangou-adult-links">
+                <button type="button" data-saspay-plan="adult_vip" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">VIP Adulte +18 (2 500 FCFA)</button>
+                <button type="button" data-saspay-plan="no_ads_vip" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:none;cursor:pointer;">Sans Publicités (1 500 FCFA)</button>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;">
+                <input type="text" id="input-link-tv-code" maxlength="8" placeholder="Code affiché sur la TV (ex: A1B2C3)" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-size:0.86rem;flex:1;min-width:160px;">
+                <button type="button" id="btn-link-tv-submit" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Lier la TV</button>
+              </div>
+            `;
+            vipCard.querySelectorAll("[data-saspay-plan]").forEach((btn) => {
+              btn.addEventListener("click", async () => {
+                let uObj = null;
+                try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
+                const email = uObj?.email || "";
+                if (!email) {
+                  showToast("Connectez-vous par e-mail ou Google pour activer un abonnement.");
+                  return;
+                }
+                btn.disabled = true;
+                try {
+                  const res = await fetch("/api/saspay?action=checkout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ plan: btn.getAttribute("data-saspay-plan"), email, name: uObj?.name || email })
+                  });
+                  const data = await res.json().catch(() => ({}));
+                  const d = data.data || data;
+                  if (d.checkout_url) {
+                    location.href = d.checkout_url;
+                  } else {
+                    showToast(data.error?.message || data.error || "Clé SasPay non configurée côté serveur.");
+                  }
+                } finally {
+                  btn.disabled = false;
+                }
+              });
+            });
+            vipCard.querySelector("#btn-link-tv-submit").addEventListener("click", async () => {
+              const code = (vipCard.querySelector("#input-link-tv-code").value || "").trim().toUpperCase();
+              if (!code) return;
+              const r = await fetch("/api/auth?action=tv_pair_confirm", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "same-origin",
+                body: JSON.stringify({ code })
+              });
+              const j = await r.json().catch(() => ({}));
+              showToast(r.ok ? "TV liée à votre compte !" : (j.error || "Code TV invalide."));
+            });
+            targetContainer.appendChild(vipCard);
           }
 
           if (!targetContainer.querySelector("#settings-apps-offline-card")) {
