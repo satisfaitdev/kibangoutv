@@ -15,6 +15,59 @@ export default async function handler(req, res) {
     const parsedUrl = new URL(req.url || "/", "https://kibangoutv.vercel.app");
     const sp = parsedUrl.searchParams;
 
+    if (q.football === "1" || sp.get("football") === "1") {
+      const sportChannels = [];
+      for (const rel of ["kibangou-addon/catalog/live/canal_congo.json", "kibangou-addon/catalog/live/bein.json"]) {
+        try {
+          const p = path.join(process.cwd(), rel);
+          if (!fs.existsSync(p)) continue;
+          const d = JSON.parse(fs.readFileSync(p, "utf8"));
+          const src = rel.includes("bein.json") ? "bein" : "canal_congo";
+          for (const it of d.items || []) {
+            if (it && it.id && it.name) sportChannels.push({ id: it.id, name: it.name, src });
+          }
+        } catch {}
+      }
+      const matchCh = (slug) => {
+        const s = String(slug || "").toLowerCase();
+        let rxList = [/canal\+ sport 1/i, /bein sports 1/i, /dazn 1/i, /canal\+ premi/i];
+        if (s.includes("premier-league") || s.includes("eng.")) rxList = [/canal\+ sport 1/i, /canal\+ sport 2/i, /canal\+ premi/i, /dazn 1/i];
+        else if (s.includes("laliga") || s.includes("esp.")) rxList = [/bein sports 1/i, /bein sports 2/i, /dazn 1/i, /canal\+ sport 3/i];
+        else if (s.includes("ligue-1") || s.includes("fra.")) rxList = [/dazn 1/i, /dazn 2/i, /bein sports 1/i, /canal\+ sport 1/i];
+        else if (s.includes("serie-a") || s.includes("ita.")) rxList = [/dazn 1/i, /bein sports 2/i, /canal\+ sport 4/i];
+        else if (s.includes("bundesliga") || s.includes("ger.")) rxList = [/bein sports 1/i, /bein sports 3/i, /canal\+ sport 5/i];
+        else if (s.includes("caf") || s.includes("africa")) rxList = [/africa sport/i, /canal\+ sport 1/i, /bein sports 1/i, /canal\+ premi/i];
+        const out = [];
+        const seen = new Set();
+        for (const rx of rxList) {
+          const f = sportChannels.find((c) => rx.test(c.name) && !seen.has(c.id));
+          if (f) { seen.add(f.id); out.push(f); }
+        }
+        return out;
+      };
+      const r = await fetch("https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard");
+      const raw = r.ok ? await r.json() : { events: [] };
+      const matches = (raw.events || []).slice(0, 40).map((ev) => {
+        const comp = ev.competitions?.[0] || {};
+        const comps = comp.competitors || [];
+        const home = comps.find((c) => c.homeAway === "home") || comps[0] || {};
+        const away = comps.find((c) => c.homeAway === "away") || comps[1] || {};
+        const slug = ev.season?.slug || "";
+        return {
+          id: ev.id,
+          home: home.team?.shortDisplayName || home.team?.name || "Équipe A",
+          away: away.team?.shortDisplayName || away.team?.name || "Équipe B",
+          homeScore: home.score ?? "0",
+          awayScore: away.score ?? "0",
+          league: slug.replace(/^\d{4}-\d{2}-/, "").replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) || "Football",
+          state: ev.status?.type?.state || "pre",
+          status: ev.status?.type?.shortDetail || ev.status?.type?.description || "",
+          channels: matchCh(slug)
+        };
+      }).sort((a, b) => (a.state === "in" ? 0 : a.state === "pre" ? 1 : 2) - (b.state === "in" ? 0 : b.state === "pre" ? 1 : 2));
+      return res.status(200).json({ ok: true, count: matches.length, matches });
+    }
+
     if (q.stats === "1" || sp.get("stats") === "1") {
       const readCount = (rel) => {
         try {

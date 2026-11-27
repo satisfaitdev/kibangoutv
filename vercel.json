@@ -62,7 +62,7 @@
     },
     {
       "src": "^/api/football/?$",
-      "dest": "/api/football.js"
+      "dest": "/api/catalog.js?football=1"
     },
     {
       "src": "^/api/telemetry/?$",
