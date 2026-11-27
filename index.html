@@ -1742,10 +1742,75 @@
       return `${buildStreamProxyUrl(streamUrl, headers)}&download=1&filename=${encodeURIComponent(filename)}`;
     }
 
+    function isIosBrowser() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    }
+
+    function updateDownloadProgressWidget({ title, pct = 0, detail = "", done = false, error = false, blob = null, filename = "", dlUrl = "" }) {
+      let box = document.getElementById("kibangou-dl-widget");
+      if (!box) {
+        box = document.createElement("div");
+        box.id = "kibangou-dl-widget";
+        const isMobile = window.innerWidth <= 768;
+        box.style.cssText = `position:fixed;${isMobile ? "left:12px;right:12px;bottom:84px;" : "right:24px;bottom:24px;width:340px;"}z-index:99998;background:#151C24;border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:12px 14px;box-shadow:0 16px 40px rgba(0,0,0,0.65);display:flex;flex-direction:column;gap:8px;color:#fff;font-family:inherit;`;
+        document.body.appendChild(box);
+      }
+      const safePct = Math.max(0, Math.min(100, Math.round(pct)));
+      box.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+          <div style="font-size:0.86rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(title || "Téléchargement")}</div>
+          <button type="button" id="dl-widget-close" style="background:none;border:none;color:#94A3B8;font-size:15px;cursor:pointer;padding:0 4px;">✕</button>
+        </div>
+        <div style="width:100%;height:7px;border-radius:99px;background:rgba(255,255,255,0.1);overflow:hidden;">
+          <div style="width:${safePct}%;height:100%;background:${error ? "#EF4444" : "#00C853"};transition:width 0.2s ease;"></div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.76rem;color:#94A3B8;">
+          <span>${escapeHtml(detail || (done ? "Téléchargement terminé" : "En cours..."))}</span>
+          <strong style="color:${error ? "#EF4444" : "#00C853"};">${safePct}%</strong>
+        </div>
+        ${done ? `
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;">
+            <button type="button" id="dl-widget-offline" style="flex:1;padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-size:0.78rem;font-weight:600;cursor:pointer;">▶ Hors-ligne</button>
+            ${(blob || dlUrl) ? `<button type="button" id="dl-widget-save" style="flex:1;padding:7px 10px;border-radius:8px;border:none;background:#00C853;color:#07120B;font-size:0.78rem;font-weight:700;cursor:pointer;">⬇ Enregistrer</button>` : ""}
+          </div>
+        ` : ""}
+      `;
+      box.querySelector("#dl-widget-close").addEventListener("click", () => box.remove());
+      const offBtn = box.querySelector("#dl-widget-offline");
+      if (offBtn) offBtn.addEventListener("click", () => { box.remove(); openOfflineModal(); });
+      const saveBtn = box.querySelector("#dl-widget-save");
+      if (saveBtn) {
+        saveBtn.addEventListener("click", async () => {
+          if (blob && isIosBrowser() && navigator.canShare) {
+            try {
+              const file = new File([blob], filename || "video.mp4", { type: blob.type || "video/mp4" });
+              if (navigator.canShare({ files: [file] })) {
+                await navigator.share({ files: [file], title: title || "KibangouTV" });
+                return;
+              }
+            } catch {}
+          }
+          if (blob) {
+            const bUrl = URL.createObjectURL(blob);
+            triggerDownloadUrl(bUrl, filename || "video.mp4");
+            setTimeout(() => URL.revokeObjectURL(bUrl), 60000);
+          } else if (dlUrl) {
+            triggerDownloadUrl(dlUrl, filename || "video.mp4");
+          }
+        });
+      }
+    }
+
     function triggerDownloadUrl(dlUrl, filename) {
       if (window.KibangouAndroid && typeof window.KibangouAndroid.downloadUrl === "function" && !dlUrl.startsWith("blob:")) {
         window.KibangouAndroid.downloadUrl(dlUrl, filename || "video.mp4");
         showToast(`Téléchargement sur l'appareil : ${filename}`);
+        return;
+      }
+      if (isIosBrowser() && !dlUrl.startsWith("blob:")) {
+        // Safari iOS bloque souvent a.click() après un await ; location.assign déclenche le gestionnaire natif Safari via Content-Disposition: attachment.
+        window.location.assign(dlUrl);
+        showToast(`Téléchargement lancé dans Safari : ${filename}`);
         return;
       }
       const a = document.createElement("a");
@@ -1828,18 +1893,30 @@
           if (!sr.ok) throw new Error("Segment failed");
           chunks[idx] = await sr.arrayBuffer();
           completed++;
-          if (completed === 1 || completed % 25 === 0 || completed === segUrls.length) {
-            const pct = Math.round((completed / segUrls.length) * 100);
-            showToast(`Téléchargement vidéo : ${pct}%`);
-          }
+          const pct = Math.round((completed / segUrls.length) * 100);
+          updateDownloadProgressWidget({
+            title,
+            pct,
+            detail: `${completed} / ${segUrls.length} segments`
+          });
         }
       }
 
+      updateDownloadProgressWidget({ title, pct: 0, detail: `0 / ${segUrls.length} segments` });
       await Promise.all(Array.from({ length: Math.min(concurrency, segUrls.length) }, worker));
       const ext = isFmp4 ? "mp4" : "ts";
       const outName = `${base}.${ext}`;
       const blob = new Blob(chunks, { type: isFmp4 ? "video/mp4" : "video/mp2t" });
       try { await saveOfflineVideo({ id: base, title, mime: blob.type, blob, size: blob.size, ts: Date.now() }); } catch {}
+      const sizeMb = (blob.size / (1024 * 1024)).toFixed(1);
+      updateDownloadProgressWidget({
+        title,
+        pct: 100,
+        detail: `Prêt (${sizeMb} Mo) — enregistré hors-ligne`,
+        done: true,
+        blob,
+        filename: outName
+      });
       if (window.KibangouAndroid && typeof window.KibangouAndroid.saveBase64 === "function") {
         try {
           const reader = new FileReader();
@@ -1852,9 +1929,11 @@
           return true;
         } catch {}
       }
-      const blobUrl = URL.createObjectURL(blob);
-      triggerDownloadUrl(blobUrl, outName);
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+      if (!isIosBrowser()) {
+        const blobUrl = URL.createObjectURL(blob);
+        triggerDownloadUrl(blobUrl, outName);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+      }
       return true;
     }
 
@@ -1969,7 +2048,16 @@
         }
       } catch {}
       const filename = sanitizeFilename(title, resolved.url);
-      triggerDownloadUrl(buildStreamDownloadUrl(resolved.url, resolved.headers, filename), filename);
+      const finalDlUrl = buildStreamDownloadUrl(resolved.url, resolved.headers, filename);
+      updateDownloadProgressWidget({
+        title,
+        pct: 100,
+        detail: isIosBrowser() ? "Appuyez sur Enregistrer si Safari ne démarre pas" : "Téléchargement lancé dans le navigateur",
+        done: true,
+        dlUrl: finalDlUrl,
+        filename
+      });
+      triggerDownloadUrl(finalDlUrl, filename);
       return true;
     }
 
