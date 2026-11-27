@@ -1443,6 +1443,28 @@
             const j = await r.json();
             if (j.authenticated && j.user) {
               localStorage.setItem("kibangoutv_user", JSON.stringify(j.user));
+              const pendingPid = localStorage.getItem("kibangoutv_pending_pid");
+              if (pendingPid) {
+                try {
+                  const vr = await fetch(`/api/saspay?action=verify&payment_id=${encodeURIComponent(pendingPid)}`);
+                  const vj = vr.ok ? await vr.json().catch(() => ({})) : {};
+                  if (vj.status === "SUCCESS") {
+                    localStorage.removeItem("kibangoutv_pending_pid");
+                    const me2 = await (await fetch("/api/auth?action=me", { credentials: "same-origin" })).json();
+                    if (me2.authenticated && me2.user) localStorage.setItem("kibangoutv_user", JSON.stringify(me2.user));
+                  }
+                } catch {}
+              }
+              if (!(j.user.noAdsVipUntil > Date.now() || j.user.adultVipUntil > Date.now()) && j.user.email) {
+                try {
+                  const sr = await fetch(`/api/saspay?action=sync_user&email=${encodeURIComponent(j.user.email)}`);
+                  const sj = sr.ok ? await sr.json().catch(() => ({})) : {};
+                  if (sj.synced > 0) {
+                    const me2 = await (await fetch("/api/auth?action=me", { credentials: "same-origin" })).json();
+                    if (me2.authenticated && me2.user) localStorage.setItem("kibangoutv_user", JSON.stringify(me2.user));
+                  }
+                } catch {}
+              }
               unlockApp(j.user.email);
               await confirmPendingTvPair();
               if (sp.has("auth_success") || sp.has("tv_pair")) {
@@ -2965,6 +2987,15 @@
           }
 
           if (!targetContainer.querySelector("#settings-vip-saspay-card")) {
+            let uVip = null;
+            try { uVip = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
+            const nowTs = Date.now();
+            const hasNoAds = Number(uVip?.noAdsVipUntil || 0) > nowTs;
+            const hasAdult = Number(uVip?.adultVipUntil || 0) > nowTs;
+            const vipParts = [];
+            if (hasNoAds) vipParts.push(`Sans Pubs actif jusqu'au ${new Date(uVip.noAdsVipUntil).toLocaleString("fr-FR")}`);
+            if (hasAdult) vipParts.push(`Adulte +18 actif jusqu'au ${new Date(uVip.adultVipUntil).toLocaleString("fr-FR")}`);
+            const vipSubText = vipParts.length ? vipParts.join(" · ") : "Sans Publicités dès 200 FCFA ou Adulte +18.";
             const vipCard = document.createElement("div");
             vipCard.id = "settings-vip-saspay-card";
             vipCard.className = "s-group";
@@ -2975,9 +3006,9 @@
                 <span class="s-group-title">Abonnements VIP &amp; TV</span>
               </div>
               <div class="kibangou-s-row">
-                <div class="s-label">Offres VIP<span class="s-sub">Sans Publicités dès 200 FCFA ou Adulte +18.</span></div>
+                <div class="s-label">${vipParts.length ? "Abonnement VIP Actif" : "Offres VIP"}<span class="s-sub" style="${vipParts.length ? "color:#00C853;" : ""}">${escapeHtml(vipSubText)}</span></div>
                 <div class="kibangou-adult-links">
-                  <button type="button" id="btn-open-plans-modal" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Voir les offres VIP →</button>
+                  <button type="button" id="btn-open-plans-modal" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">${vipParts.length ? "Prolonger / Gérer →" : "Voir les offres VIP →"}</button>
                 </div>
               </div>
               <div class="kibangou-s-row">
@@ -3607,6 +3638,9 @@
             return;
           }
           const pid = d.id || d.payment_id;
+          if (pid) {
+            try { localStorage.setItem("kibangoutv_pending_pid", String(pid)); } catch {}
+          }
           statusEl.style.color = "#4ADE80";
           statusEl.textContent = "Validez le paiement sur votre téléphone (code PIN Mobile Money)...";
           if (pid) {
@@ -3624,6 +3658,7 @@
               const vj = await vr.json().catch(() => ({}));
               if (vj.status === "SUCCESS") {
                 clearInterval(poll);
+                try { localStorage.removeItem("kibangoutv_pending_pid"); } catch {}
                 statusEl.style.color = "#4ADE80";
                 statusEl.textContent = "Paiement confirmé ! Abonnement activé.";
                 try {
@@ -3633,6 +3668,7 @@
                 setTimeout(() => location.reload(), 1200);
               } else if (vj.status === "FAILED") {
                 clearInterval(poll);
+                try { localStorage.removeItem("kibangoutv_pending_pid"); } catch {}
                 statusEl.style.color = "#EF4444";
                 statusEl.textContent = "Paiement refusé ou annulé.";
               }

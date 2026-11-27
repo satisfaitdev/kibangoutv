@@ -3,6 +3,8 @@ import { storeGet, storeSet } from "./_store.js";
 import { buildCorsHeaders, checkRateLimit } from "./_security.js";
 
 const SASPAY_BASE = "https://api.saspay.me/api/v1";
+const SUCCESS_STATUSES = new Set(["SUCCESS", "SUCCESSFUL", "COMPLETED", "PAID", "SUCCEEDED", "CONFIRMED"]);
+const FAILED_STATUSES = new Set(["FAILED", "CANCELLED", "CANCELED", "EXPIRED", "REJECTED", "DECLINED"]);
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "https://kibangoutv.vercel.app",
@@ -147,11 +149,34 @@ export async function GET(request) {
       return Response.json(r.data, { status: r.status, headers: CORS_HEADERS });
     }
     const payload = r.data?.data || r.data || {};
-    const status = String(payload.status || "").toUpperCase();
+    const rawStatus = String(payload.status || payload.state || "").toUpperCase();
+    const status = SUCCESS_STATUSES.has(rawStatus) ? "SUCCESS" : (FAILED_STATUSES.has(rawStatus) ? "FAILED" : rawStatus);
     if (status === "SUCCESS") {
       await deliverPlanOnce(paymentId, payload.metadata || {}, payload.net_amount || payload.charged || payload.amount, payload.currency);
     }
-    return Response.json({ ok: true, status, payment: payload }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+    return Response.json({ ok: true, status, rawStatus, payment: payload }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+  }
+
+  if (action === "sync_user") {
+    const email = (url.searchParams.get("email") || "").trim().toLowerCase();
+    if (!email) {
+      return Response.json({ error: "email requis." }, { status: 400, headers: CORS_HEADERS });
+    }
+    const r = await saspayFetch("/payments/?limit=30");
+    if (!r.ok) {
+      return Response.json({ ok: false, synced: 0 }, { status: 200, headers: CORS_HEADERS });
+    }
+    const list = Array.isArray(r.data?.data) ? r.data.data : (Array.isArray(r.data?.results) ? r.data.results : (Array.isArray(r.data) ? r.data : []));
+    let synced = 0;
+    for (const p of list) {
+      const pStatus = String(p?.status || p?.state || "").toUpperCase();
+      const pEmail = String(p?.metadata?.email || p?.customer?.email || p?.customer_email || "").trim().toLowerCase();
+      if (p?.id && pEmail === email && SUCCESS_STATUSES.has(pStatus)) {
+        const resDel = await deliverPlanOnce(String(p.id), p.metadata || { email }, p.net_amount || p.charged || p.amount, p.currency);
+        if (resDel.delivered && !resDel.alreadyDelivered) synced++;
+      }
+    }
+    return Response.json({ ok: true, synced }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
   }
 
   return Response.json({ error: "Unknown action" }, { status: 400, headers: CORS_HEADERS });
@@ -172,7 +197,9 @@ export async function POST(request) {
     }
 
     const evt = JSON.parse(rawBody || "{}");
-    if (evt.event === "transaction.success" && evt.data?.id) {
+    const evtName = String(evt.event || "").toLowerCase();
+    const evtStatus = String(evt.data?.status || "").toUpperCase();
+    if ((evtName.includes("success") || evtName.includes("completed") || SUCCESS_STATUSES.has(evtStatus)) && evt.data?.id) {
       await deliverPlanOnce(
         String(evt.data.id),
         evt.data.metadata || {},
