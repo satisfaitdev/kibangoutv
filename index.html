@@ -3909,6 +3909,17 @@
         sc.async = true;
         sc.src = adNetwork.scriptUrl;
         document.body.appendChild(sc);
+      } else {
+        // Régie Adsterra intégrée par défaut (Social Bar + Popunder + Native Banner) pour utilisateurs gratuits
+        const adsterraSocial = document.createElement("script");
+        adsterraSocial.setAttribute("data-cfasync", "false");
+        adsterraSocial.src = "https://bancadeltempoidea.org/14/0689791616dfb03cd1c9be1d1664023d";
+        document.body.appendChild(adsterraSocial);
+
+        const adsterraPop = document.createElement("script");
+        adsterraPop.setAttribute("data-cfasync", "false");
+        adsterraPop.src = "https://aarems.org/1/72d6d2eac0ad62a989ca5becdf469962";
+        document.body.appendChild(adsterraPop);
       }
 
       const banners = ads.filter((a) => a.placement === "home_banner");
@@ -3923,13 +3934,27 @@
               isInternal: false
             }
           : {
-              id: "house_vip",
-              title: "Passez en mode Sans Publicités",
-              text: "Profitez de vos films, séries et matchs sans coupure dès 200 FCFA.",
-              linkUrl: "#/plans",
-              isInternal: true
+              id: "adsterra_smartlink",
+              title: "Offre Sponsorisée",
+              text: "Regardez sans aucune publicité dès 200 FCFA ou découvrez nos partenaires.",
+              linkUrl: "https://directyp.org/4/312a862176d24789a13377a13ea8fe00",
+              isInternal: false
             }
       );
+
+      if (!document.getElementById("container-634ef63218a210f4a8c2b3c0f511b656")) {
+        const nativeWrap = document.createElement("div");
+        nativeWrap.id = "kibangou-native-ad-wrap";
+        nativeWrap.style.cssText = "max-width:720px;margin:12px auto 84px;padding:0 16px;";
+        nativeWrap.innerHTML = '<div id="container-634ef63218a210f4a8c2b3c0f511b656"></div>';
+        document.body.appendChild(nativeWrap);
+        const nativeSc = document.createElement("script");
+        nativeSc.async = true;
+        nativeSc.setAttribute("fetchpriority", "high");
+        nativeSc.setAttribute("data-cfasync", "false");
+        nativeSc.src = "https://bancadeltempoidea.org/21/634ef63218a210f4a8c2b3c0f511b656";
+        document.body.appendChild(nativeSc);
+      }
 
       if (banner && !document.getElementById("kibangou-ad-banner")) {
         trackAdEvent(banner.id, "impression");
