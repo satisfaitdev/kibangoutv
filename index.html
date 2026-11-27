@@ -246,7 +246,8 @@
       width: 30px;
       height: 30px;
       border-radius: 8px;
-      filter: drop-shadow(0 2px 8px rgba(0, 200, 83, 0.55));
+      transform: perspective(360px) rotateX(8deg) rotateY(-8deg);
+      filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.72));
       flex-shrink: 0;
     }
 
@@ -480,6 +481,30 @@
         background: rgba(255, 255, 255, 0.08) !important;
         border-color: rgba(255, 255, 255, 0.16) !important;
       }
+
+      /* Tous les popups en Bottom Sheet sur mobile */
+      .modal-overlay,
+      .modal-backdrop,
+      #kibangou-offline-modal,
+      #kibangou-plans-modal {
+        align-items: flex-end !important;
+        justify-content: center !important;
+        padding: 0 !important;
+      }
+
+      .modal-overlay > div,
+      .modal-backdrop > div,
+      .modal-sources,
+      .modal-dialog,
+      #kibangou-offline-modal > div,
+      #kibangou-plans-modal > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 22px 22px 0 0 !important;
+        max-height: 86vh !important;
+        padding-bottom: max(20px, env(safe-area-inset-bottom)) !important;
+      }
     }
 
     /* Profil / Paramètres cartes propres sans doublon */
@@ -615,7 +640,8 @@
       width: 68px;
       height: 68px;
       margin-bottom: 14px;
-      filter: drop-shadow(0 6px 18px rgba(0, 200, 83, 0.4));
+      transform: perspective(360px) rotateX(8deg) rotateY(-8deg);
+      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.75));
     }
 
     .auth-brand {
@@ -1295,7 +1321,7 @@
   <div id="app">
     <!-- Écran de démarrage KibangouTV -->
     <div style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#0E1318;color:#FFFFFF;font-family:system-ui,-apple-system,sans-serif">
-      <img src="./logo.svg" alt="KibangouTV" width="84" height="84" style="filter:drop-shadow(0 4px 14px rgba(0,200,83,0.45))">
+      <img src="./logo.svg" alt="KibangouTV" width="84" height="84" style="transform:perspective(360px) rotateX(8deg) rotateY(-8deg);filter:drop-shadow(0 6px 8px rgba(0,0,0,0.75))">
       <div style="font-size:24px;font-weight:700;letter-spacing:0.5px;color:#FFFFFF">Kibangou<span style="color:#00C853">TV</span></div>
       <div style="font-size:13px;color:#8E99A4">Canal+, beIN Sports, Télé Congo, Films & Séries...</div>
       <div style="width:26px;height:26px;border-radius:50%;border:3px solid rgba(255,255,255,.1);border-top-color:#00C853;animation:boot-spin .8s linear infinite;margin-top:8px"></div>
@@ -2682,12 +2708,25 @@
         }
       }
 
+      let profilePic = "";
+      try { profilePic = JSON.parse(localStorage.getItem("kibangoutv_user") || "null")?.picture || ""; } catch {}
+      const avatarHtml = profilePic
+        ? `<img src="${escapeHtml(profilePic)}" alt="Profil" style="width:22px;height:22px;border-radius:50%;object-fit:cover;flex-shrink:0;">`
+        : SVG_USER_PROFILE;
+
+      const mSettingsBtn = document.getElementById("m-btn-settings");
+      if (mSettingsBtn && mSettingsBtn.dataset.avatarPic !== profilePic) {
+        mSettingsBtn.dataset.avatarPic = profilePic;
+        mSettingsBtn.innerHTML = avatarHtml;
+      }
+
       document.querySelectorAll('.sidebar a[href="#/settings"], .sidebar-bottom a[href="#/settings"]').forEach(link => {
-        if (link.dataset.profileReady !== "1") {
+        if (link.dataset.profileReady !== "1" || link.dataset.avatarPic !== profilePic) {
           link.dataset.profileReady = "1";
+          link.dataset.avatarPic = profilePic;
           link.title = "Profil";
           link.setAttribute("aria-label", "Profil");
-          link.innerHTML = `${SVG_USER_PROFILE}<span>Profil</span>`;
+          link.innerHTML = `${avatarHtml}<span>Profil</span>`;
         }
       });
 
@@ -2762,22 +2801,16 @@
             adultCard.id = "settings-pro-adult-card";
             adultCard.className = "s-group kibangou-settings-card";
             adultCard.setAttribute("data-zone", "v");
-            adultCard.style.background = "rgba(0, 200, 83, 0.06)";
-            adultCard.style.borderColor = "rgba(0, 200, 83, 0.28)";
             adultCard.innerHTML = `
               <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-                <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem; display:flex; align-items:center; gap:8px;">
-                  <span>🔞 Espace Adulte +18</span>
-                </div>
-                <span style="font-size:0.72rem; background:#00C853; color:#0E1318; padding:3px 10px; border-radius:12px; font-weight:800; text-transform:uppercase;">Actif</span>
+                <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Espace Adulte +18</div>
+                <span style="font-size:0.74rem; color:#8E99A4;">+18</span>
               </div>
-              <div style="font-size:0.84rem; color:#8E99A4;">${routes.liveHref ? "Accès direct sans code PIN aux chaînes et films adultes +18." : "Accès direct sans code PIN aux films et séries adultes +18."}</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">${routes.liveHref ? "Accès direct aux chaînes et films adultes +18." : "Accès direct aux films et séries adultes +18."}</div>
               <div class="kibangou-adult-links">
-                ${routes.liveHref ? `<a href="${escapeHtml(routes.liveHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Chaînes Adultes +18 →</a>` : ""}
-                <a href="${escapeHtml(routes.videoHref)}" class="kibangou-adult-link kibangou-adult-link-primary">
-                  Films Adultes +18 →
-                </a>
-                ${routes.seriesHref ? `<a href="${escapeHtml(routes.seriesHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Séries Adultes +18 →</a>` : ""}
+                ${routes.liveHref ? `<a href="${escapeHtml(routes.liveHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Chaînes +18 →</a>` : ""}
+                <a href="${escapeHtml(routes.videoHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Films +18 →</a>
+                ${routes.seriesHref ? `<a href="${escapeHtml(routes.seriesHref)}" class="kibangou-adult-link kibangou-adult-link-secondary">Séries +18 →</a>` : ""}
               </div>
             `;
             targetContainer.appendChild(adultCard);
@@ -2798,13 +2831,13 @@
             refCard.setAttribute("data-zone", "v");
             refCard.innerHTML = `
               <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                <div style="font-weight:700;color:#FFFFFF;font-size:1.02rem;">Parrainage &amp; Mode Sans-Pubs</div>
-                <span style="font-size:0.74rem;padding:3px 10px;border-radius:12px;font-weight:700;background:${adFree ? "rgba(0,200,83,0.2)" : "rgba(255,255,255,0.08)"};color:${adFree ? "#4ADE80" : "#CBD5E1"};">${adFree ? "Sans Pubs Actif" : `${uObj?.referralCount || 0} parrainage(s)`}</span>
+                <div style="font-weight:600;color:#FFFFFF;font-size:0.98rem;">Parrainage &amp; Mode Sans-Pubs</div>
+                <span style="font-size:0.78rem;color:#8E99A4;">${adFree ? "Sans Pubs Actif" : `${uObj?.referralCount || 0} invité(s)`}</span>
               </div>
               <div style="font-size:0.84rem;color:#8E99A4;">${escapeHtml(adFreeTxt)}</div>
               <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
                 <code style="padding:7px 10px;border-radius:8px;background:rgba(255,255,255,0.06);color:#fff;font-size:0.84rem;">${escapeHtml(refCode)}</code>
-                ${refUrl ? `<button type="button" id="btn-copy-ref-link" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Copier mon lien d'invitation</button>` : ""}
+                ${refUrl ? `<button type="button" id="btn-copy-ref-link" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Copier mon lien d'invitation</button>` : ""}
               </div>
             `;
             if (refUrl) {
@@ -2821,67 +2854,17 @@
             vipCard.className = "s-group kibangou-settings-card";
             vipCard.setAttribute("data-zone", "v");
             vipCard.innerHTML = `
-              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Abonnements VIP (Mobile Money SasPay) &amp; Lier une TV</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Supprimez les publicités dès 50 FCFA/jour et ajoutez l'accès Adulte +18 (1 000 FCFA/mois) si souhaité.</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:4px;">
-                <select id="saspay-plan-select" style="flex:1;min-width:210px;padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:#151C24;color:#fff;font-size:0.88rem;">
-                  <option value="no_ads_1d">Sans Pubs · 1 jour (50 FCFA)</option>
-                  <option value="no_ads_3d">Sans Pubs · 3 jours (125 FCFA)</option>
-                  <option value="no_ads_7d">Sans Pubs · 1 semaine (300 FCFA)</option>
-                  <option value="no_ads_1m">Sans Pubs · 1 mois (1 200 FCFA)</option>
-                  <option value="no_ads_3m">Sans Pubs · 3 mois (3 500 FCFA)</option>
-                  <option value="no_ads_6m">Sans Pubs · 6 mois (6 500 FCFA)</option>
-                  <option value="no_ads_1y">Sans Pubs · 1 an (10 000 FCFA)</option>
-                  <option value="adult_1m">Adulte +18 seul · 1 mois (1 000 FCFA)</option>
-                </select>
-                <button type="button" id="btn-saspay-pay" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Payer via SasPay</button>
+              <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Abonnements VIP &amp; Lier une TV</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">Choisissez une formule Sans Publicités (dès 50 FCFA) ou Adulte +18, ou liez votre Smart TV.</div>
+              <div class="kibangou-adult-links">
+                <button type="button" id="btn-open-plans-modal" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Voir les offres VIP →</button>
               </div>
-              <label id="saspay-adult-combo-wrap" style="display:flex;align-items:center;gap:8px;font-size:0.84rem;color:#CBD5E1;cursor:pointer;margin-top:4px;">
-                <input type="checkbox" id="saspay-include-adult" style="width:16px;height:16px;accent-color:#00C853;">
-                <span>Ajouter l'abonnement Chaînes &amp; Films Adultes +18 (+1 000 FCFA / 30 jours)</span>
-              </label>
-              <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+              <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;">
                 <input type="text" id="input-link-tv-code" maxlength="8" placeholder="Code affiché sur la TV (ex: A1B2C3)" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);color:#fff;font-size:0.86rem;flex:1;min-width:160px;">
-                <button type="button" id="btn-link-tv-submit" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:none;cursor:pointer;">Lier la TV</button>
+                <button type="button" id="btn-link-tv-submit" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Lier la TV</button>
               </div>
             `;
-            const planSelect = vipCard.querySelector("#saspay-plan-select");
-            const comboWrap = vipCard.querySelector("#saspay-adult-combo-wrap");
-            planSelect.addEventListener("change", () => {
-              comboWrap.style.display = planSelect.value === "adult_1m" ? "none" : "flex";
-            });
-            vipCard.querySelector("#btn-saspay-pay").addEventListener("click", async () => {
-              const btn = vipCard.querySelector("#btn-saspay-pay");
-              let uObj = null;
-              try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
-              const email = uObj?.email || "";
-              if (!email) {
-                showToast("Connectez-vous par e-mail ou Google pour activer un abonnement.");
-                return;
-              }
-              btn.disabled = true;
-              try {
-                const res = await fetch("/api/saspay?action=checkout", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    plan: planSelect.value,
-                    includeAdult: vipCard.querySelector("#saspay-include-adult").checked,
-                    email,
-                    name: uObj?.name || email
-                  })
-                });
-                const data = await res.json().catch(() => ({}));
-                const d = data.data || data;
-                if (d.checkout_url) {
-                  location.href = d.checkout_url;
-                } else {
-                  showToast(data.error?.message || data.error || "Clé SasPay non configurée côté serveur.");
-                }
-              } finally {
-                btn.disabled = false;
-              }
-            });
+            vipCard.querySelector("#btn-open-plans-modal").addEventListener("click", openPlansModal);
             vipCard.querySelector("#btn-link-tv-submit").addEventListener("click", async () => {
               const code = (vipCard.querySelector("#input-link-tv-code").value || "").trim().toUpperCase();
               if (!code) return;
@@ -2903,10 +2886,10 @@
             appsCard.className = "s-group kibangou-settings-card";
             appsCard.setAttribute("data-zone", "v");
             appsCard.innerHTML = `
-              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Hors-ligne &amp; Applications</div>
-              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos enregistrées sans connexion ou téléchargez les apps Mobile, PC (.exe), Mac &amp; TV.</div>
+              <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Hors-ligne &amp; Applications</div>
+              <div style="font-size:0.84rem; color:#8E99A4;">Retrouvez vos vidéos enregistrées sans connexion ou téléchargez les apps Mobile, PC, Mac &amp; TV.</div>
               <div class="kibangou-adult-links">
-                <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-primary" style="border:none;cursor:pointer;">Vidéos hors-ligne (PWA)</button>
+                <button type="button" id="btn-open-offline-videos" class="kibangou-adult-link kibangou-adult-link-secondary" style="border:1px solid rgba(255,255,255,0.12);cursor:pointer;">Vidéos hors-ligne (PWA)</button>
                 <a href="/download" class="kibangou-adult-link kibangou-adult-link-secondary">Apps Mobile, PC, Mac &amp; TV →</a>
               </div>
             `;
@@ -2919,20 +2902,18 @@
             try {
               const u = JSON.parse(localStorage.getItem("kibangoutv_user") || "null");
               if (u && u.email) {
-                userLabel = `Connecté en tant que ${u.name || u.email} (${u.email}${u.provider === "google" ? " · Google" : ""}).`;
+                userLabel = `Connecté : ${u.name || u.email} (${u.email})`;
               }
             } catch {}
             const card = document.createElement("div");
             card.id = "settings-logout-card";
             card.className = "s-group kibangou-settings-card";
             card.setAttribute("data-zone", "v");
-            card.style.background = "rgba(248, 113, 113, 0.08)";
-            card.style.borderColor = "rgba(248, 113, 113, 0.25)";
             card.innerHTML = `
-              <div style="font-weight:700; color:#FFFFFF; font-size:1.02rem;">Compte & Session KibangouTV</div>
+              <div style="font-weight:600; color:#FFFFFF; font-size:0.98rem;">Compte &amp; Session</div>
               <div style="font-size:0.84rem; color:#8E99A4;">${escapeHtml(userLabel)}</div>
-              <button type="button" id="btn-settings-logout-action" style="margin-top:4px; height:42px; width:fit-content; padding:0 20px; border-radius:10px; border:none; background:#E5484D; color:#FFFFFF; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <button type="button" id="btn-settings-logout-action" class="kibangou-adult-link kibangou-adult-link-secondary" style="margin-top:4px; width:fit-content; border:1px solid rgba(255,255,255,0.12); cursor:pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 Se déconnecter
               </button>
             `;
@@ -2952,16 +2933,90 @@
       updateActiveNav();
     }
 
+    function openPlansModal() {
+      const existing = document.getElementById("kibangou-plans-modal");
+      if (existing) existing.remove();
+      const plans = [
+        { id: "no_ads_1d", title: "1 Jour Sans Pubs", price: "50 FCFA", desc: "24 heures sans publicité" },
+        { id: "no_ads_3d", title: "3 Jours Sans Pubs", price: "125 FCFA", desc: "Week-end sans coupures" },
+        { id: "no_ads_7d", title: "1 Semaine Sans Pubs", price: "300 FCFA", desc: "7 jours complets sans pubs" },
+        { id: "no_ads_1m", title: "1 Mois Sans Pubs", price: "1 200 FCFA", desc: "Formule mensuelle standard", badge: "Populaire" },
+        { id: "no_ads_3m", title: "3 Mois Sans Pubs", price: "3 500 FCFA", desc: "Trimestre économique" },
+        { id: "no_ads_6m", title: "6 Mois Sans Pubs", price: "6 500 FCFA", desc: "Semestre avantageux" },
+        { id: "no_ads_1y", title: "1 An Sans Pubs", price: "10 000 FCFA", desc: "Économie maximale annuelle", badge: "Meilleure offre" },
+        { id: "adult_1m", title: "Adulte +18 (1 Mois)", price: "1 000 FCFA", desc: "Chaînes & Films Adultes +18", isAdult: true }
+      ];
+      const modal = document.createElement("div");
+      modal.id = "kibangou-plans-modal";
+      modal.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(10,13,18,0.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;";
+      modal.innerHTML = `
+        <div style="width:100%;max-width:560px;background:#151C24;border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:86vh;overflow-y:auto;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <strong style="color:#fff;font-size:1.08rem;">Formules VIP KibangouTV</strong>
+            <button type="button" id="plans-modal-close" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;">✕</button>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.86rem;color:#E2E8F0;cursor:pointer;">
+            <input type="checkbox" id="plans-include-adult" style="width:16px;height:16px;accent-color:#00C853;">
+            <span>Ajouter l'accès Adulte +18 (+1 000 FCFA / 30 jours) à mon abonnement Sans Pubs</span>
+          </label>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
+            ${plans.map((p) => `
+              <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
+                    <strong style="color:#fff;font-size:0.94rem;">${p.title}</strong>
+                    ${p.badge ? `<span style="font-size:0.68rem;padding:2px 7px;border-radius:99px;background:rgba(0,200,83,0.18);color:#4ADE80;font-weight:700;">${p.badge}</span>` : ""}
+                  </div>
+                  <div style="font-size:1.15rem;font-weight:800;color:#00C853;margin:4px 0;">${p.price}</div>
+                  <div style="font-size:0.78rem;color:#94A3B8;">${p.desc}</div>
+                </div>
+                <button type="button" data-choose-plan="${p.id}" style="width:100%;padding:8px 12px;border-radius:8px;border:none;background:#00C853;color:#07120B;font-weight:700;cursor:pointer;">Choisir</button>
+              </div>
+            `).join("")}
+          </div>
+        </div>`;
+      document.body.appendChild(modal);
+      modal.querySelector("#plans-modal-close").addEventListener("click", () => modal.remove());
+      modal.addEventListener("click", (ev) => { if (ev.target === modal) modal.remove(); });
+      modal.querySelectorAll("[data-choose-plan]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          let uObj = null;
+          try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
+          const email = uObj?.email || "";
+          if (!email) { showToast("Connectez-vous par e-mail ou Google pour activer un abonnement."); return; }
+          btn.disabled = true;
+          try {
+            const res = await fetch("/api/saspay?action=checkout", {
+              method: "POST", headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                plan: btn.getAttribute("data-choose-plan"),
+                includeAdult: modal.querySelector("#plans-include-adult").checked,
+                email, name: uObj?.name || email
+              })
+            });
+            const data = await res.json().catch(() => ({}));
+            const d = data.data || data;
+            if (d.checkout_url) location.href = d.checkout_url;
+            else showToast(data.error?.message || data.error || "Paiement indisponible.");
+          } finally { btn.disabled = false; }
+        });
+      });
+    }
+
     function updateActiveNav() {
       const hash = location.hash || "#/";
       const isHome = hash === "#/" || hash === "" || hash.startsWith("#/?");
-      document.body.classList.toggle("is-home", isHome);
-
-      const mBack = document.getElementById("m-btn-back");
-      if (mBack) mBack.setAttribute("aria-hidden", isHome ? "true" : "false");
-
       const isSearch = hash.startsWith("#/search");
       const isSettings = hash.startsWith("#/settings");
+      const isFilm = hash.includes("video/movie");
+      const isSeries = hash.includes("series/series");
+      const isTopNavPage = isHome || hash.startsWith("#/library") || hash.startsWith("#/channels") || isFilm || isSeries || isSearch || isSettings;
+
+      document.body.classList.toggle("is-home", isTopNavPage);
+
+      const mBack = document.getElementById("m-btn-back");
+      if (mBack) mBack.setAttribute("aria-hidden", isTopNavPage ? "true" : "false");
+
       const mSearch = document.getElementById("m-btn-search");
       const mSettings = document.getElementById("m-btn-settings");
       if (mSearch) mSearch.classList.toggle("active", isSearch);
@@ -2972,16 +3027,18 @@
       const bnavFilms = document.getElementById("bnav-films");
       const bnavSeries = document.getElementById("bnav-series");
 
-      const isFilm = hash.includes("video/movie");
-      const isSeries = hash.includes("series/series");
-
       if (navFilms) navFilms.classList.toggle("active", isFilm);
       if (bnavFilms) bnavFilms.classList.toggle("active", isFilm);
 
       if (navSeries) navSeries.classList.toggle("active", isSeries);
       if (bnavSeries) bnavSeries.classList.toggle("active", isSeries);
 
-      if (isFilm || isSeries) {
+      if (isHome) {
+        document.querySelectorAll(".sidebar-nav .nav-item, .bnav .bnav-item").forEach(el => {
+          const h = el.getAttribute("href") || "";
+          el.classList.toggle("active", h === "#/" || h === "");
+        });
+      } else if (isFilm || isSeries) {
         document.querySelectorAll('.sidebar-nav .nav-item:not(#nav-films):not(#nav-series)').forEach(el => el.classList.remove("active"));
         document.querySelectorAll('.bnav .bnav-item:not(#bnav-films):not(#bnav-series)').forEach(el => el.classList.remove("active"));
       }
