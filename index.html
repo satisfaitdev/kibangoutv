@@ -2791,7 +2791,7 @@
         fbTab.addEventListener("click", (ev) => {
           ev.preventDefault();
           ev.stopPropagation();
-          openFootballModal();
+          location.hash = "#/football";
         });
         tabStrip.appendChild(fbTab);
       }
@@ -2923,7 +2923,7 @@
                 </div>
               </div>
             `;
-            vipCard.querySelector("#btn-open-plans-modal").addEventListener("click", openPlansModal);
+            vipCard.querySelector("#btn-open-plans-modal").addEventListener("click", () => { location.hash = "#/plans"; });
             vipCard.querySelector("#btn-link-tv-submit").addEventListener("click", async () => {
               const code = (vipCard.querySelector("#input-link-tv-code").value || "").trim().toUpperCase();
               if (!code) return;
@@ -3061,68 +3061,126 @@
         const byKey = new Map(rows.map((r) => [r.dataset.chKey, r]));
         order.forEach((k) => { const r = byKey.get(k); if (r) list.appendChild(r); });
       }
+
+      if (window.__kibangouPendingChannelName) {
+        const target = window.__kibangouPendingChannelName.toLowerCase();
+        const matchRow = rows.find((r) => {
+          const t = (r.querySelector(".ch-name, .ch-title, strong")?.textContent || r.textContent || "").toLowerCase();
+          return t.includes(target) || target.includes(t.trim());
+        });
+        if (matchRow) {
+          window.__kibangouPendingChannelName = null;
+          setTimeout(() => matchRow.click(), 120);
+        }
+      }
     }
 
-    async function openFootballModal() {
-      const existing = document.getElementById("kibangou-football-modal");
+    async function openFootballPage() {
+      const existing = document.getElementById("kibangou-football-page");
       if (existing) existing.remove();
-      const modal = document.createElement("div");
-      modal.id = "kibangou-football-modal";
-      modal.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(10,13,18,0.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;";
-      modal.innerHTML = `
-        <div style="width:100%;max-width:580px;background:#151C24;border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:86vh;overflow-y:auto;">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <strong style="color:#fff;font-size:1.08rem;">⚽ Matchs de Football en direct</strong>
-            <button type="button" id="fb-modal-close" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;">✕</button>
+      const page = document.createElement("div");
+      page.id = "kibangou-football-page";
+      page.className = "settings-view";
+      page.style.cssText = "position:fixed;inset:0;z-index:99990;background:#0E1318;overflow-y:auto;padding:20px 16px 96px;";
+      page.innerHTML = `
+        <div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <button type="button" id="fb-page-back" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#E2E8F0;padding:8px 14px;border-radius:10px;font-weight:600;font-size:0.86rem;cursor:pointer;">← Retour</button>
+            <h1 style="margin:0;color:#fff;font-size:1.12rem;font-weight:700;">⚽ Matchs de Football</h1>
+            <span style="width:74px;"></span>
           </div>
-          <div id="fb-matches-body" style="display:flex;flex-direction:column;gap:10px;color:#94A3B8;">Chargement des matchs...</div>
+          <div class="s-group" style="margin:0;">
+            <div class="s-group-head">
+              <span class="s-gicon" style="font-size:15px;">⚽</span>
+              <span class="s-group-title">Rechercher un match, une équipe ou un championnat</span>
+            </div>
+            <div class="kibangou-s-row">
+              <input type="search" id="fb-search-input" placeholder="Ex : PSG, Real Madrid, Premier League, Ligue 1, CAN..." style="width:100%;padding:11px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;outline:none;">
+            </div>
+          </div>
+          <div id="fb-matches-body" style="display:flex;flex-direction:column;gap:12px;color:#94A3B8;">Chargement des matchs...</div>
         </div>`;
-      document.body.appendChild(modal);
-      modal.querySelector("#fb-modal-close").addEventListener("click", () => modal.remove());
-      modal.addEventListener("click", (ev) => { if (ev.target === modal) modal.remove(); });
+      document.body.appendChild(page);
+      page.querySelector("#fb-page-back").addEventListener("click", () => {
+        page.remove();
+        if (location.hash === "#/football") history.back();
+      });
 
       try {
         const res = await fetch("/api/football", { cache: "no-store" });
         const { matches = [] } = await res.json();
-        const body = modal.querySelector("#fb-matches-body");
-        if (!matches.length) {
-          body.innerHTML = '<div style="padding:16px 0;">Aucun match disponible pour le moment.</div>';
-          return;
-        }
-        body.innerHTML = matches.map((m) => `
-          <div class="fb-match-card" style="padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;">
-            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;margin-bottom:6px;">
-              <span style="color:#94A3B8;">${escapeHtml(m.league)}</span>
-              <span style="padding:2px 8px;border-radius:99px;font-weight:700;background:${m.state === "in" ? "rgba(0,200,83,0.2)" : "rgba(255,255,255,0.08)"};color:${m.state === "in" ? "#4ADE80" : "#CBD5E1"};">${m.state === "in" ? "EN DIRECT · " : ""}${escapeHtml(m.status)}</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:0.95rem;">
-              <span>${escapeHtml(m.home)}</span>
-              <span style="color:#00C853;font-size:1.05rem;">${m.state === "pre" ? "vs" : `${escapeHtml(m.homeScore)} - ${escapeHtml(m.awayScore)}`}</span>
-              <span>${escapeHtml(m.away)}</span>
-            </div>
-            <div style="font-size:0.78rem;color:#00C853;margin-top:6px;">📺 ${m.channels.length} chaîne(s) de diffusion — Cliquez pour regarder</div>
-            <div class="fb-match-channels" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;gap:8px;">
-              ${m.channels.map((ch) => `
-                <a href="#/channels?src=kibangou-direct%2F${encodeURIComponent(ch.src)}" onclick="document.getElementById('kibangou-football-modal')?.remove()" style="padding:6px 12px;border-radius:8px;background:#00C853;color:#07120B;font-weight:700;font-size:0.8rem;text-decoration:none;">▶ ${escapeHtml(ch.name)}</a>
-              `).join("")}
-            </div>
-          </div>
-        `).join("");
+        const body = page.querySelector("#fb-matches-body");
+        const searchInput = page.querySelector("#fb-search-input");
 
-        body.querySelectorAll(".fb-match-card").forEach((card) => {
-          card.addEventListener("click", (e) => {
-            if (e.target.closest("a")) return;
-            const chBox = card.querySelector(".fb-match-channels");
-            if (chBox) chBox.style.display = chBox.style.display === "flex" ? "none" : "flex";
+        const renderMatches = (qStr = "") => {
+          const q = qStr.trim().toLowerCase();
+          const filtered = !q ? matches : matches.filter((m) =>
+            `${m.home} ${m.away} ${m.league} ${m.status}`.toLowerCase().includes(q)
+          );
+          if (!filtered.length) {
+            body.innerHTML = '<div class="s-group" style="padding:20px;text-align:center;color:#94A3B8;">Aucun match trouvé.</div>';
+            return;
+          }
+          body.innerHTML = filtered.map((m) => `
+            <div class="s-group fb-match-card" style="margin:0;cursor:pointer;">
+              <div class="s-group-head" style="justify-content:space-between;">
+                <span class="s-group-title">${escapeHtml(m.league)}</span>
+                <span style="font-size:0.72rem;padding:3px 9px;border-radius:99px;font-weight:700;background:${m.state === "in" ? "rgba(0,200,83,0.18)" : "rgba(255,255,255,0.08)"};color:${m.state === "in" ? "#00C853" : "#CBD5E1"};">${m.state === "in" ? "EN DIRECT · " : ""}${escapeHtml(m.status)}</span>
+              </div>
+              <div class="kibangou-s-row">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+                    ${m.homeLogo ? `<img src="${escapeHtml(m.homeLogo)}" alt="${escapeHtml(m.home)}" style="width:30px;height:30px;object-fit:contain;flex-shrink:0;">` : `<span style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.08);display:inline-flex;align-items:center;justify-content:center;font-size:13px;">⚽</span>`}
+                    <span style="color:#fff;font-weight:700;font-size:0.94rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(m.home)}</span>
+                  </div>
+                  <span style="color:#00C853;font-weight:800;font-size:1.08rem;padding:4px 10px;border-radius:8px;background:rgba(0,200,83,0.1);flex-shrink:0;">${m.state === "pre" ? "VS" : `${escapeHtml(m.homeScore)} - ${escapeHtml(m.awayScore)}`}</span>
+                  <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:1;min-width:0;">
+                    <span style="color:#fff;font-weight:700;font-size:0.94rem;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(m.away)}</span>
+                    ${m.awayLogo ? `<img src="${escapeHtml(m.awayLogo)}" alt="${escapeHtml(m.away)}" style="width:30px;height:30px;object-fit:contain;flex-shrink:0;">` : `<span style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.08);display:inline-flex;align-items:center;justify-content:center;font-size:13px;">⚽</span>`}
+                  </div>
+                </div>
+                <div style="font-size:0.78rem;color:#00C853;">${m.channels.length} chaîne(s) disponibles — Cliquez pour choisir une chaîne</div>
+              </div>
+              <div class="fb-match-channels kibangou-s-row" style="display:none;">
+                <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                  ${m.channels.map((ch) => `
+                    <button type="button" class="fb-ch-launch" data-ch-src="${escapeHtml(ch.src)}" data-ch-name="${escapeHtml(ch.name)}" style="display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;font-weight:600;font-size:0.82rem;cursor:pointer;">
+                      <img src="${escapeHtml(ch.logo || "/logo.svg")}" alt="${escapeHtml(ch.name)}" style="width:22px;height:22px;border-radius:6px;object-fit:contain;background:#0E1318;">
+                      <span>${escapeHtml(ch.name)}</span>
+                    </button>
+                  `).join("")}
+                </div>
+              </div>
+            </div>
+          `).join("");
+
+          body.querySelectorAll(".fb-match-card").forEach((card) => {
+            card.addEventListener("click", (e) => {
+              const chBtn = e.target.closest(".fb-ch-launch");
+              if (chBtn) {
+                e.stopPropagation();
+                const chName = chBtn.getAttribute("data-ch-name") || "";
+                const chSrc = chBtn.getAttribute("data-ch-src") || "canal_congo";
+                window.__kibangouPendingChannelName = chName;
+                page.remove();
+                location.hash = `#/channels?src=${encodeURIComponent(`kibangou-addon/${chSrc}`)}`;
+                return;
+              }
+              const chBox = card.querySelector(".fb-match-channels");
+              if (chBox) chBox.style.display = chBox.style.display === "flex" ? "none" : "flex";
+            });
           });
-        });
+        };
+
+        renderMatches("");
+        searchInput.addEventListener("input", () => renderMatches(searchInput.value));
       } catch {
-        modal.querySelector("#fb-matches-body").textContent = "Impossible de charger les scores pour le moment.";
+        page.querySelector("#fb-matches-body").textContent = "Impossible de charger les matchs pour le moment.";
       }
     }
 
-    async function openPlansModal() {
-      const existing = document.getElementById("kibangou-plans-modal");
+    async function openPlansPage() {
+      const existing = document.getElementById("kibangou-plans-page");
       if (existing) existing.remove();
       const plans = [
         { id: "no_ads_1d", title: "1 Jour Sans Pubs", priceNum: 50, price: "50 FCFA", desc: "24 heures sans publicité" },
@@ -3134,64 +3192,165 @@
         { id: "no_ads_1y", title: "1 An Sans Pubs", priceNum: 10000, price: "10 000 FCFA", desc: "Économie maximale annuelle", badge: "Meilleure offre" },
         { id: "adult_1m", title: "Adulte +18 (1 Mois)", priceNum: 1000, price: "1 000 FCFA", desc: "Chaînes & Films Adultes +18", isAdult: true }
       ];
+
+      const COUNTRY_FLAGS = {
+        CG: "🇨🇬", CD: "🇨🇩", CI: "🇨🇮", CM: "🇨🇲", SN: "🇸🇳", GA: "🇬🇦",
+        BJ: "🇧🇯", ML: "🇲🇱", BF: "🇧🇫", TG: "🇹🇬", NE: "🇳🇪", GN: "🇬🇳",
+        KE: "🇰🇪", UG: "🇺🇬", TZ: "🇹🇿", RW: "🇷🇼", GH: "🇬🇭", NG: "🇳🇬"
+      };
+      const OPERATOR_META = (code = "", label = "") => {
+        const s = `${code} ${label}`.toLowerCase();
+        if (s.includes("mtn")) return { bg: "#FFCC00", fg: "#000", tag: "MTN", name: "MTN Mobile Money" };
+        if (s.includes("airtel")) return { bg: "#E60000", fg: "#FFF", tag: "airtel", name: "Airtel Money" };
+        if (s.includes("orange")) return { bg: "#FF7900", fg: "#000", tag: "Orange", name: "Orange Money" };
+        if (s.includes("moov")) return { bg: "#0066CC", fg: "#FFF", tag: "Moov", name: "Moov Money" };
+        if (s.includes("wave")) return { bg: "#1DC4FF", fg: "#07120B", tag: "Wave", name: "Wave" };
+        return { bg: "#00C853", fg: "#07120B", tag: "MoMo", name: label || code };
+      };
+
+      let paymentMethods = [
+        { country: "CG", countryName: "Congo-Brazzaville", currency: "XAF", network: "mtn_cg", networkName: "MTN Mobile Money" },
+        { country: "CG", countryName: "Congo-Brazzaville", currency: "XAF", network: "airtel_cg", networkName: "Airtel Money" },
+        { country: "CD", countryName: "RD Congo", currency: "CDF", network: "airtel_cd", networkName: "Airtel Money" },
+        { country: "CI", countryName: "Côte d'Ivoire", currency: "XOF", network: "mtn_ci", networkName: "MTN Money" },
+        { country: "CI", countryName: "Côte d'Ivoire", currency: "XOF", network: "orange_ci", networkName: "Orange Money" },
+        { country: "CI", countryName: "Côte d'Ivoire", currency: "XOF", network: "wave_ci", networkName: "Wave" },
+        { country: "CM", countryName: "Cameroun", currency: "XAF", network: "mtn_cm", networkName: "MTN Mobile Money" },
+        { country: "CM", countryName: "Cameroun", currency: "XAF", network: "orange_cm", networkName: "Orange Money" },
+        { country: "SN", countryName: "Sénégal", currency: "XOF", network: "orange_sn", networkName: "Orange Money" },
+        { country: "SN", countryName: "Sénégal", currency: "XOF", network: "wave_sn", networkName: "Wave" },
+        { country: "GA", countryName: "Gabon", currency: "XAF", network: "airtel_ga", networkName: "Airtel Money" },
+        { country: "BJ", countryName: "Bénin", currency: "XOF", network: "mtn_bj", networkName: "MTN Mobile Money" },
+        { country: "BJ", countryName: "Bénin", currency: "XOF", network: "moov_bj", networkName: "Moov Money" }
+      ];
+      let selectedMethod = paymentMethods[0];
       let selectedPlan = null;
-      const modal = document.createElement("div");
-      modal.id = "kibangou-plans-modal";
-      modal.style.cssText = "position:fixed;inset:0;z-index:99999;background:rgba(10,13,18,0.88);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;";
-      modal.innerHTML = `
-        <div style="width:100%;max-width:560px;background:#151C24;border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:86vh;overflow-y:auto;">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <strong style="color:#fff;font-size:1.08rem;">Formules VIP KibangouTV</strong>
-            <button type="button" id="plans-modal-close" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;">✕</button>
+
+      const page = document.createElement("div");
+      page.id = "kibangou-plans-page";
+      page.className = "settings-view";
+      page.style.cssText = "position:fixed;inset:0;z-index:99990;background:#0E1318;overflow-y:auto;padding:20px 16px 96px;";
+      page.innerHTML = `
+        <div style="max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <button type="button" id="plans-page-back" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#E2E8F0;padding:8px 14px;border-radius:10px;font-weight:600;font-size:0.86rem;cursor:pointer;">← Retour</button>
+            <h1 style="margin:0;color:#fff;font-size:1.12rem;font-weight:700;">Formules VIP KibangouTV</h1>
+            <span style="width:74px;"></span>
           </div>
-          <div id="plans-step-list">
-            <label style="display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.86rem;color:#E2E8F0;cursor:pointer;margin-bottom:12px;">
-              <input type="checkbox" id="plans-include-adult" style="width:16px;height:16px;accent-color:#00C853;">
-              <span>Ajouter l'accès Adulte +18 (+1 000 FCFA / 30 jours) à mon abonnement Sans Pubs</span>
-            </label>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
+
+          <div id="plans-step-list" style="display:flex;flex-direction:column;gap:14px;">
+            <div class="s-group" style="margin:0;">
+              <div class="s-group-head">
+                <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                <span class="s-group-title">Options &amp; Formules</span>
+              </div>
+              <div class="kibangou-s-row">
+                <label style="display:flex;align-items:center;gap:10px;font-size:0.88rem;color:#E2E8F0;cursor:pointer;">
+                  <input type="checkbox" id="plans-include-adult" style="width:17px;height:17px;accent-color:#00C853;">
+                  <span>Ajouter l'accès Adulte +18 (+1 000 FCFA / 30 jours) à mon abonnement Sans Pubs</span>
+                </label>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
               ${plans.map((p) => `
-                <div style="padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
-                  <div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;">
-                      <strong style="color:#fff;font-size:0.94rem;">${p.title}</strong>
-                      ${p.badge ? `<span style="font-size:0.68rem;padding:2px 7px;border-radius:99px;background:rgba(0,200,83,0.18);color:#4ADE80;font-weight:700;">${p.badge}</span>` : ""}
-                    </div>
-                    <div class="plan-price-label" data-base-price="${p.priceNum}" data-is-adult="${p.isAdult ? "1" : "0"}" style="font-size:1.15rem;font-weight:800;color:#00C853;margin:4px 0;">${p.price}</div>
-                    <div style="font-size:0.78rem;color:#94A3B8;">${p.desc}</div>
+                <div class="s-group" style="margin:0;display:flex;flex-direction:column;justify-content:space-between;">
+                  <div class="s-group-head" style="justify-content:space-between;">
+                    <span class="s-group-title">${p.title}</span>
+                    ${p.badge ? `<span style="font-size:0.66rem;padding:2px 8px;border-radius:99px;background:rgba(0,200,83,0.18);color:#00C853;font-weight:700;">${p.badge}</span>` : ""}
                   </div>
-                  <button type="button" data-choose-plan="${p.id}" style="width:100%;padding:8px 12px;border-radius:8px;border:none;background:#00C853;color:#07120B;font-weight:700;cursor:pointer;">Choisir</button>
+                  <div class="kibangou-s-row">
+                    <div class="plan-price-label" data-base-price="${p.priceNum}" data-is-adult="${p.isAdult ? "1" : "0"}" style="font-size:1.2rem;font-weight:800;color:#fff;">${p.price}</div>
+                    <div class="s-sub" style="color:#94A3B8;font-size:0.8rem;">${p.desc}</div>
+                    <button type="button" data-choose-plan="${p.id}" style="width:100%;padding:9px 12px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:700;cursor:pointer;">Choisir</button>
+                  </div>
                 </div>
               `).join("")}
             </div>
           </div>
-          <div id="plans-step-pay" style="display:none;flex-direction:column;gap:12px;">
+
+          <div id="plans-step-pay" style="display:none;flex-direction:column;gap:14px;">
             <button type="button" id="plans-back-btn" style="align-self:flex-start;background:none;border:none;color:#94A3B8;font-size:0.86rem;cursor:pointer;">← Changer de formule</button>
-            <div id="plans-pay-summary" style="padding:12px;border-radius:10px;background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.25);color:#fff;font-weight:600;font-size:0.95rem;"></div>
-            <select id="plans-network-select" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.9rem;">
-              <option value="CG|XAF|mtn_cg">Congo-Brazzaville · MTN Mobile Money</option>
-              <option value="CG|XAF|airtel_cg">Congo-Brazzaville · Airtel Money</option>
-              <option value="CD|CDF|airtel_cd">RD Congo · Airtel Money</option>
-              <option value="CI|XOF|mtn_ci">Côte d'Ivoire · MTN Money</option>
-              <option value="CI|XOF|orange_ci">Côte d'Ivoire · Orange Money</option>
-              <option value="CM|XAF|mtn_cm">Cameroun · MTN Mobile Money</option>
-              <option value="CM|XAF|orange_cm">Cameroun · Orange Money</option>
-              <option value="BJ|XOF|mtn_bj">Bénin · MTN Mobile Money</option>
-            </select>
-            <input type="text" id="plans-name-input" placeholder="Nom complet" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
-            <input type="tel" id="plans-phone-input" placeholder="Numéro Mobile Money (ex: +24206...)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
-            <input type="tel" id="plans-phone-confirm-input" placeholder="Confirmer le numéro Mobile Money" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
-            <div id="plans-pay-status" style="font-size:0.84rem;color:#94A3B8;min-height:18px;"></div>
-            <button type="button" id="plans-confirm-softpay" style="width:100%;padding:11px 16px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:800;font-size:0.95rem;cursor:pointer;">Payer directement depuis l'app</button>
+            <div class="s-group" style="margin:0;">
+              <div class="s-group-head">
+                <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+                <span class="s-group-title">Résumé de la commande</span>
+              </div>
+              <div class="kibangou-s-row">
+                <div id="plans-pay-summary" style="color:#fff;font-weight:700;font-size:0.98rem;"></div>
+              </div>
+            </div>
+
+            <div class="s-group" style="margin:0;">
+              <div class="s-group-head">
+                <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+                <span class="s-group-title">Pays &amp; Moyen de paiement</span>
+              </div>
+              <div class="kibangou-s-row">
+                <input type="search" id="plans-country-search" placeholder="Rechercher un pays ou opérateur (ex: Congo, MTN, Airtel, Orange, Wave...)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.88rem;outline:none;">
+                <div id="plans-methods-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;max-height:220px;overflow-y:auto;"></div>
+              </div>
+            </div>
+
+            <div class="s-group" style="margin:0;">
+              <div class="s-group-head">
+                <span class="s-gicon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+                <span class="s-group-title">Coordonnées Mobile Money</span>
+              </div>
+              <div class="kibangou-s-row">
+                <input type="text" id="plans-name-input" placeholder="Nom complet" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
+                <input type="tel" id="plans-phone-input" placeholder="Numéro Mobile Money (ex: +24206...)" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.14);background:#0E1318;color:#fff;font-size:0.92rem;">
+                <div id="plans-pay-status" style="font-size:0.84rem;color:#94A3B8;min-height:18px;"></div>
+                <button type="button" id="plans-confirm-softpay" style="width:100%;padding:12px 16px;border-radius:10px;border:none;background:#00C853;color:#07120B;font-weight:800;font-size:0.95rem;cursor:pointer;">Payer directement depuis l'app</button>
+              </div>
+            </div>
           </div>
         </div>`;
-      document.body.appendChild(modal);
-      modal.querySelector("#plans-modal-close").addEventListener("click", () => modal.remove());
-      modal.addEventListener("click", (ev) => { if (ev.target === modal) modal.remove(); });
+      document.body.appendChild(page);
+      page.querySelector("#plans-page-back").addEventListener("click", () => {
+        page.remove();
+        if (location.hash === "#/plans") history.back();
+      });
 
-      const adultChk = modal.querySelector("#plans-include-adult");
+      const renderMethods = (qStr = "") => {
+        const q = qStr.trim().toLowerCase();
+        const grid = page.querySelector("#plans-methods-grid");
+        const list = !q ? paymentMethods : paymentMethods.filter((m) =>
+          `${m.country} ${m.countryName} ${m.networkName} ${m.network}`.toLowerCase().includes(q)
+        );
+        if (!list.length) {
+          grid.innerHTML = '<div style="font-size:0.82rem;color:#94A3B8;padding:8px;">Aucun pays ou opérateur trouvé.</div>';
+          return;
+        }
+        grid.innerHTML = list.map((m) => {
+          const op = OPERATOR_META(m.network, m.networkName);
+          const flag = COUNTRY_FLAGS[m.country] || "🌍";
+          const active = selectedMethod && selectedMethod.network === m.network && selectedMethod.country === m.country;
+          return `
+            <button type="button" class="plans-method-btn" data-country="${escapeHtml(m.country)}" data-network="${escapeHtml(m.network)}" style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;border:1px solid ${active ? "#00C853" : "rgba(255,255,255,0.12)"};background:${active ? "rgba(0,200,83,0.12)" : "rgba(255,255,255,0.04)"};color:#fff;cursor:pointer;text-align:left;">
+              <span style="font-size:1.25rem;line-height:1;">${flag}</span>
+              <span style="flex:1;min-width:0;">
+                <span style="display:block;font-size:0.8rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(m.countryName)}</span>
+                <span style="display:inline-block;margin-top:2px;font-size:0.68rem;font-weight:800;padding:1px 6px;border-radius:5px;background:${op.bg};color:${op.fg};">${escapeHtml(op.tag)}</span>
+                <span style="font-size:0.72rem;color:#CBD5E1;margin-left:4px;">${escapeHtml(m.networkName)}</span>
+              </span>
+            </button>`;
+        }).join("");
+        grid.querySelectorAll(".plans-method-btn").forEach((b) => {
+          b.addEventListener("click", () => {
+            const c = b.getAttribute("data-country");
+            const n = b.getAttribute("data-network");
+            selectedMethod = paymentMethods.find((x) => x.country === c && x.network === n) || selectedMethod;
+            renderMethods(page.querySelector("#plans-country-search").value);
+          });
+        });
+      };
+
+      renderMethods("");
+      page.querySelector("#plans-country-search").addEventListener("input", (e) => renderMethods(e.target.value));
+
+      const adultChk = page.querySelector("#plans-include-adult");
       adultChk.addEventListener("change", () => {
-        modal.querySelectorAll(".plan-price-label").forEach((el) => {
+        page.querySelectorAll(".plan-price-label").forEach((el) => {
           const base = Number(el.getAttribute("data-base-price") || 0);
           const isAd = el.getAttribute("data-is-adult") === "1";
           const total = (!isAd && adultChk.checked) ? base + 1000 : base;
@@ -3202,23 +3361,29 @@
       fetch("/api/saspay?action=rates").then((r) => r.json()).then((res) => {
         const rates = Array.isArray(res?.data) ? res.data : (Array.isArray(res?.rates) ? res.rates : []);
         if (rates.length) {
-          const sel = modal.querySelector("#plans-network-select");
-          const opts = rates.filter((rt) => (rt.network_code || rt.network) && (rt.country_code || rt.country) && (!rt.payin || rt.payin.available !== false)).map((rt) => {
-            const c = rt.country_code || rt.country;
-            const n = rt.network_code || rt.network;
-            const cname = rt.country_name || c;
-            return `<option value="${escapeHtml(c)}|${escapeHtml(rt.currency || "XAF")}|${escapeHtml(n)}">${escapeHtml(cname)} · ${escapeHtml(rt.network_name || n)}</option>`;
-          });
-          if (opts.length) sel.innerHTML = opts.join("");
+          const mapped = rates
+            .filter((rt) => (rt.network_code || rt.network) && (rt.country_code || rt.country) && (!rt.payin || rt.payin.available !== false))
+            .map((rt) => ({
+              country: String(rt.country_code || rt.country).toUpperCase(),
+              countryName: rt.country_name || rt.country_code || rt.country,
+              currency: rt.currency || "XAF",
+              network: rt.network_code || rt.network,
+              networkName: rt.network_name || rt.network_code || rt.network
+            }));
+          if (mapped.length) {
+            paymentMethods = mapped;
+            selectedMethod = mapped[0];
+            renderMethods(page.querySelector("#plans-country-search").value);
+          }
         }
       }).catch(() => {});
 
-      modal.querySelector("#plans-back-btn").addEventListener("click", () => {
-        modal.querySelector("#plans-step-pay").style.display = "none";
-        modal.querySelector("#plans-step-list").style.display = "block";
+      page.querySelector("#plans-back-btn").addEventListener("click", () => {
+        page.querySelector("#plans-step-pay").style.display = "none";
+        page.querySelector("#plans-step-list").style.display = "flex";
       });
 
-      modal.querySelectorAll("[data-choose-plan]").forEach((btn) => {
+      page.querySelectorAll("[data-choose-plan]").forEach((btn) => {
         btn.addEventListener("click", () => {
           const proceedToPlan = () => {
             let uNow = null;
@@ -3227,11 +3392,11 @@
             if (!selectedPlan) return;
             const incAdult = !selectedPlan.isAdult && adultChk.checked;
             const total = selectedPlan.priceNum + (incAdult ? 1000 : 0);
-            modal.querySelector("#plans-pay-summary").textContent = `${selectedPlan.title}${incAdult ? " + Adulte +18 (30j)" : ""} — Total : ${total.toLocaleString("fr-FR")} FCFA`;
-            const nameEl = modal.querySelector("#plans-name-input");
+            page.querySelector("#plans-pay-summary").textContent = `${selectedPlan.title}${incAdult ? " + Adulte +18 (30j)" : ""} — Total : ${total.toLocaleString("fr-FR")} FCFA`;
+            const nameEl = page.querySelector("#plans-name-input");
             if (nameEl && !nameEl.value && uNow?.name) nameEl.value = uNow.name;
-            modal.querySelector("#plans-step-list").style.display = "none";
-            modal.querySelector("#plans-step-pay").style.display = "flex";
+            page.querySelector("#plans-step-list").style.display = "none";
+            page.querySelector("#plans-step-pay").style.display = "flex";
           };
           let uObj = null;
           try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
@@ -3247,41 +3412,55 @@
         });
       });
 
-      modal.querySelector("#plans-confirm-softpay").addEventListener("click", async () => {
+      page.querySelector("#plans-confirm-softpay").addEventListener("click", async () => {
         if (!selectedPlan) return;
         let uObj = null;
         try { uObj = JSON.parse(localStorage.getItem("kibangoutv_user") || "null"); } catch {}
         const email = uObj?.email || "";
-        const fullName = (modal.querySelector("#plans-name-input")?.value || "").trim();
-        const phone = (modal.querySelector("#plans-phone-input").value || "").trim();
-        const phoneConfirm = (modal.querySelector("#plans-phone-confirm-input")?.value || "").trim();
-        const statusEl = modal.querySelector("#plans-pay-status");
-        const payBtn = modal.querySelector("#plans-confirm-softpay");
-        if (fullName.length < 2) { statusEl.textContent = "Veuillez entrer votre nom complet."; return; }
-        if (phone.length < 8) { statusEl.textContent = "Entrez votre numéro Mobile Money complet (avec indicatif, ex: +242...)."; return; }
-        if (phone.replace(/\s+/g, "") !== phoneConfirm.replace(/\s+/g, "")) {
-          statusEl.textContent = "Les deux numéros Mobile Money ne correspondent pas.";
+        const fullName = (page.querySelector("#plans-name-input")?.value || "").trim();
+        const phone = (page.querySelector("#plans-phone-input")?.value || "").trim();
+        const statusEl = page.querySelector("#plans-pay-status");
+        const payBtn = page.querySelector("#plans-confirm-softpay");
+        if (fullName.length < 2) {
+          statusEl.style.color = "#EF4444";
+          statusEl.textContent = "Veuillez entrer votre nom complet.";
           return;
         }
-        const [country, currency, network] = (modal.querySelector("#plans-network-select").value || "CG|XAF|mtn_cg").split("|");
+        if (phone.length < 8) {
+          statusEl.style.color = "#EF4444";
+          statusEl.textContent = "Entrez votre numéro Mobile Money complet (avec indicatif, ex: +242...).";
+          return;
+        }
+        const country = selectedMethod?.country || "CG";
+        const currency = selectedMethod?.currency || "XAF";
+        const network = selectedMethod?.network || "mtn_cg";
 
         payBtn.disabled = true;
+        statusEl.style.color = "#94A3B8";
         statusEl.textContent = "Envoi de la demande sur votre téléphone...";
         try {
           const res = await fetch("/api/saspay?action=softpay", {
-            method: "POST", headers: { "Content-Type": "application/json" },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               plan: selectedPlan.id,
               includeAdult: !selectedPlan.isAdult && adultChk.checked,
-              email, name: fullName,
-              phone, country, currency, network,
+              email,
+              name: fullName,
+              phone,
+              country,
+              currency,
+              network,
               idempotencyKey: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()))
             })
           });
           const data = await res.json().catch(() => ({}));
           const d = data.data || data;
           if (!res.ok) {
-            statusEl.textContent = data.error?.message || data.error || "Impossible d'initier le paiement.";
+            const msg = data.error?.message || data.error || data.message || "Impossible d'initier le paiement.";
+            statusEl.style.color = "#EF4444";
+            statusEl.textContent = msg;
+            showToast(msg);
             return;
           }
           if (d.checkout_url) {
@@ -3289,12 +3468,18 @@
             return;
           }
           const pid = d.id || d.payment_id;
+          statusEl.style.color = "#4ADE80";
           statusEl.textContent = "Validez le paiement sur votre téléphone (code PIN Mobile Money)...";
           if (pid) {
             let tries = 0;
             const poll = setInterval(async () => {
               tries++;
-              if (tries > 40) { clearInterval(poll); statusEl.textContent = "Délai expiré. Vérifiez votre téléphone ou réessayez."; return; }
+              if (tries > 40) {
+                clearInterval(poll);
+                statusEl.style.color = "#EF4444";
+                statusEl.textContent = "Délai expiré. Vérifiez votre téléphone ou réessayez.";
+                return;
+              }
               const vr = await fetch(`/api/saspay?action=verify&payment_id=${encodeURIComponent(pid)}`).catch(() => null);
               if (!vr || !vr.ok) return;
               const vj = await vr.json().catch(() => ({}));
@@ -3309,15 +3494,29 @@
                 setTimeout(() => location.reload(), 1200);
               } else if (vj.status === "FAILED") {
                 clearInterval(poll);
+                statusEl.style.color = "#EF4444";
                 statusEl.textContent = "Paiement refusé ou annulé.";
               }
             }, 3000);
           }
+        } catch (err) {
+          statusEl.style.color = "#EF4444";
+          statusEl.textContent = "Erreur réseau lors du paiement. Vérifiez votre connexion et réessayez.";
         } finally {
           payBtn.disabled = false;
         }
       });
     }
+
+    function syncCustomPages() {
+      const h = location.hash || "";
+      if (h === "#/football") openFootballPage();
+      else document.getElementById("kibangou-football-page")?.remove();
+      if (h === "#/plans") openPlansPage();
+      else document.getElementById("kibangou-plans-page")?.remove();
+    }
+    window.addEventListener("hashchange", syncCustomPages);
+    syncCustomPages();
 
     function updateActiveNav() {
       const hash = location.hash || "#/";

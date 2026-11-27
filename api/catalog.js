@@ -24,7 +24,11 @@ export default async function handler(req, res) {
           const d = JSON.parse(fs.readFileSync(p, "utf8"));
           const src = rel.includes("bein.json") ? "bein" : "canal_congo";
           for (const it of d.items || []) {
-            if (it && it.id && it.name) sportChannels.push({ id: it.id, name: it.name, src });
+            if (it && it.id && it.name) {
+              let rawLogo = it.images?.logo || it.images?.poster || it.logo || "";
+              if (rawLogo.startsWith("/live2/")) rawLogo = `https://vavoo.to${rawLogo}`;
+              sportChannels.push({ id: it.id, name: it.name, src, logo: rawLogo || "/logo.svg" });
+            }
           }
         } catch {}
       }
@@ -57,6 +61,8 @@ export default async function handler(req, res) {
           id: ev.id,
           home: home.team?.shortDisplayName || home.team?.name || "Équipe A",
           away: away.team?.shortDisplayName || away.team?.name || "Équipe B",
+          homeLogo: home.team?.logo || "",
+          awayLogo: away.team?.logo || "",
           homeScore: home.score ?? "0",
           awayScore: away.score ?? "0",
           league: slug.replace(/^\d{4}-\d{2}-/, "").replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()) || "Football",
