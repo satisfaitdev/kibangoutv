@@ -3013,9 +3013,12 @@
         const rates = Array.isArray(res?.data) ? res.data : (Array.isArray(res?.rates) ? res.rates : []);
         if (rates.length) {
           const sel = modal.querySelector("#plans-network-select");
-          const opts = rates.filter((rt) => rt.network && rt.country).map((rt) =>
-            `<option value="${escapeHtml(rt.country)}|${escapeHtml(rt.currency || "XAF")}|${escapeHtml(rt.network)}">${escapeHtml(rt.country)} · ${escapeHtml(rt.network_name || rt.network)}</option>`
-          );
+          const opts = rates.filter((rt) => (rt.network_code || rt.network) && (rt.country_code || rt.country) && (!rt.payin || rt.payin.available !== false)).map((rt) => {
+            const c = rt.country_code || rt.country;
+            const n = rt.network_code || rt.network;
+            const cname = rt.country_name || c;
+            return `<option value="${escapeHtml(c)}|${escapeHtml(rt.currency || "XAF")}|${escapeHtml(n)}">${escapeHtml(cname)} · ${escapeHtml(rt.network_name || n)}</option>`;
+          });
           if (opts.length) sel.innerHTML = opts.join("");
         }
       }).catch(() => {});
