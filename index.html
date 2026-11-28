@@ -1348,6 +1348,19 @@
     window.fetch = wrapFetch;
     globalThis.fetch = wrapFetch;
 
+    function isHtmlEmbedPageUrl(rawUrl) {
+      const lower = String(rawUrl || "").toLowerCase();
+      if (!lower) return false;
+      if (/\.(mp4|m4v|mkv|webm|mov|m3u8|ts)(\?|$)/i.test(lower)) return false;
+      try {
+        const u = new URL(lower, location.href);
+        if (!isEmbedHostUrl(lower)) return false;
+        return /^\/(e|embed)\//i.test(u.pathname);
+      } catch {
+        return isEmbedHostUrl(lower) && /\/(e|embed)\//i.test(lower);
+      }
+    }
+
     function isEmbedHostUrl(rawUrl) {
       const lower = String(rawUrl || "").toLowerCase();
       if (!lower) return true;
@@ -2835,14 +2848,15 @@
             const meta = findSourceMetaForElement(item, idx);
             const langInfo = parseSourceLanguage(item, meta);
             const key = getSourceKey(item, idx);
-            return { item, idx, key, priority: langInfo.priority, label: langInfo.label };
+            const isHtmlEmbed = isHtmlEmbedPageUrl(key);
+            return { item, idx, key, isHtmlEmbed, priority: langInfo.priority, label: langInfo.label };
           })
           .filter(c =>
             !c.item.classList.contains("source-item-error") &&
             !c.item.classList.contains("source-item-busy") &&
             !vodAutoState.triedKeys.has(c.key)
           )
-          .sort((a, b) => a.priority - b.priority || a.idx - b.idx);
+          .sort((a, b) => (a.isHtmlEmbed ? 1 : 0) - (b.isHtmlEmbed ? 1 : 0) || a.priority - b.priority || a.idx - b.idx);
 
         if (candidates.length > 0 && vodAutoState.triedKeys.size < MAX_VOD_SOURCE_ATTEMPTS) {
           const next = candidates[0];

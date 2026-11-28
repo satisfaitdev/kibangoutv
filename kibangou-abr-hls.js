@@ -18,12 +18,52 @@ function getNavigatorConnection() {
   return navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
 }
 
+function isLivePlaybackContext(userConfig = {}) {
+  if (userConfig && userConfig.liveDurationInfinity === true) return true;
+  try {
+    if (typeof location !== "undefined") {
+      if (location.hash.startsWith("#/channels") || location.hash.includes("/live/")) return true;
+    }
+    if (typeof document !== "undefined") {
+      if (document.querySelector(".player-root .player-zap-btn, .player-root .iptv-bar-controls, .player-root .ch-overlay")) {
+        return true;
+      }
+    }
+  } catch {}
+  return false;
+}
+
 export class KibangouHls extends OriginalHls {
   constructor(userConfig = {}) {
     clearLegacyManualQuality();
 
     const conn = getNavigatorConnection();
     const initialEstimate = KibangouHls.computeInitialBandwidthEstimate(conn);
+    const isLiveCtx = isLivePlaybackContext(userConfig);
+
+    const timeoutConfig = isLiveCtx
+      ? {
+          fragLoadingTimeOut: 8000,
+          fragLoadingMaxRetry: 4,
+          fragLoadingRetryDelay: 250,
+          manifestLoadingTimeOut: 7000,
+          manifestLoadingMaxRetry: 2,
+          manifestLoadingRetryDelay: 200,
+          levelLoadingTimeOut: 7000,
+          levelLoadingMaxRetry: 2,
+          levelLoadingRetryDelay: 200
+        }
+      : {
+          fragLoadingTimeOut: 20000,
+          fragLoadingMaxRetry: 2,
+          fragLoadingRetryDelay: 350,
+          manifestLoadingTimeOut: 12000,
+          manifestLoadingMaxRetry: 1,
+          manifestLoadingRetryDelay: 250,
+          levelLoadingTimeOut: 12000,
+          levelLoadingMaxRetry: 1,
+          levelLoadingRetryDelay: 250
+        };
 
     const abrConfig = {
       abrEwmaDefaultEstimate: initialEstimate,
@@ -49,20 +89,15 @@ export class KibangouHls extends OriginalHls {
       liveMaxLatencyDurationCount: 5,
       initialLiveManifestSize: 1,
 
-      fragLoadingTimeOut: 8000,
-      fragLoadingMaxRetry: 4,
-      fragLoadingRetryDelay: 250,
-      manifestLoadingTimeOut: 7000,
-      manifestLoadingMaxRetry: 2,
-      manifestLoadingRetryDelay: 200,
-      levelLoadingTimeOut: 7000,
-      levelLoadingMaxRetry: 2,
-      levelLoadingRetryDelay: 200,
-
+      ...timeoutConfig,
       ...userConfig
     };
 
     super(abrConfig);
+
+    this._explicitLive = Boolean(userConfig && userConfig.liveDurationInfinity === true);
+    this._isLiveMode = isLiveCtx;
+    this._hasCustomFragTimeout = Boolean(userConfig && (typeof userConfig.fragLoadingTimeOut === "number" || userConfig.fragLoadPolicy));
 
     window.__kibangouHls = this;
     window.Hls = KibangouHls;
@@ -99,8 +134,52 @@ export class KibangouHls extends OriginalHls {
     return 4800000;
   }
 
+  _applyPolicyTimeouts(policy, timeoutMs, maxRetry, retryDelayMs) {
+    if (!policy || !policy.default) return;
+    policy.default.maxTimeToFirstByteMs = timeoutMs;
+    policy.default.maxLoadTimeMs = timeoutMs;
+    if (policy.default.timeoutRetry) {
+      policy.default.timeoutRetry.maxNumRetry = maxRetry;
+      policy.default.timeoutRetry.retryDelayMs = retryDelayMs;
+    }
+  }
+
+  _applyStreamModeTimeouts(isLive) {
+    this._isLiveMode = Boolean(isLive);
+    if (this._hasCustomFragTimeout || !this.config) return;
+    if (this._isLiveMode) {
+      this.config.fragLoadingTimeOut = 8000;
+      this.config.fragLoadingMaxRetry = 4;
+      this.config.fragLoadingRetryDelay = 250;
+      this.config.manifestLoadingTimeOut = 7000;
+      this.config.manifestLoadingMaxRetry = 2;
+      this.config.manifestLoadingRetryDelay = 200;
+      this.config.levelLoadingTimeOut = 7000;
+      this.config.levelLoadingMaxRetry = 2;
+      this.config.levelLoadingRetryDelay = 200;
+      this._applyPolicyTimeouts(this.config.fragLoadPolicy, 8000, 4, 250);
+      this._applyPolicyTimeouts(this.config.manifestLoadPolicy, 7000, 2, 200);
+      this._applyPolicyTimeouts(this.config.playlistLoadPolicy, 7000, 2, 200);
+    } else {
+      this.config.fragLoadingTimeOut = 20000;
+      this.config.fragLoadingMaxRetry = 2;
+      this.config.fragLoadingRetryDelay = 350;
+      this.config.manifestLoadingTimeOut = 12000;
+      this.config.manifestLoadingMaxRetry = 1;
+      this.config.manifestLoadingRetryDelay = 250;
+      this.config.levelLoadingTimeOut = 12000;
+      this.config.levelLoadingMaxRetry = 1;
+      this.config.levelLoadingRetryDelay = 250;
+      this._applyPolicyTimeouts(this.config.fragLoadPolicy, 20000, 2, 350);
+      this._applyPolicyTimeouts(this.config.manifestLoadPolicy, 12000, 1, 250);
+      this._applyPolicyTimeouts(this.config.playlistLoadPolicy, 12000, 1, 250);
+    }
+  }
+
   loadSource(url) {
     let target = url;
+    const isLiveUrl = typeof url === "string" && url.includes("/live/");
+    this._applyStreamModeTimeouts(this._explicitLive || isLiveUrl || isLivePlaybackContext());
     const hasCustomLoader = Boolean(
       this.config &&
       this.config.loader &&
@@ -460,6 +539,12 @@ export class KibangouHls extends OriginalHls {
       }
 
       this._emitNetworkStats(snap);
+    });
+
+    this.on(OriginalHls.Events.LEVEL_LOADED, (_event, data) => {
+      if (data && data.details && data.details.live === true && !this._isLiveMode) {
+        this._applyStreamModeTimeouts(true);
+      }
     });
 
     this.on(OriginalHls.Events.LEVEL_SWITCHED, (_event, data) => {
