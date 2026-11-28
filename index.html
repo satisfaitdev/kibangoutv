@@ -4303,6 +4303,7 @@
         const res = await fetch("/api/admin?action=public_ads", { cache: "no-store" });
         if (res.ok) {
           const j = await res.json();
+          if (j.ads_enabled === false) return; // pubs désactivées par l'admin
           ads = Array.isArray(j.ads) ? j.ads.filter((a) => a && a.active) : [];
           adNetwork = j.adNetwork || null;
         }

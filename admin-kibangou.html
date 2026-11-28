@@ -170,6 +170,20 @@
 
       <!-- TAB PUBLICITES -->
       <section id="tab-ads" style="display:none;">
+        <!-- INTERRUPTEUR GLOBAL PUBS -->
+        <div class="table-card" style="margin-bottom:16px;border:2px solid var(--accent);">
+          <div class="table-head" style="gap:12px;">
+            <strong>🔛 Publicités globales</strong>
+            <span class="pill" id="ads-global-pill">Chargement…</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:4px 0;">
+            <p style="margin:0;color:var(--muted);font-size:0.86rem;max-width:520px;">
+              Désactivez toutes les publicités pour tous les utilisateurs en un clic. Réactivez à tout moment. Les abonnés VIP Sans-Pubs restent toujours exemptés.
+            </p>
+            <button id="ads-global-btn" class="btn btn-primary" style="min-width:160px;justify-content:center;" onclick="toggleAdsGlobal()">Chargement…</button>
+          </div>
+        </div>
+
         <div class="table-card" style="margin-bottom:16px;">
           <div class="table-head"><strong>Régie Pub Automatique (Adsterra / Monetag)</strong><span class="pill" id="adnet-status">Inactif</span></div>
           <form id="adnet-form" class="ad-form">
@@ -405,6 +419,7 @@
       if (!r.ok) return;
       const { ads = [] } = await r.json();
       document.getElementById("ads-count").textContent = `${ads.length} pub(s)`;
+      loadAdsGlobal();
       loadAdsNetwork();
       document.getElementById("ads-body").innerHTML = ads.length ? ads.map((a) => `
         <tr>
@@ -419,8 +434,63 @@
         </tr>`).join("") : '<tr><td colspan="5" class="empty">Aucune publicité configurée.</td></tr>';
     }
 
-    async function loadAdsNetwork() {
-      const r = await fetch("/api/admin?action=ad_network", { credentials: "same-origin", cache: "no-store" });
+    function showToast(msg, isError) {
+      let t = document.getElementById("_adm_toast");
+      if (!t) {
+        t = document.createElement("div");
+        t.id = "_adm_toast";
+        t.style.cssText = "position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:10px;font-size:0.9rem;font-weight:600;z-index:99999;transition:opacity 0.4s;";
+        document.body.appendChild(t);
+      }
+      t.textContent = msg;
+      t.style.background = isError ? "#ef4444" : "#00C853";
+      t.style.color = "#fff";
+      t.style.opacity = "1";
+      clearTimeout(t._tid);
+      t._tid = setTimeout(() => { t.style.opacity = "0"; }, 3000);
+    }
+
+    let _adsGlobalEnabled = true;
+
+    async function loadAdsGlobal() {
+      try {
+        const r = await fetch("/api/admin?action=ads_global", { credentials: "same-origin", cache: "no-store" });
+        if (!r.ok) return;
+        const { ads_enabled } = await r.json();
+        _adsGlobalEnabled = ads_enabled !== false;
+        _updateAdsGlobalUI(_adsGlobalEnabled);
+      } catch {}
+    }
+
+    function _updateAdsGlobalUI(enabled) {
+      const pill = document.getElementById("ads-global-pill");
+      const btn  = document.getElementById("ads-global-btn");
+      if (pill) {
+        pill.textContent = enabled ? "✅ Actives" : "🚫 Désactivées";
+        pill.style.background = enabled ? "var(--accent)" : "#ef4444";
+      }
+      if (btn) {
+        btn.textContent = enabled ? "🚫 Désactiver toutes les pubs" : "✅ Réactiver toutes les pubs";
+        btn.style.background = enabled ? "#ef4444" : "var(--accent)";
+      }
+    }
+
+    async function toggleAdsGlobal() {
+      const newState = !_adsGlobalEnabled;
+      const r = await fetch("/api/admin?action=toggle_ads", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ enabled: newState })
+      });
+      if (r.ok) {
+        _adsGlobalEnabled = newState;
+        _updateAdsGlobalUI(newState);
+        showToast(newState ? "✅ Publicités réactivées sur tout le site." : "🚫 Toutes les publicités sont désactivées.");
+      } else {
+        showToast("Erreur lors de la mise à jour.", true);
+      }
+    }
+
+    async function loadAdsNetwork() {      const r = await fetch("/api/admin?action=ad_network", { credentials: "same-origin", cache: "no-store" });
       if (!r.ok) return;
       const { adNetwork } = await r.json();
       if (!adNetwork) return;

@@ -4,6 +4,7 @@ import { buildCorsHeaders, checkRateLimit, verifyHmacToken } from "./_security.j
 const USERS_FILE = "kibangou_users";
 const ADS_FILE = "kibangou_ads";
 const AD_NETWORK_FILE = "kibangou_ad_network";
+const ADS_GLOBAL_FILE = "kibangou_ads_global";
 const LEDGER_FILE = "kibangou_ledger";
 const ADMIN_COOKIE = "kibangou_admin";
 
@@ -58,11 +59,21 @@ export async function GET(request) {
   const action = url.searchParams.get("action") || "public_ads";
 
   if (action === "public_ads") {
+    const globalCfg = await readJson(ADS_GLOBAL_FILE, { ads_enabled: true });
+    const ads_enabled = globalCfg.ads_enabled !== false;
+    if (!ads_enabled) {
+      return Response.json({ ads: [], adNetwork: { enabled: false }, ads_enabled: false }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+    }
     const ads = await readJson(ADS_FILE, []);
     const active = Array.isArray(ads) ? ads.filter((a) => a && a.active) : [];
     const net = await readJson(AD_NETWORK_FILE, { enabled: false, provider: "adsterra", scriptUrl: "", smartlinkUrl: "" });
     const adNetwork = net && net.enabled ? { enabled: true, provider: net.provider || "adsterra", scriptUrl: net.scriptUrl || "", smartlinkUrl: net.smartlinkUrl || "" } : { enabled: false };
-    return Response.json({ ads: active, adNetwork }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+    return Response.json({ ads: active, adNetwork, ads_enabled: true }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
+  }
+
+  if (action === "ads_global") {
+    const globalCfg = await readJson(ADS_GLOBAL_FILE, { ads_enabled: true });
+    return Response.json({ ads_enabled: globalCfg.ads_enabled !== false }, { status: 200, headers: { ...CORS_HEADERS, "Cache-Control": "no-store" } });
   }
 
   if (!isAdminAuthorized(request)) {
@@ -314,6 +325,12 @@ export async function POST(request) {
     const next = (Array.isArray(ads) ? ads : []).filter((a) => a.id !== String(body.id || ""));
     await writeJson(ADS_FILE, next);
     return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
+  }
+
+  if (action === "toggle_ads") {
+    const enabled = body.enabled !== false;
+    await writeJson(ADS_GLOBAL_FILE, { ads_enabled: enabled, updatedAt: Date.now() });
+    return Response.json({ ok: true, ads_enabled: enabled }, { status: 200, headers: CORS_HEADERS });
   }
 
   if (action === "ad_network_save") {
