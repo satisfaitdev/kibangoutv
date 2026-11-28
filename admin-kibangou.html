@@ -152,7 +152,13 @@
       <!-- TAB UTILISATEURS -->
       <section id="tab-users" style="display:none;">
         <div class="table-card">
-          <div class="table-head"><strong>Utilisateurs, Parrainages &amp; Abonnements</strong><span class="pill" id="users-count">0</span></div>
+          <div class="table-head" style="gap:12px;flex-wrap:wrap;">
+            <strong>Utilisateurs, Parrainages &amp; Abonnements</strong>
+            <div style="display:flex;align-items:center;gap:10px;flex:1;justify-content:flex-end;min-width:220px;">
+              <input type="search" id="users-search-input" placeholder="Rechercher par nom ou e-mail..." style="max-width:300px;width:100%;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:#0E1318;color:#fff;font-size:0.85rem;">
+              <span class="pill" id="users-count">0</span>
+            </div>
+          </div>
           <div style="overflow-x:auto;">
             <table>
               <thead><tr><th>Nom</th><th>E-mail</th><th>Parrainage</th><th>VIP / Sans Pubs</th><th>Statut</th><th>Actions</th></tr></thead>
@@ -323,17 +329,21 @@
       loadMonetization();
     });
 
-    async function loadUsers() {
-      const r = await fetch("/api/admin?action=users", { credentials: "same-origin", cache: "no-store" });
-      if (!r.ok) return;
-      const { users = [] } = await r.json();
+    let cachedUsers = [];
+
+    function renderUsersTable(qStr = "") {
+      const q = qStr.trim().toLowerCase();
+      const filtered = !q ? cachedUsers : cachedUsers.filter((u) =>
+        `${u.name || ""} ${u.email || ""} ${u.referralCode || ""}`.toLowerCase().includes(q)
+      );
       const now = Date.now();
-      document.getElementById("users-count").textContent = `${users.length} utilisateur(s)`;
-      document.getElementById("users-body").innerHTML = users.length ? users.map((u) => {
+      document.getElementById("users-count").textContent = `${filtered.length} / ${cachedUsers.length} utilisateur(s)`;
+      document.getElementById("users-body").innerHTML = filtered.length ? filtered.map((u) => {
         const badges = [];
         if ((u.adultVipUntil || 0) > now) badges.push("Adulte +18");
         if ((u.noAdsVipUntil || 0) > now) badges.push("Sans Pubs");
         else if ((u.adFreeUntil || 0) > now) badges.push("Sans Pub (Parrain)");
+        const hasAnyVip = (u.adultVipUntil || 0) > now || (u.noAdsVipUntil || 0) > now;
         return `
         <tr>
           <td>${esc(u.name)}</td>
@@ -341,12 +351,37 @@
           <td><code>${esc(u.referralCode || "—")}</code> · ${u.referralCount || 0} invité(s)</td>
           <td>${badges.length ? badges.map((b) => `<span class="pill">${b}</span>`).join(" ") : "Gratuit"}</td>
           <td><span class="pill ${u.banned ? "pill-red" : ""}">${u.banned ? "Suspendu" : "Actif"}</span></td>
-          <td style="display:flex;gap:6px;">
+          <td style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary" onclick="grantVip('${esc(u.email)}', 'both', 30)">Premium 30j</button>
+            <button type="button" class="btn" onclick="grantVip('${esc(u.email)}', 'no_ads_vip', 30)">Sans Pubs 30j</button>
+            <button type="button" class="btn" onclick="grantVip('${esc(u.email)}', 'adult_vip', 30)">Adulte 30j</button>
+            ${hasAnyVip ? `<button type="button" class="btn" onclick="grantVip('${esc(u.email)}', 'revoke', 0)">Retirer VIP</button>` : ""}
             <button type="button" class="btn" onclick="toggleBan('${esc(u.email)}', ${!u.banned})">${u.banned ? "Réactiver" : "Suspendre"}</button>
             <button type="button" class="btn btn-danger" onclick="deleteUser('${esc(u.email)}')">Supprimer</button>
           </td>
         </tr>`;
-      }).join("") : '<tr><td colspan="6" class="empty">Aucun utilisateur enregistré sur cette session serveur.</td></tr>';
+      }).join("") : '<tr><td colspan="6" class="empty">Aucun utilisateur trouvé.</td></tr>';
+    }
+
+    document.getElementById("users-search-input")?.addEventListener("input", (e) => {
+      renderUsersTable(e.target.value);
+    });
+
+    async function loadUsers() {
+      const r = await fetch("/api/admin?action=users", { credentials: "same-origin", cache: "no-store" });
+      if (!r.ok) return;
+      const { users = [] } = await r.json();
+      cachedUsers = users;
+      renderUsersTable(document.getElementById("users-search-input")?.value || "");
+    }
+
+    async function grantVip(email, plan, days) {
+      await fetch("/api/admin?action=user_grant_vip", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ email, plan, days })
+      });
+      loadUsers();
+      loadMonetization();
     }
 
     async function toggleBan(email, banned) {

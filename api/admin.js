@@ -231,6 +231,46 @@ export async function POST(request) {
     return Response.json({ ok: true }, { status: 200, headers: CORS_HEADERS });
   }
 
+  if (action === "user_grant_vip") {
+    const email = String(body.email || "").trim().toLowerCase();
+    const plan = String(body.plan || "both").trim();
+    const days = Math.max(1, Number(body.days) || 30);
+    if (!email) return Response.json({ error: "E-mail requis." }, { status: 400, headers: CORS_HEADERS });
+    const users = await readJson(USERS_FILE, {});
+    if (!users[email]) return Response.json({ error: "Utilisateur introuvable." }, { status: 404, headers: CORS_HEADERS });
+
+    const now = Date.now();
+    const addMs = days * 86400000;
+    if (plan === "revoke") {
+      users[email].noAdsVipUntil = 0;
+      users[email].adultVipUntil = 0;
+    } else {
+      if (plan === "no_ads_vip" || plan === "both") {
+        users[email].noAdsVipUntil = Math.max(now, users[email].noAdsVipUntil || 0) + addMs;
+      }
+      if (plan === "adult_vip" || plan === "both") {
+        users[email].adultVipUntil = Math.max(now, users[email].adultVipUntil || 0) + addMs;
+      }
+    }
+    await writeJson(USERS_FILE, users);
+
+    if (plan !== "revoke") {
+      const ledger = await readJson(LEDGER_FILE, []);
+      const list = Array.isArray(ledger) ? ledger : [];
+      list.unshift({
+        id: `adm_vip_${now}`,
+        type: plan,
+        email,
+        days,
+        amountFcfa: 0,
+        note: `Activation Premium Admin (${plan}, ${days}j)`,
+        ts: now
+      });
+      await writeJson(LEDGER_FILE, list.slice(0, 200));
+    }
+    return Response.json({ ok: true, user: users[email] }, { status: 200, headers: CORS_HEADERS });
+  }
+
   if (action === "ad_save") {
     const ads = await readJson(ADS_FILE, []);
     const list = Array.isArray(ads) ? ads : [];

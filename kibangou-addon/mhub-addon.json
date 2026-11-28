@@ -69,6 +69,7 @@
             "id": "country",
             "name": "Pays",
             "values": [
+              { "id": "all", "name": "Tous les pays" },
               { "id": "Congo-Brazzaville", "name": "Congo-Brazzaville" },
               { "id": "RD Congo", "name": "RD Congo" },
               { "id": "Côte d'Ivoire", "name": "Côte d'Ivoire" },
