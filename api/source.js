@@ -1,21 +1,32 @@
 import { isExcludedVodHost, sortAndLabelSources } from "./_sources.js";
 
-async function fetchVavooSources(url) {
+async function fetchVavooSources(url, metrics = null) {
+  const t0 = Date.now();
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "VAVOO/2.6", "Accept": "application/json" },
       signal: AbortSignal.timeout(5000)
     });
-    if (!res.ok) return [];
+    if (metrics) metrics.vavooMs = Math.max(metrics.vavooMs || 0, Date.now() - t0);
+    if (!res.ok) {
+      if (metrics) metrics.vavooErrors = (metrics.vavooErrors || 0) + 1;
+      return [];
+    }
     const data = await res.json();
     if (!data || !Array.isArray(data.sources)) return [];
     return data.sources.filter((s) => s && !isExcludedVodHost(s.url));
-  } catch {
+  } catch (err) {
+    if (metrics) {
+      metrics.vavooMs = Math.max(metrics.vavooMs || 0, Date.now() - t0);
+      if (err?.name === "TimeoutError" || err?.name === "AbortError") metrics.timeouts = (metrics.timeouts || 0) + 1;
+      else metrics.vavooErrors = (metrics.vavooErrors || 0) + 1;
+    }
     return [];
   }
 }
 
-async function resolveImdbIdFromTmdb(mainId, isEpisode) {
+async function resolveImdbIdFromTmdb(mainId, isEpisode, metrics = null) {
+  const t0 = Date.now();
   const metaTypes = isEpisode ? ["series", "video"] : ["video", "series"];
   for (const mType of metaTypes) {
     try {
@@ -26,11 +37,17 @@ async function resolveImdbIdFromTmdb(mainId, isEpisode) {
       if (res.ok) {
         const metaJson = await res.json();
         if (metaJson?.ids?.imdb) {
+          if (metrics) metrics.tmdbMs = Date.now() - t0;
           return String(metaJson.ids.imdb).replace(/^tt/i, "");
         }
       }
-    } catch {}
+    } catch (err) {
+      if (metrics && (err?.name === "TimeoutError" || err?.name === "AbortError")) {
+        metrics.timeouts = (metrics.timeouts || 0) + 1;
+      }
+    }
   }
+  if (metrics) metrics.tmdbMs = Date.now() - t0;
   return "";
 }
 
@@ -109,34 +126,51 @@ export default async function handler(req, res) {
       return kinds.map((k) => `https://vavoo.top/vod/source/${k}/${suffix}.json?region=FR&language=fr`);
     };
 
+    const metrics = { tmdbMs: 0, vavooMs: 0, secondaryMs: 0, timeouts: 0, vavooErrors: 0 };
+    const reqStart = Date.now();
     let finalSources = [];
 
     if (imdbId) {
-      const imdbCandidates = buildKindCandidates("imdb", `tt${imdbId}`);
-      const results = await Promise.all(imdbCandidates.map(fetchVavooSources));
+      const imdbCandidates = [...new Set(buildKindCandidates("imdb", `tt${imdbId}`))];
+      const results = await Promise.all(imdbCandidates.map((u) => fetchVavooSources(u, metrics)));
       finalSources = results.find((list) => list.length > 0) || [];
     } else if (mainId) {
-      // Interroger directement tmdb: EN PARALLÈLE avec le lookup imdb: pour éviter 1s de latence séquentielle
+      // Recherche principale : Vavoo TMDB + lookup IMDb en parallèle
       const tmdbCandidates = buildKindCandidates("tmdb", mainId);
       const [primaryTmdbSources, resolvedImdb] = await Promise.all([
-        fetchVavooSources(tmdbCandidates[0]),
-        resolveImdbIdFromTmdb(mainId, isEpisode)
+        fetchVavooSources(tmdbCandidates[0], metrics),
+        resolveImdbIdFromTmdb(mainId, isEpisode, metrics)
       ]);
 
       finalSources = primaryTmdbSources;
 
-      if (finalSources.length === 0 && tmdbCandidates[1]) {
-        finalSources = await fetchVavooSources(tmdbCandidates[1]);
-      }
-
-      if (finalSources.length === 0 && resolvedImdb) {
-        const imdbCandidates = buildKindCandidates("imdb", `tt${resolvedImdb}`);
-        const imdbResults = await Promise.all(imdbCandidates.map(fetchVavooSources));
-        finalSources = imdbResults.find((list) => list.length > 0) || [];
+      // Si aucune source exploitable en recherche principale, lancer les recherches secondaires uniques en parallèle
+      if (finalSources.length === 0) {
+        const secondaryUrls = new Set();
+        if (tmdbCandidates[1] && tmdbCandidates[1] !== tmdbCandidates[0]) {
+          secondaryUrls.add(tmdbCandidates[1]);
+        }
+        if (resolvedImdb) {
+          for (const u of buildKindCandidates("imdb", `tt${resolvedImdb}`)) {
+            secondaryUrls.add(u);
+          }
+        }
+        if (secondaryUrls.size > 0) {
+          const secStart = Date.now();
+          const secResults = await Promise.all(Array.from(secondaryUrls).map((u) => fetchVavooSources(u, metrics)));
+          metrics.secondaryMs = Date.now() - secStart;
+          finalSources = secResults.find((list) => list.length > 0) || [];
+        }
       }
     }
 
     const sources = sortAndLabelSources(finalSources);
+    const totalMs = Date.now() - reqStart;
+    res.setHeader(
+      "Server-Timing",
+      `tmdb;dur=${metrics.tmdbMs}, vavoo;dur=${metrics.vavooMs}, secondary;dur=${metrics.secondaryMs}, total;dur=${totalMs}`
+    );
+    res.setHeader("X-Kibangou-Source-Metrics", `to=${metrics.timeouts};err=${metrics.vavooErrors}`);
     res.setHeader("Cache-Control", "public, max-age=120");
     return res.status(200).json({ sources });
   } catch (err) {

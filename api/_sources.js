@@ -191,47 +191,100 @@ export function normalizeResolvedPlayback(data, isLive = false) {
   return data;
 }
 
+function getEntryExpiryMs(data, fallbackTs) {
+  const defaultExp = fallbackTs + RESOLVE_TTL_MS;
+  if (typeof data?.url !== "string" || !data.url) return 0;
+  try {
+    const parsed = new URL(data.url);
+    if (!parsed.searchParams.has("expiry")) {
+      return defaultExp;
+    }
+    const rawExp = parsed.searchParams.get("expiry");
+    if (!rawExp || !/^\d+(\.\d+)?$/.test(rawExp.trim())) {
+      return 0;
+    }
+    const expParam = Number(rawExp);
+    if (!Number.isFinite(expParam) || expParam <= 0) {
+      return 0;
+    }
+    // Vavoo retourne un timestamp Unix en ms (13 chiffres) ou secondes (10 chiffres) ; marge de sécurité de 5s
+    const tokenExp = (expParam < 1e12 ? expParam * 1000 : expParam) - 5000;
+    if (tokenExp <= fallbackTs) {
+      return 0;
+    }
+    return Math.min(defaultExp, tokenExp);
+  } catch {
+    return 0;
+  }
+}
+
 /**
- * Cache TTL court (45s) + déduplication des requêtes simultanées pour /resolve.
+ * Cache TTL court (45s max, borné par expiry amont) + déduplication des requêtes simultanées pour /resolve.
  */
 export async function resolveVavooWithCache(upstreamUrl, { isLive = false, bypassCache = false } = {}) {
   const now = Date.now();
   if (!bypassCache) {
     const cached = resolveCache.get(upstreamUrl);
-    if (cached && now - cached.ts < RESOLVE_TTL_MS) {
-      return { status: cached.status, data: { ...cached.data }, cacheHit: true };
+    if (cached && now < cached.expiresAt) {
+      return {
+        status: cached.status,
+        data: { ...cached.data },
+        cacheHit: true,
+        durationMs: 0,
+        timedOut: false
+      };
     }
+    if (cached) resolveCache.delete(upstreamUrl);
   }
 
   if (inflightResolves.has(upstreamUrl)) {
     const shared = await inflightResolves.get(upstreamUrl);
-    return { status: shared.status, data: shared.data ? { ...shared.data } : shared.data, cacheHit: false };
+    return {
+      status: shared.status,
+      data: shared.data ? { ...shared.data } : shared.data,
+      rawText: shared.rawText,
+      cacheHit: false,
+      durationMs: shared.durationMs || 0,
+      timedOut: Boolean(shared.timedOut)
+    };
   }
 
+  const t0 = Date.now();
   const task = (async () => {
-    const upstreamRes = await fetch(upstreamUrl, {
-      headers: { "User-Agent": "VAVOO/2.6", "Accept": "application/json" },
-      signal: AbortSignal.timeout(8000)
-    });
-    const rawText = await upstreamRes.text();
-    let parsed;
     try {
-      parsed = JSON.parse(rawText);
-    } catch {
-      return { status: upstreamRes.status, rawText, data: null };
-    }
-
-    normalizeResolvedPlayback(parsed, isLive);
-
-    if (upstreamRes.ok && parsed && typeof parsed.url === "string" && parsed.url) {
-      if (resolveCache.size >= MAX_RESOLVE_CACHE) {
-        const oldestKey = resolveCache.keys().next().value;
-        resolveCache.delete(oldestKey);
+      const upstreamRes = await fetch(upstreamUrl, {
+        headers: { "User-Agent": "VAVOO/2.6", "Accept": "application/json" },
+        signal: AbortSignal.timeout(8000)
+      });
+      const rawText = await upstreamRes.text();
+      let parsed;
+      try {
+        parsed = JSON.parse(rawText);
+      } catch {
+        return { status: upstreamRes.status, rawText, data: null, durationMs: Date.now() - t0, timedOut: false };
       }
-      resolveCache.set(upstreamUrl, { status: upstreamRes.status, data: parsed, ts: Date.now() });
-    }
+      const durationMs = Date.now() - t0;
 
-    return { status: upstreamRes.status, data: parsed, rawText: null };
+      normalizeResolvedPlayback(parsed, isLive);
+
+      if (upstreamRes.ok && parsed && typeof parsed.url === "string" && parsed.url) {
+        const tsNow = Date.now();
+        const expiresAt = getEntryExpiryMs(parsed, tsNow);
+        if (expiresAt > tsNow) {
+          if (resolveCache.size >= MAX_RESOLVE_CACHE) {
+            const oldestKey = resolveCache.keys().next().value;
+            resolveCache.delete(oldestKey);
+          }
+          resolveCache.set(upstreamUrl, { status: upstreamRes.status, data: parsed, expiresAt });
+        }
+      }
+
+      return { status: upstreamRes.status, data: parsed, rawText: null, durationMs, timedOut: false };
+    } catch (err) {
+      const durationMs = Date.now() - t0;
+      const timedOut = err?.name === "TimeoutError" || err?.name === "AbortError";
+      throw Object.assign(err || new Error("Resolve failed"), { durationMs, timedOut });
+    }
   })();
 
   inflightResolves.set(upstreamUrl, task);

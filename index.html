@@ -981,8 +981,108 @@
     window.__kibangouSourcesByItemId = new Map();
     window.__kibangouSourceMap = new Map();
     window.__kibangouResolvedCache = new Map();
+    window.__kibangouInflightResolves = new Map();
     window.__kibangouCurrentStream = null;
     window.__kibangouAdultManifest = null;
+    window.__kibangouVodPerf = {
+      lastClickToPlayingMs: null,
+      samples: []
+    };
+
+    const RESOLVED_CACHE_MAX_TTL_MS = 45000;
+    const MAX_RESOLVED_CACHE_ENTRIES = 60;
+
+    function getClientResolvedExpiryMs(rawUrl, nowTs = Date.now()) {
+      if (typeof rawUrl !== "string" || !rawUrl) return 0;
+      try {
+        const parsed = new URL(rawUrl, location.href);
+        if (!parsed.searchParams.has("expiry")) {
+          return nowTs + RESOLVED_CACHE_MAX_TTL_MS;
+        }
+        const rawExp = parsed.searchParams.get("expiry");
+        if (!rawExp || !/^\d+(\.\d+)?$/.test(rawExp.trim())) {
+          return 0;
+        }
+        const expParam = Number(rawExp);
+        if (!Number.isFinite(expParam) || expParam <= 0) {
+          return 0;
+        }
+        const tokenExp = (expParam < 1e12 ? expParam * 1000 : expParam) - 5000;
+        if (tokenExp <= nowTs) {
+          return 0;
+        }
+        return Math.min(nowTs + RESOLVED_CACHE_MAX_TTL_MS, tokenExp);
+      } catch {
+        return 0;
+      }
+    }
+
+    function purgeExpiredResolvedCache(nowTs = Date.now()) {
+      const cache = window.__kibangouResolvedCache;
+      if (!cache) return;
+      for (const [k, v] of cache.entries()) {
+        if (!v || !v.expiresAt || nowTs >= v.expiresAt) {
+          cache.delete(k);
+        }
+      }
+    }
+
+    function getResolvedCacheEntry(sourceUrl) {
+      if (!sourceUrl || !window.__kibangouResolvedCache) return null;
+      const entry = window.__kibangouResolvedCache.get(sourceUrl);
+      if (!entry) return null;
+      if (!entry.expiresAt || Date.now() >= entry.expiresAt) {
+        window.__kibangouResolvedCache.delete(sourceUrl);
+        return null;
+      }
+      return entry;
+    }
+
+    function setResolvedCacheEntry(origSourceUrl, data) {
+      if (!data || typeof data.url !== "string" || !data.url || isEmbedHostUrl(data.url)) return null;
+      const nowTs = Date.now();
+      const expiresAt = getClientResolvedExpiryMs(data.url, nowTs);
+      if (expiresAt <= nowTs) return null;
+
+      purgeExpiredResolvedCache(nowTs);
+      const cache = window.__kibangouResolvedCache;
+      while (cache.size >= MAX_RESOLVED_CACHE_ENTRIES) {
+        const oldestKey = cache.keys().next().value;
+        cache.delete(oldestKey);
+      }
+      const entry = {
+        url: data.url,
+        headers: data.headers || null,
+        proxy: Boolean(data.proxy),
+        ts: nowTs,
+        expiresAt
+      };
+      if (origSourceUrl) {
+        cache.set(origSourceUrl, entry);
+      }
+      cache.set(data.url, entry);
+      return entry;
+    }
+
+    function awaitWithSignal(promise, signal) {
+      if (!signal) return promise;
+      if (signal.aborted) return Promise.reject(new DOMException("Aborted", "AbortError"));
+      return new Promise((resolve, reject) => {
+        const onAbort = () => reject(new DOMException("Aborted", "AbortError"));
+        signal.addEventListener("abort", onAbort, { once: true });
+        Promise.resolve(promise).then(
+          (val) => {
+            signal.removeEventListener("abort", onAbort);
+            resolve(val);
+          },
+          (err) => {
+            signal.removeEventListener("abort", onAbort);
+            reject(err);
+          }
+        );
+      });
+    }
+    window.__kibangouAwaitWithSignal = awaitWithSignal;
 
     function getProxiedUrl(rawUrl) {
       if (!rawUrl || typeof rawUrl !== "string") return rawUrl;
@@ -1106,16 +1206,7 @@
                 origSourceUrl = parsedBody.sourceUrl || parsedBody.url || "";
               } catch {}
             }
-            const entry = {
-              url: data.url,
-              headers: data.headers || null,
-              proxy: Boolean(data.proxy),
-              ts: Date.now()
-            };
-            if (origSourceUrl) {
-              window.__kibangouResolvedCache.set(origSourceUrl, entry);
-            }
-            window.__kibangouResolvedCache.set(data.url, entry);
+            setResolvedCacheEntry(origSourceUrl, data);
           }
         }).catch(() => {});
       } catch {}
@@ -1152,6 +1243,59 @@
         urlStr += `${sep}pro=1`;
       }
 
+      const methodUpper = String(options.method || "GET").toUpperCase();
+      let resolveTargetUrl = "";
+      if (methodUpper === "GET" && urlStr.includes("/resolve")) {
+        try {
+          const parsedResolve = new URL(urlStr, location.href);
+          if (parsedResolve.pathname.endsWith("/resolve")) {
+            resolveTargetUrl = parsedResolve.searchParams.get("url") || "";
+          }
+        } catch {}
+      }
+
+      if (resolveTargetUrl) {
+        if (options.signal && options.signal.aborted) {
+          return Promise.reject(new DOMException("Aborted", "AbortError"));
+        }
+        const cachedEntry = getResolvedCacheEntry(resolveTargetUrl);
+        if (cachedEntry && cachedEntry.url) {
+          return Promise.resolve(new Response(JSON.stringify({
+            url: cachedEntry.url,
+            headers: cachedEntry.headers || undefined,
+            proxy: Boolean(cachedEntry.proxy)
+          }), {
+            status: 200,
+            headers: { "Content-Type": "application/json", "X-Kibangou-Client-Cache": "HIT" }
+          }));
+        }
+        const inflight = window.__kibangouInflightResolves && window.__kibangouInflightResolves.get(resolveTargetUrl);
+        if (inflight && inflight.promise) {
+          inflight.hasMainConsumer = true;
+          return awaitWithSignal(inflight.promise, options.signal).then((entry) => {
+            if (options.signal && options.signal.aborted) {
+              throw new DOMException("Aborted", "AbortError");
+            }
+            if (entry && entry.url) {
+              return new Response(JSON.stringify({
+                url: entry.url,
+                headers: entry.headers || undefined,
+                proxy: Boolean(entry.proxy)
+              }), {
+                status: 200,
+                headers: { "Content-Type": "application/json", "X-Kibangou-Client-Cache": "DEDUP" }
+              });
+            }
+            return nativeFetch(getProxiedUrl(urlStr), options);
+          }).catch((err) => {
+            if (err && err.name === "AbortError" && options.signal && options.signal.aborted) {
+              throw err;
+            }
+            return nativeFetch(getProxiedUrl(urlStr), options);
+          });
+        }
+      }
+
       const proxiedUrl = getProxiedUrl(urlStr);
       const isProxied = proxiedUrl !== urlStr && proxiedUrl.startsWith("/api/proxy");
 
@@ -1167,7 +1311,24 @@
         options.headers = safeHeaders;
       }
 
-      return nativeFetch(proxiedUrl, options).then((res) => {
+      if (resolveTargetUrl) {
+        window.__kibangouActiveResolveCount = (window.__kibangouActiveResolveCount || 0) + 1;
+      }
+
+      let fetchPromise;
+      try {
+        fetchPromise = nativeFetch(proxiedUrl, options);
+      } catch (syncErr) {
+        if (resolveTargetUrl) {
+          window.__kibangouActiveResolveCount = Math.max(0, (window.__kibangouActiveResolveCount || 1) - 1);
+        }
+        throw syncErr;
+      }
+
+      return fetchPromise.then((res) => {
+        if (resolveTargetUrl) {
+          window.__kibangouActiveResolveCount = Math.max(0, (window.__kibangouActiveResolveCount || 1) - 1);
+        }
         const realUrl = res.headers.get("X-Final-Url");
         if (realUrl && isProxied) {
           try {
@@ -1176,6 +1337,11 @@
         }
         recordApiPayload(urlStr, res, options);
         return res;
+      }, (err) => {
+        if (resolveTargetUrl) {
+          window.__kibangouActiveResolveCount = Math.max(0, (window.__kibangouActiveResolveCount || 1) - 1);
+        }
+        throw err;
       });
     }
 
@@ -2153,75 +2319,122 @@
       return true;
     }
 
-    async function resolveSourceToPlayable(sourceUrl) {
+    async function resolveSourceToPlayable(sourceUrl, opts = {}) {
       if (!sourceUrl) return null;
+      const signal = opts && opts.signal ? opts.signal : null;
+      const isPreResolve = Boolean(opts && opts.isPreResolve);
+      if (signal && signal.aborted) {
+        throw new DOMException("Aborted", "AbortError");
+      }
+
       const directPath = sourceUrl.split("?")[0].toLowerCase();
       if (/\.(mp4|m4v|mkv|webm|mov|m3u8|ts)$/i.test(directPath) && !isEmbedHostUrl(sourceUrl)) {
         return { url: sourceUrl, headers: null };
       }
 
-      const cached = window.__kibangouResolvedCache && window.__kibangouResolvedCache.get(sourceUrl);
-      if (cached && cached.url && !isEmbedHostUrl(cached.url) && Date.now() - cached.ts < 120000) {
+      const cached = getResolvedCacheEntry(sourceUrl);
+      if (cached && cached.url) {
         return cached;
       }
 
-      const res = await fetch(`/resolve?url=${encodeURIComponent(sourceUrl)}`);
-      if (!res.ok) return null;
-      let data = await res.json();
+      const inflightMap = window.__kibangouInflightResolves;
+      if (inflightMap && inflightMap.has(sourceUrl)) {
+        const sharedEntry = inflightMap.get(sourceUrl);
+        if (!isPreResolve) {
+          sharedEntry.hasMainConsumer = true;
+        }
+        return window.__kibangouAwaitWithSignal(sharedEntry.promise, signal);
+      }
 
-      let hops = 0;
-      while (data && data.clientFetch && hops < 5) {
-        hops++;
-        const cf = data.clientFetch;
-        const cfRes = await fetch(cf.url, {
-          method: cf.method || "GET",
-          headers: cf.headers || undefined,
-          body: cf.body || undefined,
-          redirect: cf.redirect || undefined
-        });
-        const ct = cfRes.headers.get("content-type") || "";
-        const isText = ct.includes("text/") || ct.includes("json") || ct.includes("xml") || ct.includes("javascript");
-        let bodyStr = "";
-        let encoding = "utf-8";
-        if (isText) {
-          bodyStr = await cfRes.text();
-        } else {
-          const bytes = new Uint8Array(await cfRes.arrayBuffer());
-          let bin = "";
-          for (let i = 0; i < bytes.length; i += 8192) {
-            bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+      const internalController = new AbortController();
+      const sharedEntry = {
+        promise: null,
+        hasMainConsumer: !isPreResolve
+      };
+
+      const onCallerAbort = () => {
+        if (!sharedEntry.hasMainConsumer) {
+          try { internalController.abort(); } catch {}
+        }
+      };
+      if (signal) {
+        signal.addEventListener("abort", onCallerAbort, { once: true });
+      }
+
+      const task = (async () => {
+        const res = await fetch(`/resolve?url=${encodeURIComponent(sourceUrl)}`, { signal: internalController.signal });
+        if (!res.ok) return null;
+        let data = await res.json();
+
+        let hops = 0;
+        while (data && data.clientFetch && hops < 5) {
+          if (internalController.signal.aborted) {
+            throw new DOMException("Aborted", "AbortError");
           }
-          bodyStr = btoa(bin);
-          encoding = "base64";
-        }
-        const hdrObj = {};
-        cfRes.headers.forEach((v, k) => { hdrObj[k] = v; });
+          hops++;
+          const cf = data.clientFetch;
+          const cfRes = await fetch(cf.url, {
+            method: cf.method || "GET",
+            headers: cf.headers || undefined,
+            body: cf.body || undefined,
+            redirect: cf.redirect || undefined,
+            signal: internalController.signal
+          });
+          const ct = cfRes.headers.get("content-type") || "";
+          const isText = ct.includes("text/") || ct.includes("json") || ct.includes("xml") || ct.includes("javascript");
+          let bodyStr = "";
+          let encoding = "utf-8";
+          if (isText) {
+            bodyStr = await cfRes.text();
+          } else {
+            const bytes = new Uint8Array(await cfRes.arrayBuffer());
+            let bin = "";
+            for (let i = 0; i < bytes.length; i += 8192) {
+              bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+            }
+            bodyStr = btoa(bin);
+            encoding = "base64";
+          }
+          const hdrObj = {};
+          cfRes.headers.forEach((v, k) => { hdrObj[k] = v; });
 
-        const postRes = await fetch("/client-fetch", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            id: cf.id,
-            status: cfRes.status,
-            url: cfRes.url || cf.url,
-            headers: hdrObj,
-            body: bodyStr,
-            encoding
-          })
-        });
-        if (!postRes.ok) return null;
-        data = await postRes.json();
-      }
-
-      if (data && typeof data.url === "string" && data.url && !isEmbedHostUrl(data.url)) {
-        const entry = { url: data.url, headers: data.headers || null, ts: Date.now() };
-        if (window.__kibangouResolvedCache) {
-          window.__kibangouResolvedCache.set(sourceUrl, entry);
-          window.__kibangouResolvedCache.set(data.url, entry);
+          const postRes = await fetch("/client-fetch", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            signal: internalController.signal,
+            body: JSON.stringify({
+              id: cf.id,
+              status: cfRes.status,
+              url: cfRes.url || cf.url,
+              headers: hdrObj,
+              body: bodyStr,
+              encoding
+            })
+          });
+          if (!postRes.ok) return null;
+          data = await postRes.json();
         }
-        return entry;
+
+        if (data && typeof data.url === "string" && data.url && !isEmbedHostUrl(data.url)) {
+          return setResolvedCacheEntry(sourceUrl, data) || { url: data.url, headers: data.headers || null, ts: Date.now() };
+        }
+        return null;
+      })();
+
+      sharedEntry.promise = task;
+      if (inflightMap) {
+        inflightMap.set(sourceUrl, sharedEntry);
+        task.finally(() => {
+          if (inflightMap.get(sourceUrl) === sharedEntry) {
+            inflightMap.delete(sourceUrl);
+          }
+        }).catch(() => {});
       }
-      return null;
+      try {
+        return await window.__kibangouAwaitWithSignal(task, signal);
+      } finally {
+        if (signal) signal.removeEventListener("abort", onCallerAbort);
+      }
     }
 
     function parseSourceLanguage(el, meta) {
@@ -2410,13 +2623,70 @@
       }
     }
 
+    const MAX_VOD_SOURCE_ATTEMPTS = 6;
     const vodAutoState = {
       wantAutoPlay: false,
       activeChain: false,
+      manualModalOpen: false,
       triedKeys: new Set(),
       attemptStartedAt: 0,
-      lastFallbackClickAt: 0
+      playClickAt: 0,
+      lastFallbackClickAt: 0,
+      sessionId: 0,
+      attemptId: 0,
+      fallbackTriggeredForAttemptId: 0,
+      proxyRescueTimer: null,
+      proxyRescueAttemptId: 0,
+      preresolveController: null
     };
+
+    function clearProxyRescueTimer() {
+      if (vodAutoState.proxyRescueTimer) {
+        clearTimeout(vodAutoState.proxyRescueTimer);
+        vodAutoState.proxyRescueTimer = null;
+      }
+      vodAutoState.proxyRescueAttemptId = 0;
+    }
+
+    function abortVodPreResolve() {
+      if (vodAutoState.preresolveController) {
+        try { vodAutoState.preresolveController.abort(); } catch {}
+        vodAutoState.preresolveController = null;
+      }
+    }
+
+    function resetVodSession() {
+      vodAutoState.sessionId++;
+      vodAutoState.attemptId++;
+      vodAutoState.fallbackTriggeredForAttemptId = 0;
+      vodAutoState.wantAutoPlay = false;
+      vodAutoState.activeChain = false;
+      vodAutoState.manualModalOpen = false;
+      vodAutoState.attemptStartedAt = 0;
+      vodAutoState.playClickAt = 0;
+      clearProxyRescueTimer();
+      abortVodPreResolve();
+    }
+
+    function schedulePreResolveCandidate(candidate, sessionId) {
+      if (!candidate || !candidate.key || sessionId !== vodAutoState.sessionId) return;
+      const srcUrl = candidate.key;
+      if (!srcUrl.startsWith("http://") && !srcUrl.startsWith("https://")) return;
+      if (getResolvedCacheEntry(srcUrl)) return;
+      if ((window.__kibangouActiveResolveCount || 0) >= 2) return;
+      if (window.__kibangouInflightResolves && window.__kibangouInflightResolves.has(srcUrl)) return;
+
+      if (!vodAutoState.preresolveController || vodAutoState.preresolveController.signal.aborted) {
+        vodAutoState.preresolveController = new AbortController();
+      }
+      const { signal } = vodAutoState.preresolveController;
+      // Lancer en arrière-plan sans jamais bloquer ni retarder la lecture principale
+      Promise.resolve().then(() => {
+        if (signal.aborted || sessionId !== vodAutoState.sessionId) return;
+        if ((window.__kibangouActiveResolveCount || 0) >= 2) return;
+        return resolveSourceToPlayable(srcUrl, { signal, isPreResolve: true });
+      }).catch(() => {});
+    }
 
     document.addEventListener("click", (e) => {
       const target = e.target instanceof Element ? e.target : null;
@@ -2424,10 +2694,18 @@
 
       if (target.closest(".item-view .btn-hero-play:not(.is-empty):not(.is-busy), .item-view .ep-tile, .item-view .ep-card")) {
         if (!isLiveContext()) {
+          clearProxyRescueTimer();
+          abortVodPreResolve();
+          vodAutoState.sessionId++;
+          vodAutoState.attemptId++;
+          vodAutoState.fallbackTriggeredForAttemptId = 0;
+          vodAutoState.preresolveController = new AbortController();
           vodAutoState.wantAutoPlay = true;
           vodAutoState.activeChain = true;
+          vodAutoState.manualModalOpen = false;
           vodAutoState.triedKeys.clear();
           vodAutoState.attemptStartedAt = Date.now();
+          vodAutoState.playClickAt = performance.now();
         }
         return;
       }
@@ -2439,36 +2717,60 @@
         if (idx >= 0) {
           vodAutoState.triedKeys.add(getSourceKey(srcItem, idx));
         }
+        clearProxyRescueTimer();
+        if (e.isTrusted) {
+          vodAutoState.sessionId++;
+          abortVodPreResolve();
+          vodAutoState.playClickAt = performance.now();
+        }
+        vodAutoState.attemptId++;
+        vodAutoState.fallbackTriggeredForAttemptId = 0;
         vodAutoState.activeChain = true;
         vodAutoState.wantAutoPlay = false;
+        vodAutoState.manualModalOpen = false;
         vodAutoState.attemptStartedAt = Date.now();
         return;
       }
 
       if (target.closest(".modal-sources .modal-close")) {
         if (e.isTrusted) {
-          vodAutoState.wantAutoPlay = false;
-          vodAutoState.activeChain = false;
+          resetVodSession();
         }
         return;
       }
 
       if (target.closest('.player-bar-right .player-ctrl-btn[data-key="S"]')) {
         if (e.isTrusted) {
+          clearProxyRescueTimer();
           vodAutoState.wantAutoPlay = false;
+          vodAutoState.manualModalOpen = true;
+          abortVodPreResolve();
         }
       }
     }, true);
 
-    function triggerPlayerSourceFallback() {
-      const now = Date.now();
-      if (now - vodAutoState.lastFallbackClickAt < 1800) return;
+    function triggerPlayerSourceFallback(opts = {}) {
+      const targetAttemptId = typeof opts.attemptId === "number" ? opts.attemptId : vodAutoState.attemptId;
+      if (!targetAttemptId || vodAutoState.fallbackTriggeredForAttemptId === targetAttemptId) {
+        return;
+      }
+      if (vodAutoState.triedKeys.size >= MAX_VOD_SOURCE_ATTEMPTS) {
+        vodAutoState.fallbackTriggeredForAttemptId = targetAttemptId;
+        vodAutoState.activeChain = false;
+        vodAutoState.wantAutoPlay = false;
+        clearProxyRescueTimer();
+        showToast("Limite d'essais atteinte pour ce titre.");
+        return;
+      }
       if (document.querySelector(".modal-sources")) return;
 
       const srcBtn = document.querySelector('.player-bar-right .player-ctrl-btn[data-key="S"]');
       if (!srcBtn) return;
 
-      vodAutoState.lastFallbackClickAt = now;
+      clearProxyRescueTimer();
+      vodAutoState.fallbackTriggeredForAttemptId = targetAttemptId;
+      vodAutoState.lastFallbackClickAt = Date.now();
+      vodAutoState.manualModalOpen = false;
       vodAutoState.wantAutoPlay = true;
       srcBtn.click();
     }
@@ -2519,6 +2821,7 @@
       });
 
       if (live) return;
+      if (vodAutoState.manualModalOpen && !hasFailureNotice) return;
 
       if (vodAutoState.wantAutoPlay || (vodAutoState.activeChain && hasFailureNotice)) {
         items.forEach((item, idx) => {
@@ -2541,8 +2844,10 @@
           )
           .sort((a, b) => a.priority - b.priority || a.idx - b.idx);
 
-        if (candidates.length > 0) {
+        if (candidates.length > 0 && vodAutoState.triedKeys.size < MAX_VOD_SOURCE_ATTEMPTS) {
           const next = candidates[0];
+          const backup = candidates[1] || null;
+          const activeSessionId = vodAutoState.sessionId;
           vodAutoState.triedKeys.add(next.key);
           vodAutoState.wantAutoPlay = false;
           vodAutoState.attemptStartedAt = Date.now();
@@ -2551,10 +2856,20 @@
               ? `Source indisponible — bascule auto (${next.label})...`
               : `Lecture automatique (${next.label})...`
           );
-          requestAnimationFrame(() => next.item.click());
-        } else if (hasFailureNotice) {
+          requestAnimationFrame(() => {
+            if (activeSessionId !== vodAutoState.sessionId) return;
+            clearProxyRescueTimer();
+            vodAutoState.attemptId++;
+            vodAutoState.fallbackTriggeredForAttemptId = 0;
+            next.item.click();
+            if (backup) {
+              schedulePreResolveCandidate(backup, activeSessionId);
+            }
+          });
+        } else if (hasFailureNotice || vodAutoState.triedKeys.size >= MAX_VOD_SOURCE_ATTEMPTS) {
           vodAutoState.activeChain = false;
           vodAutoState.wantAutoPlay = false;
+          abortVodPreResolve();
           showToast("Aucune autre source fonctionnelle disponible.");
         }
       }
@@ -2686,6 +3001,20 @@
         });
         video.addEventListener("playing", () => {
           video.dataset.kibangouInitialPlayDone = "1";
+          delete video.dataset.kibangouProxyPending;
+          clearProxyRescueTimer();
+          abortVodPreResolve();
+          if (vodAutoState.playClickAt > 0) {
+            const elapsedMs = Math.round(performance.now() - vodAutoState.playClickAt);
+            vodAutoState.playClickAt = 0;
+            if (window.__kibangouVodPerf) {
+              window.__kibangouVodPerf.lastClickToPlayingMs = elapsedMs;
+              window.__kibangouVodPerf.samples.push(elapsedMs);
+              if (window.__kibangouVodPerf.samples.length > 20) {
+                window.__kibangouVodPerf.samples.shift();
+              }
+            }
+          }
         });
         video.addEventListener("pause", () => {
           if (video.dataset.kibangouInitialPlayDone === "1") {
@@ -2693,9 +3022,17 @@
           }
         });
         video.addEventListener("error", () => {
-          // Ne jamais déclencher le fallback proxy sur une erreur de décodage (code 3 = MEDIA_ERR_DECODE).
-          if (video.error && video.error.code === 3) return;
           const curSrc = video.currentSrc || video.getAttribute("src") || "";
+          const errAttemptId = vodAutoState.attemptId;
+          // Ne jamais déclencher le fallback proxy sur une erreur de décodage (code 3 = MEDIA_ERR_DECODE).
+          if (video.error && video.error.code === 3) {
+            delete video.dataset.kibangouProxyPending;
+            clearProxyRescueTimer();
+            if (vodAutoState.activeChain && !isLiveContext()) {
+              triggerPlayerSourceFallback({ confirmedFailure: true, attemptId: errAttemptId });
+            }
+            return;
+          }
           if (
             curSrc.startsWith("https://") &&
             !curSrc.includes("/api/stream") &&
@@ -2703,11 +3040,21 @@
             video.dataset.kibangouDirectFallback !== curSrc
           ) {
             video.dataset.kibangouDirectFallback = curSrc;
-            const cached = window.__kibangouResolvedCache?.get(curSrc);
+            video.dataset.kibangouProxyPending = "1";
+            clearProxyRescueTimer();
+            vodAutoState.attemptStartedAt = Date.now();
+            const cached = getResolvedCacheEntry(curSrc) || window.__kibangouResolvedCache?.get(curSrc);
             const fallbackUrl = buildStreamProxyUrl(curSrc, cached?.headers || null);
             video.src = fallbackUrl;
             video.load();
             video.play().catch(() => {});
+            return;
+          }
+          // Le proxy /api/stream a échoué ou la source n'est pas éligible au fallback P0 : bascule source suivante.
+          delete video.dataset.kibangouProxyPending;
+          clearProxyRescueTimer();
+          if (vodAutoState.activeChain && !isLiveContext()) {
+            triggerPlayerSourceFallback({ confirmedFailure: true, attemptId: errAttemptId });
           }
         });
         const updateBufferedBar = () => {
@@ -2771,16 +3118,28 @@
           video.addEventListener("playing", () => {
             vodAutoState.attemptStartedAt = Date.now();
           });
-          video.addEventListener("error", () => {
-            if (vodAutoState.activeChain && !isLiveContext()) {
-              triggerPlayerSourceFallback();
-            }
-          });
         }
 
         const errBox = playerRoot.querySelector(".player-error");
         if (errBox && vodAutoState.activeChain) {
-          triggerPlayerSourceFallback();
+          if (video?.dataset.kibangouProxyPending === "1") {
+            if ((video.paused || (video.currentTime === 0 && video.readyState < 3)) && !vodAutoState.proxyRescueTimer) {
+              const rescueSessionId = vodAutoState.sessionId;
+              const rescueAttemptId = vodAutoState.attemptId;
+              vodAutoState.proxyRescueAttemptId = rescueAttemptId;
+              vodAutoState.proxyRescueTimer = setTimeout(() => {
+                vodAutoState.proxyRescueTimer = null;
+                vodAutoState.proxyRescueAttemptId = 0;
+                if (rescueSessionId !== vodAutoState.sessionId || rescueAttemptId !== vodAutoState.attemptId) return;
+                if (!vodAutoState.activeChain || isLiveContext()) return;
+                if (video.dataset.kibangouProxyPending !== "1") return;
+                delete video.dataset.kibangouProxyPending;
+                triggerPlayerSourceFallback({ confirmedFailure: true, attemptId: rescueAttemptId });
+              }, 3500);
+            }
+          } else {
+            triggerPlayerSourceFallback({ confirmedFailure: true, attemptId: vodAutoState.attemptId });
+          }
         } else if (
           video &&
           vodAutoState.activeChain &&
@@ -2792,7 +3151,9 @@
           video.readyState < 3 &&
           Date.now() - vodAutoState.attemptStartedAt > 12000
         ) {
-          triggerPlayerSourceFallback();
+          delete video.dataset.kibangouProxyPending;
+          clearProxyRescueTimer();
+          triggerPlayerSourceFallback({ confirmedFailure: false, attemptId: vodAutoState.attemptId });
         }
       }
     }
@@ -3797,16 +4158,12 @@
     checkChannelsHash();
 
     window.addEventListener("player-closed", () => {
-      vodAutoState.wantAutoPlay = false;
-      vodAutoState.activeChain = false;
-      vodAutoState.attemptStartedAt = 0;
+      resetVodSession();
       window.__kibangouCurrentStream = null;
     });
 
     window.addEventListener("hashchange", () => {
-      vodAutoState.wantAutoPlay = false;
-      vodAutoState.activeChain = false;
-      vodAutoState.attemptStartedAt = 0;
+      resetVodSession();
       window.__kibangouCurrentStream = null;
       window.__kibangouSourceList = [];
       checkChannelsHash();
